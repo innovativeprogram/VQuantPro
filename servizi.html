@@ -1,15 +1,56 @@
 <!DOCTYPE html>
 <html lang="it">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Servizi | V-Quant Pro</title><style>body{font-family:Inter,system-ui,sans-serif;background:#0b0f14;color:#edf2f7;line-height:1.6;max-width:900px;margin:0 auto;padding:40px}li,p{color:#9aa6b2}</style></head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Servizi | V-Quant Pro</title>
+  <meta name="description" content="Servizi V-Quant Pro: analisi dei mercati, ricerca macro, portfolio design e reporting." />
+  <style>
+    :root{--bg:#0b0f14;--surface:#111720;--border:rgba(255,255,255,.09);--text:#edf2f7;--muted:#9aa6b2;--max:1180px;--font:Inter,system-ui,sans-serif}
+    *{box-sizing:border-box;margin:0;padding:0} body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.7}
+    a{color:inherit;text-decoration:none} .container{width:min(var(--max),calc(100% - 2rem));margin:auto}
+    header{position:sticky;top:0;background:rgba(11,15,20,.86);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+    .nav{min-height:76px;display:flex;justify-content:space-between;align-items:center;gap:1rem}.brand{font-weight:700}.brand small{display:block;color:var(--muted);font-weight:500}
+    .menu{list-style:none;display:flex;gap:1rem;flex-wrap:wrap}.menu a{color:var(--muted)} .menu a:hover{color:var(--text)}
+    main{padding:4rem 0}.box{background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));border:1px solid var(--border);border-radius:18px;padding:1.5rem}
+    h1{font-size:clamp(2rem,4vw,3.5rem);margin-bottom:1rem;letter-spacing:-.03em}
+    ul{margin-left:1.2rem;color:var(--muted)} li{margin-bottom:.7rem}
+    p{color:var(--muted);margin-bottom:1rem}
+    .footer{padding:2rem 0;color:var(--muted)}
+    @media (max-width:900px){nav{display:none}}
+  </style>
+</head>
 <body>
-  <h1>Servizi</h1>
-  <ul>
-    <li>Analisi dei mercati</li>
-    <li>Ricerca quantitativa</li>
-    <li>Analisi macro-finanziaria</li>
-    <li>Costruzione portafoglio</li>
-    <li>Monitoraggio ETF e asset allocation</li>
-    <li>Report e dashboard interpretative</li>
-  </ul>
+  <header class="site-header">
+    <div class="container nav">
+      <div class="brand">V-Quant Pro<small>Market Intelligence</small></div>
+      <nav aria-label="Navigazione principale">
+        <ul class="menu">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="chi-siamo.html">Chi siamo</a></li>
+          <li><a href="servizi.html">Servizi</a></li>
+          <li><a href="analisi.html">Analisi</a></li>
+          <li><a href="metodo.html">Metodo</a></li>
+          <li><a href="insight.html">Insight</a></li>
+          <li><a href="contatti.html">Contatti</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+    <div class="box">
+      <h1>Servizi</h1>
+      <p>I servizi di V-Quant Pro sono costruiti per presentare i mercati con una logica professionale, semplice da leggere e orientata alla decisione.</p>
+      <ul>
+        <li>Analisi dei mercati.</li>
+        <li>Ricerca quantitativa.</li>
+        <li>Analisi macro-finanziaria.</li>
+        <li>Costruzione portafoglio.</li>
+        <li>Monitoraggio ETF e asset allocation.</li>
+        <li>Report e dashboard interpretative.</li>
+      </ul>
+    </div>
+  </main>
+  <footer class="footer"><div class="container">© V-Quant Pro</div></footer>
 </body>
 </html>
