@@ -3,101 +3,252 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>VQuantPro | Analisi quantitativa e strumenti per investitori</title>
-  <meta name="description" content="VQuantPro è un progetto dedicato all'analisi quantitativa dei mercati, all'educazione finanziaria e a strumenti informativi per investitori consapevoli.">
-  <meta name="robots" content="index,follow">
+  <title>VQuantPro</title>
+  <meta name="description" content="Analisi quantitativa, metriche di rischio e portafogli.">
   <style>
-    :root{--bg:#0b1020;--card:#121933;--line:#2a3669;--text:#eef2ff;--muted:#aeb8d6;--accent:#6ee7b7}
+    :root{
+      --bg:#0c1327;
+      --card:#121933;
+      --card2:#162042;
+      --line:#2a3669;
+      --text:#eef2ff;
+      --muted:#aeb8d6;
+      --accent:#6ee7b7;
+      --warn:#fbbf24;
+    }
     *{box-sizing:border-box}
-    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(180deg,#0b1020,#101935 45%,#0b1020);color:var(--text);line-height:1.6}
+    body{
+      margin:0;
+      font-family:Arial,Helvetica,sans-serif;
+      background:linear-gradient(180deg,#0c1327,#101935 45%,#0c1327);
+      color:var(--text);
+      line-height:1.75
+    }
     a{color:var(--accent);text-decoration:none}
-    .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
-    header{position:sticky;top:0;background:rgba(11,16,32,.92);border-bottom:1px solid var(--line);backdrop-filter:blur(10px);z-index:10}
-    .nav{display:flex;justify-content:space-between;align-items:center;padding:16px 0;gap:16px;flex-wrap:wrap}
+    .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+    header{
+      position:sticky;top:0;z-index:20;
+      background:rgba(12,19,39,.94);
+      border-bottom:1px solid var(--line);
+      backdrop-filter:blur(10px)
+    }
+    .nav{
+      display:flex;justify-content:space-between;align-items:center;
+      padding:16px 0;gap:16px;flex-wrap:wrap
+    }
     .brand{font-weight:700;font-size:22px;color:#fff}
     .menu{display:flex;flex-wrap:wrap;gap:14px}
     .menu a{color:#d9e4ff}
-    .hero{padding:72px 0 44px}
-    .hero-grid{display:grid;grid-template-columns:1.4fr .9fr;gap:28px;align-items:start}
-    h1,h2,h3{line-height:1.15;margin:0 0 14px}
-    h1{font-size:46px}
-    h2{font-size:30px}
-    h3{font-size:22px}
-    p{margin:0 0 16px;color:var(--muted)}
-    .lead{font-size:20px;color:#dfe7ff}
-    .card{background:rgba(18,25,51,.92);border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:0 10px 30px rgba(0,0,0,.18)}
-    .btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
-    .btn{display:inline-block;padding:12px 18px;border-radius:12px;font-weight:700}
-    .primary{background:var(--accent);color:#08111f}
-    .secondary{border:1px solid var(--line);color:#fff;background:#162042}
-    .grid-3,.grid-2{display:grid;gap:22px}
-    .grid-3{grid-template-columns:repeat(3,1fr)}
-    .grid-2{grid-template-columns:repeat(2,1fr)}
-    section{padding:24px 0 32px}
-    .kpi{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#95a5d6;margin-bottom:8px}
-    ul{padding-left:18px;color:var(--muted)}
-    li{margin-bottom:10px}
-    .notice{border-left:4px solid #fbbf24;padding-left:14px;color:#f8e8b0}
-    footer{margin-top:34px;border-top:1px solid var(--line);padding:28px 0 40px;background:#0a0f1e}
-    .footgrid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:20px}
-    .small{font-size:14px;color:#99a7cb}
-    @media (max-width:860px){
-      .hero-grid,.grid-3,.grid-2,.footgrid{grid-template-columns:1fr}
-      h1{font-size:36px}
-      .menu{gap:10px}
+    .hero{padding:56px 0 30px}
+    .card{
+      background:rgba(18,25,51,.96);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:30px;
+      box-shadow:0 10px 30px rgba(0,0,0,.18)
     }
+    h1,h2,h3{line-height:1.15;margin:0 0 14px}
+    h1{font-size:42px}
+    h2{font-size:28px;margin-top:34px}
+    p{margin:0 0 16px;color:var(--muted)}
+    .lead{font-size:19px;color:#dfe7ff}
+    .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+    .btn{
+      display:inline-block;
+      padding:12px 16px;
+      border-radius:10px;
+      font-weight:700;
+      border:1px solid var(--line)
+    }
+    .btn.primary{background:var(--accent);color:#07111f;border-color:var(--accent)}
+    .btn.secondary{background:#1b2a52;color:#eef2ff}
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+      margin-top:26px
+    }
+    .box{
+      background:var(--card2);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:18px
+    }
+    .small{font-size:14px;color:#99a7cb}
+    footer{
+      margin-top:34px;
+      border-top:1px solid var(--line);
+      padding:24px 0 38px;
+      background:#0a0f1e
+    }
+    .cookie-banner{
+      position:fixed;left:16px;right:16px;bottom:16px;z-index:9999;
+      max-width:980px;margin:0 auto;background:#121933;border:1px solid #2a3669;
+      border-radius:18px;box-shadow:0 14px 40px rgba(0,0,0,.35);color:#eef2ff
+    }
+    .cookie-banner__content{padding:18px}
+    .cookie-banner__text p{margin:8px 0 0;color:#aeb8d6;line-height:1.6}
+    .cookie-banner__actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .cookie-btn{border:0;border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer}
+    .cookie-btn--primary{background:#6ee7b7;color:#07111f}
+    .cookie-btn--secondary{background:#2b344f;color:#eef2ff}
+    .cookie-btn--ghost{background:#1b2a52;color:#eef2ff}
+    .cookie-banner__prefs{margin-top:14px;padding-top:14px;border-top:1px solid #2a3669;display:none}
+    .cookie-option{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      padding:10px 0;color:#aeb8d6
+    }
+    .spacer{height:210px}
+    @media (max-width:900px){.grid{grid-template-columns:1fr}.nav{gap:10px}h1{font-size:34px}}
   </style>
+
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'analytics_storage': 'denied'
+    });
+  </script>
 </head>
 <body>
-<header>
-  <div class="wrap nav">
-    <div class="brand">VQuantPro</div>
-    <nav class="menu" aria-label="Navigazione principale">
-      <a href="index.html">Home</a>
-      <a href="articoli.html">Articoli</a>
-      <a href="about.html">About</a>
-      <a href="metodologia.html">Metodologia</a>
-      <a href="motore.html">Motore esterno</a>
-      <a href="contatti.html">Contatti</a>
-      <a href="disclaimer.html">Disclaimer</a>
-      <a href="privacy.html">Privacy</a>
-      <a href="cookie.html">Cookie</a>
-      <a href="termini.html">Termini</a>
-    </nav>
-  </div>
-</header>
+  <header>
+    <div class="wrap nav">
+      <div class="brand">VQuantPro</div>
+      <nav class="menu" aria-label="Navigazione principale">
+        <a href="index.html">Home</a>
+        <a href="articoli.html">Articoli</a>
+        <a href="metodologia.html">Metodologia</a>
+        <a href="motore.html">Motore esterno</a>
+        <a href="contatti.html">Contatti</a>
+      </nav>
+    </div>
+  </header>
 
-<main>
-  <section class="hero">
-    <div class="wrap hero-grid">
-      <div class="card">
-        <div class="kpi">Analisi quantitativa · Educazione finanziaria · Strumenti informativi</div>
-        <h1>VQuantPro è un progetto dedicato a dati, metodo e disciplina negli investimenti.</h1>
-        <p class="lead">Il sito raccoglie contenuti informativi, approcci quantitativi e risorse educative per aiutare gli utenti a comprendere meglio mercati, rischio, allocazione e strumenti di analisi.</p>
-        <p>Le informazioni pubblicate hanno finalità esclusivamente informative ed educative. Nessun contenuto presente su VQuantPro costituisce consulenza finanziaria personalizzata, raccomandazione d'investimento o sollecitazione al pubblico risparmio.</p>
-        <div class="btns">
-          <a class="btn primary" href="articoli.html">Leggi gli articoli</a>
-          <a class="btn secondary" href="motore.html">Apri il motore dell'app</a>
-          <a class="btn secondary" href="metodologia.html">Leggi la metodologia</a>
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <div class="card">
+          <p class="small">Analisi quantitativa e risk management</p>
+          <h1>VQuantPro</h1>
+          <p class="lead">Analisi quantitativa, metriche di rischio e lettura disciplinata dei portafogli.</p>
+          <p>Il sito unisce contenuti educativi, analisi metodologiche e strumenti di lettura per aiutare a interpretare meglio rendimento, rischio e robustezza delle strategie. L’obiettivo non è promettere risultati, ma migliorare la qualità del giudizio.</p>
+          <div class="actions">
+            <a class="btn primary" href="articoli.html">Leggi gli articoli</a>
+            <a class="btn secondary" href="metodologia.html">Scopri la metodologia</a>
+            <a class="btn secondary" href="motore.html">Apri il motore</a>
+          </div>
+
+          <div class="grid">
+            <div class="box">
+              <h3>Metriche</h3>
+              <p>Sharpe, Sortino, Calmar, drawdown, volatilità e altre letture utili.</p>
+            </div>
+            <div class="box">
+              <h3>Metodologia</h3>
+              <p>Trasparenza, prudenza e interpretazione corretta dei dati.</p>
+            </div>
+            <div class="box">
+              <h3>Monitoraggio</h3>
+              <p>Confronto tra portafogli, benchmark e scenari di robustezza.</p>
+            </div>
+          </div>
         </div>
       </div>
-      <aside class="card">
-        <h2>Prima di investire</h2>
-        <ul>
-          <li>Valuta obiettivi, orizzonte temporale e tolleranza al rischio.</li>
-          <li>Verifica sempre le fonti e confronta i dati con documentazione ufficiale.</li>
-          <li>Ricorda che performance passate e backtest non garantiscono risultati futuri.</li>
-        </ul>
-        <p class="notice"><strong>Nota importante:</strong> il motore esterno dell'app è ospitato su una piattaforma separata. Controlla sempre URL, termini d'uso e informative dedicate prima di inserire dati personali.</p>
-      </aside>
-    </div>
-  </section>
-</main>
+    </section>
 
-<footer>
-  <div class="wrap">
-    <p class="small">VQuantPro · contenuti informativi ed educativi.</p>
+    <div class="spacer"></div>
+  </main>
+
+  <div class="cookie-banner" id="cookieBanner">
+    <div class="cookie-banner__content">
+      <strong>Gestione cookie</strong>
+      <p>
+        Usiamo cookie tecnici e, con il tuo consenso, cookie pubblicitari per Google AdSense.
+        Puoi accettare, rifiutare o personalizzare le preferenze.
+      </p>
+
+      <div class="cookie-banner__actions">
+        <button type="button" class="cookie-btn cookie-btn--primary" onclick="acceptCookies()">Accetta</button>
+        <button type="button" class="cookie-btn cookie-btn--secondary" onclick="rejectCookies()">Rifiuta</button>
+        <button type="button" class="cookie-btn cookie-btn--ghost" onclick="toggleCookiePrefs()">Personalizza</button>
+      </div>
+
+      <div class="cookie-banner__prefs" id="cookiePrefs">
+        <label class="cookie-option">
+          <span>Cookie tecnici</span>
+          <input type="checkbox" checked disabled>
+        </label>
+        <label class="cookie-option">
+          <span>Cookie pubblicitari / AdSense</span>
+          <input type="checkbox" id="adsCookies">
+        </label>
+        <button type="button" class="cookie-btn cookie-btn--primary" onclick="saveCookiePrefs()">Salva preferenze</button>
+      </div>
+    </div>
   </div>
-</footer>
+
+  <footer>
+    <div class="wrap">
+      <p class="small">VQuantPro · contenuti informativi ed educativi.</p>
+    </div>
+  </footer>
+
+  <script>
+    const cookieKey = 'vquantpro_cookie_consent';
+    const banner = document.getElementById('cookieBanner');
+    const prefs = document.getElementById('cookiePrefs');
+
+    function hideCookieBanner() {
+      banner.style.display = 'none';
+    }
+
+    function acceptCookies() {
+      localStorage.setItem(cookieKey, 'accepted');
+      gtag('consent', 'update', {
+        'ad_storage': 'granted',
+        'ad_user_data': 'granted',
+        'ad_personalization': 'granted',
+        'analytics_storage': 'granted'
+      });
+      hideCookieBanner();
+    }
+
+    function rejectCookies() {
+      localStorage.setItem(cookieKey, 'rejected');
+      gtag('consent', 'update', {
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'analytics_storage': 'denied'
+      });
+      hideCookieBanner();
+    }
+
+    function toggleCookiePrefs() {
+      prefs.style.display = prefs.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function saveCookiePrefs() {
+      const ads = document.getElementById('adsCookies').checked;
+      localStorage.setItem(cookieKey, ads ? 'custom-ads-on' : 'custom-ads-off');
+      gtag('consent', 'update', {
+        'ad_storage': ads ? 'granted' : 'denied',
+        'ad_user_data': ads ? 'granted' : 'denied',
+        'ad_personalization': ads ? 'granted' : 'denied',
+        'analytics_storage': ads ? 'granted' : 'denied'
+      });
+      hideCookieBanner();
+    }
+
+    if (localStorage.getItem(cookieKey)) {
+      hideCookieBanner();
+    }
+  </script>
+
+  <!-- Inserisci qui il codice AdSense dopo il consenso, oppure tramite CMP certificata -->
+  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXX" crossorigin="anonymous"></script> -->
 </body>
 </html>
