@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>VQuantPro</title>
-  <meta name="description" content="Analisi quantitativa, metriche di rischio e portafogli.">
+  <meta name="description" content="VQuantPro è un progetto dedicato ad analisi quantitativa, metriche di rischio, portafogli e contenuti informativi sugli investimenti.">
+  <meta name="robots" content="index,follow">
   <style>
     :root{
       --bg:#0c1327;
@@ -14,92 +15,138 @@
       --text:#eef2ff;
       --muted:#aeb8d6;
       --accent:#6ee7b7;
-      --warn:#fbbf24;
+      --accent2:#8ab4ff;
+      --danger:#f87171;
     }
     *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
     body{
       margin:0;
       font-family:Arial,Helvetica,sans-serif;
       background:linear-gradient(180deg,#0c1327,#101935 45%,#0c1327);
       color:var(--text);
-      line-height:1.75
+      line-height:1.7
     }
     a{color:var(--accent);text-decoration:none}
-    .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
     header{
-      position:sticky;top:0;z-index:20;
-      background:rgba(12,19,39,.94);
+      position:sticky;top:0;z-index:50;
+      background:rgba(12,19,39,.95);
       border-bottom:1px solid var(--line);
-      backdrop-filter:blur(10px)
+      backdrop-filter:blur(12px)
     }
     .nav{
       display:flex;justify-content:space-between;align-items:center;
-      padding:16px 0;gap:16px;flex-wrap:wrap
+      padding:14px 0;gap:14px;flex-wrap:wrap
     }
-    .brand{font-weight:700;font-size:22px;color:#fff}
+    .brand{
+      display:flex;align-items:center;gap:10px;
+      font-weight:800;font-size:22px;color:#fff
+    }
+    .brand-badge{
+      width:34px;height:34px;border-radius:10px;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      display:inline-block
+    }
     .menu{display:flex;flex-wrap:wrap;gap:14px}
-    .menu a{color:#d9e4ff}
-    .hero{padding:56px 0 30px}
+    .menu a{color:#d9e4ff;font-weight:700}
+    .hero{padding:54px 0 28px}
     .card{
       background:rgba(18,25,51,.96);
       border:1px solid var(--line);
-      border-radius:18px;
+      border-radius:20px;
       padding:30px;
-      box-shadow:0 10px 30px rgba(0,0,0,.18)
+      box-shadow:0 16px 34px rgba(0,0,0,.24)
     }
     h1,h2,h3{line-height:1.15;margin:0 0 14px}
-    h1{font-size:42px}
-    h2{font-size:28px;margin-top:34px}
+    h1{font-size:44px}
+    h2{font-size:29px;margin-top:34px}
+    h3{font-size:20px}
     p{margin:0 0 16px;color:var(--muted)}
     .lead{font-size:19px;color:#dfe7ff}
+    .meta{font-size:14px;color:#9aa8cb;margin-bottom:10px}
     .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
     .btn{
-      display:inline-block;
-      padding:12px 16px;
-      border-radius:10px;
-      font-weight:700;
-      border:1px solid var(--line)
+      display:inline-block;padding:12px 16px;border-radius:12px;
+      font-weight:800;border:1px solid var(--line)
     }
     .btn.primary{background:var(--accent);color:#07111f;border-color:var(--accent)}
     .btn.secondary{background:#1b2a52;color:#eef2ff}
+    .btn.ghost{background:transparent;color:#dfe7ff}
+    .section{padding:10px 0 0}
     .grid{
       display:grid;
       grid-template-columns:repeat(3,1fr);
       gap:18px;
-      margin-top:26px
+      margin-top:22px
     }
     .box{
       background:var(--card2);
       border:1px solid var(--line);
-      border-radius:16px;
+      border-radius:18px;
       padding:18px
     }
-    .small{font-size:14px;color:#99a7cb}
-    footer{
-      margin-top:34px;
-      border-top:1px solid var(--line);
-      padding:24px 0 38px;
-      background:#0a0f1e
+    .box p{margin-bottom:0}
+    .split{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:18px;
+      align-items:start;
+      margin-top:22px
     }
+    .list{
+      display:grid;
+      gap:12px;
+      margin-top:8px
+    }
+    .list a{
+      display:block;
+      padding:14px 16px;
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:#101935;
+      color:#e8efff
+    }
+    .pill-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+    .pill{
+      display:inline-block;padding:8px 12px;border-radius:999px;
+      background:#18264b;border:1px solid var(--line);color:#dbe6ff;font-size:14px
+    }
+    footer{
+      margin-top:34px;border-top:1px solid var(--line);
+      padding:26px 0 44px;background:#0a0f1e
+    }
+    .footer-links{display:flex;flex-wrap:wrap;gap:14px;margin-top:10px}
+    .footer-links a{color:#d9e4ff}
+    .small{font-size:14px;color:#99a7cb}
     .cookie-banner{
       position:fixed;left:16px;right:16px;bottom:16px;z-index:9999;
-      max-width:980px;margin:0 auto;background:#121933;border:1px solid #2a3669;
-      border-radius:18px;box-shadow:0 14px 40px rgba(0,0,0,.35);color:#eef2ff
+      max-width:1020px;margin:0 auto;background:#121933;border:1px solid #2a3669;
+      border-radius:20px;box-shadow:0 16px 46px rgba(0,0,0,.42);color:#eef2ff
     }
     .cookie-banner__content{padding:18px}
-    .cookie-banner__text p{margin:8px 0 0;color:#aeb8d6;line-height:1.6}
+    .cookie-banner__text p{margin:8px 0 0;color:#aeb8d6;line-height:1.55}
     .cookie-banner__actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-    .cookie-btn{border:0;border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer}
-    .cookie-btn--primary{background:#6ee7b7;color:#07111f}
+    .cookie-btn{
+      border:0;border-radius:10px;padding:10px 14px;font-weight:800;cursor:pointer
+    }
+    .cookie-btn--primary{background:var(--accent);color:#07111f}
     .cookie-btn--secondary{background:#2b344f;color:#eef2ff}
     .cookie-btn--ghost{background:#1b2a52;color:#eef2ff}
-    .cookie-banner__prefs{margin-top:14px;padding-top:14px;border-top:1px solid #2a3669;display:none}
+    .cookie-banner__prefs{
+      margin-top:14px;padding-top:14px;border-top:1px solid #2a3669;display:none
+    }
     .cookie-option{
       display:flex;align-items:center;justify-content:space-between;gap:12px;
       padding:10px 0;color:#aeb8d6
     }
-    .spacer{height:210px}
-    @media (max-width:900px){.grid{grid-template-columns:1fr}.nav{gap:10px}h1{font-size:34px}}
+    .cookie-link{color:var(--accent2)}
+    @media (max-width:920px){
+      .grid,.split{grid-template-columns:1fr}
+      h1{font-size:36px}
+      .nav{gap:10px}
+    }
   </style>
 
   <script>
@@ -116,12 +163,17 @@
 <body>
   <header>
     <div class="wrap nav">
-      <div class="brand">VQuantPro</div>
+      <div class="brand">
+        <span class="brand-badge" aria-hidden="true"></span>
+        <span>VQuantPro</span>
+      </div>
       <nav class="menu" aria-label="Navigazione principale">
         <a href="index.html">Home</a>
-        <a href="articoli.html">Articoli</a>
-        <a href="metodologia.html">Metodologia</a>
-        <a href="motore.html">Motore esterno</a>
+        <a href="analisi.html">Analisi</a>
+        <a href="chi-siamo.html">Chi siamo</a>
+        <a href="servizi.html">Servizi</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="termini.html">Termini</a>
         <a href="contatti.html">Contatti</a>
       </nav>
     </div>
@@ -131,44 +183,70 @@
     <section class="hero">
       <div class="wrap">
         <div class="card">
-          <p class="small">Analisi quantitativa e risk management</p>
+          <div class="meta">Analisi quantitativa · Risk management · Portafogli</div>
           <h1>VQuantPro</h1>
           <p class="lead">Analisi quantitativa, metriche di rischio e lettura disciplinata dei portafogli.</p>
-          <p>Il sito unisce contenuti educativi, analisi metodologiche e strumenti di lettura per aiutare a interpretare meglio rendimento, rischio e robustezza delle strategie. L’obiettivo non è promettere risultati, ma migliorare la qualità del giudizio.</p>
+          <p>VQuantPro è un progetto editoriale dedicato alla comprensione dei mercati attraverso dati, metodo e disciplina. Il sito pubblica contenuti informativi ed educativi su analisi dei portafogli, robustezza delle strategie, metriche di rischio e interpretazione dei risultati, con un taglio chiaro e operativo.</p>
+          <p>I contenuti hanno finalità esclusivamente informative e non costituiscono consulenza finanziaria personalizzata.</p>
+
           <div class="actions">
-            <a class="btn primary" href="articoli.html">Leggi gli articoli</a>
-            <a class="btn secondary" href="metodologia.html">Scopri la metodologia</a>
-            <a class="btn secondary" href="motore.html">Apri il motore</a>
+            <a class="btn primary" href="analisi.html">Vai all’analisi</a>
+            <a class="btn secondary" href="chi-siamo.html">Chi siamo</a>
+            <a class="btn secondary" href="servizi.html">Servizi</a>
+            <a class="btn ghost" href="#articoli">Ultimi contenuti</a>
           </div>
 
-          <div class="grid">
-            <div class="box">
-              <h3>Metriche</h3>
-              <p>Sharpe, Sortino, Calmar, drawdown, volatilità e altre letture utili.</p>
+          <div class="pill-row">
+            <span class="pill">Sharpe</span>
+            <span class="pill">Sortino</span>
+            <span class="pill">Calmar</span>
+            <span class="pill">Drawdown</span>
+            <span class="pill">Volatilità</span>
+            <span class="pill">Benchmark</span>
+          </div>
+        </div>
+
+        <div class="grid">
+          <article class="box">
+            <h3>Metriche</h3>
+            <p>Leggiamo rendimento, rischio e consistenza con indicatori utili e confrontabili.</p>
+          </article>
+          <article class="box">
+            <h3>Metodo</h3>
+            <p>Trasparenza, prudenza e processi di valutazione chiari al centro del progetto.</p>
+          </article>
+          <article class="box">
+            <h3>Monitoraggio</h3>
+            <p>Confronti tra portafogli, benchmark e scenari per capire la robustezza delle idee.</p>
+          </article>
+        </div>
+
+        <div class="split section" id="articoli">
+          <div class="box">
+            <h2>Ultimi contenuti</h2>
+            <div class="list">
+              <a href="analisi.html">Analisi: come leggere drawdown e volatilità in modo semplice</a>
+              <a href="servizi.html">Servizi: cosa offre VQuantPro e come usare il sito</a>
+              <a href="chi-siamo.html">Chi siamo: obiettivi, metodo e approccio editoriale</a>
             </div>
-            <div class="box">
-              <h3>Metodologia</h3>
-              <p>Trasparenza, prudenza e interpretazione corretta dei dati.</p>
-            </div>
-            <div class="box">
-              <h3>Monitoraggio</h3>
-              <p>Confronto tra portafogli, benchmark e scenari di robustezza.</p>
-            </div>
+          </div>
+          <div class="box">
+            <h2>Informazioni utili</h2>
+            <p>Questo sito usa cookie tecnici e, con il consenso, cookie pubblicitari e di analisi. Puoi gestire le preferenze dal banner qui sotto.</p>
+            <p>Per dettagli su trattamento dati, consulta le pagine Privacy e Termini collegate nel footer.</p>
           </div>
         </div>
       </div>
     </section>
-
-    <div class="spacer"></div>
   </main>
 
-  <div class="cookie-banner" id="cookieBanner">
+  <div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Banner cookie">
     <div class="cookie-banner__content">
       <strong>Gestione cookie</strong>
-      <p>
-        Usiamo cookie tecnici e, con il tuo consenso, cookie pubblicitari per Google AdSense.
-        Puoi accettare, rifiutare o personalizzare le preferenze.
-      </p>
+      <div class="cookie-banner__text">
+        <p>Usiamo cookie tecnici e, con il tuo consenso, cookie pubblicitari e di analisi per migliorare il sito e mostrare annunci pertinenti.</p>
+        <p>Puoi accettare, rifiutare o personalizzare le preferenze. Trovi maggiori dettagli nella pagina <a class="cookie-link" href="privacy.html">Privacy</a>.</p>
+      </div>
 
       <div class="cookie-banner__actions">
         <button type="button" class="cookie-btn cookie-btn--primary" onclick="acceptCookies()">Accetta</button>
@@ -185,6 +263,10 @@
           <span>Cookie pubblicitari / AdSense</span>
           <input type="checkbox" id="adsCookies">
         </label>
+        <label class="cookie-option">
+          <span>Cookie analitici</span>
+          <input type="checkbox" id="analyticsCookies">
+        </label>
         <button type="button" class="cookie-btn cookie-btn--primary" onclick="saveCookiePrefs()">Salva preferenze</button>
       </div>
     </div>
@@ -192,7 +274,16 @@
 
   <footer>
     <div class="wrap">
-      <p class="small">VQuantPro · contenuti informativi ed educativi.</p>
+      <p class="small">VQuantPro · contenuti informativi ed educativi. I materiali pubblicati non costituiscono consulenza finanziaria personalizzata.</p>
+      <div class="footer-links">
+        <a href="analisi.html">Analisi</a>
+        <a href="chi-siamo.html">Chi siamo</a>
+        <a href="servizi.html">Servizi</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="termini.html">Termini</a>
+        <a href="contatti.html">Contatti</a>
+        <a href="disclaimer.html">Disclaimer</a>
+      </div>
     </div>
   </footer>
 
@@ -201,54 +292,46 @@
     const banner = document.getElementById('cookieBanner');
     const prefs = document.getElementById('cookiePrefs');
 
-    function hideCookieBanner() {
-      banner.style.display = 'none';
+    function hideCookieBanner(){ banner.style.display = 'none'; }
+
+    function setConsent(ad, analytics){
+      gtag('consent', 'update', {
+        'ad_storage': ad ? 'granted' : 'denied',
+        'ad_user_data': ad ? 'granted' : 'denied',
+        'ad_personalization': ad ? 'granted' : 'denied',
+        'analytics_storage': analytics ? 'granted' : 'denied'
+      });
     }
 
-    function acceptCookies() {
+    function acceptCookies(){
       localStorage.setItem(cookieKey, 'accepted');
-      gtag('consent', 'update', {
-        'ad_storage': 'granted',
-        'ad_user_data': 'granted',
-        'ad_personalization': 'granted',
-        'analytics_storage': 'granted'
-      });
+      setConsent(true, true);
       hideCookieBanner();
     }
 
-    function rejectCookies() {
+    function rejectCookies(){
       localStorage.setItem(cookieKey, 'rejected');
-      gtag('consent', 'update', {
-        'ad_storage': 'denied',
-        'ad_user_data': 'denied',
-        'ad_personalization': 'denied',
-        'analytics_storage': 'denied'
-      });
+      setConsent(false, false);
       hideCookieBanner();
     }
 
-    function toggleCookiePrefs() {
+    function toggleCookiePrefs(){
       prefs.style.display = prefs.style.display === 'block' ? 'none' : 'block';
     }
 
-    function saveCookiePrefs() {
+    function saveCookiePrefs(){
       const ads = document.getElementById('adsCookies').checked;
-      localStorage.setItem(cookieKey, ads ? 'custom-ads-on' : 'custom-ads-off');
-      gtag('consent', 'update', {
-        'ad_storage': ads ? 'granted' : 'denied',
-        'ad_user_data': ads ? 'granted' : 'denied',
-        'ad_personalization': ads ? 'granted' : 'denied',
-        'analytics_storage': ads ? 'granted' : 'denied'
-      });
+      const analytics = document.getElementById('analyticsCookies').checked;
+      localStorage.setItem(cookieKey, JSON.stringify({ads, analytics}));
+      setConsent(ads, analytics);
       hideCookieBanner();
     }
 
-    if (localStorage.getItem(cookieKey)) {
-      hideCookieBanner();
-    }
+    const saved = localStorage.getItem(cookieKey);
+    if(saved) hideCookieBanner();
   </script>
 
-  <!-- Inserisci qui il codice AdSense dopo il consenso, oppure tramite CMP certificata -->
+  <!-- Inserisci qui il codice AdSense solo dopo il consenso o tramite CMP certificata -->
   <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXX" crossorigin="anonymous"></script> -->
 </body>
 </html>
