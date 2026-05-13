@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Beta e benchmark | VQuantPro</title>
+  <meta name="description" content="Analisi approfondita del beta e del suo ruolo nel confronto con il benchmark.">
+  <style>
+    :root{--bg:#0b1020;--card:#121933;--line:#2a3669;--text:#eef2ff;--muted:#aeb8d6;--accent:#6ee7b7}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(180deg,#0b1020,#101935 45%,#0b1020);color:var(--text);line-height:1.75}
+    a{color:var(--accent);text-decoration:none}
+    .wrap{max-width:980px;margin:0 auto;padding:0 20px}
+    header{position:sticky;top:0;background:rgba(11,16,32,.92);border-bottom:1px solid var(--line);backdrop-filter:blur(10px);z-index:10}
+    .nav{display:flex;justify-content:space-between;align-items:center;padding:16px 0;gap:16px;flex-wrap:wrap}
+    .brand{font-weight:700;font-size:22px;color:#fff}
+    .menu{display:flex;flex-wrap:wrap;gap:14px}
+    .menu a{color:#d9e4ff}
+    .hero{padding:56px 0 24px}
+    .card{background:rgba(18,25,51,.92);border:1px solid var(--line);border-radius:18px;padding:28px;box-shadow:0 10px 30px rgba(0,0,0,.18)}
+    h1,h2,h3{line-height:1.15;margin:0 0 14px}
+    h1{font-size:40px}
+    h2{font-size:28px;margin-top:34px}
+    h3{font-size:21px;margin-top:24px}
+    p{margin:0 0 16px;color:var(--muted)}
+    ul{padding-left:18px;color:var(--muted)}
+    li{margin-bottom:10px}
+    .note{border-left:4px solid #fbbf24;padding-left:14px;color:#f8e8b0;margin:22px 0}
+    .box{background:#162042;border:1px solid var(--line);border-radius:14px;padding:18px;margin:18px 0}
+    .small{font-size:14px;color:#99a7cb}
+    footer{margin-top:34px;border-top:1px solid var(--line);padding:24px 0 38px;background:#0a0f1e}
+    @media (max-width:860px){h1{font-size:32px}}
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <div class="brand">VQuantPro</div>
+    <nav class="menu" aria-label="Navigazione principale">
+      <a href="index.html">Home</a>
+      <a href="articoli.html">Articoli</a>
+      <a href="motore.html">Motore esterno</a>
+      <a href="metodologia.html">Metodologia</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div class="card">
+        <p class="small">Articolo 8 · Relative risk</p>
+        <h1>Beta: misurare quanto una strategia segue il mercato</h1>
+        <p>Il beta è una misura fondamentale per capire quanto un portafoglio o uno strumento si muove in relazione al mercato di riferimento, o benchmark. Se il beta è superiore a 1, il portafoglio tende a muoversi più del benchmark; se è inferiore a 1, tende a muoversi meno; se è negativo, si comporta in direzione opposta. Questa informazione è preziosa perché dice non solo quanto rischio c’è, ma anche che tipo di rischio stiamo assumendo.</p>
+        <p>Nel motore VQuantPro il beta è utile soprattutto quando si vogliono confrontare strategie con una forte componente direzionale. Un portafoglio con beta molto alto può generare risultati importanti nelle fasi favorevoli, ma può soffrire in modo altrettanto pronunciato quando il mercato si indebolisce. Al contrario, un beta contenuto può indicare una struttura più difensiva, ma anche una minore capacità di beneficiare di forti rialzi. La metrica diventa quindi uno strumento di posizionamento relativo.</p>
+        <h2>Beta e strategia</h2>
+        <p>Capire il beta significa anche capire il profilo di comportamento del portafoglio. Non tutte le strategie devono inseguire il mercato allo stesso modo. Alcune sono costruite per amplificarne i movimenti, altre per attenuarli, altre ancora per decorrelarsi. Il beta aiuta a classificare queste intenzioni in modo quantitativo.</p>
+        <p>Nel motore, il beta si legge insieme alla correlazione e al tracking error. Se un portafoglio ha beta alto ma tracking error basso, potrebbe essere semplicemente un replicatore molto fedele del benchmark con leva implicita o esplicita. Se ha beta basso ma tracking error alto, allora potrebbe stare seguendo una logica molto diversa, pur restando vicino in media ai movimenti del mercato. Queste sfumature sono essenziali per non semplificare troppo la realtà.</p>
+        <h2>Attenzione alle interpretazioni</h2>
+        <p>Il beta non dice tutto. È utile, ma non sufficiente. Due strategie con lo stesso beta possono avere livelli di drawdown, volatilità e asimmetria del rischio molto diversi. Per questo il motore lo usa come una chiave di lettura complementare, non come metrica dominante.</p>
+        <div class="note"><strong>Punto chiave:</strong> il beta serve a capire l’esposizione relativa al mercato, ma deve sempre essere letto insieme a drawdown, correlazione e tracking error.</div>
+        <div class="box">
+          <h3>In sintesi</h3>
+          <ul>
+            <li>Misura la sensibilità rispetto al benchmark.</li>
+            <li>Aiuta a classificare il profilo difensivo o aggressivo della strategia.</li>
+            <li>Va letto con correlazione e tracking error.</li>
+            <li>Da solo non basta a descrivere il rischio del portafoglio.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </sec
