@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Correlazione e diversificazione | VQuantPro</title>
+  <meta name="description" content="Analisi approfondita della correlazione e del suo ruolo nella costruzione di portafogli robusti.">
+  <style>
+    :root{--bg:#0b1020;--card:#121933;--line:#2a3669;--text:#eef2ff;--muted:#aeb8d6;--accent:#6ee7b7}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(180deg,#0b1020,#101935 45%,#0b1020);color:var(--text);line-height:1.75}
+    a{color:var(--accent);text-decoration:none}
+    .wrap{max-width:980px;margin:0 auto;padding:0 20px}
+    header{position:sticky;top:0;background:rgba(11,16,32,.92);border-bottom:1px solid var(--line);backdrop-filter:blur(10px);z-index:10}
+    .nav{display:flex;justify-content:space-between;align-items:center;padding:16px 0;gap:16px;flex-wrap:wrap}
+    .brand{font-weight:700;font-size:22px;color:#fff}
+    .menu{display:flex;flex-wrap:wrap;gap:14px}
+    .menu a{color:#d9e4ff}
+    .hero{padding:56px 0 24px}
+    .card{background:rgba(18,25,51,.92);border:1px solid var(--line);border-radius:18px;padding:28px;box-shadow:0 10px 30px rgba(0,0,0,.18)}
+    h1,h2,h3{line-height:1.15;margin:0 0 14px}
+    h1{font-size:40px}
+    h2{font-size:28px;margin-top:34px}
+    h3{font-size:21px;margin-top:24px}
+    p{margin:0 0 16px;color:var(--muted)}
+    ul{padding-left:18px;color:var(--muted)}
+    li{margin-bottom:10px}
+    .note{border-left:4px solid #fbbf24;padding-left:14px;color:#f8e8b0;margin:22px 0}
+    .box{background:#162042;border:1px solid var(--line);border-radius:14px;padding:18px;margin:18px 0}
+    .small{font-size:14px;color:#99a7cb}
+    footer{margin-top:34px;border-top:1px solid var(--line);padding:24px 0 38px;background:#0a0f1e}
+    @media (max-width:860px){h1{font-size:32px}}
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <div class="brand">VQuantPro</div>
+    <nav class="menu" aria-label="Navigazione principale">
+      <a href="index.html">Home</a>
+      <a href="articoli.html">Articoli</a>
+      <a href="motore.html">Motore esterno</a>
+      <a href="metodologia.html">Metodologia</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div class="card">
+        <p class="small">Articolo 6 · Portfolio construction</p>
+        <h1>Correlazione: la diversificazione esiste solo se gli asset non fanno tutti la stessa cosa</h1>
+        <p>La correlazione è una delle metriche più importanti nella costruzione di portafogli, perché misura quanto due asset si muovono insieme. Il suo valore strategico è enorme: una vera diversificazione non consiste nel comprare tanti strumenti diversi, ma nel combinare strumenti che reagiscono in modo differente agli stessi shock di mercato. Se gli asset salgono e scendono insieme, il beneficio della diversificazione si riduce drasticamente proprio quando servirebbe di più.</p>
+        <p>Nel motore VQuantPro la correlazione viene osservata per capire se il portafoglio è davvero bilanciato oppure solo apparentemente diversificato. Questo è particolarmente importante nelle fasi di stress, quando molte correlazioni tendono ad aumentare e gli asset che sembravano indipendenti iniziano a muoversi come un blocco unico. Un’analisi seria deve quindi guardare non solo alla correlazione storica, ma anche alla sua stabilità nel tempo e alla sua capacità di cambiare regime.</p>
+        <h2>Correlazione positiva, negativa e nulla</h2>
+        <p>Una correlazione positiva indica che due asset tendono a muoversi nella stessa direzione, una correlazione negativa suggerisce un comportamento opposto e una correlazione prossima a zero segnala movimenti poco legati tra loro. In teoria, la combinazione ideale per un portafoglio difensivo è spesso quella che include attivi con correlazioni contenute o negative, ma nella pratica la realtà è più complessa. Le correlazioni non sono immobili: cambiano con il ciclo economico, con il sentiment e con la liquidità di mercato.</p>
+        <p>Per il motore, questo significa che non basta misurare una volta e dimenticare. La correlazione va monitorata come una variabile dinamica, perché un portafoglio costruito bene può peggiorare nel tempo se gli asset iniziano a comportarsi in modo più simile. È uno dei motivi per cui la gestione quantitativa richiede revisione continua e non solo scelta iniziale.</p>
+        <h2>Il ruolo nella gestione del rischio</h2>
+        <p>La correlazione aiuta anche a capire quanto rischio stiamo davvero assumendo aggiungendo un nuovo strumento al portafoglio. Se un asset nuovo ha alta correlazione con quelli già presenti, aumenta la concentrazione economica anche se sembra diversificare a livello nominale. Viceversa, un asset con correlazione bassa può migliorare il profilo rischio/rendimento dell’intero portafoglio senza dover aumentare troppo il rischio complessivo.</p>
+        <div class="note"><strong>Punto chiave:</strong> la diversificazione non è il numero di asset, ma la qualità delle relazioni tra gli asset.</div>
+        <div class="box">
+          <h3>In sintesi</h3>
+          <ul>
+            <li>Misura come gli asset si muovono insieme.</li>
+            <li>È essenziale per una vera diversificazione.</li>
+            <li>Va monitorata perché cambia nel tempo.</li>
+            <li>Diventa critica nei momenti di stress di mercato.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer><div class="wrap"><p class="small">VQuantPro · articolo informativo e non consulenza finanziaria.</p></div></footer>
+</body>
+</html>
