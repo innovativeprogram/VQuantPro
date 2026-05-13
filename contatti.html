@@ -1,56 +1,25 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contatti | V-Quant Pro</title>
-  <meta name="description" content="Contatti V-Quant Pro: spazio per email, form e riferimenti ufficiali del progetto." />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contatti | VQuantPro</title>
+  <meta name="description" content="Contatti e canali informativi del progetto VQuantPro.">
   <style>
-    :root{--bg:#0b0f14;--surface:#111720;--border:rgba(255,255,255,.09);--text:#edf2f7;--muted:#9aa6b2;--max:1180px;--font:Inter,system-ui,sans-serif}
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.7}
-    a{color:inherit;text-decoration:none}
-    .container{width:min(var(--max),calc(100% - 2rem));margin:auto}
-    header{position:sticky;top:0;background:rgba(11,15,20,.86);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
-    .nav{min-height:76px;display:flex;justify-content:space-between;align-items:center;gap:1rem}
-    .brand{font-weight:700}
-    .brand small{display:block;color:var(--muted);font-weight:500}
-    .menu{list-style:none;display:flex;gap:1rem;flex-wrap:wrap}
-    .menu a{color:var(--muted)}
-    .menu a:hover{color:var(--text)}
-    main{padding:4rem 0}
-    .box{background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));border:1px solid var(--border);border-radius:18px;padding:1.5rem}
-    h1{font-size:clamp(2rem,4vw,3.5rem);margin-bottom:1rem;letter-spacing:-.03em}
-    p{color:var(--muted);margin-bottom:1rem}
-    .footer{padding:2rem 0;color:var(--muted)}
-    @media (max-width:900px){nav{display:none}}
+    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#0c1327;color:#eef2ff;line-height:1.7}
+    a{color:#6ee7b7}
+    .wrap{max-width:900px;margin:auto;padding:28px 20px}
+    .card{background:#121933;border:1px solid #2a3669;border-radius:18px;padding:28px}
   </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container nav">
-      <div class="brand">V-Quant Pro<small>Market Intelligence</small></div>
-      <nav aria-label="Navigazione principale">
-        <ul class="menu">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="chi-siamo.html">Chi siamo</a></li>
-          <li><a href="servizi.html">Servizi</a></li>
-          <li><a href="analisi.html">Analisi</a></li>
-          <li><a href="metodo.html">Metodo</a></li>
-          <li><a href="insight.html">Insight</a></li>
-          <li><a href="https://vquantpro.streamlit.app/" target="_blank" rel="noopener noreferrer">VQuantPro Engine</a></li>
-          <li><a href="contatti.html">Contatti</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-  <main class="container">
-    <div class="box">
+  <div class="wrap">
+    <p><a href="index.html">← Torna alla home</a></p>
+    <div class="card">
       <h1>Contatti</h1>
-      <p>Per richieste, partnership o collaborazioni, qui puoi inserire email, form e riferimenti ufficiali del progetto.</p>
-      <p>Per l’accesso diretto alla piattaforma operativa puoi usare il link VQuantPro Engine presente nel menu.</p>
+      <p>Email progetto: inserisci-qui-la-tua-email@dominio.it</p>
+      <p>Motore esterno: <a href="https://example.com" target="_blank" rel="noopener noreferrer">https://example.com</a></p>
     </div>
-  </main>
-  <footer class="footer"><div class="container">© V-Quant Pro</div></footer>
+  </div>
 </body>
 </html>
