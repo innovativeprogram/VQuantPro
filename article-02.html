@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sortino Ratio nel motore | VQuantPro</title>
+  <meta name="description" content="Analisi approfondita dello Sortino Ratio e del suo ruolo nel controllo del rischio al ribasso.">
+  <style>
+    :root{--bg:#0b1020;--card:#121933;--line:#2a3669;--text:#eef2ff;--muted:#aeb8d6;--accent:#6ee7b7}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(180deg,#0b1020,#101935 45%,#0b1020);color:var(--text);line-height:1.75}
+    a{color:var(--accent);text-decoration:none}
+    .wrap{max-width:980px;margin:0 auto;padding:0 20px}
+    header{position:sticky;top:0;background:rgba(11,16,32,.92);border-bottom:1px solid var(--line);backdrop-filter:blur(10px);z-index:10}
+    .nav{display:flex;justify-content:space-between;align-items:center;padding:16px 0;gap:16px;flex-wrap:wrap}
+    .brand{font-weight:700;font-size:22px;color:#fff}
+    .menu{display:flex;flex-wrap:wrap;gap:14px}
+    .menu a{color:#d9e4ff}
+    .hero{padding:56px 0 24px}
+    .card{background:rgba(18,25,51,.92);border:1px solid var(--line);border-radius:18px;padding:28px;box-shadow:0 10px 30px rgba(0,0,0,.18)}
+    h1,h2,h3{line-height:1.15;margin:0 0 14px}
+    h1{font-size:40px}
+    h2{font-size:28px;margin-top:34px}
+    h3{font-size:21px;margin-top:24px}
+    p{margin:0 0 16px;color:var(--muted)}
+    ul{padding-left:18px;color:var(--muted)}
+    li{margin-bottom:10px}
+    .note{border-left:4px solid #fbbf24;padding-left:14px;color:#f8e8b0;margin:22px 0}
+    .box{background:#162042;border:1px solid var(--line);border-radius:14px;padding:18px;margin:18px 0}
+    .small{font-size:14px;color:#99a7cb}
+    footer{margin-top:34px;border-top:1px solid var(--line);padding:24px 0 38px;background:#0a0f1e}
+    @media (max-width:860px){h1{font-size:32px}}
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <div class="brand">VQuantPro</div>
+    <nav class="menu" aria-label="Navigazione principale">
+      <a href="index.html">Home</a>
+      <a href="articoli.html">Articoli</a>
+      <a href="motore.html">Motore esterno</a>
+      <a href="metodologia.html">Metodologia</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div class="card">
+        <p class="small">Articolo 2 · Risk management</p>
+        <h1>Sortino Ratio: quando il rischio al ribasso conta più della volatilità totale</h1>
+        <p>Lo Sortino Ratio nasce da una critica molto concreta allo Sharpe Ratio: non tutta la volatilità ha lo stesso significato per l’investitore. Un rialzo improvviso, infatti, non è un problema; anzi, spesso è esattamente ciò che si desidera. Il vero rischio da valutare è la variabilità negativa, cioè la parte della distribuzione che penalizza il capitale. Lo Sortino risponde proprio a questa esigenza, isolando il downside risk e rendendo la lettura della strategia più vicina alla sensibilità reale di chi investe.</p>
+        <p>Nel motore VQuantPro questa metrica ha un ruolo importante perché permette di distinguere strategie che hanno lo stesso rendimento medio ma comportamenti molto diversi nei momenti critici. Due portafogli possono sembrare simili guardando lo Sharpe, ma uno può subire flessioni più profonde e più frequenti. Lo Sortino ci aiuta ad accorgercene. È quindi una metrica più severa e allo stesso tempo più pragmatica, soprattutto quando si analizzano strategie con profili asimmetrici o con ritorni non gaussiani.</p>
+        <h2>La logica del downside deviation</h2>
+        <p>Il cuore dello Sortino è la downside deviation, cioè la misura della variabilità dei rendimenti quando questi scendono sotto un livello target o sotto il rendimento minimo accettabile. Questo è un dettaglio importante: lo Sortino non penalizza le oscillazioni positive, ma solo quelle che danneggiano l’investitore rispetto all’obiettivo prefissato. In pratica, la metrica traduce il concetto di rischio “cattivo” in un numero confrontabile.</p>
+        <p>Dal punto di vista pratico, il motore usa questa informazione per capire se un portafoglio produce rendimento in modo efficiente senza esporre eccessivamente a ribassi indesiderati. Se lo Sharpe misura l’efficienza generale, lo Sortino misura la qualità del percorso verso quel rendimento. Questa distinzione è essenziale per gli investitori che non vogliono solo guadagnare, ma vogliono anche proteggere il capitale lungo il tragitto.</p>
+        <h2>Quando preferirlo allo Sharpe</h2>
+        <p>Lo Sortino è particolarmente utile quando la distribuzione dei rendimenti è asimmetrica, quando il portafoglio utilizza opzioni o leve selettive, oppure quando il comportamento nei ribassi è molto diverso dal comportamento nelle fasi di recupero. In questi casi la volatilità totale diventa una misura troppo grossolana e rischia di mescolare fenomeni diversi. Lo Sortino separa meglio il rumore innocuo dalla parte realmente problematica.</p>
+        <p>Nel motore, se una strategia presenta uno Sharpe discreto ma uno Sortino debole, la lettura è chiara: il rendimento sta probabilmente arrivando con un prezzo troppo alto in termini di stress negativo. Al contrario, uno Sortino solido suggerisce una struttura più sana, anche se il rendimento complessivo non è spettacolare. Questo è un punto importante nella costruzione di portafogli robusti: a volte è meglio un rendimento un po’ più basso, ma più regolare e difendibile nel tempo.</p>
+        <h2>Limiti e falsi segnali</h2>
+        <p>Anche lo Sortino ha i suoi limiti. Se il periodo analizzato è troppo breve, la metrica può variare molto e dare un’illusione di stabilità o debolezza che non esiste realmente. Inoltre, la scelta del target return influenza il risultato: un obiettivo troppo basso può gonfiare artificialmente la metrica, mentre uno troppo alto può penalizzarla eccessivamente. Per questo la configurazione del motore deve essere trasparente e ben documentata.</p>
+        <div class="note"><strong>Punto chiave:</strong> lo Sortino è più informativo dello Sharpe quando il problema principale non è “quanta volatilità c’è”, ma “quanta volatilità negativa sto pagando per ottenere il rendimento”.</div>
+        <div class="box">
+          <h3>In sintesi</h3>
+          <ul>
+            <li>Isola il rischio al ribasso invece della volatilità totale.</li>
+            <li>È utile per strategie asimmetriche o con distribuzioni non normali.</li>
+            <li>Va sempre letto insieme a drawdown e contesto di mercato.</li>
+            <li>Aiuta a valutare la qualità reale del rendimento.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer><div class="wrap"><p class="small">VQuantPro · articolo informativo e non consulenza finanziaria.</p></div></footer>
+</body>
+</html>
