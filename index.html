@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>V-Quant Pro | Market Intelligence</title>
+  <meta name="description" content="V-Quant Pro presenta analisi finanziarie, ricerca quantitativa, macro, portafoglio e insight sui mercati con approccio corporate e data-driven." />
+  <style>
+    :root{--bg:#0b0f14;--surface:#111720;--surface-2:#161d28;--border:rgba(255,255,255,.09);--text:#edf2f7;--muted:#9aa6b2;--accent:#2ea3b0;--shadow:0 24px 60px rgba(0,0,0,.38);--radius:18px;--max:1180px;--font:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:var(--font);background:radial-gradient(circle at top right, rgba(46,163,176,.16), transparent 24%),var(--bg);color:var(--text);line-height:1.6}
+    a{color:inherit;text-decoration:none}
+    .container{width:min(var(--max),calc(100% - 2rem));margin:auto}
+    header{position:sticky;top:0;z-index:10;background:rgba(11,15,20,.82);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+    .nav{min-height:76px;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .brand{font-weight:700;letter-spacing:.02em}
+    .brand small{display:block;color:var(--muted);font-weight:500}
+    nav ul{list-style:none;display:flex;gap:1rem;flex-wrap:wrap}
+    nav a{color:var(--muted)}
+    nav a:hover{color:var(--text)}
+    .hero{padding:5rem 0 3rem}
+    .grid{display:grid;grid-template-columns:1.15fr .85fr;gap:1.5rem;align-items:center}
+    h1{font-size:clamp(2.5rem,5vw,4.8rem);line-height:1.02;letter-spacing:-.04em;max-width:11ch}
+    .lead{margin-top:1rem;color:var(--muted);font-size:1.08rem;max-width:62ch}
+    .actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.5rem}
+    .btn{padding:.85rem 1.05rem;border-radius:12px;font-weight:600;border:1px solid transparent;display:inline-flex;align-items:center;justify-content:center}
+    .primary{background:var(--accent);color:#081216}
+    .secondary{border-color:var(--border);background:transparent;color:var(--text)}
+    .panel{background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));border:1px solid var(--border);border-radius:var(--radius);padding:1.3rem;box-shadow:var(--shadow)}
+    .list{list-style:none;display:grid;gap:.9rem}
+    .list li{background:var(--surface-2);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:1rem}
+    section{padding:3rem 0;border-top:1px solid rgba(255,255,255,.07)}
+    h2{font-size:clamp(1.6rem,2.5vw,2.4rem);margin-bottom:.8rem;letter-spacing:-.03em}
+    .muted{color:var(--muted)}
+    .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.2rem}
+    .footer{padding:2.5rem 0 3rem;color:var(--muted)}
+    @media (max-width:900px){.grid,.cards{grid-template-columns:1fr}nav{display:none}h1{max-width:none}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">V-Quant Pro<small>Market Intelligence</small></div>
+      <nav>
+        <ul>
+          <li><a href="#chi-siamo">Chi siamo</a></li>
+          <li><a href="#servizi">Servizi</a></li>
+          <li><a href="#analisi">Analisi</a></li>
+          <li><a href="#metodo">Metodo</a></li>
+          <li><a href="#contatti">Contatti</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="container grid">
+        <div>
+          <h1>Leggere i mercati con rigore, metodo e visione.</h1>
+          <p class="lead">V-Quant Pro unisce analisi macro, ricerca quantitativa e costruzione di portafoglio in una piattaforma pensata per investitori evoluti e professionisti.</p>
+          <div class="actions">
+            <a class="btn primary" href="#servizi">Scopri i servizi</a>
+            <a class="btn secondary" href="#analisi">Vedi le analisi</a>
+          </div>
+        </div>
+        <aside class="panel">
+          <ul class="list">
+            <li><strong>Mercati</strong><br><span class="muted">Azioni, obbligazioni, ETF, valute e tassi.</span></li>
+            <li><strong>Ricerca</strong><br><span class="muted">Momentum, volatilità, correlazioni, breadth e regime.</span></li>
+            <li><strong>Portafogli</strong><br><span class="muted">Asset allocation, pesi, ribilanciamento e controllo rischio.</span></li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+    <section id="chi-siamo"><div class="container"><h2>Chi siamo</h2><p class="muted">V-Quant Pro nasce per trasformare i dati di mercato in letture chiare, utili e professionalmente presentabili.</p></div></section>
+    <section id="servizi"><div class="container"><h2>Servizi</h2><div class="cards"><article class="card"><h3>Analisi di mercato</h3><p class="muted">Osservazione dei principali asset e rotazioni.</p></article><article class="card"><h3>Ricerca macro</h3><p class="muted">Inflazione, tassi, banche centrali e scenari.</p></article><article class="card"><h3>Portfolio design</h3><p class="muted">ETF, asset allocation e logiche di accumulo.</p></article></div></div></section>
+    <section id="analisi"><div class="container"><h2>Analisi</h2><p class="muted">Contenuti su mercati globali, tassi, credito, fattori, ETF, macro e scenari di rischio.</p></div></section>
+    <section id="metodo"><div class="container"><h2>Metodo</h2><p class="muted">Raccolta dati, filtraggio del rumore, interpretazione e sintesi operativa.</p></div></section>
+    <section id="contatti"><div class="container"><h2>Contatti</h2><p class="muted">Spazio per email, form e riferimenti del progetto.</p></div></section>
+  </main>
+  <footer class="footer"><div class="container">© V-Quant Pro</div></footer>
+</body>
+</html>
