@@ -178,6 +178,7 @@
         <a href="privacy.html">Privacy</a>
         <a href="termini.html">Termini</a>
         <a href="contatti.html">Contatti</a>
+        <a href="disclaimer.html">Disclaimer</a>
       </nav>
     </div>
   </header>
@@ -197,7 +198,7 @@
             <a class="btn secondary" href="chi-siamo.html">Chi siamo</a>
             <a class="btn secondary" href="servizi.html">Servizi</a>
             <a class="btn secondary" href="motore.html">Apri il motore</a>
-            <a class="btn ghost" href="#articoli">Ultimi contenuti</a>
+            <a class="btn ghost" href="#articoli">Vai agli articoli</a>
           </div>
 
           <div class="pill-row">
@@ -211,28 +212,25 @@
         </div>
 
         <div class="grid">
-          <article class="box">
-            <h3>Metriche</h3>
-            <p>Leggiamo rendimento, rischio e consistenza con indicatori utili e confrontabili.</p>
-          </article>
-          <article class="box">
-            <h3>Metodo</h3>
-            <p>Trasparenza, prudenza e processi di valutazione chiari al centro del progetto.</p>
-          </article>
-          <article class="box">
-            <h3>Monitoraggio</h3>
-            <p>Confronti tra portafogli, benchmark e scenari per capire la robustezza delle idee.</p>
-          </article>
+          <article class="box"><h3>Metriche</h3><p>Leggiamo rendimento, rischio e consistenza con indicatori utili e confrontabili.</p></article>
+          <article class="box"><h3>Metodo</h3><p>Trasparenza, prudenza e processi di valutazione chiari al centro del progetto.</p></article>
+          <article class="box"><h3>Monitoraggio</h3><p>Confronti tra portafogli, benchmark e scenari per capire la robustezza delle idee.</p></article>
         </div>
 
         <div class="split section" id="articoli">
           <div class="box">
-            <h2>Ultimi contenuti</h2>
+            <h2>Articoli</h2>
             <div class="list">
-              <a href="analisi.html">Analisi: come leggere drawdown e volatilità in modo semplice</a>
-              <a href="servizi.html">Servizi: cosa offre VQuantPro e come usare il sito</a>
-              <a href="chi-siamo.html">Chi siamo: obiettivi, metodo e approccio editoriale</a>
-              <a href="motore.html">Motore: accesso allo strumento esterno del progetto</a>
+              <a href="article-01.html">Article 01</a>
+              <a href="article-02.html">Article 02</a>
+              <a href="article-03.html">Article 03</a>
+              <a href="article-04.html">Article 04</a>
+              <a href="article-05.html">Article 05</a>
+              <a href="article-06.html">Article 06</a>
+              <a href="article-07.html">Article 07</a>
+              <a href="article-08.html">Article 08</a>
+              <a href="article-09.html">Article 09</a>
+              <a href="article-10.html">Article 10</a>
             </div>
           </div>
           <div class="box">
@@ -299,7 +297,6 @@
     const prefs = document.getElementById('cookiePrefs');
 
     function hideCookieBanner(){ banner.style.display = 'none'; }
-
     function setConsent(ad, analytics){
       gtag('consent', 'update', {
         'ad_storage': ad ? 'granted' : 'denied',
@@ -308,23 +305,9 @@
         'analytics_storage': analytics ? 'granted' : 'denied'
       });
     }
-
-    function acceptCookies(){
-      localStorage.setItem(cookieKey, 'accepted');
-      setConsent(true, true);
-      hideCookieBanner();
-    }
-
-    function rejectCookies(){
-      localStorage.setItem(cookieKey, 'rejected');
-      setConsent(false, false);
-      hideCookieBanner();
-    }
-
-    function toggleCookiePrefs(){
-      prefs.style.display = prefs.style.display === 'block' ? 'none' : 'block';
-    }
-
+    function acceptCookies(){ localStorage.setItem(cookieKey, 'accepted'); setConsent(true, true); hideCookieBanner(); }
+    function rejectCookies(){ localStorage.setItem(cookieKey, 'rejected'); setConsent(false, false); hideCookieBanner(); }
+    function toggleCookiePrefs(){ prefs.style.display = prefs.style.display === 'block' ? 'none' : 'block'; }
     function saveCookiePrefs(){
       const ads = document.getElementById('adsCookies').checked;
       const analytics = document.getElementById('analyticsCookies').checked;
@@ -332,9 +315,7 @@
       setConsent(ads, analytics);
       hideCookieBanner();
     }
-
-    const saved = localStorage.getItem(cookieKey);
-    if(saved) hideCookieBanner();
+    if(localStorage.getItem(cookieKey)) hideCookieBanner();
   </script>
 </body>
 </html>
