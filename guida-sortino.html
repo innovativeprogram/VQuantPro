@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sortino Ratio: il rischio che conta davvero | VQuantPro</title>
+  <meta name="description" content="Guida professionale al Sortino Ratio: formula, significato, interpretazione e differenze rispetto allo Sharpe Ratio.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body{margin:0;font-family:'Inter',sans-serif;background:linear-gradient(180deg,#0a0f1c 0%,#0b1020 100%);color:#d8e1ef;line-height:1.75}
+    .wrap{max-width:980px;margin:0 auto;padding:28px 20px 60px}
+    .card{background:linear-gradient(180deg,#131b2f 0%,#17233b 100%);border:1px solid #273553;border-radius:20px;box-shadow:0 18px 50px rgba(0,0,0,.35);overflow:hidden}
+    .topbar,.footer{padding:18px 24px;border-bottom:1px solid #273553}
+    .footer{border-top:1px solid #273553;border-bottom:none;color:#99a8bf;font-size:.93rem}
+    .topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;background:rgba(255,255,255,.02)}
+    .brand{font-weight:700;color:#f8fbff}
+    .back{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;text-decoration:none;background:#1c2942;color:#eaf2ff;border:1px solid #314261}
+    .hero{padding:38px 24px 16px}
+    .eyebrow{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(168,85,247,.12);border:1px solid rgba(168,85,247,.25);color:#ebd8ff;font-size:13px;font-weight:600}
+    h1{font-size:clamp(2rem,3vw,3rem);line-height:1.08;color:#f8fbff;margin:18px 0 14px}
+    .lead{font-size:1.08rem;color:#c7d3e5;max-width:72ch}
+    .content{padding:8px 24px 34px}
+    h2{font-size:1.45rem;margin:34px 0 12px;padding-left:14px;border-left:4px solid #a855f7;color:#f8fbff}
+    h3{color:#f8fbff;margin:24px 0 10px}
+    p{margin:0 0 18px}
+    ul{margin:0;padding-left:20px}
+    li{margin:0 0 12px}
+    .box,.formula,.quote{margin:24px 0}
+    .box{background:rgba(8,15,30,.42);border:1px solid #273553;border-radius:16px;padding:20px}
+    .formula{background:#0a1324;border:1px solid #1c3450;border-radius:14px;padding:18px 20px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#d9b8ff;font-size:1.03rem;text-align:center}
+    .quote{padding:22px;border-left:4px solid #a855f7;background:rgba(168,85,247,.12);border-radius:0 14px 14px 0;color:#f5efff}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+    .note{color:#99a8bf;font-size:.96rem}
+    @media (max-width:760px){.grid{grid-template-columns:1fr}.hero,.content,.topbar,.footer{padding-left:18px;padding-right:18px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="topbar">
+        <div class="brand">VQuantPro</div>
+        <a class="back" href="index.html">← Torna alla Home</a>
+      </div>
+      <div class="hero">
+        <span class="eyebrow">Guida risk-adjusted</span>
+        <h1>Sortino Ratio: il rischio che conta davvero</h1>
+        <p class="lead">Il Sortino Ratio è simile allo Sharpe Ratio, ma si concentra solo sulla parte negativa della volatilità. Questa scelta lo rende molto utile per chi vuole misurare il rendimento rispetto al rischio realmente sgradito: le perdite, non le oscillazioni positive.</p>
+      </div>
+      <div class="content">
+        <h2>Che cosa misura</h2>
+        <p>Il Sortino Ratio confronta il rendimento di un investimento con il suo tasso privo di rischio e divide il risultato per la downside deviation, cioè la deviazione dei rendimenti negativi rispetto a una soglia minima accettabile. In questo modo non penalizza i movimenti al rialzo, che per l'investitore non rappresentano un rischio.</p>
+        <div class="formula">Sortino Ratio = (Rendimento - Tasso Risk Free) / Downside Deviation</div>
+        <p>La logica è più raffinata di una misura basata sulla volatilità totale, perché distingue il “rumore buono” dal “rumore cattivo”. È per questo che il Sortino Ratio viene spesso preferito quando si vuole giudicare una strategia in base alla qualità del rischio assunto.</p>
+
+        <h2>Perché è utile</h2>
+        <p>Molti strumenti mostrano oscillazioni frequenti, ma non tutte le oscillazioni sono uguali. Un investitore può tollerare una certa variabilità se questa è accompagnata da una tendenza positiva e da correzioni limitate. Il Sortino Ratio cerca di fotografare proprio questo aspetto: quanto rendimento è stato prodotto rispetto al solo rischio di scendere sotto una soglia considerata critica.</p>
+        <p>Per portafogli orientati alla crescita di lungo periodo, questa metrica è spesso più intuitiva della sola volatilità, perché allinea il calcolo con la preoccupazione reale dell'investitore: proteggere il capitale nelle fasi avverse.</p>
+
+        <h2>Come interpretarlo</h2>
+        <div class="grid">
+          <div class="box">
+            <h3>Sortino basso</h3>
+            <p>Significa che il rendimento generato non compensa in modo adeguato la frequenza o l'intensità dei movimenti negativi. La strategia può essere poco efficiente nella gestione del downside risk.</p>
+          </div>
+          <div class="box">
+            <h3>Sortino alto</h3>
+            <p>Indica che l'investimento ha trasformato bene il rischio negativo in rendimento. In genere segnala un profilo più interessante per chi cerca efficienza nella parte critica del percorso.</p>
+          </div>
+        </div>
+        <p>Come tutte le metriche, anche il Sortino va letto con attenzione. Un valore elevato è positivo, ma va comunque confrontato con durata del periodo, condizioni di mercato e profondità delle perdite effettive.</p>
+
+        <h2>Differenza con lo Sharpe Ratio</h2>
+        <p>La differenza principale è nel tipo di rischio considerato. Lo Sharpe Ratio usa la volatilità totale, mentre il Sortino si concentra solo sulla volatilità negativa. Questo significa che due portafogli con la stessa variabilità complessiva possono essere valutati in modo diverso se uno dei due concentra le oscillazioni soprattutto verso l'alto.</p>
+        <div class="quote">Il Sortino Ratio è spesso più vicino al modo in cui ragiona un investitore reale: non teme che il prezzo salga e scenda in astratto, teme soprattutto le cadute che erodono capitale e fiducia.</div>
+
+        <h2>Applicazioni pratiche</h2>
+        <div class="box">
+          <ul>
+            <li>Valutazione di ETF e portafogli che devono contenere il rischio al ribasso.</li>
+            <li>Confronto tra strategie con distribuzioni di rendimento asimmetriche.</li>
+            <li>Analisi di soluzioni pensate per investitori che privilegiano la protezione del capitale.</li>
+            <li>Integrazione con CAGR, drawdown e Sharpe per una lettura più completa.</li>
+          </ul>
+        </div>
+
+        <h2>Limiti della metrica</h2>
+        <p>Anche il Sortino Ratio non è perfetto. La sua qualità dipende dalla soglia scelta per definire il downside risk, dalla frequenza dei dati e dalla stabilità del campione osservato. Inoltre, come ogni metrica storica, fotografa il passato e non garantisce che il comportamento si ripeta in futuro.</p>
+        <p class="note">Contenuto informativo ed educativo. Non costituisce consulenza finanziaria o raccomandazione personalizzata.</p>
+      </div>
+      <div class="footer">VQuantPro · Misurare il rischio negativo aiuta a capire quanto un rendimento sia davvero meritorio.</div>
+    </div>
+  </div>
+</body>
+</html>
