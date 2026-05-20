@@ -5,29 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog | VQuantPro</title>
     <style>
-        /* Inserisci qui lo stesso CSS del tuo index.html per mantenere lo stile */
-        /* Per brevità non lo riscrivo, ma basta fare copia-incolla dal tuo index.html */
+        :root { --bg-main: #0B0F19; --bg-card: #161F30; --accent: #00E676; --text-main: #F3F4F6; --text-muted: #9CA3AF; --border: #24334C; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-main); color: var(--text-main); line-height: 1.7; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        header { background-color: rgba(11, 15, 25, 0.95); border-bottom: 1px solid var(--border); position: fixed; width: 100%; top: 0; z-index: 100; height: 75px; display: flex; align-items: center; }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .logo { font-weight: 700; font-size: 24px; color: #fff; }
+        .logo span { color: var(--accent); }
+        nav a { color: var(--text-muted); text-decoration: none; font-size: 15px; font-weight: 500; }
+        nav a:hover { color: var(--accent); }
+        .section { padding: 150px 0 100px 0; }
+        .section-title { font-size: 36px; font-weight: 700; margin-bottom: 20px; text-align: center; color: #fff; }
+        .section-subtitle { color: var(--text-muted); text-align: center; max-width: 700px; margin: 0 auto 60px auto; font-size: 18px; }
+        .grid-methods { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 30px; }
+        .card { background-color: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 40px; }
+        .card h3 { font-size: 20px; margin-bottom: 16px; color: #fff; }
+        .card p { color: var(--text-muted); font-size: 15px; margin-bottom: 24px; }
+        .card-link { color: var(--accent); text-decoration: none; font-weight: 600; font-size: 14px; }
     </style>
 </head>
-<body style="background-color: #0B0F19; color: #F3F4F6;">
+<body>
 
     <header>
         <div class="container nav-container">
             <div class="logo">VQuant<span>Pro</span></div>
-            <nav><ul><li><a href="/">Home</a></li></ul></nav>
+            <nav><a href="/">← Torna alla Home</a></nav>
         </div>
     </header>
 
-    <section class="section container" style="padding-top: 150px;">
+    <section class="section container">
         <h2 class="section-title">Archivio Analisi</h2>
-        <p class="section-subtitle">Economia applicata e quantistica finanziaria.</p>
+        <p class="section-subtitle">Economia applicata e studi quantitativi.</p>
         
         <div class="grid-methods">
             <div class="card">
-                <div class="card">
-    <h3>L'Architettura della Decisione</h3>
-    <p>Manifesto di VQuantPro: perché l'analisi quantitativa è la bussola dell'investitore moderno.</p>
-    <a href="manifesto.html" class="card-link">Leggi il manifesto →</a>
-</div>
+                <h3>L'Architettura della Decisione</h3>
+                <p>Manifesto di VQuantPro: perché l'analisi quantitativa è la bussola dell'investitore moderno.</p>
+                <a href="manifesto.html" class="card-link">Leggi il manifesto →</a>
+            </div>
+            </div>
+    </section>
+
 </body>
 </html>
