@@ -9,9 +9,9 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
     
-    <!-- Script KaTeX per rendering formule matematiche (Fondamentale per la qualità del sito) -->
+    <!-- Script KaTeX per rendering formule matematiche -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
@@ -41,7 +41,7 @@
 
         /* Header e Navigazione */
         header {
-            background-color: rgba(11, 15, 25, 0.9);
+            background-color: rgba(11, 15, 25, 0.95);
             backdrop-filter: blur(15px);
             border-bottom: 1px solid var(--border);
             position: fixed; width: 100%; top: 0; z-index: 100;
@@ -53,7 +53,7 @@
         nav a { color: var(--text-muted); text-decoration: none; font-size: 15px; font-weight: 500; transition: color 0.3s; }
         nav a:hover { color: var(--accent); }
 
-        /* Hero Section con Immagine di Sfondo */
+        /* Hero Section */
         .hero {
             position: relative;
             padding: 180px 0 100px 0;
@@ -99,6 +99,19 @@
             font-family: 'JetBrains Mono', monospace; color: var(--accent); text-align: center; border-left: 4px solid var(--accent); overflow-x: auto;
         }
 
+        /* Sezione Lezione Magistrale (Professore / Buffett Style per AdSense SEO) */
+        .lesson-section {
+            background-color: #0d131f; padding: 80px; border-radius: 16px; border: 1px solid var(--border);
+            margin: 40px auto; max-width: 900px;
+        }
+        .lesson-section h2 { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--accent); margin-bottom: 30px; text-align: center; font-style: italic; }
+        .lesson-section h4 { color: #fff; font-size: 20px; margin: 30px 0 10px 0; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+        .lesson-section p { color: var(--text-muted); margin-bottom: 20px; font-size: 16px; line-height: 1.8; text-align: justify; }
+        .lesson-section blockquote {
+            border-left: 4px solid var(--accent); padding-left: 20px; margin: 30px 0;
+            font-style: italic; color: #fff; font-size: 18px;
+        }
+
         /* Sezione Split (Immagine + Testo) */
         .split-section { display: flex; align-items: center; gap: 60px; margin-top: 40px; }
         .split-text { flex: 1; }
@@ -116,9 +129,12 @@
         .disclaimer-box h4 { color: #EF4444; font-size: 18px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
         .disclaimer-box p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
 
-        /* Footer */
-        footer { background-color: #060810; padding: 50px 0; text-align: center; color: var(--text-muted); border-top: 1px solid var(--border); }
-        footer p { margin-bottom: 10px; font-size: 14px; }
+        /* Footer con Link Legali (Cruciale per AdSense) */
+        footer { background-color: #060810; padding: 50px 0 30px 0; text-align: center; color: var(--text-muted); border-top: 1px solid var(--border); }
+        .footer-links { display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; flex-wrap: wrap; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; transition: color 0.3s; }
+        .footer-links a:hover { color: var(--accent); }
+        footer p { margin-bottom: 10px; font-size: 13px; opacity: 0.7; }
 
         /* Banner Cookie */
         .cookie-banner {
@@ -139,6 +155,7 @@
             .split-section { flex-direction: column; }
             .hero h1 { font-size: 38px; }
             nav ul { gap: 15px; }
+            .lesson-section { padding: 40px 20px; }
         }
         @media (max-width: 600px) {
             nav ul { display: none; }
@@ -147,9 +164,9 @@
 </head>
 <body>
 
-    <!-- Cookie Banner (Google AdSense GDPR Compliance) -->
+    <!-- Cookie Banner -->
     <div class="cookie-banner" id="cookieBanner">
-        <p>Utilizziamo i cookie per analizzare il traffico e permettere a Google AdSense di mostrare annunci pertinenti. Scegliendo "Accetta", acconsenti all'uso dei cookie. Non memorizziamo alcun dato finanziario inserito nell'app.</p>
+        <p>Utilizziamo i cookie per analizzare il traffico e permettere a Google AdSense di mostrare annunci pertinenti. Scegliendo "Accetta", acconsenti all'uso dei cookie. Non memorizziamo alcun dato finanziario.</p>
         <div class="cookie-btns">
             <button class="btn-cookie btn-accept" onclick="acceptCookies()">Accetta Cookie</button>
             <button class="btn-cookie btn-reject" onclick="rejectCookies()">Solo Essenziali</button>
@@ -163,9 +180,9 @@
             <nav>
                 <ul>
                     <li><a href="#home">Home</a></li>
-                    <li><a href="#metodi">Metriche</a></li>
-                    <li><a href="#analisi">Dati Reali</a></li>
-                    <li><a href="#chisiamo">Chi Siamo</a></li>
+                    <li><a href="#metodi">Formule</a></li>
+                    <li><a href="#lezione">Masterclass</a></li>
+                    <li><a href="#chisiamo">Disclaimer</a></li>
                 </ul>
             </nav>
         </div>
@@ -188,83 +205,76 @@
         </div>
     </div>
 
-    <!-- Sezione Metodologie -->
+    <!-- Sezione Metodologie (Le Formule) -->
     <section id="metodi" class="section container">
-        <h2 class="section-title">Il Motore Matematico e Algoritmico</h2>
-        <p class="section-subtitle">Dall'analisi del singolo asset all'ottimizzazione matematica del portafoglio. VQuantPro implementa i modelli computazionali della Teoria Moderna di Portafoglio (MPT) per massimizzare l'efficienza del capitale.</p>
+        <h2 class="section-title">Le Formule del Motore Algoritmico</h2>
+        <p class="section-subtitle">Il dizionario matematico di VQuantPro. Ecco gli strumenti computazionali che utilizziamo per spogliare gli asset dalle emozioni e valutarli per la loro nuda efficienza.</p>
         
         <div class="grid-methods">
-            <!-- CAGR -->
             <div class="card">
-                <h3>CAGR (Compound Annual Growth Rate)</h3>
-                <p>Misura il tasso di crescita annuo composto di una linea di capitale. Spiana le fluttuazioni storiche mostrando il rendimento geometrico costante necessario per passare dal valore iniziale a quello finale, considerando la capitalizzazione degli interessi.</p>
+                <h3>CAGR</h3>
+                <p>Misura il tasso di crescita annuo composto. Spiana le fluttuazioni storiche mostrando il rendimento geometrico costante necessario per passare dal valore iniziale a quello finale.</p>
                 <div class="formula">$$CAGR = \left( \frac{V_f}{V_i} \right)^{\frac{1}{t}} - 1$$</div>
             </div>
-
-            <!-- Sharpe Ratio -->
             <div class="card">
-                <h3>Sharpe Ratio (Efficienza Totale)</h3>
-                <p>Esprime il rendimento in eccesso generato dal portafoglio rispetto all'asset privo di rischio ($R_f$), rapportato alla deviazione standard ($\sigma_p$), ovvero la volatilità totale. Indica matematicamente se la performance è frutto di abilità strategica o di puro rischio assunto.</p>
+                <h3>Sharpe Ratio</h3>
+                <p>Rapporto tra il rendimento in eccesso (rispetto al tasso risk-free) e la volatilità totale. Rivela se i profitti derivano da intelligenza strategica o da semplice assunzione di rischi estremi.</p>
                 <div class="formula">$$Sharpe = \frac{R_p - R_f}{\sigma_p}$$</div>
             </div>
-
-            <!-- Sortino Ratio -->
             <div class="card">
-                <h3>Sortino Ratio (Downside Optimization)</h3>
-                <p>Evoluzione del modello di Sharpe. Isola ed elabora esclusivamente la deviazione standard dei rendimenti negativi ($\sigma_d$). Questo evita di penalizzare gli asset per la volatilità positiva (i forti rialzi), parametro fondamentale per ETF azionari e strategie asimmetriche.</p>
+                <h3>Sortino Ratio</h3>
+                <p>Isola ed elabora esclusivamente la deviazione standard dei rendimenti negativi. Smette di penalizzare un asset per i forti rialzi, concentrandosi solo sulla volatilità "cattiva".</p>
                 <div class="formula">$$Sortino = \frac{R_p - R_f}{\sigma_d}$$</div>
             </div>
-
-            <!-- Calmar Ratio -->
             <div class="card">
-                <h3>Calmar Ratio (Resilienza ai Crolli)</h3>
-                <p>Mette in relazione diretta il rendimento geometrico (CAGR) con il Massimo Drawdown ($Max\ DD$) registrato nel medesimo arco temporale. È la metrica prediletta dai gestori istituzionali per valutare il premio ottenuto a fronte del massimo stress psicologico ed economico subito.</p>
+                <h3>Calmar Ratio</h3>
+                <p>Relaziona il CAGR al Massimo Drawdown. Ottimo indicatore per i periodi di crisi: mostra quanto rendimento l'investitore riceve per ogni unità di crollo percentuale sopportato.</p>
                 <div class="formula">$$Calmar = \frac{CAGR}{|Max\ DD|}$$</div>
             </div>
-
-            <!-- Matrice di Covarianza -->
             <div class="card">
-                <h3>Matrice di Covarianza e Correlazione</h3>
-                <p>Il vero cuore del motore di ottimizzazione. Calcola come gli asset in portafoglio (es. azionario e obbligazionario) si muovono l'uno rispetto all'altro. Ridurre la covarianza complessiva permette di abbattere il rischio sistemico senza intaccare i rendimenti attesi.</p>
+                <h3>Matrice di Covarianza</h3>
+                <p>Calcola il grado di dipendenza tra molteplici asset. Una bassa covarianza tra gli elementi del portafoglio è il segreto matematico per abbattere il rischio senza sacrificare i rendimenti.</p>
                 <div class="formula">$$\Sigma = \begin{bmatrix} \sigma_1^2 & \sigma_{12} \\ \sigma_{21} & \sigma_2^2 \end{bmatrix}$$</div>
             </div>
-
-            <!-- Volatilità di Portafoglio -->
             <div class="card">
-                <h3>Volatilità di Portafoglio (Portfolio Variance)</h3>
-                <p>La volatilità di un portafoglio non è la semplice media ponderata delle singole volatilità. L'algoritmo calcola la varianza combinata combinando i vettori dei pesi degli asset ($w$) e la matrice di covarianza ($\Sigma$), quantificando l'effetto reale della diversificazione.</p>
+                <h3>Varianza di Portafoglio</h3>
+                <p>Combina i pesi degli asset e la matrice di covarianza. Dimostra numericamente l'effetto della diversificazione: il rischio totale è inferiore alla somma delle sue singole parti.</p>
                 <div class="formula">$$\sigma_p^2 = w^T \Sigma w$$</div>
             </div>
-
-            <!-- Frontiera Efficiente -->
             <div class="card">
-                <h3>Ottimizzazione della Frontiera Efficiente</h3>
-                <p>L'algoritmo mappa matematicamente lo spazio delle combinazioni possibili di allocazione, tracciando la Frontiera Efficiente di Markowitz. Identifica i portafogli geometrici ottimali che offrono il massimo rendimento possibile per un determinato livello di rischio.</p>
+                <h3>Frontiera Efficiente</h3>
+                <p>Ottimizzazione di Markowitz. Risolve un problema di minimizzazione vettoriale per trovare l'esatta combinazione percentuale di asset che offre il massimo rendimento per un dato rischio.</p>
                 <div class="formula">$$\min w^T \Sigma w \quad \text{s.t.} \quad w^T R = R_{\text{target}}$$</div>
             </div>
-
-            <!-- Massimo Drawdown -->
             <div class="card">
-                <h3>Maximum Drawdown (Max DD)</h3>
-                <p>Rappresenta la massima perdita percentuale picco-valle registrata dal portafoglio prima del recupero dei massimi precedenti. Definisce quantitativamente lo scenario peggiore storico e permette di testare la robustezza dell'asset allocation durante le crisi di mercato.</p>
+                <h3>Maximum Drawdown</h3>
+                <p>La peggior caduta percentuale picco-valle prima di un recupero. Serve a stress-testare la strategia e capire se possiedi lo stomaco per mantenere le posizioni durante un crollo.</p>
                 <div class="formula">$$Max\ DD = \frac{P_{\text{min}} - P_{\text{max}}}{P_{\text{max}}}$$</div>
             </div>
         </div>
     </section>
 
-    <!-- Sezione Applicazione Pratica (con Immagine) -->
-    <section id="analisi" class="section container">
-        <div class="split-section">
-            <div class="split-image">
-                <!-- Immagine No-Copy ad alta risoluzione (tema Dati/Finanza) -->
-                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=80" alt="Analisi dati finanziari e grafici">
-            </div>
-            <div class="split-text">
-                <h3>Applicazione su Dati Reali</h3>
-                <p>Il software è in grado di scaricare e processare storici decennali per calcolare le metriche su qualsiasi strumento quotato. L'algoritmo di VQuantPro è strutturato per elaborare agevolmente prodotti finanziari complessi, permettendo all'investitore di confrontarne la resilienza.</p>
-                <p>L'infrastruttura è ideale per l'ottimizzazione e il backtesting di strumenti diversificati: l'elaborazione dei pesi statistici espone la reale efficienza dello strumento rimuovendo completamente l'incertezza e i bias emotivi dalle scelte di allocazione.</p>
-                <a href="https://vquantpro.streamlit.app/" class="btn-primary" style="margin-top: 10px;" target="_blank">Esegui una Simulazione</a>
-            </div>
+    <!-- NUOVA SEZIONE: Lezione Magistrale (Professore / Buffett Style - Risolve il Low Value Content) -->
+    <section id="lezione" class="section container">
+        <div class="lesson-section">
+            <h2>La Logica Dietro i Numeri: Una Lezione di Razionalità Finanziaria</h2>
+            <p>Mettiamoci nei panni di un professore di economia che deve spiegare l'allocazione del capitale, eliminando il rumore di fondo di Wall Street. Nel mondo degli investimenti, l'illusione più pericolosa è confondere un mercato toro (rialzista) con la propria genialità. Come si suol dire, <em>"è solo quando la marea si ritira che scopri chi stava nuotando nudo"</em>.</p>
+            <p>Per non farci trovare nudi dalla marea dei mercati, non usiamo sfere di cristallo, ma l'inesorabile linguaggio della matematica. I calcolatori di VQuantPro non servono a prevedere il futuro, ma a pesare la robustezza del passato e del presente. Vediamo esattamente perché usiamo queste metriche e come agiscono sul vostro capitale.</p>
+
+            <h4>1. Il Valore del Tempo: Il CAGR</h4>
+            <p>Immaginate di investire 10.000€ e, dopo un anno, perdere il 50%. Il vostro saldo scende a 5.000€. L'anno successivo guadagnate il 50%. Il saldo sale a 7.500€. La media aritmetica dei rendimenti vi direbbe che avete fatto 0% (-50% + 50% diviso due). Ma il vostro portafoglio è in perdita di 2.500€! Ecco perché usiamo il <strong>CAGR (Compound Annual Growth Rate)</strong>. Il CAGR calcola il rendimento *geometrico*, tenendo conto della gravità della matematica. Vi restituisce il tasso di crescita reale, anno su anno, smascherando le false medie aritmetiche che le banche spesso mostrano nei loro prospetti.</p>
+
+            <h4>2. Il Prezzo dell'Ansia: Sharpe e Sortino Ratio</h4>
+            <p>Supponiamo che due gestori ottengano entrambi un rendimento del 10%. Il primo lo ottiene investendo in Titoli di Stato stabili; il secondo scommettendo su criptovalute altamente volatili. Hanno lo stesso valore? Assolutamente no. Lo <strong>Sharpe Ratio</strong> misura il rendimento per ogni unità di rischio (volatilità) assunta. Se lo Sharpe è inferiore a 1, state rischiando troppo per quello che guadagnate. Tuttavia, la volatilità verso l'alto ci piace. Se un asset fa improvvisamente +30%, lo Sharpe lo penalizza considerandolo "instabile". Ecco che interviene il <strong>Sortino Ratio</strong>: un professore severo che punisce lo strumento *solo* per la volatilità negativa, isolando i crolli e premiando gli asset asimmetrici che scendono piano e salgono forte.</p>
+
+            <h4>3. Sopravvivenza e Resilienza: Max Drawdown e Calmar Ratio</h4>
+            <p>La regola numero uno è non perdere soldi. La regola numero due è non dimenticare la regola numero uno. Il <strong>Maximum Drawdown</strong> è la metrica psicologicamente più importante: misura la caduta massima dal punto più alto a quello più basso. Vi dice esattamente quanto sangue freddo vi servirà per mantenere quel portafoglio durante una recessione. Il <strong>Calmar Ratio</strong> fonde questa informazione con il rendimento: vi dice quanto CAGR vi portate a casa per ogni punto percentuale di Drawdown che siete stati disposti a sudare. È l'indicatore definitivo dell'efficienza sotto stress.</p>
+
+            <h4>4. Il "Pasto Gratis" dell'Economia: Covarianza e Frontiera Efficiente</h4>
+            <p>Harry Markowitz vinse il Nobel dimostrando che la diversificazione è l'unico vero pasto gratis nella finanza. Se possedete due asset che si muovono all'unisono, non siete diversificati. La <strong>Matrice di Covarianza</strong> analizza matematicamente se, quando l'asset A crolla, l'asset B fa da paracadute salendo. Inserendo queste matrici e le volatilità nel nostro motore vettoriale, tracciamo la <strong>Frontiera Efficiente</strong>: una curva matematica che definisce con spietata precisione quali percentuali assegnare ai vostri ETF per spremere il massimo rendimento matematicamente possibile senza aumentare il rischio di un millimetro.</p>
+
+            <blockquote>"Il rischio deriva dal non sapere cosa si sta facendo. La finanza quantitativa non è speculazione; è il processo sistematico di trasformare l'incertezza in probabilità misurabili."</blockquote>
+            <p>Questo è il cuore di VQuantPro. Non vi dice cosa comprare. Vi offre l'intelletto computazionale per comprendere se ciò che state comprando ha un senso matematico, permettendovi di agire con razionalità e pazienza.</p>
         </div>
     </section>
 
@@ -276,7 +286,6 @@
             
             <p>Per richieste di natura tecnica, partnership o supporto: <strong>info@vquantpro.it</strong></p>
 
-            <!-- Box di Tutela Legale Obbligatorio -->
             <div class="disclaimer-box">
                 <h4>Disclaimer Finanziario ed Esclusione di Responsabilità</h4>
                 <p>I calcoli forniti tramite il dominio <em>vquantpro.it</em> e la sua applicazione collegata <em>vquantpro.streamlit.app</em> hanno finalità rigorosamente didattiche, matematiche e di ricerca quantitativa. <strong>Nessun contenuto esposto costituisce consulenza finanziaria, invito all'investimento o raccomandazione per l'allocazione del capitale.</strong></p>
@@ -285,10 +294,16 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Footer Ottimizzato per AdSense -->
     <footer>
         <div class="container">
-            <p>&copy; 2026 VQuantPro. Tutti i diritti riservati.</p>
+            <div class="footer-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="cookie.html">Cookie Policy</a>
+                <a href="terms.html">Termini e Condizioni</a>
+                <a href="mailto:info@vquantpro.it">Contatti</a>
+            </div>
+            <p>&copy; 2026 VQuantPro. Tutti i diritti riservati. Progetto editoriale e software quantitativo.</p>
             <p>Ospitato su architettura serverless GitHub Pages.</p>
         </div>
     </footer>
