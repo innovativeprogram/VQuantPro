@@ -14,19 +14,19 @@
         .logo { font-weight: 700; font-size: 24px; color: #fff; }
         .logo span { color: var(--accent); }
         
-        /* Stile navigazione freccia */
         .nav-back { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--text-main); font-weight: 500; font-size: 15px; transition: color 0.2s; }
         .nav-back:hover { color: var(--accent); }
         .arrow { font-size: 1.2rem; color: var(--accent); }
 
         main { max-width: 1000px; margin: 120px auto 80px auto; padding: 0 24px; }
+        .hero-img { width: 100%; height: 300px; object-fit: cover; border-radius: 12px; margin-bottom: 50px; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         h1 { font-size: 48px; margin-bottom: 20px; color: #fff; }
         .intro { font-size: 18px; color: var(--text-muted); margin-bottom: 60px; max-width: 700px; }
         h2 { font-size: 20px; margin-bottom: 20px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
         
         .blog-section { margin-bottom: 60px; }
-        .post-card { background: var(--bg-card); padding: 30px; border-radius: 12px; border: 1px solid var(--border); transition: transform 0.2s; margin-bottom: 20px; }
-        .post-card:hover { border-color: var(--accent); }
+        .post-card { background: var(--bg-card); padding: 30px; border-radius: 12px; border: 1px solid var(--border); transition: transform 0.2s, border-color 0.2s; margin-bottom: 20px; }
+        .post-card:hover { border-color: var(--accent); transform: translateY(-2px); }
         .post-card h3 { color: #fff; font-size: 22px; margin-bottom: 10px; }
         .post-card p { color: var(--text-muted); margin-bottom: 15px; }
         .post-card a { color: var(--accent); text-decoration: none; font-weight: 600; }
@@ -44,6 +44,8 @@
     </header>
 
     <main>
+        <img src="https://images.unsplash.com/photo-1506784365847-bbad939e9335?auto=format&fit=crop&w=1200&q=80" alt="Archivio di conoscenza" class="hero-img">
+        
         <h1>Il Nostro Archivio</h1>
         <p class="intro">"Il rischio deriva dal non sapere cosa stai facendo." La disciplina quantitativa è il faro che ci guida nella complessità dei mercati. Di seguito, l'intera raccolta delle nostre analisi e metodologie.</p>
         
