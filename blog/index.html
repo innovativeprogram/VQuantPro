@@ -19,7 +19,8 @@
         .section-title { font-size: 36px; font-weight: 700; margin-bottom: 20px; text-align: center; color: #fff; }
         .section-subtitle { color: var(--text-muted); text-align: center; max-width: 700px; margin: 0 auto 60px auto; font-size: 18px; }
         .grid-methods { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 30px; }
-        .card { background-color: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 40px; }
+        .card { background-color: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 40px; transition: transform 0.2s ease; }
+        .card:hover { border-color: var(--accent); transform: translateY(-5px); }
         .card h3 { font-size: 20px; margin-bottom: 16px; color: #fff; }
         .card p { color: var(--text-muted); font-size: 15px; margin-bottom: 24px; }
         .card-link { color: var(--accent); text-decoration: none; font-weight: 600; font-size: 14px; }
@@ -36,15 +37,59 @@
 
     <section class="section container">
         <h2 class="section-title">Archivio Analisi</h2>
-        <p class="section-subtitle">Economia applicata e studi quantitativi.</p>
+        <p class="section-subtitle">Economia applicata e studi quantitativi. La conoscenza è l'unico investimento che non subisce svalutazione.</p>
         
         <div class="grid-methods">
+            
             <div class="card">
-                <h3>L'Architettura della Decisione</h3>
-                <p>Manifesto di VQuantPro: perché l'analisi quantitativa è la bussola dell'investitore moderno.</p>
-                <a href="manifesto.html" class="card-link">Leggi il manifesto →</a>
+                <h3>L'Illusione del 1929</h3>
+                <p>Quando l'avidità sfida la matematica: analisi dell'architettura di un crollo e il fallimento del margine di sicurezza.</p>
+                <a href="l-illusione-del-1929.html" class="card-link">Leggi analisi →</a>
             </div>
+
+            <div class="card">
+                <h3>CAGR: La Verità Geometrica</h3>
+                <p>Oltre il rumore dei rendimenti nominali: la bussola dell'investitore razionale nel tempo.</p>
+                <a href="guida-cagr.html" class="card-link">Leggi analisi →</a>
             </div>
+
+            <div class="card">
+                <h3>Volatilità: Segnale vs Rumore</h3>
+                <p>Comprendere la differenza tra l'oscillazione dei prezzi e il rischio di perdita permanente del capitale.</p>
+                <a href="guida-volatilita.html" class="card-link">Leggi analisi →</a>
+            </div>
+
+            <div class="card">
+                <h3>Sharpe Ratio: Il Prezzo del Coraggio</h3>
+                <p>Valutare l'efficienza di un portafoglio: rendimento giustificato vs temerarietà.</p>
+                <a href="guida-sharpe.html" class="card-link">Leggi analisi →</a>
+            </div>
+
+            <div class="card">
+                <h3>Sortino Ratio: Precisione del Dolore</h3>
+                <p>Perché non tutta la volatilità è uguale: isolare il rischio che realmente brucia il capitale.</p>
+                <a href="guida-sortino.html" class="card-link">Leggi analisi →</a>
+            </div>
+
+            <div class="card">
+                <h3>Calmar Ratio: Sopravvivenza</h3>
+                <p>Il rapporto tra ambizione e resistenza: la metrica che separa chi resta in partita da chi esce.</p>
+                <a href="guida-calmar.html" class="card-link">Leggi analisi →</a>
+            </div>
+
+            <div class="card">
+                <h3>Diversificazione: La Cena Gratuita</h3>
+                <p>Frontiera efficiente e decorrelazione: l'arte di equilibrare gli asset nell'orchestra finanziaria.</p>
+                <a href="guida-diversificazione.html" class="card-link">Leggi analisi →</a>
+            </div>
+
+            <div class="card">
+                <h3>Max Drawdown: Test di Tenuta</h3>
+                <p>Lo specchio della nostra tolleranza psicologica: studiare la massima sofferenza storica.</p>
+                <a href="guida-max-drawdown.html" class="card-link">Leggi analisi →</a>
+            </div>
+
+        </div>
     </section>
 
 </body>
