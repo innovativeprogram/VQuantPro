@@ -64,6 +64,9 @@
         .card-link { margin-top: auto; color: var(--accent); text-decoration: none; font-weight: 600; font-size: 14px; transition: 0.3s; }
         .card-link:hover { color: #fff; letter-spacing: 0.5px; }
 
+        /* Aggiunte estetiche */
+        .content-image { width: 100%; border-radius: 12px; margin-bottom: 40px; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        
         .lesson-section { background-color: #0d131f; padding: 80px; border-radius: 16px; border: 1px solid var(--border); max-width: 900px; margin: 40px auto; }
         .lesson-section h2 { font-family: 'Playfair Display', serif; font-size: 36px; color: var(--accent); margin-bottom: 30px; text-align: center; }
         .lesson-section p { color: var(--text-muted); margin-bottom: 20px; font-size: 17px; line-height: 1.8; }
@@ -108,7 +111,7 @@
                 <h2>Il Metodo: Oltre il Rumore del Mercato</h2>
                 <p>La finanza moderna è inondata di opinioni, rumore e previsioni non richieste. Ho creato VQuantPro perché ritengo che il vantaggio competitivo non risieda nel "prevedere" dove andrà il prezzo domani, ma nel comprendere profondamente la struttura del rischio oggi.</p>
                 <p>Ogni investitore consapevole deve porsi una domanda fondamentale: <em>"Il rendimento che sto ottenendo è proporzionato al rischio che sto correndo?"</em></p>
-                <p>VQuantPro trasforma questa domanda in risposte numeriche. È una piattaforma progettata per chi rifiuta la delega passiva e vuole costruire il proprio "fossato" finanziario attraverso l'analisi quantitativa. Qui non troverai speculazione, ma un'architettura di dati per gestire drawdown, volatilità e correlazioni. Perché nel lungo periodo, è la tenuta del portafoglio nei momenti di crisi a determinare il successo finale.</p>
+                <p>VQuantPro trasforma questa domanda in risposte numeriche. È una piattaforma progettata per chi rifiuta la delega passiva e vuole costruire il proprio "fossato" finanziario attraverso l'analisi quantitativa.</p>
             </div>
             <div class="about-image">
                 <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80" alt="Analisi quantitativa">
@@ -118,8 +121,10 @@
 
     <section id="metodi" class="section container">
         <h2 class="section-title">Frontiera Analitica: Gli Strumenti</h2>
-        <p class="section-subtitle">Il successo finanziario è un'equazione. Ecco le metriche che utilizziamo per decodificare il comportamento dei mercati e validare le strategie.</p>
+        <p class="section-subtitle">Il successo finanziario è un'equazione. Ecco le metriche che utilizziamo per decodificare il comportamento dei mercati.</p>
         
+        <img src="https://images.unsplash.com/photo-1543286386-2e659306cd6c?auto=format&fit=crop&w=1200&q=80" alt="Data Analysis" class="content-image">
+
         <div class="grid-methods">
             <div class="card">
                 <h3>CAGR</h3>
@@ -139,7 +144,7 @@
                 <h3>Max Drawdown</h3>
                 <p>La metrica della sofferenza. Misuriamo il calo massimo dal picco al minimo per testare la vera resilienza del tuo portafoglio nei momenti di crisi.</p>
                 <div class="formula">\( DD = \frac{Trough - Peak}{Peak} \)</div>
-                <a href="guida-drawdown.html" class="card-link">Analizza il Drawdown →</a>
+                <a href="guida-max-drawdown.html" class="card-link">Analizza il Drawdown →</a>
             </div>
 
             <div class="card">
@@ -162,18 +167,12 @@
                 <div class="formula">\( Calmar = \frac{CAGR}{Max\ DD} \)</div>
                 <a href="guida-calmar.html" class="card-link">Calcola il Calmar →</a>
             </div>
-
-            <div class="card">
-                <h3>Diversificazione</h3>
-                <p>Non è solo "comprare cose diverse". È la costruzione di un portafoglio dove la correlazione tra asset è minimizzata per massimizzare l'efficienza.</p>
-                <div class="formula">\( \min w^T \Sigma w \quad \text{s.t.} \quad w^T R = R_{target} \)</div>
-                <a href="guida-diversificazione.html" class="card-link">Ottimizzazione di Markowitz →</a>
-            </div>
         </div>
     </section>
 
     <section id="masterclass" class="section container">
         <div class="lesson-section">
+            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&q=80" alt="Masterclass" class="content-image">
             <h2>Masterclass VQuantPro: Costruire il proprio Metodo</h2>
             <p>Il rischio deriva dal non sapere cosa si sta facendo. Questa è la nostra massima operativa.</p>
             <p>La Masterclass non è un corso teorico, ma un percorso di architettura finanziaria. Attraverso lezioni basate sull'analisi dati, imparerai a costruire un sistema di investimento che non dipenda dal "sentimento" del momento, ma da regole matematiche rigorose.</p>
