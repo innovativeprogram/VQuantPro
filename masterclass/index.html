@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass VQuantPro | Il Metodo</title>
+    
+    <style>
+        :root { --bg-main: #0B0F19; --bg-card: #161F30; --accent: #00E676; --text-main: #F3F4F6; --text-muted: #9CA3AF; --border: #24334C; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-main); color: var(--text-main); line-height: 1.7; }
+        
+        header { background-color: rgba(11, 15, 25, 0.95); border-bottom: 1px solid var(--border); height: 75px; display: flex; align-items: center; position: sticky; top: 0; z-index: 100; }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 1000px; margin: 0 auto; padding: 0 24px; }
+        .logo { font-weight: 700; font-size: 24px; color: #fff; }
+        .logo span { color: var(--accent); }
+        .nav-back { color: var(--text-muted); text-decoration: none; font-size: 15px; transition: 0.2s; }
+        .nav-back:hover { color: var(--accent); }
+
+        main { max-width: 800px; margin: 80px auto; padding: 0 24px; }
+        h1 { font-size: 42px; margin-bottom: 20px; color: #fff; }
+        .intro { color: var(--text-muted); margin-bottom: 60px; font-size: 18px; }
+
+        .module-list { display: flex; flex-direction: column; gap: 20px; }
+        .lesson-card { background: var(--bg-card); padding: 30px; border-radius: 12px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .lesson-card:hover { border-color: var(--accent); transform: translateX(5px); }
+        .lesson-card h3 { color: #fff; margin-bottom: 10px; font-size: 20px; }
+        .lesson-card p { color: var(--text-muted); margin-bottom: 15px; font-size: 15px; }
+        .lesson-card a { color: var(--accent); text-decoration: none; font-weight: 600; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo">VQuant<span>Pro</span></div>
+            <a href="../index.html" class="nav-back">← Torna alla Home</a>
+        </div>
+    </header>
+
+    <main>
+        <h1>Masterclass: Il Metodo</h1>
+        <p class="intro">La disciplina quantitativa è il faro che ci guida nella complessità. Questo è il luogo dove la teoria diventa architettura operativa. Scegli il modulo su cui lavorare oggi.</p>
+        
+        <div class="module-list">
+            
+            <article class="lesson-card">
+                <h3>Modulo 1: L'Architettura del Portafoglio</h3>
+                <p>Comprendere la diversificazione non come dispersione, ma come efficienza matematica.</p>
+                <a href="lezione-01.html">Accedi al modulo →</a>
+            </article>
+
+            <article class="lesson-card">
+                <h3>Modulo 2: La Gestione del Drawdown</h3>
+                <p>Definire il dolore sopportabile per preservare il capitale nel lungo periodo.</p>
+                <a href="lezione-02.html">In arrivo...</a>
+            </article>
+
+            <article class="lesson-card">
+                <h3>Modulo 3: Metriche di Performance</h3>
+                <p>Oltre il semplice rendimento: Sharpe, Sortino e Calmar Ratio come bussola.</p>
+                <a href="lezione-03.html">In arrivo...</a>
+            </article>
+
+        </div>
+    </main>
+
+</body>
+</html>
