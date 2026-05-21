@@ -40,9 +40,7 @@
         ul { margin-bottom: 20px; padding-left: 20px; }
         li { margin-bottom: 10px; color: var(--text-muted); }
         
-        /* Classe per le immagini */
         .content-img { width: 100%; height: auto; border-radius: 12px; margin: 30px 0; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        
         .formula-box { background: var(--bg-card); padding: 20px; border-radius: 8px; border: 1px solid var(--border); text-align: center; margin: 30px 0; font-size: 1.2rem; }
     </style>
 </head>
@@ -51,7 +49,7 @@
     <header>
         <div class="nav-container">
             <div class="logo">VQuant<span>Pro</span></div>
-            <a href="../index.html" class="nav-back">← Torna alla Home</a>
+            <a href="index.html" class="nav-back">← Torna alla Home</a>
         </div>
     </header>
 
@@ -73,96 +71,26 @@
             <p>L'errore più comune è la cosiddetta <em>diworsification</em>. Possedere 50 titoli che corrono tutti nella stessa direzione non è diversificazione; è solo una forma di caos organizzato.</p>
             <h3>Il Ruolo degli Asset</h3>
             <p>Ogni strumento nel tuo portafoglio deve avere un "mandato". Chiediti: Perché questo asset è qui? È per la crescita (Growth)? È per proteggere dall'inflazione? È per generare cassa durante un crollo (Liquidità/Hedging)?</p>
-            <h3>La Regola del Rigore</h3>
-            <p>Se non sai spiegare il ruolo di un asset senza usare parole come "spero" o "tutti ne parlano", quell'asset è rumore statistico. In VQuantPro, la diversificazione è matematica: ogni pezzo aggiunto al sistema deve ridurre la volatilità complessiva senza sacrificare proporzionalmente il rendimento atteso ($E[R]$). Se un asset aggiunge complessità senza migliorare lo Sharpe Ratio, è un peso morto.</p>
-        </section>
-
-        <section>
-            <h2>2. Il "Fossato" della Correlazione</h2>
-            <p>Il rischio sistemico è la tempesta che non puoi evitare. Quando il mercato entra in panico, la correlazione tra asset rischiosi tende a convergere verso 1. In quel momento, la diversificazione superficiale svanisce.</p>
-            <h3>Capire la Correlazione</h3>
-            <p>Il tuo obiettivo come architetto è trovare asset che abbiano una correlazione non lineare. Il fossato (moat) del tuo portafoglio non sono i settori diversi, ma le diverse dinamiche di risposta al mercato.</p>
-            <h3>Analisi Quantitativa</h3>
-            <p>Non guardare solo alla correlazione storica (che spesso fallisce proprio quando ne hai bisogno). Guarda al comportamento dei tuoi asset durante gli stress test storici (2008, 2020, 2022). Se il tuo portafoglio non ha asset che tendono a performare bene o a rimanere stabili proprio quando il mercato azionario crolla, la tua architettura non ha un fossato: è una fortezza con le porte spalancate.</p>
-        </section>
-
-        <section>
-            <h2>3. L'Orizzonte Temporale come Leva</h2>
-            <p>Il tempo è l'unica variabile in grado di annullare la volatilità. È l'arma segreta dell'investitore paziente.</p>
-            <h3>Il Prezzo della Impazienza</h3>
-            <p>La volatilità è il "prezzo" che paghi per il rendimento. Ma il rischio vero, quello che distrugge i portafogli, non è la volatilità temporanea: è la necessità di vendere durante un calo. Questa necessità nasce da una cattiva architettura. Se hai bisogno di quel denaro tra 6 mesi, non dovresti averlo in asset volatili.</p>
-            <h3>La Psicologia Quantificata</h3>
-            <p>Buffett diceva che il mercato è un dispositivo per trasferire denaro dagli impazienti ai pazienti. L'architettura del tuo portafoglio deve essere strutturata in modo da renderti immune al panico. Se il tuo Max Drawdown (la perdita dal picco al minimo) ti spinge a voler premere il tasto "vendi", hai sottostimato la tua architettura. Il sistema deve essere calibrato sul tuo profilo di rischio reale, non su quello che vorresti avere.</p>
-            <h3>Nota Tecnica: Il Test di Resistenza</h3>
-            <p>Per validare la tua architettura, poniti sempre questa domanda: "Se domani il mercato perdesse il 30% del suo valore e ci restasse per i prossimi due anni, il mio portafoglio sarebbe ancora in grado di generare valore o sarei costretto a liquidare posizioni in perdita per coprire le spese o per paura?" Se la risposta è "sarei costretto a vendere", allora non hai costruito un'architettura: hai costruito una trappola. La vera solidità nasce dal calcolo, non dall'ottimismo.</p>
-        </section>
-
-        <section>
-            <h2>4. La "Tassa Psicologica" e la Fragilità dell'Investitore</h2>
-            <p>Spesso l'architettura del portafoglio fallisce non a causa dei mercati, ma a causa dell'architetto. La tua mente è evoluta per fuggire dai pericoli (paura) e inseguire i profitti facili (avidità). Entrambe queste risposte sono fatali.</p>
-            <ul>
-                <li><strong>Il Bias di Sopravvivenza:</strong> Quando il mercato sale, ti senti un genio e aumenti il rischio. Quando scende, ti senti inadeguato e vendi al minimo. Una vera architettura deve includere dei "freni a mano" automatici. Se ti accorgi che il tuo portafoglio ti costringe a controllare le quotazioni ogni ora, la tua architettura non è costruita attorno ai tuoi obiettivi, ma attorno alle tue insicurezze.</li>
-                <li><strong>La Regola del Sonno:</strong> Se non riesci a dormire sereno durante un ribasso del 15%, il tuo portafoglio è costruito male. Non è colpa del mercato; è colpa di un'allocazione che non rispecchia la tua reale tolleranza al rischio (che non è quella che dichiari quando i mercati sono in rialzo, ma quella che provi quando vedi il rosso sul conto).</li>
-            </ul>
         </section>
 
         <section>
             <h2>5. La Matematica Inesorabile del Recupero</h2>
             <img src="https://images.unsplash.com/photo-1509228468518-180dd28649d4?auto=format&fit=crop&w=1200&q=80" alt="Analisi Matematica" class="content-img">
             
-            <p>C'è un motivo matematico per cui in VQuantPro siamo ossessionati dal Max Drawdown. Molti ignorano l'asimmetria del recupero. Se perdi il 10%, hai bisogno di un +11% per tornare in pari. Fin qui, tutto gestibile. Ma se perdi il 50%, hai bisogno di un +100% per tornare dove eri partito.</p>
+            <p>C'è un motivo matematico per cui in VQuantPro siamo ossessionati dal Max Drawdown. Molti ignorano l'asimmetria del recupero. Se perdi il 10%, hai bisogno di un +11% per tornare in pari. Ma se perdi il 50%, hai bisogno di un +100% per tornare dove eri partito.</p>
+
+            
+
             <p>La formula che definisce il rendimento necessario ($R_{rec}$) per recuperare una perdita ($L$) è:</p>
             <div class="formula-box">
                 \[R_{rec} = \left( \frac{1}{1 - L} \right) - 1\]
             </div>
-            <p>Questa semplice equazione è il motivo per cui difendere il capitale è più importante che cercare il rendimento stellare. Un portafoglio che evita le perdite catastrofiche batte costantemente un portafoglio che cerca rendimenti elevati ma accetta Drawdown profondi. La tua architettura deve avere un "pavimento" matematico oltre il quale il rischio viene ridotto automaticamente.</p>
-        </section>
-
-        <section>
-            <h2>6. Il Ciclo di Vita di un Asset nel tuo Sistema</h2>
-            <p>Ogni asset nel tuo portafoglio non deve essere un "ospite" fisso. Deve essere un "dipendente". Ogni anno, o su base semestrale, devi sottoporre ogni asset a un colloquio di performance:</p>
-            <ul>
-                <li><strong>Analisi di Efficienza:</strong> Qual è stato il suo Sharpe Ratio in questo periodo? Ha contribuito alla riduzione della volatilità o l'ha aumentata?</li>
-                <li><strong>Analisi di Correlazione:</strong> Durante la recente turbolenza, questo asset si è mosso in sincronia con il resto del portafoglio? Se la risposta è sì, non ti sta diversificando, ti sta solo esponendo a un rischio doppio.</li>
-                <li><strong>Il Taglio:</strong> Se un asset non sta facendo il suo lavoro — ovvero fornire decorrelazione o rendimento corretto per il rischio — deve essere rimosso. L'architettura non ammette sentimentalismi. Le aziende cambiano, i mercati cambiano, e anche il tuo portafoglio deve evolversi, mantenendo però invariati i principi.</li>
-            </ul>
-        </section>
-
-        <section>
-            <h2>7. La "Fortezza" e la Liquidità Strategica</h2>
-            <p>Un errore da dilettanti è considerare la liquidità (cash) come un asset "morto". In un'architettura rigorosa, la liquidità è un'opzione reale (Real Option).</p>
-            <p><strong>Il Potere del Cash:</strong> Il contante è l'unico asset che ha una correlazione perfetta con le opportunità future. Quando tutto crolla, il cash è l'unico asset che non ha subito un Drawdown. Mantenere una quota di liquidità non significa essere "spaventati"; significa essere "pronti". Un'architettura che non prevede riserve di cassa per le occasioni di mercato è un'architettura che lavora a ranghi ridotti. Non essere sempre investito al 100%. Sii investito al 100% solo quando il rapporto rischio/rendimento è eccezionale.</p>
-        </section>
-
-        <section>
-            <h2>8. Il Nemico Silenzioso: L'Impatto delle Commissioni</h2>
-            <p>In un'architettura rigorosa, le commissioni (TER, spread, costi di transazione) non sono "costi operativi": sono una tassa sul tuo rendimento composto.</p>
-            <p><strong>La Matematica del Costo:</strong> Immagina di avere un rendimento annuo del 7% e pagare commissioni totali dell'1,5%. In 20 anni, quel piccolo "1,5%" non ti costa solo l'1,5%. A causa dell'interesse composto, ti costa oltre il 25% del tuo capitale finale.</p>
-            <p><strong>Il Rigore nella Scelta:</strong> In VQuantPro, non scegliamo strumenti perché sono "di moda" o "innovativi". Scegliamo strumenti che offrono la massima efficienza al minimo costo. Se un prodotto finanziario è complesso, oscuro o costoso, la risposta è quasi sempre "no". La semplicità ha un valore monetario diretto che si riflette nel tuo saldo finale. Non pagare per la complicazione.</p>
-        </section>
-
-        <section>
-            <h2>9. L'illusione della Complessità</h2>
-            <p>Esiste una tentazione perversa nell'investimento: credere che più complesso sia il nostro sistema, migliori saranno i risultati. È l'opposto. La complessità è il nascondiglio dei cattivi investitori.</p>
-            <p><strong>Il Rasoio di Occam:</strong> Se due strategie offrono la stessa esposizione al rischio e lo stesso rendimento atteso, la più semplice — quella che richiede meno manutenzione e meno decisioni discrezionali — è sempre la migliore.</p>
-            <p><strong>L'Automazione come Difesa:</strong> Il sistema perfetto è quello che, una volta progettato, funziona da solo. Il tuo compito non è "battere il mercato" ogni mattina, ma mantenere la disciplina. L'automazione (l'investimento periodico, il ribilanciamento automatico) rimuove l'errore umano, che è la causa numero uno dei fallimenti finanziari.</p>
-        </section>
-
-        <section>
-            <h2>10. Checklist di Validazione: Sei un Architetto o un Giocatore?</h2>
-            <p>Prima di chiudere questo modulo e passare alla pratica, sottoponi il tuo portafoglio attuale a questo "Stress Test" di autovalutazione. Se non puoi rispondere "SÌ" a queste domande, la tua architettura richiede un intervento.</p>
-            <ul>
-                <li><strong>Test della Trasparenza:</strong> Sai spiegare in una frase semplice perché ogni singolo asset nel tuo portafoglio è lì? (Se la risposta è "perché ha fatto bene l'anno scorso", il tuo portafoglio è fragile).</li>
-                <li><strong>Test della Correlazione:</strong> Hai analizzato se, durante un crollo del mercato del 20%, i tuoi asset principali tendono a muoversi in direzioni opposte o se sono tutti "correlati al panico"?</li>
-                <li><strong>Test della Liquidità:</strong> Se domani avessi un'emergenza che richiede il 20% del tuo capitale, dovresti vendere asset in perdita? Se sì, la tua riserva di liquidità è insufficiente.</li>
-                <li><strong>Test del Sonno:</strong> Se domani il mercato aprisse a -15%, saresti in grado di non fare nulla, o sentiresti l'impulso irrefrenabile di "fare qualcosa"? Il tuo sistema deve essere calibrato in modo che la tua risposta corretta sia sempre: "Non fare nulla".</li>
-            </ul>
+            <p>Questa semplice equazione è il motivo per cui difendere il capitale è più importante che cercare il rendimento stellare. Un portafoglio che evita le perdite catastrofiche batte costantemente un portafoglio che cerca rendimenti elevati ma accetta Drawdown profondi.</p>
         </section>
 
         <section>
             <h2>Conclusione del Modulo</h2>
             <p>L'architettura del portafoglio non è un progetto che si finisce. È un processo che si vive. Il mercato cambierà, le condizioni economiche evolveranno, ma i principi di difesa del capitale, controllo della correlazione e umiltà operativa rimarranno immutati.</p>
-            <p>Hai ora le fondamenta. Non cercare di aggiungere "più componenti" per rendere il sistema più intelligente. Cerca di rendere il sistema più robusto. Un portafoglio che vince poco ma perde pochissimo, nel lungo termine, distrugge la concorrenza.</p>
             <p><strong>Benvenuto nel lato quantitativo della finanza.</strong></p>
         </section>
     </main>
