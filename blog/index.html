@@ -3,94 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog | VQuantPro</title>
+    <title>VQuantPro | Metodo, Rigore e Analisi Quantitativa</title>
     <style>
         :root { --bg-main: #0B0F19; --bg-card: #161F30; --accent: #00E676; --text-main: #F3F4F6; --text-muted: #9CA3AF; --border: #24334C; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background-color: var(--bg-main); color: var(--text-main); line-height: 1.7; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-main); color: var(--text-main); line-height: 1.6; }
+        
         header { background-color: rgba(11, 15, 25, 0.95); border-bottom: 1px solid var(--border); position: fixed; width: 100%; top: 0; z-index: 100; height: 75px; display: flex; align-items: center; }
-        .nav-container { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 1000px; margin: 0 auto; padding: 0 24px; }
         .logo { font-weight: 700; font-size: 24px; color: #fff; }
         .logo span { color: var(--accent); }
-        nav a { color: var(--text-muted); text-decoration: none; font-size: 15px; font-weight: 500; }
-        nav a:hover { color: var(--accent); }
-        .section { padding: 150px 0 100px 0; }
-        .section-title { font-size: 36px; font-weight: 700; margin-bottom: 20px; text-align: center; color: #fff; }
-        .section-subtitle { color: var(--text-muted); text-align: center; max-width: 700px; margin: 0 auto 60px auto; font-size: 18px; }
-        .grid-methods { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 30px; }
-        .card { background-color: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 40px; transition: transform 0.2s ease; }
-        .card:hover { border-color: var(--accent); transform: translateY(-5px); }
-        .card h3 { font-size: 20px; margin-bottom: 16px; color: #fff; }
-        .card p { color: var(--text-muted); font-size: 15px; margin-bottom: 24px; }
-        .card-link { color: var(--accent); text-decoration: none; font-weight: 600; font-size: 14px; }
+        
+        main { max-width: 1000px; margin: 120px auto 80px auto; padding: 0 24px; }
+        h1 { font-size: 48px; margin-bottom: 40px; }
+        
+        .blog-section { margin-top: 60px; }
+        .post-card { background: var(--bg-card); padding: 30px; border-radius: 12px; border: 1px solid var(--border); transition: transform 0.2s; margin-bottom: 20px; }
+        .post-card:hover { border-color: var(--accent); }
+        .post-card h3 { color: #fff; font-size: 24px; margin-bottom: 10px; }
+        .post-card p { color: var(--text-muted); margin-bottom: 15px; }
+        .post-card a { color: var(--accent); text-decoration: none; font-weight: 600; }
+        .date { font-size: 14px; color: var(--text-muted); margin-bottom: 10px; display: block; }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="container nav-container">
+        <div class="nav-container">
             <div class="logo">VQuant<span>Pro</span></div>
-            <nav><a href="/">← Torna alla Home</a></nav>
         </div>
     </header>
 
-    <section class="section container">
-        <h2 class="section-title">Archivio Analisi</h2>
-        <p class="section-subtitle">Economia applicata e studi quantitativi. La conoscenza è l'unico investimento che non subisce svalutazione.</p>
+    <main>
+        <h1>Blog</h1>
         
-        <div class="grid-methods">
-            
-            <div class="card">
-                <h3>L'Illusione del 1929</h3>
-                <p>Quando l'avidità sfida la matematica: analisi dell'architettura di un crollo e il fallimento del margine di sicurezza.</p>
-                <a href="l-illusione-del-1929.html" class="card-link">Leggi analisi →</a>
-            </div>
+        <section class="blog-section">
+            <article class="post-card">
+                <span class="date">21 Maggio 2026</span>
+                <h3>Anatomia di un Collasso: Il 2008 e la Fine dell'Illusione del Rischio Zero</h3>
+                <p>Un'analisi profonda del 2008, non come cigno nero, ma come fallimento di sistema prevedibile. Scopri come l'approccio VQuantPro avrebbe gestito il segnale di rischio asimmetrico.</p>
+                <a href="anatomia-collasso-2008.html">Leggi l'articolo →</a>
+            </article>
 
-            <div class="card">
-                <h3>CAGR: La Verità Geometrica</h3>
-                <p>Oltre il rumore dei rendimenti nominali: la bussola dell'investitore razionale nel tempo.</p>
-                <a href="guida-cagr.html" class="card-link">Leggi analisi →</a>
-            </div>
-
-            <div class="card">
-                <h3>Volatilità: Segnale vs Rumore</h3>
-                <p>Comprendere la differenza tra l'oscillazione dei prezzi e il rischio di perdita permanente del capitale.</p>
-                <a href="guida-volatilita.html" class="card-link">Leggi analisi →</a>
-            </div>
-
-            <div class="card">
-                <h3>Sharpe Ratio: Il Prezzo del Coraggio</h3>
-                <p>Valutare l'efficienza di un portafoglio: rendimento giustificato vs temerarietà.</p>
-                <a href="guida-sharpe.html" class="card-link">Leggi analisi →</a>
-            </div>
-
-            <div class="card">
-                <h3>Sortino Ratio: Precisione del Dolore</h3>
-                <p>Perché non tutta la volatilità è uguale: isolare il rischio che realmente brucia il capitale.</p>
-                <a href="guida-sortino.html" class="card-link">Leggi analisi →</a>
-            </div>
-
-            <div class="card">
-                <h3>Calmar Ratio: Sopravvivenza</h3>
-                <p>Il rapporto tra ambizione e resistenza: la metrica che separa chi resta in partita da chi esce.</p>
-                <a href="guida-calmar.html" class="card-link">Leggi analisi →</a>
-            </div>
-
-            <div class="card">
-                <h3>Diversificazione: La Cena Gratuita</h3>
-                <p>Frontiera efficiente e decorrelazione: l'arte di equilibrare gli asset nell'orchestra finanziaria.</p>
-                <a href="guida-diversificazione.html" class="card-link">Leggi analisi →</a>
-            </div>
-
-            <div class="card">
-                <h3>Max Drawdown: Test di Tenuta</h3>
-                <p>Lo specchio della nostra tolleranza psicologica: studiare la massima sofferenza storica.</p>
-                <a href="guida-max-drawdown.html" class="card-link">Leggi analisi →</a>
-            </div>
-
-        </div>
-    </section>
+            </section>
+    </main>
 
 </body>
 </html>
