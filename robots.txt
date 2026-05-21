@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Sitemap: https://vquantpro.it/sitemap.xml
+
+Disallow: /admin/
+Disallow: /temp/
