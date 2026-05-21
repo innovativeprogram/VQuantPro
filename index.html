@@ -79,6 +79,12 @@
 
         .btn-primary:hover { background-color: var(--accent-hover); transform: translateY(-2px); }
 
+        /* Section About (Chi Siamo) */
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; padding: 100px 0; }
+        .about-text h2 { font-size: 36px; margin-bottom: 24px; color: #fff; }
+        .about-text p { color: var(--text-muted); margin-bottom: 20px; font-size: 16px; }
+        .about-image img { width: 100%; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+
         .section { padding: 100px 0; border-bottom: 1px solid var(--border); }
         .section-title { font-size: 36px; font-weight: 700; margin-bottom: 20px; text-align: center; color: #fff; }
         .section-subtitle { color: var(--text-muted); text-align: center; max-width: 700px; margin: 0 auto 60px auto; font-size: 18px; }
@@ -105,18 +111,20 @@
         .card-link { margin-top: auto; color: var(--accent); text-decoration: none; font-weight: 600; font-size: 14px; transition: 0.3s; }
         .card-link:hover { color: #fff; letter-spacing: 0.5px; }
 
-        .lesson-section { background-color: #0d131f; padding: 80px; border-radius: 16px; border: 1px solid var(--border); max-width: 900px; margin: 40px auto; }
-        .lesson-section h2 { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--accent); margin-bottom: 30px; text-align: center; font-style: italic; }
-        .lesson-section h4 { color: #fff; font-size: 20px; margin: 30px 0 10px 0; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+        .lesson-section { background-color: #0d131f; padding: 80px; border-radius: 16px; border: 1px solid var(--border); max-width: 900px; margin: 40px auto; text-align: center; }
+        .lesson-section h2 { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--accent); margin-bottom: 30px; font-style: italic; }
         .lesson-section p { color: var(--text-muted); margin-bottom: 20px; font-size: 16px; line-height: 1.8; }
-
+        
         footer { background-color: #060810; padding: 50px 0 30px 0; text-align: center; color: var(--text-muted); border-top: 1px solid var(--border); }
         .footer-links { display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; flex-wrap: wrap; }
         .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; transition: color 0.3s; }
         .footer-links a:hover { color: var(--accent); }
 
-        @media (max-width: 900px) { .hero h1 { font-size: 38px; } nav ul { gap: 15px; } .lesson-section { padding: 40px 20px; } }
-        @media (max-width: 600px) { nav ul { display: none; } .grid-methods { grid-template-columns: 1fr; } }
+        @media (max-width: 900px) { 
+            .hero h1 { font-size: 38px; } 
+            .about-grid { grid-template-columns: 1fr; text-align: center; }
+            .nav-container nav { display: none; } /* Semplificazione mobile */
+        }
     </style>
 </head>
 <body>
@@ -127,9 +135,9 @@
             <nav>
                 <ul>
                     <li><a href="#home">Home</a></li>
+                    <li><a href="#chi-siamo">Chi Siamo</a></li>
                     <li><a href="#metodi">Formule</a></li>
                     <li><a href="#lezione">Masterclass</a></li>
-                    <li><a href="/blog/index.html">Blog</a></li>
                     <li><a href="contatti.html">Contatti</a></li>
                 </ul>
             </nav>
@@ -141,6 +149,20 @@
             <h1>Ingegneria Finanziaria per il tuo Portafoglio</h1>
             <p>Non fidarti dell'istinto. Valuta l'efficienza reale dei tuoi investimenti calcolando drawdown, volatilità e tassi composti.</p>
             <a href="https://vquantpro.streamlit.app/" class="btn-primary" target="_blank" rel="noopener noreferrer">Lancia l'App VQuantPro</a>
+        </div>
+    </section>
+
+    <section id="chi-siamo" class="container">
+        <div class="about-grid">
+            <div class="about-text">
+                <h2>Perché ho costruito VQuantPro</h2>
+                <p>Sono un investitore, proprio come te. Ho passato anni a navigare tra fogli Excel, metriche complicate e consigli non richiesti, cercando di capire cosa distinguesse un investimento solido da un errore costoso.</p>
+                <p>La verità che ho scoperto è che la differenza non risiede nel "colpo di fortuna", ma nella capacità di analizzare il rischio con freddezza e metodo.</p>
+                <p>VQuantPro è il risultato della mia ricerca personale di ordine in mezzo al caos. È il toolkit che avrei voluto avere all'inizio del mio percorso: un insieme di strumenti, guide e analisi progettati per trasformare i dati grezzi in decisioni ponderate. Non troverai qui il "segreto per diventare ricchi", ma troverai gli strumenti per diventare un investitore più razionale, paziente e, in ultima analisi, più sereno.</p>
+            </div>
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80" alt="Investitore analizza dati">
+            </div>
         </div>
     </section>
 
@@ -197,7 +219,7 @@
         <div class="lesson-section">
             <h2>La Logica Dietro i Numeri</h2>
             <p>Il rischio deriva dal non sapere cosa si sta facendo. La finanza quantitativa non è speculazione; è il processo sistematico di trasformare l'incertezza in probabilità misurabili.</p>
-            <blockquote>“Il valore reale non risiede nella capacità di prevedere il mercato, ma nella capacità di misurare la robustezza della propria strategia.”</blockquote>
+            <blockquote style="font-style: italic; color: var(--text-main);">“Il valore reale non risiede nella capacità di prevedere il mercato, ma nella capacità di misurare la robustezza della propria strategia.”</blockquote>
         </div>
     </section>
 
