@@ -55,8 +55,8 @@
         nav a { color: var(--text-muted); text-decoration: none; font-size: 15px; font-weight: 500; transition: color 0.3s; }
         nav a:hover { color: var(--accent); }
 
-        /* Mobile Styles */
-        .hamburger { display: none; cursor: pointer; color: var(--accent); font-size: 28px; }
+        /* --- STILE MOBILE (HAMBURGER) --- */
+        .hamburger { display: none; cursor: pointer; color: var(--accent); font-size: 30px; }
 
         @media (max-width: 900px) {
             .hamburger { display: block; }
@@ -66,6 +66,7 @@
             .hero h1 { font-size: 38px; } 
             .about-grid { grid-template-columns: 1fr; text-align: center; }
         }
+        /* ---------------------------------- */
 
         .hero { padding: 200px 0 140px 0; text-align: center; background: linear-gradient(to bottom, rgba(11,15,25,0.8) 0%, rgba(11,15,25,1) 100%), url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat; border-bottom: 1px solid var(--border); }
         .hero h1 { font-size: 56px; font-weight: 800; line-height: 1.1; margin-bottom: 24px; color: #fff; letter-spacing: -1px; }
@@ -93,6 +94,7 @@
         .card-link:hover { color: #fff; letter-spacing: 0.5px; }
 
         .content-image { width: 100%; border-radius: 12px; margin-bottom: 40px; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        
         .lesson-section { background-color: #0d131f; padding: 80px; border-radius: 16px; border: 1px solid var(--border); max-width: 900px; margin: 40px auto; }
         .lesson-section h2 { font-family: 'Playfair Display', serif; font-size: 36px; color: var(--accent); margin-bottom: 30px; text-align: center; }
         .lesson-section p { color: var(--text-muted); margin-bottom: 20px; font-size: 17px; line-height: 1.8; }
@@ -130,5 +132,97 @@
         </div>
     </section>
 
-    </body>
+    <section id="chi-siamo" class="container">
+        <div class="about-grid">
+            <div class="about-text">
+                <h2>Il Metodo: Oltre il Rumore del Mercato</h2>
+                <p>La finanza moderna è inondata di opinioni, rumore e previsioni non richieste. Ho creato VQuantPro perché ritengo che il vantaggio competitivo non risieda nel "prevedere" dove andrà il prezzo domani, ma nel comprendere profondamente la struttura del rischio oggi.</p>
+                <p>Ogni investitore consapevole deve porsi una domanda fondamentale: <em>"Il rendimento che sto ottenendo è proporzionato al rischio che sto correndo?"</em></p>
+                <p>VQuantPro trasforma questa domanda in risposte numeriche. È una piattaforma progettata per chi rifiuta la delega passiva e vuole costruire il proprio "fossato" finanziario attraverso l'analisi quantitativa.</p>
+            </div>
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80" alt="Analisi quantitativa">
+            </div>
+        </div>
+    </section>
+
+    <section id="metodi" class="section container">
+        <h2 class="section-title">Frontiera Analitica: Gli Strumenti</h2>
+        <p class="section-subtitle">Il successo finanziario è un'equazione. Ecco le metriche che utilizziamo per decodificare il comportamento dei mercati.</p>
+        
+        <img src="https://images.unsplash.com/photo-1543286386-2e659306cd6c?auto=format&fit=crop&w=1200&q=80" alt="Data Analysis" class="content-image">
+
+        <div class="grid-methods">
+            <div class="card">
+                <h3>CAGR</h3>
+                <p>Il Tasso di Crescita Annuo Composto è la bussola del lungo termine. Elimina le distorsioni dei rendimenti annuali per mostrarti il rendimento geometrico costante.</p>
+                <div class="formula">\( CAGR = \left( \frac{V_f}{V_i} \right)^{\frac{1}{t}} - 1 \)</div>
+                <a href="guida-cagr.html" class="card-link">Comprendi il CAGR →</a>
+            </div>
+
+            <div class="card">
+                <h3>Volatilità</h3>
+                <p>Non temere la volatilità, comprendila. Misuriamo la dispersione dei rendimenti per valutare la "temperatura" del tuo rischio sistemico.</p>
+                <div class="formula">\( \sigma = \sqrt{\frac{1}{N}\sum(R_i - \bar{R})^2} \)</div>
+                <a href="guida-volatilita.html" class="card-link">Analisi della Volatilità →</a>
+            </div>
+
+            <div class="card">
+                <h3>Max Drawdown</h3>
+                <p>La metrica della sofferenza. Misuriamo il calo massimo dal picco al minimo per testare la vera resilienza del tuo portafoglio nei momenti di crisi.</p>
+                <div class="formula">\( DD = \frac{Trough - Peak}{Peak} \)</div>
+                <a href="guida-max-drawdown.html" class="card-link">Analizza il Drawdown →</a>
+            </div>
+
+            <div class="card">
+                <h3>Sharpe Ratio</h3>
+                <p>L'efficienza ha un nome. Lo Sharpe Ratio ti dice quanto rendimento stai ottenendo per ogni unità di rischio volatile che decidi di sopportare.</p>
+                <div class="formula">\( Sharpe = \frac{R_p - R_f}{\sigma_p} \)</div>
+                <a href="guida-sharpe.html" class="card-link">Ottimizza lo Sharpe →</a>
+            </div>
+
+            <div class="card">
+                <h3>Sortino Ratio</h3>
+                <p>Solo il rischio che fa male conta. Il Sortino isola la volatilità negativa, permettendoti di valutare la qualità reale della tua strategia.</p>
+                <div class="formula">\( Sortino = \frac{R_p - R_f}{\sigma_d} \)</div>
+                <a href="guida-sortino.html" class="card-link">Analisi Asimmetrica →</a>
+            </div>
+
+            <div class="card">
+                <h3>Calmar Ratio</h3>
+                <p>Il test finale. Mettiamo il rendimento a confronto con il "dolore" massimo (Drawdown). È la metrica definitiva per la robustezza di lungo periodo.</p>
+                <div class="formula">\( Calmar = \frac{CAGR}{Max\ DD} \)</div>
+                <a href="guida-calmar.html" class="card-link">Calcola il Calmar →</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="masterclass" class="section container">
+        <div class="lesson-section">
+            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&q=80" alt="Masterclass" class="content-image">
+            <h2>Masterclass VQuantPro: Costruire il proprio Metodo</h2>
+            <p>Il rischio deriva dal non sapere cosa si sta facendo. Questa è la nostra massima operativa.</p>
+            <p>La Masterclass non è un corso teorico, ma un percorso di architettura finanziaria. Attraverso lezioni basate sull'analisi dati, imparerai a costruire un sistema di investimento che non dipenda dal "sentimento" del momento, ma da regole matematiche rigorose.</p>
+            <p><strong>Cosa apprenderai:</strong><br>
+            - La costruzione di un portafoglio resistente ai crolli di mercato.<br>
+            - Come utilizzare le metriche quantitative per ribilanciare gli asset.<br>
+            - L'arte della pazienza: perché il tempo è l'unico vero alleato dell'investitore.</p>
+            <p><em>“Il valore reale non risiede nella capacità di prevedere il mercato, ma nella capacità di misurare la robustezza della propria strategia.”</em></p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="/privacy/index.html">Privacy Policy</a>
+                <a href="/cookie/index.html">Cookie Policy</a>
+                <a href="/legal/index.html">Note Legali & Disclaimer</a>
+                <a href="contatti.html">Contatti</a>
+                <a href="#" id="open_preferences_center">Gestisci preferenze cookie</a>
+            </div>
+            <p>&copy; 2026 VQuantPro. La disciplina è il motore del rendimento.</p>
+        </div>
+    </footer>
+
+</body>
 </html>
