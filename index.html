@@ -20,6 +20,28 @@
     
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2835044924304516" crossorigin="anonymous"></script>
     
+    <!-- Dati Strutturati per E-E-A-T -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "VQuantPro",
+      "url": "https://vquantpro.it",
+      "logo": "https://vquantpro.it/favicon.png",
+      "founder": {
+        "@type": "Person",
+        "name": "Canio Tedesco",
+        "sameAs": [
+          "https://www.linkedin.com/in/canio-tedesco-741b342aa"
+        ]
+      },
+      "sameAs": [
+        "https://www.instagram.com/vquantpro",
+        "https://www.tiktok.com/@vquantpro"
+      ]
+    }
+    </script>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
@@ -42,7 +64,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
 
-        body { font-family: 'Inter', sans-serif; background-color: var(--bg-main); color: var(--text-main); line-height: 1.7; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-main); color: var(--text-main); line-height: 1.7; font-size: 18px; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
         header { background-color: rgba(11, 15, 25, 0.95); backdrop-filter: blur(15px); border-bottom: 1px solid var(--border); position: fixed; width: 100%; top: 0; z-index: 100; }
@@ -56,7 +78,8 @@
         nav a:hover { color: var(--accent); }
 
         /* --- STILE MOBILE (HAMBURGER) --- */
-        .hamburger { display: none; cursor: pointer; color: var(--accent); font-size: 30px; }
+        .hamburger { display: none; cursor: pointer; color: var(--accent); font-size: 30px; background: none; border: none; }
+        .hamburger:hover { color: #ffffff; }
 
         @media (max-width: 900px) {
             .hamburger { display: block; }
@@ -110,7 +133,7 @@
     <header>
         <div class="container nav-container">
             <div class="logo">VQuant<span>Pro</span></div>
-            <div class="hamburger" onclick="document.querySelector('nav').classList.toggle('active')">☰</div>
+            <button class="hamburger" onclick="document.querySelector('nav').classList.toggle('active')" aria-label="Menu">☰</button>
             <nav>
                 <ul>
                     <li><a href="#home">Home</a></li>
