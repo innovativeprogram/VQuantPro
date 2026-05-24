@@ -21,6 +21,14 @@
         <priority>0.8</priority>
     </url>
 
+    <!-- NUOVA PAGINA LIBRI CONSIGLIATI -->
+    <url>
+        <loc>https://vquantpro.it/libri-consigliati.html</loc>
+        <lastmod>2026-05-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+
     <!-- Guide versione ROOT -->
     <url>
         <loc>https://vquantpro.it/guida-cagr.html</loc>
