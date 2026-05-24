@@ -36,7 +36,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" media="print" onload="this.media='all'">
+    <!-- KaTeX CSS: caricato normalmente (senza media="print") -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
 
     <style>
         :root {
@@ -269,6 +270,10 @@
         </div>
     </div>
 
+    <!-- KaTeX: sempre presente, con rendering automatico -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+
     <script>
     // Gestione consensi cookie
     (function() {
@@ -325,19 +330,7 @@
             }
         }
     })();
-    
-    // KaTeX: caricato solo se ci sono formule nella pagina
-    function loadKaTeX() {
-        var hasFormulas = document.querySelector('.formula');
-        if (hasFormulas) {
-            var katexScript = document.createElement('script');
-            katexScript.src = 'https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js';
-            katexScript.async = true;
-            katexScript.onload = function() {
-                var autoRender = document.createElement('script');
-                autoRender.src = 'https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js';
-                autoRender.async = true;
-                autoRender.onload = function() {
-                    if (typeof renderMathInElement === 'function') {
-                        renderMathInElement(document.body);
-    
+    </script>
+
+</body>
+</html>
