@@ -88,7 +88,6 @@
         <changefreq>yearly</changefreq>
         <priority>0.5</priority>
     </url>
-    <!-- CORRETTO: contatti è un file html nella root -->
     <url>
         <loc>https://vquantpro.it/contatti.html</loc>
         <lastmod>2026-05-24</lastmod>
