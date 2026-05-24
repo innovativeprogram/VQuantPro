@@ -4,726 +4,113 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VQuantPro | Ingegneria Finanziaria e Analisi Quantitativa</title>
+    
     <link rel="canonical" href="https://vquantpro.it/index.html" />
     <link rel="icon" type="image/png" href="/favicon.png">
-
-    <meta name="description" content="Software algoritmico per calcolare Sharpe, Sortino, Calmar Ratio, Max Drawdown e ottimizzare i tuoi investimenti sulla Frontiera Efficiente.">
-
-    <script type="application/ld+json">
-    {
-      "@context":"https://schema.org",
-      "@type":"Organization",
-      "name":"VQuantPro",
-      "url":"https://vquantpro.it",
-      "logo":"https://vquantpro.it/favicon.png",
-      "sameAs":[
-        "https://www.instagram.com/vquantpro",
-        "https://www.tiktok.com/@vquantpro"
-      ]
-    }
-    </script>
-
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2835044924304516" crossorigin="anonymous"></script>
-
-    <script type="text/javascript" src="https://www.termsfeed.com/public/cookie-consent/4.2.0/cookie-consent.js"></script>
-
-    <script>
+    
+    <script type="text/javascript" src="https://www.termsfeed.com/public/cookie-consent/4.2.0/cookie-consent.js" charset="UTF-8"></script>
+    <script type="text/javascript" charset="UTF-8">
     document.addEventListener('DOMContentLoaded', function () {
-        cookieconsent.run({
-            notice_banner_type:"standalone",
-            consent_type:"express",
-            palette:"light",
-            language:"it",
-            page_load_consent_levels:["strictly-necessary"],
-            notice_banner_reject_button_hide:false,
-            preferences_center_close_button_hide:false,
-            page_refresh_confirmation_buttons:false
-        });
-
-        // Hamburger menu – attivato subito, non dipende da KaTeX
-        const hamburger = document.querySelector('.hamburger');
-        const nav = document.querySelector('nav');
-
-        if (hamburger && nav) {
-            hamburger.addEventListener('click', function(e) {
-                e.preventDefault();
-                nav.classList.toggle('active');
-            });
-        }
-
-        // Effetto scroll header
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (header) {
-                if (window.scrollY > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-            }
-        });
-
-        // KaTeX rendering – isolato per non bloccare altri script
-        try {
-            if (typeof renderMathInElement === 'function') {
-                renderMathInElement(document.body);
-            }
-        } catch(e) {
-            console.warn('KaTeX non ancora pronto, riprovo tra 500ms');
-            setTimeout(function() {
-                try {
-                    if (typeof renderMathInElement === 'function') {
-                        renderMathInElement(document.body);
-                    }
-                } catch(e2) {
-                    console.warn('KaTeX rendering fallito');
-                }
-            }, 500);
-        }
+    cookieconsent.run({"notice_banner_type":"standalone","consent_type":"express","palette":"light","language":"it","page_load_consent_levels":["strictly-necessary"],"notice_banner_reject_button_hide":false,"preferences_center_close_button_hide":false,"page_refresh_confirmation_buttons":false});
     });
     </script>
 
-    <noscript>
-        Free cookie consent management tool by
-        <a href="https://www.termsfeed.com/">TermsFeed</a>
-    </noscript>
-
+    <noscript>Free cookie consent management tool by <a href="https://www.termsfeed.com/">TermsFeed</a></noscript>
+    <meta name="description" content="Software algoritmico per calcolare Sharpe, Sortino, Calmar Ratio, Max Drawdown e ottimizzare i tuoi investimenti sulla Frontiera Efficiente. Costruisci un portafoglio basato sul metodo, non sulla speculazione.">
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2835044924304516" crossorigin="anonymous"></script>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
-
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
 
     <style>
-        :root{
-            --bg-main:#0B0F19;
-            --bg-card:#161F30;
-            --accent:#00E676;
-            --accent-hover:#00B359;
-            --text-main:#F3F4F6;
-            --text-muted:#9CA3AF;
-            --border:#24334C;
-            --gradient:
-            linear-gradient(
-                135deg,
-                rgba(0,230,118,0.12),
-                rgba(0,230,118,0)
-            );
-        }
-
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-        }
-
-        html{
-            scroll-behavior:smooth;
-        }
-
-        body{
-            font-family:'Inter',sans-serif;
-            background:var(--bg-main);
-            color:var(--text-main);
-            line-height:1.7;
-            overflow-x:hidden;
-        }
-
-        img{
-            max-width:100%;
-            display:block;
-        }
-
-        .container{
-            max-width:1200px;
-            margin:0 auto;
-            padding:0 24px;
-        }
-
-        header{
-            position:fixed;
-            width:100%;
-            top:0;
-            z-index:1000;
-            background:rgba(11,15,25,0.92);
-            backdrop-filter:blur(14px);
-            border-bottom:1px solid rgba(255,255,255,0.05);
-            transition:0.3s;
-        }
-
-        header.scrolled{
-            box-shadow:0 10px 30px rgba(0,0,0,0.4);
-        }
-
-        .nav-container{
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            height:78px;
-        }
-
-        .logo{
-            font-size:28px;
-            font-weight:800;
-            letter-spacing:-1px;
-        }
-
-        .logo span{
-            color:var(--accent);
-        }
-
-        nav ul{
-            display:flex;
-            list-style:none;
-            gap:32px;
-        }
-
-        nav a{
-            color:var(--text-muted);
-            text-decoration:none;
-            font-size:15px;
-            font-weight:600;
-            transition:0.3s;
-            position:relative;
-        }
-
-        nav a::after{
-            content:"";
-            position:absolute;
-            width:0;
-            left:0;
-            bottom:-8px;
-            height:2px;
-            background:var(--accent);
-            transition:0.3s;
-        }
-
-        nav a:hover{
-            color:#fff;
-        }
-
-        nav a:hover::after{
-            width:100%;
-        }
-
-        .hamburger{
-            display:none;
-            font-size:30px;
-            cursor:pointer;
-            color:var(--accent);
-            z-index:1001;
-            background:none;
-            border:none;
-        }
-
-        .hero{
-            padding:220px 0 160px;
-            text-align:center;
-            position:relative;
-            overflow:hidden;
-            border-bottom:1px solid var(--border);
-
-            background:
-            linear-gradient(to bottom, rgba(11,15,25,0.75), rgba(11,15,25,1)),
-            url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1920&q=90')
-            center/cover no-repeat;
-        }
-
-        .hero::before{
-            content:"";
-            position:absolute;
-            inset:0;
-            background:
-            radial-gradient(circle at top left, rgba(0,230,118,0.18), transparent 30%);
-            pointer-events:none;
-        }
-
-        .hero-badge{
-            display:inline-flex;
-            align-items:center;
-            gap:10px;
-            border:1px solid rgba(255,255,255,0.08);
-            background:rgba(255,255,255,0.04);
-            padding:10px 18px;
-            border-radius:999px;
-            margin-bottom:28px;
-            color:#d1d5db;
-            font-size:14px;
-        }
-
-        .hero h1{
-            font-size:64px;
-            line-height:1.05;
-            max-width:980px;
-            margin:0 auto 28px;
-            font-weight:900;
-            letter-spacing:-2px;
-        }
-
-        .hero p{
-            font-size:21px;
-            color:var(--text-muted);
-            max-width:850px;
-            margin:0 auto 42px;
-        }
-
-        .hero-buttons{
-            display:flex;
-            justify-content:center;
-            gap:18px;
-            flex-wrap:wrap;
-        }
-
-        .btn-primary{
-            background:var(--accent);
-            color:#08110d;
-            padding:16px 36px;
-            border-radius:12px;
-            font-weight:800;
-            text-decoration:none;
-            transition:0.3s;
-            box-shadow:0 10px 35px rgba(0,230,118,0.3);
-        }
-
-        .btn-primary:hover{
-            transform:translateY(-4px);
-            background:var(--accent-hover);
-        }
-
-        .btn-secondary{
-            border:1px solid rgba(255,255,255,0.12);
-            background:rgba(255,255,255,0.03);
-            color:#fff;
-            padding:16px 30px;
-            border-radius:12px;
-            font-weight:700;
-            text-decoration:none;
-            transition:0.3s;
-        }
-
-        .btn-secondary:hover{
-            border-color:var(--accent);
-            color:var(--accent);
-        }
-
-        .hero-stats{
-            margin-top:70px;
-            display:grid;
-            grid-template-columns:repeat(4,1fr);
-            gap:24px;
-        }
-
-        .hero-stat{
-            background:rgba(255,255,255,0.03);
-            border:1px solid rgba(255,255,255,0.06);
-            border-radius:18px;
-            padding:28px;
-            backdrop-filter:blur(10px);
-        }
-
-        .hero-stat h3{
-            font-size:42px;
-            color:var(--accent);
-            margin-bottom:8px;
-        }
-
-        .hero-stat p{
-            margin:0;
-            font-size:15px;
-        }
-
-        .about-grid{
-            display:grid;
-            grid-template-columns:1fr 1fr;
-            gap:80px;
-            align-items:center;
-            padding:120px 0;
-        }
-
-        .about-text h2{
-            font-size:44px;
-            line-height:1.1;
-            margin-bottom:24px;
-        }
-
-        .about-text p{
-            color:var(--text-muted);
-            margin-bottom:20px;
-            font-size:17px;
-        }
-
-        .about-image{
-            position:relative;
-        }
-
-        .about-image::before{
-            content:"";
-            position:absolute;
-            inset:-20px;
-            background:var(--gradient);
-            border-radius:20px;
-            z-index:-1;
-        }
-
-        .about-image img{
-            border-radius:18px;
-            border:1px solid var(--border);
-            box-shadow:0 20px 40px rgba(0,0,0,0.45);
-        }
-
-        .section{
-            padding:110px 0;
-            border-bottom:1px solid var(--border);
-        }
-
-        .section-title{
-            text-align:center;
-            font-size:46px;
-            margin-bottom:20px;
-        }
-
-        .section-subtitle{
-            max-width:850px;
-            margin:0 auto 60px;
-            text-align:center;
-            color:var(--text-muted);
-            font-size:19px;
-        }
-
-        .content-image{
-            border-radius:20px;
-            margin-bottom:60px;
-            border:1px solid var(--border);
-            box-shadow:0 20px 40px rgba(0,0,0,0.45);
-        }
-
-        .grid-methods{
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
-            gap:30px;
-        }
-
-        .card{
-            background:linear-gradient(180deg,#161F30,#121827);
-            border:1px solid rgba(255,255,255,0.05);
-            border-radius:20px;
-            padding:40px;
-            transition:0.3s;
-            position:relative;
-            overflow:hidden;
-        }
-
-        .card::before{
-            content:"";
-            position:absolute;
-            inset:0;
-            background:linear-gradient(135deg, rgba(0,230,118,0.08), transparent);
-            opacity:0;
-            transition:0.3s;
-        }
-
-        .card:hover::before{
-            opacity:1;
-        }
-
-        .card:hover{
-            transform:translateY(-6px);
-            border-color:rgba(0,230,118,0.25);
-        }
-
-        .card h3{
-            font-size:24px;
-            margin-bottom:16px;
-            display:flex;
-            align-items:center;
-            gap:12px;
-        }
-
-        .card h3::before{
-            content:"";
-            width:12px;
-            height:12px;
-            border-radius:50%;
-            background:var(--accent);
-            box-shadow:0 0 15px var(--accent);
-        }
-
-        .card p{
-            color:var(--text-muted);
-            margin-bottom:24px;
-        }
-
-        .formula{
-            background:#0a101b;
-            border-left:4px solid var(--accent);
-            padding:18px;
-            border-radius:10px;
-            font-family:'JetBrains Mono', monospace;
-            color:var(--accent);
-            margin-bottom:22px;
-            overflow:auto;
-        }
-
-        .card-link{
-            color:var(--accent);
-            text-decoration:none;
-            font-weight:700;
-        }
-
-        .card-link:hover{
-            color:#fff;
-        }
-
-        .research-section{
-            padding:110px 0;
-            border-bottom:1px solid var(--border);
-        }
-
-        .research-grid{
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-            gap:30px;
-            margin-top:60px;
-        }
-
-        .research-card{
-            background:var(--bg-card);
-            border-radius:20px;
-            overflow:hidden;
-            border:1px solid rgba(255,255,255,0.06);
-            transition:0.3s;
-        }
-
-        .research-card:hover{
-            transform:translateY(-6px);
-            border-color:rgba(0,230,118,0.25);
-        }
-
-        .research-card img{
-            height:240px;
-            width:100%;
-            object-fit:cover;
-        }
-
-        .research-content{
-            padding:30px;
-        }
-
-        .research-tag{
-            color:var(--accent);
-            text-transform:uppercase;
-            font-size:12px;
-            font-weight:800;
-            letter-spacing:1px;
-            margin-bottom:12px;
-        }
-
-        .research-content h3{
-            font-size:26px;
-            margin-bottom:16px;
-            line-height:1.3;
-        }
-
-        .research-content p{
-            color:var(--text-muted);
-            margin-bottom:20px;
-        }
-
-        .lesson-section{
-            background:#0d131f;
-            padding:80px;
-            border-radius:24px;
-            border:1px solid rgba(255,255,255,0.06);
-            max-width:950px;
-            margin:40px auto;
-            box-shadow:0 25px 50px rgba(0,0,0,0.35);
-        }
-
-        .lesson-section h2{
-            font-size:42px;
-            text-align:center;
-            margin-bottom:30px;
-            color:var(--accent);
-            font-family:'Playfair Display', serif;
-        }
-
-        .lesson-section p{
-            color:var(--text-muted);
-            margin-bottom:20px;
-            font-size:18px;
-        }
-
-        .topics-section{
-            padding:110px 0;
-        }
-
-        .topics-grid{
-            display:flex;
-            flex-wrap:wrap;
-            justify-content:center;
-            gap:18px;
-            margin-top:50px;
-        }
-
-        .topic-pill{
-            padding:15px 24px;
-            border-radius:999px;
-            background:var(--bg-card);
-            border:1px solid rgba(255,255,255,0.06);
-            transition:0.3s;
-            color:#d1d5db;
-        }
-
-        .topic-pill:hover{
-            border-color:var(--accent);
-            color:#fff;
-            transform:translateY(-2px);
-        }
-
-        footer{
-            background:#060810;
-            padding:70px 0 40px;
-            text-align:center;
-            border-top:1px solid rgba(255,255,255,0.06);
-        }
-
-        .footer-logo{
-            font-size:34px;
-            font-weight:900;
-            margin-bottom:20px;
-        }
-
-        .footer-logo span{
-            color:var(--accent);
-        }
-
-        .footer-links{
-            display:flex;
-            justify-content:center;
-            gap:24px;
-            flex-wrap:wrap;
-            margin-bottom:28px;
-        }
-
-        .footer-links a{
-            color:var(--text-muted);
-            text-decoration:none;
-        }
-
-        .footer-links a:hover{
-            color:var(--accent);
-        }
-
-        .socials{
-            display:flex;
-            justify-content:center;
-            gap:16px;
-            margin-bottom:30px;
-            flex-wrap:wrap;
-        }
-
-        .socials a{
-            padding:12px 22px;
-            border-radius:999px;
-            background:rgba(255,255,255,0.04);
-            border:1px solid rgba(255,255,255,0.06);
-            color:#fff;
-            text-decoration:none;
-            transition:0.3s;
-        }
-
-        .socials a:hover{
-            border-color:var(--accent);
-            color:var(--accent);
-        }
-
-        @media(max-width:900px){
-            .hamburger{
-                display:block;
-            }
-
-            nav{
-                display:none;
-                position:absolute;
-                top:78px;
-                left:0;
-                width:100%;
-                background:#101827;
-                border-bottom:1px solid var(--border);
-                padding:25px;
-            }
-
-            nav.active{
-                display:block;
-            }
-
-            nav ul{
-                flex-direction:column;
-                align-items:center;
-                gap:20px;
-            }
-
-            .hero{
-                padding-top:180px;
-            }
-
-            .hero h1{
-                font-size:42px;
-            }
-
-            .hero p{
-                font-size:18px;
-            }
-
-            .hero-stats{
-                grid-template-columns:1fr 1fr;
-            }
-
-            .about-grid{
-                grid-template-columns:1fr;
-            }
-
-            .section-title{
-                font-size:36px;
-            }
-
-            .lesson-section{
-                padding:40px 30px;
-            }
-        }
-
-        @media(max-width:640px){
-            .hero h1{
-                font-size:34px;
-            }
-
-            .hero-stats{
-                grid-template-columns:1fr;
-            }
-
-            .grid-methods{
-                grid-template-columns:1fr;
-            }
-
-            .research-grid{
-                grid-template-columns:1fr;
-            }
-        }
+        :root {
+            --bg-main: #0B0F19;
+            --bg-card: #161F30;
+            --accent: #00E676;
+            --accent-hover: #00B359;
+            --text-main: #F3F4F6;
+            --text-muted: #9CA3AF;
+            --border: #24334C;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-main); color: var(--text-main); line-height: 1.7; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+        header { background-color: rgba(11, 15, 25, 0.95); backdrop-filter: blur(15px); border-bottom: 1px solid var(--border); position: fixed; width: 100%; top: 0; z-index: 100; }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; height: 75px; }
+        .logo { font-weight: 700; font-size: 24px; color: #fff; }
+        .logo span { color: var(--accent); }
+        
+        /* Menu Desktop */
+        nav ul { display: flex; list-style: none; gap: 30px; }
+        nav a { color: var(--text-muted); text-decoration: none; font-size: 15px; font-weight: 500; transition: color 0.3s; }
+        nav a:hover { color: var(--accent); }
+
+        /* --- STILE MOBILE (HAMBURGER) --- */
+        .hamburger { display: none; cursor: pointer; color: var(--accent); font-size: 30px; }
+
+        @media (max-width: 900px) {
+            .hamburger { display: block; }
+            nav { display: none; position: absolute; top: 75px; left: 0; width: 100%; background: var(--bg-card); padding: 20px; border-bottom: 1px solid var(--border); }
+            nav.active { display: block; }
+            nav ul { flex-direction: column; gap: 15px; align-items: center; }
+            .hero h1 { font-size: 38px; } 
+            .about-grid { grid-template-columns: 1fr; text-align: center; }
+        }
+        /* ---------------------------------- */
+
+        .hero { padding: 200px 0 140px 0; text-align: center; background: linear-gradient(to bottom, rgba(11,15,25,0.8) 0%, rgba(11,15,25,1) 100%), url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat; border-bottom: 1px solid var(--border); }
+        .hero h1 { font-size: 56px; font-weight: 800; line-height: 1.1; margin-bottom: 24px; color: #fff; letter-spacing: -1px; }
+        .hero p { color: var(--text-muted); font-size: 20px; max-width: 800px; margin: 0 auto 40px auto; }
+        .btn-primary { background-color: var(--accent); color: #0B0F19; padding: 16px 36px; border-radius: 8px; text-decoration: none; font-weight: 700; transition: all 0.3s; display: inline-block; box-shadow: 0 4px 20px rgba(0, 230, 118, 0.4); }
+        .btn-primary:hover { background-color: var(--accent-hover); transform: translateY(-2px); }
+
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; padding: 120px 0; }
+        .about-text h2 { font-size: 38px; margin-bottom: 24px; color: #fff; line-height: 1.2; }
+        .about-text p { color: var(--text-muted); margin-bottom: 20px; font-size: 17px; }
+        .about-image img { width: 100%; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+
+        .section { padding: 100px 0; border-bottom: 1px solid var(--border); }
+        .section-title { font-size: 38px; font-weight: 700; margin-bottom: 20px; text-align: center; color: #fff; }
+        .section-subtitle { color: var(--text-muted); text-align: center; max-width: 700px; margin: 0 auto 60px auto; font-size: 18px; }
+
+        .grid-methods { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 30px; }
+        .card { background-color: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 40px; transition: all 0.3s; display: flex; flex-direction: column; }
+        .card:hover { transform: translateY(-5px); border-color: rgba(0, 230, 118, 0.5); }
+        .card h3 { font-size: 20px; margin-bottom: 16px; color: #fff; display: flex; align-items: center; gap: 10px; }
+        .card h3::before { content: ""; display: block; width: 12px; height: 12px; background-color: var(--accent); border-radius: 50%; }
+        .card p { color: var(--text-muted); font-size: 15px; margin-bottom: 24px; }
+        .formula { background-color: rgba(11, 15, 25, 0.8); padding: 15px; border-radius: 8px; font-family: 'JetBrains Mono', monospace; color: var(--accent); text-align: center; border-left: 4px solid var(--accent); margin-bottom: 20px; }
+        .card-link { margin-top: auto; color: var(--accent); text-decoration: none; font-weight: 600; font-size: 14px; transition: 0.3s; }
+        .card-link:hover { color: #fff; letter-spacing: 0.5px; }
+
+        .content-image { width: 100%; border-radius: 12px; margin-bottom: 40px; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        
+        .lesson-section { background-color: #0d131f; padding: 80px; border-radius: 16px; border: 1px solid var(--border); max-width: 900px; margin: 40px auto; }
+        .lesson-section h2 { font-family: 'Playfair Display', serif; font-size: 36px; color: var(--accent); margin-bottom: 30px; text-align: center; }
+        .lesson-section p { color: var(--text-muted); margin-bottom: 20px; font-size: 17px; line-height: 1.8; }
+        
+        footer { background-color: #060810; padding: 50px 0 30px 0; text-align: center; color: var(--text-muted); border-top: 1px solid var(--border); }
+        .footer-links { display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; flex-wrap: wrap; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; transition: color 0.3s; }
+        .footer-links a:hover { color: var(--accent); }
     </style>
 </head>
 <body>
+
     <header>
         <div class="container nav-container">
-            <div class="logo">
-                VQuant<span>Pro</span>
-            </div>
-
-            <button class="hamburger" aria-label="Menu">☰</button>
-
+            <div class="logo">VQuant<span>Pro</span></div>
+            <div class="hamburger" onclick="document.querySelector('nav').classList.toggle('active')">☰</div>
             <nav>
                 <ul>
                     <li><a href="#home">Home</a></li>
@@ -739,53 +126,9 @@
 
     <section id="home" class="hero">
         <div class="container">
-            <div class="hero-badge">
-                Quantitative Investing • Risk Engineering • Evidence-Based Finance
-            </div>
-            <h1>
-                Ingegneria Finanziaria:<br>
-                Misura il Rischio,<br>
-                Domina il Rendimento
-            </h1>
-            <p>
-                Non fidarti dell'istinto.
-                La gestione del capitale non è un gioco d'azzardo:
-                è un esercizio di probabilità.
-                VQuantPro ti fornisce strumenti quantitativi,
-                metriche professionali e analisi statistiche
-                per costruire portafogli più robusti,
-                razionali e resilienti.
-            </p>
-            <div class="hero-buttons">
-                <a href="https://vquantpro.streamlit.app/"
-                   class="btn-primary"
-                   target="_blank"
-                   rel="noopener noreferrer">
-                    Accedi alla Dashboard
-                </a>
-                <a href="/blog/index.html"
-                   class="btn-secondary">
-                    Esplora il Blog
-                </a>
-            </div>
-            <div class="hero-stats">
-                <div class="hero-stat">
-                    <h3>6+</h3>
-                    <p>Metriche quantitative integrate</p>
-                </div>
-                <div class="hero-stat">
-                    <h3>100%</h3>
-                    <p>Approccio basato sui dati</p>
-                </div>
-                <div class="hero-stat">
-                    <h3>0</h3>
-                    <p>Speculazione emotiva</p>
-                </div>
-                <div class="hero-stat">
-                    <h3>24/7</h3>
-                    <p>Accesso agli strumenti</p>
-                </div>
-            </div>
+            <h1>Ingegneria Finanziaria: Misura il Rischio, Domina il Rendimento</h1>
+            <p>Non fidarti dell'istinto. La gestione del capitale non è un gioco d'azzardo; è un esercizio di probabilità. VQuantPro ti fornisce il toolkit algoritmico per analizzare i tuoi asset con il rigore dei grandi gestori.</p>
+            <a href="https://vquantpro.streamlit.app/" class="btn-primary" target="_blank" rel="noopener noreferrer">Accedi alla Dashboard Quantitativa</a>
         </div>
     </section>
 
@@ -793,287 +136,83 @@
         <div class="about-grid">
             <div class="about-text">
                 <h2>Il Metodo: Oltre il Rumore del Mercato</h2>
-                <p>
-                    La finanza moderna è inondata di opinioni,
-                    rumore e previsioni non richieste.
-                    Ho creato VQuantPro perché ritengo che
-                    il vantaggio competitivo non risieda nel
-                    prevedere il prezzo domani,
-                    ma nel comprendere il rischio oggi.
-                </p>
-                <p>
-                    Ogni investitore consapevole
-                    deve porsi una domanda fondamentale:
-                    <em>
-                        "Il rendimento che sto ottenendo
-                        è proporzionato al rischio che sto correndo?"
-                    </em>
-                </p>
-                <p>
-                    VQuantPro trasforma questa domanda
-                    in risposte numeriche.
-                    È una piattaforma progettata
-                    per chi rifiuta la delega passiva
-                    e vuole costruire un vantaggio
-                    attraverso l'analisi quantitativa.
-                </p>
+                <p>La finanza moderna è inondata di opinioni, rumore e previsioni non richieste. Ho creato VQuantPro perché ritengo che il vantaggio competitivo non risieda nel "prevedere" dove andrà il prezzo domani, ma nel comprendere profondamente la struttura del rischio oggi.</p>
+                <p>Ogni investitore consapevole deve porsi una domanda fondamentale: <em>"Il rendimento che sto ottenendo è proporzionato al rischio che sto correndo?"</em></p>
+                <p>VQuantPro trasforma questa domanda in risposte numeriche. È una piattaforma progettata per chi rifiuta la delega passiva e vuole costruire il proprio "fossato" finanziario attraverso l'analisi quantitativa.</p>
             </div>
             <div class="about-image">
-                <img
-                    src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=90"
-                    alt="Analisi quantitativa">
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80" alt="Analisi quantitativa">
             </div>
         </div>
     </section>
 
     <section id="metodi" class="section container">
-        <h2 class="section-title">
-            Frontiera Analitica: Gli Strumenti
-        </h2>
-        <p class="section-subtitle">
-            Il successo finanziario è un'equazione.
-            Ecco le metriche che utilizziamo
-            per misurare rischio,
-            rendimento ed efficienza.
-        </p>
-        <img
-            src="https://images.unsplash.com/photo-1543286386-2e659306cd6c?auto=format&fit=crop&w=1400&q=90"
-            alt="Data Analysis"
-            class="content-image">
+        <h2 class="section-title">Frontiera Analitica: Gli Strumenti</h2>
+        <p class="section-subtitle">Il successo finanziario è un'equazione. Ecco le metriche che utilizziamo per decodificare il comportamento dei mercati.</p>
+        
+        <img src="https://images.unsplash.com/photo-1543286386-2e659306cd6c?auto=format&fit=crop&w=1200&q=80" alt="Data Analysis" class="content-image">
+
         <div class="grid-methods">
             <div class="card">
                 <h3>CAGR</h3>
-                <p>
-                    Il Tasso di Crescita Annuo Composto
-                    rappresenta il rendimento geometrico
-                    reale di lungo periodo.
-                </p>
-                <div class="formula">
-                    \[CAGR = \left( \frac{V_f}{V_i} \right)^{\frac{1}{t}} - 1\]
-                </div>
-                <a href="guida-cagr.html" class="card-link">
-                    Comprendi il CAGR →
-                </a>
+                <p>Il Tasso di Crescita Annuo Composto è la bussola del lungo termine. Elimina le distorsioni dei rendimenti annuali per mostrarti il rendimento geometrico costante.</p>
+                <div class="formula">\( CAGR = \left( \frac{V_f}{V_i} \right)^{\frac{1}{t}} - 1 \)</div>
+                <a href="guida-cagr.html" class="card-link">Comprendi il CAGR →</a>
             </div>
+
             <div class="card">
                 <h3>Volatilità</h3>
-                <p>
-                    Misuriamo la dispersione dei rendimenti
-                    per valutare l'intensità del rischio sistemico.
-                </p>
-                <div class="formula">
-                    \[\sigma = \sqrt{\frac{1}{N}\sum(R_i - \bar{R})^2}\]
-                </div>
-                <a href="guida-volatilita.html" class="card-link">
-                    Analisi della Volatilità →
-                </a>
+                <p>Non temere la volatilità, comprendila. Misuriamo la dispersione dei rendimenti per valutare la "temperatura" del tuo rischio sistemico.</p>
+                <div class="formula">\( \sigma = \sqrt{\frac{1}{N}\sum(R_i - \bar{R})^2} \)</div>
+                <a href="guida-volatilita.html" class="card-link">Analisi della Volatilità →</a>
             </div>
+
             <div class="card">
                 <h3>Max Drawdown</h3>
-                <p>
-                    La misura della sofferenza finanziaria:
-                    il peggior calo storico dal massimo al minimo.
-                </p>
-                <div class="formula">
-                    \[DD = \frac{Trough - Peak}{Peak}\]
-                </div>
-                <a href="guida-max-drawdown.html" class="card-link">
-                    Analizza il Drawdown →
-                </a>
+                <p>La metrica della sofferenza. Misuriamo il calo massimo dal picco al minimo per testare la vera resilienza del tuo portafoglio nei momenti di crisi.</p>
+                <div class="formula">\( DD = \frac{Trough - Peak}{Peak} \)</div>
+                <a href="guida-max-drawdown.html" class="card-link">Analizza il Drawdown →</a>
             </div>
+
             <div class="card">
                 <h3>Sharpe Ratio</h3>
-                <p>
-                    Misura l'efficienza del rendimento
-                    rispetto al rischio assunto.
-                </p>
-                <div class="formula">
-                    \[Sharpe = \frac{R_p - R_f}{\sigma_p}\]
-                </div>
-                <a href="guida-sharpe.html" class="card-link">
-                    Ottimizza lo Sharpe →
-                </a>
+                <p>L'efficienza ha un nome. Lo Sharpe Ratio ti dice quanto rendimento stai ottenendo per ogni unità di rischio volatile che decidi di sopportare.</p>
+                <div class="formula">\( Sharpe = \frac{R_p - R_f}{\sigma_p} \)</div>
+                <a href="guida-sharpe.html" class="card-link">Ottimizza lo Sharpe →</a>
             </div>
+
             <div class="card">
                 <h3>Sortino Ratio</h3>
-                <p>
-                    Valuta esclusivamente la volatilità negativa,
-                    isolando il rischio realmente dannoso.
-                </p>
-                <div class="formula">
-                    \[Sortino = \frac{R_p - R_f}{\sigma_d}\]
-                </div>
-                <a href="guida-sortino.html" class="card-link">
-                    Analisi Asimmetrica →
-                </a>
+                <p>Solo il rischio che fa male conta. Il Sortino isola la volatilità negativa, permettendoti di valutare la qualità reale della tua strategia.</p>
+                <div class="formula">\( Sortino = \frac{R_p - R_f}{\sigma_d} \)</div>
+                <a href="guida-sortino.html" class="card-link">Analisi Asimmetrica →</a>
             </div>
+
             <div class="card">
                 <h3>Calmar Ratio</h3>
-                <p>
-                    Confronta rendimento e drawdown massimo
-                    per valutare la robustezza reale.
-                </p>
-                <div class="formula">
-                    \[Calmar = \frac{CAGR}{Max\ DD}\]
-                </div>
-                <a href="guida-calmar.html" class="card-link">
-                    Calcola il Calmar →
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section class="research-section container">
-        <h2 class="section-title">
-            Ricerche Quantitative & Analisi
-        </h2>
-        <p class="section-subtitle">
-            Educazione finanziaria,
-            portfolio construction
-            e analisi quantitativa
-            per comprendere davvero
-            rischio e asset allocation.
-        </p>
-        <div class="research-grid">
-            <div class="research-card">
-                <img
-                    src="https://images.unsplash.com/photo-1559526324-593bc073d938?auto=format&fit=crop&w=1200&q=90"
-                    alt="ETF Portfolio">
-                <div class="research-content">
-                    <div class="research-tag">
-                        Asset Allocation
-                    </div>
-                    <h3>
-                        Come costruire
-                        un portafoglio ETF resiliente
-                    </h3>
-                    <p>
-                        Diversificazione globale,
-                        correlazione tra asset
-                        e gestione del rischio sistemico.
-                    </p>
-                    <a href="/blog/index.html" class="card-link">
-                        Leggi l'analisi →
-                    </a>
-                </div>
-            </div>
-            <div class="research-card">
-                <img
-                    src="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?q=80&w=1400&auto=format&fit=crop"
-                    alt="Risk Analysis">
-                <div class="research-content">
-                    <div class="research-tag">
-                        Risk Management
-                    </div>
-                    <h3>
-                        Perché il Max Drawdown
-                        conta più del rendimento
-                    </h3>
-                    <p>
-                        Comprendere la profondità
-                        delle perdite è essenziale
-                        per valutare la sostenibilità
-                        di una strategia.
-                    </p>
-                    <a href="/blog/index.html" class="card-link">
-                        Approfondisci →
-                    </a>
-                </div>
-            </div>
-            <div class="research-card">
-                <img
-                    src="https://images.unsplash.com/photo-1518186285589-2f7649de83e0?auto=format&fit=crop&w=1200&q=90"
-                    alt="Quantitative Finance">
-                <div class="research-content">
-                    <div class="research-tag">
-                        Quantitative Finance
-                    </div>
-                    <h3>
-                        Sharpe, Sortino e Calmar:
-                        differenze operative reali
-                    </h3>
-                    <p>
-                        Confronto tra le principali metriche
-                        risk-adjusted utilizzate
-                        nell'analisi professionale.
-                    </p>
-                    <a href="/blog/index.html" class="card-link">
-                        Leggi l'articolo →
-                    </a>
-                </div>
+                <p>Il test finale. Mettiamo il rendimento a confronto con il "dolore" massimo (Drawdown). È la metrica definitiva per la robustezza di lungo periodo.</p>
+                <div class="formula">\( Calmar = \frac{CAGR}{Max\ DD} \)</div>
+                <a href="guida-calmar.html" class="card-link">Calcola il Calmar →</a>
             </div>
         </div>
     </section>
 
     <section id="masterclass" class="section container">
         <div class="lesson-section">
-            <img
-                src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1200&q=90"
-                alt="Masterclass"
-                class="content-image">
-            <h2>
-                Masterclass VQuantPro:
-                Costruire il proprio Metodo
-            </h2>
-            <p>
-                Il rischio deriva dal non sapere cosa si sta facendo.
-                Questa è la nostra massima operativa.
-            </p>
-            <p>
-                La Masterclass non è un corso teorico,
-                ma un percorso di architettura finanziaria.
-                Attraverso lezioni basate sull'analisi dati,
-                imparerai a costruire un sistema di investimento
-                indipendente dal rumore emotivo dei mercati.
-            </p>
-            <p>
-                <strong>Cosa apprenderai:</strong><br><br>
-                • Costruzione di portafogli resilienti.<br>
-                • Gestione quantitativa del rischio.<br>
-                • Analisi della volatilità.<br>
-                • Metriche professionali di performance.<br>
-                • Psicologia dell'investitore.<br>
-                • Importanza dell'orizzonte temporale.
-            </p>
-            <p>
-                <em>
-                    "Il valore reale non risiede
-                    nella capacità di prevedere il mercato,
-                    ma nella capacità di misurare
-                    la robustezza della propria strategia."
-                </em>
-            </p>
-        </div>
-    </section>
-
-    <section class="topics-section container">
-        <h2 class="section-title">
-            Aree di Ricerca
-        </h2>
-        <p class="section-subtitle">
-            I principali temi della finanza quantitativa moderna.
-        </p>
-        <div class="topics-grid">
-            <div class="topic-pill">ETF & Passive Investing</div>
-            <div class="topic-pill">Risk Management</div>
-            <div class="topic-pill">Sharpe Ratio</div>
-            <div class="topic-pill">Portfolio Optimization</div>
-            <div class="topic-pill">Asset Allocation</div>
-            <div class="topic-pill">Behavioral Finance</div>
-            <div class="topic-pill">Efficient Frontier</div>
-            <div class="topic-pill">Drawdown Analysis</div>
-            <div class="topic-pill">Quantitative Investing</div>
-            <div class="topic-pill">Volatility Analysis</div>
-            <div class="topic-pill">Long-Term Investing</div>
-            <div class="topic-pill">Evidence-Based Finance</div>
+            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&q=80" alt="Masterclass" class="content-image">
+            <h2>Masterclass VQuantPro: Costruire il proprio Metodo</h2>
+            <p>Il rischio deriva dal non sapere cosa si sta facendo. Questa è la nostra massima operativa.</p>
+            <p>La Masterclass non è un corso teorico, ma un percorso di architettura finanziaria. Attraverso lezioni basate sull'analisi dati, imparerai a costruire un sistema di investimento che non dipenda dal "sentimento" del momento, ma da regole matematiche rigorose.</p>
+            <p><strong>Cosa apprenderai:</strong><br>
+            - La costruzione di un portafoglio resistente ai crolli di mercato.<br>
+            - Come utilizzare le metriche quantitative per ribilanciare gli asset.<br>
+            - L'arte della pazienza: perché il tempo è l'unico vero alleato dell'investitore.</p>
+            <p><em>“Il valore reale non risiede nella capacità di prevedere il mercato, ma nella capacità di misurare la robustezza della propria strategia.”</em></p>
         </div>
     </section>
 
     <footer>
         <div class="container">
-            <div class="footer-logo">
-                VQuant<span>Pro</span>
-            </div>
             <div class="footer-links">
                 <a href="/privacy/index.html">Privacy Policy</a>
                 <a href="/cookie/index.html">Cookie Policy</a>
@@ -1081,12 +220,9 @@
                 <a href="contatti.html">Contatti</a>
                 <a href="#" id="open_preferences_center">Gestisci preferenze cookie</a>
             </div>
-            <div class="socials">
-                <a href="https://www.instagram.com/vquantpro" target="_blank">Instagram</a>
-                <a href="https://www.tiktok.com/@vquantpro" target="_blank">TikTok</a>
-            </div>
-            <p>© 2026 VQuantPro. La disciplina è il motore del rendimento.</p>
+            <p>&copy; 2026 VQuantPro. La disciplina è il motore del rendimento.</p>
         </div>
     </footer>
+
 </body>
 </html>
