@@ -8,19 +8,8 @@
   <link rel="canonical" href="https://vquantpro.it/guida-sharpe-ratio.html" />
   <link rel="icon" type="image/png" href="/favicon.png">
 
-  <script type="text/javascript" src="https://www.termsfeed.com/public/cookie-consent/4.2.0/cookie-consent.js" charset="UTF-8"></script>
-  <script type="text/javascript" charset="UTF-8">
-  document.addEventListener('DOMContentLoaded', function () {
-  cookieconsent.run({"notice_banner_type":"standalone","consent_type":"express","palette":"light","language":"it","page_load_consent_levels":["strictly-necessary"],"notice_banner_reject_button_hide":false,"preferences_center_close_button_hide":false,"page_refresh_confirmation_buttons":false});
-  });
-  </script>
-
-  <noscript>Free cookie consent management tool by <a href="https://www.termsfeed.com/">TermsFeed</a></noscript>
-
   <meta name="description" content="Guida professionale allo Sharpe Ratio: come si calcola, cosa misura, come interpretarlo e quali limiti considerare nell'analisi quantitativa.">
   
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2835044924304516" crossorigin="anonymous"></script>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -38,12 +27,21 @@
     .formula{background:var(--code);border:1px solid #1c3450;border-radius:14px;padding:18px 20px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#97f1fb;font-size:1.03rem;text-align:center}
     .quote{padding:22px;border-left:4px solid var(--accent);background:var(--accent-soft);border-radius:0 14px 14px 0;color:#eefcff}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.note{color:var(--muted);font-size:.96rem}
     @media (max-width:760px){.grid{grid-template-columns:1fr}.hero,.content,.topbar,.footer{padding-left:18px;padding-right:18px}}
+
+    /* Cookie Banner */
+    .cookie-banner { position: fixed; bottom: 0; left: 0; right: 0; background: #161F30; border-top: 2px solid #26c6da; padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; z-index: 10000; gap: 15px; font-size: 14px; color: #D1D5DB; box-shadow: 0 -5px 20px rgba(0,0,0,0.5); }
+    .cookie-banner p { margin: 0; flex: 1 1 300px; }
+    .cookie-banner a { color: #26c6da; text-decoration: underline; }
+    .cookie-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
+    .cookie-btn { padding: 10px 20px; border-radius: 6px; font-weight: 600; cursor: pointer; border: none; font-size: 14px; }
+    .cookie-btn.accept { background: #26c6da; color: #0B0F19; }
+    .cookie-btn.reject { background: transparent; color: #D1D5DB; border: 1px solid #24334C; }
   </style>
 </head>
 <body>
   <main class="wrap">
     <article class="card">
-      <div class="topbar"><div class="brand">VQuantPro</div><a class="back" href="index.html">← Torna alla Home</a></div>
+      <div class="topbar"><div class="brand">VQuantPro</div><a class="back" href="/">← Torna alla Home</a></div>
       <header class="hero">
         <span class="eyebrow">Guida rischio/rendimento</span>
         <h1>Sharpe Ratio: quanto rendimento stai ottenendo per ogni unità di rischio</h1>
@@ -88,7 +86,7 @@
               <li>Valutazione di portafogli multi-asset con differenti livelli di diversificazione.</li>
               <li>Monitoraggio dell'efficienza di una strategia quantitativa nel tempo.</li>
               <li>Selezione di approcci che privilegiano stabilità e coerenza, non solo performance lorda.</li>
-              <li><a href="#" id="open_preferences_center" style="color: var(--accent);">Gestisci le preferenze sui cookie</a></li>
+              <li><a href="#" id="open_preferences_center">Gestisci le preferenze sui cookie</a></li>
             </ul>
           </div>
         </section>
@@ -114,5 +112,63 @@
       <footer class="footer">VQuantPro · Metriche che aiutano a leggere il rapporto tra rendimento ottenuto e rischio sopportato.</footer>
     </article>
   </main>
+
+  <!-- Cookie Banner Personalizzato -->
+  <div id="cookie-banner" class="cookie-banner" style="display:none;">
+      <p>Questo sito utilizza cookie tecnici necessari al funzionamento. Con il tuo consenso, potremmo utilizzare cookie di terze parti per annunci personalizzati. <a href="/privacy/index.html">Privacy Policy</a></p>
+      <div class="cookie-buttons">
+          <button id="cookie-accept" class="cookie-btn accept">Accetta tutti</button>
+          <button id="cookie-reject" class="cookie-btn reject">Solo necessari</button>
+      </div>
+  </div>
+
+  <script>
+  (function() {
+      const banner = document.getElementById('cookie-banner');
+      const acceptBtn = document.getElementById('cookie-accept');
+      const rejectBtn = document.getElementById('cookie-reject');
+      const prefsLink = document.getElementById('open_preferences_center');
+      
+      if (!localStorage.getItem('cookie-consent')) {
+          banner.style.display = 'flex';
+      }
+      
+      function setConsent(value) {
+          localStorage.setItem('cookie-consent', value);
+          banner.style.display = 'none';
+          if (value === 'accepted') loadExternalScripts();
+      }
+      
+      acceptBtn.addEventListener('click', function() { setConsent('accepted'); });
+      rejectBtn.addEventListener('click', function() { setConsent('rejected'); });
+      
+      if (prefsLink) {
+          prefsLink.addEventListener('click', function(e) {
+              e.preventDefault();
+              banner.style.display = 'flex';
+          });
+      }
+      
+      if (localStorage.getItem('cookie-consent') === 'accepted') {
+          loadExternalScripts();
+      }
+      
+      function loadExternalScripts() {
+          if (!document.querySelector('script[src*="adsbygoogle"]')) {
+              var adsScript = document.createElement('script');
+              adsScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2835044924304516';
+              adsScript.async = true;
+              adsScript.crossOrigin = 'anonymous';
+              document.head.appendChild(adsScript);
+              
+              var fcScript = document.createElement('script');
+              fcScript.src = 'https://fundingchoicesmessages.google.com/i/ca-pub-2835044924304516?ers=1';
+              fcScript.async = true;
+              document.head.appendChild(fcScript);
+          }
+      }
+  })();
+  </script>
+
 </body>
 </html>
