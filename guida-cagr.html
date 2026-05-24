@@ -8,18 +8,8 @@
   <link rel="canonical" href="https://vquantpro.it/guida-cagr.html" />
   <link rel="icon" type="image/png" href="/favicon.png">
 
-  <script type="text/javascript" src="https://www.termsfeed.com/public/cookie-consent/4.2.0/cookie-consent.js" charset="UTF-8"></script>
-  <script type="text/javascript" charset="UTF-8">
-  document.addEventListener('DOMContentLoaded', function () {
-  cookieconsent.run({"notice_banner_type":"standalone","consent_type":"express","palette":"light","language":"it","page_load_consent_levels":["strictly-necessary"],"notice_banner_reject_button_hide":false,"preferences_center_close_button_hide":false,"page_refresh_confirmation_buttons":false});
-  });
-  </script>
-
-  <noscript>Free cookie consent management tool by <a href="https://www.termsfeed.com/">TermsFeed</a></noscript>
   <meta name="description" content="Guida professionale al CAGR: definizione, formula, interpretazione, limiti e applicazione pratica nell'analisi di portafogli ed ETF.">
   
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2835044924304516" crossorigin="anonymous"></script>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -56,6 +46,15 @@
     .note{color:var(--muted);font-size:.96rem}
     .footer{padding:20px 24px;border-top:1px solid var(--border);color:var(--muted);font-size:.93rem}
     @media (max-width:760px){.grid{grid-template-columns:1fr}.hero,.content,.topbar,.footer{padding-left:18px;padding-right:18px}}
+
+    /* Cookie Banner */
+    .cookie-banner { position: fixed; bottom: 0; left: 0; right: 0; background: #161F30; border-top: 2px solid #22c55e; padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; z-index: 10000; gap: 15px; font-size: 14px; color: #D1D5DB; box-shadow: 0 -5px 20px rgba(0,0,0,0.5); }
+    .cookie-banner p { margin: 0; flex: 1 1 300px; }
+    .cookie-banner a { color: #22c55e; text-decoration: underline; }
+    .cookie-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
+    .cookie-btn { padding: 10px 20px; border-radius: 6px; font-weight: 600; cursor: pointer; border: none; font-size: 14px; }
+    .cookie-btn.accept { background: #22c55e; color: #0B0F19; }
+    .cookie-btn.reject { background: transparent; color: #D1D5DB; border: 1px solid #24334C; }
   </style>
 </head>
 <body>
@@ -63,7 +62,7 @@
     <article class="card">
       <div class="topbar">
         <div class="brand">VQuantPro</div>
-        <a class="back" href="index.html">← Torna alla Home</a>
+        <a class="back" href="/">← Torna alla Home</a>
       </div>
       <header class="hero">
         <span class="eyebrow">Guida metrica</span>
@@ -84,7 +83,7 @@
 
         <section>
           <h2>Che cos'è davvero il CAGR</h2>
-          <p>Quando si osserva una serie storica di rendimenti, il primo rischio è confondere il concetto di “rendimento medio” con la crescita reale del capitale. In finanza il patrimonio evolve per capitalizzazione, quindi anno dopo anno il punto di partenza cambia. Per questo la semplice media aritmetica dei rendimenti può essere intuitiva, ma non è sufficiente per descrivere il percorso economico dell'investitore.</p>
+          <p>Quando si osserva una serie storica di rendimenti, il primo rischio è confondere il concetto di "rendimento medio" con la crescita reale del capitale. In finanza il patrimonio evolve per capitalizzazione, quindi anno dopo anno il punto di partenza cambia. Per questo la semplice media aritmetica dei rendimenti può essere intuitiva, ma non è sufficiente per descrivere il percorso economico dell'investitore.</p>
           <p>Il CAGR risponde a una domanda precisa: quale tasso annuo costante, se applicato ogni anno, porterebbe il capitale iniziale al valore finale osservato? Questa impostazione elimina la distorsione generata da anni molto positivi alternati a anni molto negativi e consente un confronto più corretto tra strumenti, portafogli e strategie.</p>
         </section>
 
@@ -131,7 +130,7 @@
         <section>
           <h2>Limiti della metrica</h2>
           <p>Il CAGR è eccellente per sintetizzare il risultato, ma non racconta da solo la qualità del percorso. Due portafogli possono mostrare lo stesso CAGR e avere profili di rischio completamente diversi: uno con andamento stabile, l'altro con cadute profonde e recuperi violenti. Per questo chi analizza seriamente un investimento non si ferma mai al solo tasso di crescita composto.</p>
-          <div class="quote">Il CAGR è la risposta alla domanda “quanto è cresciuto davvero il capitale nel tempo?”. Non è però la risposta completa alla domanda “a quale prezzo, in termini di rischio, è stata ottenuta quella crescita?”.</div>
+          <div class="quote">Il CAGR è la risposta alla domanda "quanto è cresciuto davvero il capitale nel tempo?". Non è però la risposta completa alla domanda "a quale prezzo, in termini di rischio, è stata ottenuta quella crescita?".</div>
         </section>
 
         <section>
@@ -143,5 +142,63 @@
       <footer class="footer">VQuantPro · Analisi quantitativa, metriche e strumenti per una lettura più rigorosa di rischio e rendimento.</footer>
     </article>
   </main>
+
+  <!-- Cookie Banner Personalizzato -->
+  <div id="cookie-banner" class="cookie-banner" style="display:none;">
+      <p>Questo sito utilizza cookie tecnici necessari al funzionamento. Con il tuo consenso, potremmo utilizzare cookie di terze parti per annunci personalizzati. <a href="/privacy/index.html">Privacy Policy</a></p>
+      <div class="cookie-buttons">
+          <button id="cookie-accept" class="cookie-btn accept">Accetta tutti</button>
+          <button id="cookie-reject" class="cookie-btn reject">Solo necessari</button>
+      </div>
+  </div>
+
+  <script>
+  (function() {
+      const banner = document.getElementById('cookie-banner');
+      const acceptBtn = document.getElementById('cookie-accept');
+      const rejectBtn = document.getElementById('cookie-reject');
+      const prefsLink = document.getElementById('open_preferences_center');
+      
+      if (!localStorage.getItem('cookie-consent')) {
+          banner.style.display = 'flex';
+      }
+      
+      function setConsent(value) {
+          localStorage.setItem('cookie-consent', value);
+          banner.style.display = 'none';
+          if (value === 'accepted') loadExternalScripts();
+      }
+      
+      acceptBtn.addEventListener('click', function() { setConsent('accepted'); });
+      rejectBtn.addEventListener('click', function() { setConsent('rejected'); });
+      
+      if (prefsLink) {
+          prefsLink.addEventListener('click', function(e) {
+              e.preventDefault();
+              banner.style.display = 'flex';
+          });
+      }
+      
+      if (localStorage.getItem('cookie-consent') === 'accepted') {
+          loadExternalScripts();
+      }
+      
+      function loadExternalScripts() {
+          if (!document.querySelector('script[src*="adsbygoogle"]')) {
+              var adsScript = document.createElement('script');
+              adsScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2835044924304516';
+              adsScript.async = true;
+              adsScript.crossOrigin = 'anonymous';
+              document.head.appendChild(adsScript);
+              
+              var fcScript = document.createElement('script');
+              fcScript.src = 'https://fundingchoicesmessages.google.com/i/ca-pub-2835044924304516?ers=1';
+              fcScript.async = true;
+              document.head.appendChild(fcScript);
+          }
+      }
+  })();
+  </script>
+
 </body>
 </html>
