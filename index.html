@@ -296,10 +296,12 @@
         rejectBtn.addEventListener('click', function() { setConsent('rejected'); });
         
         // Riapri il banner cliccando su "Gestisci preferenze"
-        prefsLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            banner.style.display = 'flex';
-        });
+        if (prefsLink) {
+            prefsLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                banner.style.display = 'flex';
+            });
+        }
         
         // Se il consenso era già stato dato in precedenza, carica subito gli script
         if (localStorage.getItem('cookie-consent') === 'accepted') {
@@ -338,6 +340,4 @@
                 autoRender.onload = function() {
                     if (typeof renderMathInElement === 'function') {
                         renderMathInElement(document.body);
-                    }
-                };
-              
+    
