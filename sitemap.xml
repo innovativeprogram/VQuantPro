@@ -21,21 +21,29 @@
         <priority>0.8</priority>
     </url>
 
+    <!-- Nuovo articolo Covid-19 -->
+    <url>
+        <loc>https://vquantpro.it/blog/crisi-covid-mercati.html</loc>
+        <lastmod>2026-05-24</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
     <url>
         <loc>https://vquantpro.it/blog/anatomia-collasso-2008.html</loc>
-        <lastmod>2026-05-24</lastmod>
+        <lastmod>2026-05-17</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/blog/manifesto.html</loc>
-        <lastmod>2026-05-24</lastmod>
+        <lastmod>2026-05-11</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/blog/l-illusione-del-1929.html</loc>
-        <lastmod>2026-05-24</lastmod>
+        <lastmod>2026-05-11</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.6</priority>
     </url>
