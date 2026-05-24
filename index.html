@@ -112,7 +112,7 @@
         .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; transition: color 0.3s; }
         .footer-links a:hover { color: var(--accent); }
 
-        /* Cookie Banner Personalizzato */
+        /* Cookie Banner */
         .cookie-banner {
             position: fixed;
             bottom: 0;
@@ -308,17 +308,19 @@
         
         function loadExternalScripts() {
             // AdSense
-            var adsScript = document.createElement('script');
-            adsScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2835044924304516';
-            adsScript.async = true;
-            adsScript.crossOrigin = 'anonymous';
-            document.head.appendChild(adsScript);
-            
-            // Funding Choices
-            var fcScript = document.createElement('script');
-            fcScript.src = 'https://fundingchoicesmessages.google.com/i/ca-pub-2835044924304516?ers=1';
-            fcScript.async = true;
-            document.head.appendChild(fcScript);
+            if (!document.querySelector('script[src*="adsbygoogle"]')) {
+                var adsScript = document.createElement('script');
+                adsScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2835044924304516';
+                adsScript.async = true;
+                adsScript.crossOrigin = 'anonymous';
+                document.head.appendChild(adsScript);
+                
+                // Funding Choices
+                var fcScript = document.createElement('script');
+                fcScript.src = 'https://fundingchoicesmessages.google.com/i/ca-pub-2835044924304516?ers=1';
+                fcScript.async = true;
+                document.head.appendChild(fcScript);
+            }
         }
     })();
     
@@ -338,14 +340,4 @@
                         renderMathInElement(document.body);
                     }
                 };
-                document.head.appendChild(autoRender);
-            };
-            document.head.appendChild(katexScript);
-        }
-    }
-    
-    document.addEventListener('DOMContentLoaded', loadKaTeX);
-    </script>
-
-</body>
-</html>
+              
