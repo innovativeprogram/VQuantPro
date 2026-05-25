@@ -118,6 +118,18 @@
     </url>
     <!-- Articoli (solo blog) -->
     <url>
+        <loc>https://vquantpro.it/blog/bias-cognitivi-regole.html</loc>
+        <lastmod>2026-05-25</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://vquantpro.it/blog/diversificazione-30-azioni.html</loc>
+        <lastmod>2026-05-25</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
         <loc>https://vquantpro.it/blog/portafoglio-pigro-python.html</loc>
         <lastmod>2026-05-25</lastmod>
         <changefreq>yearly</changefreq>
