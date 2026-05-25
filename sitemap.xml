@@ -14,7 +14,7 @@
     </url>
     <url>
         <loc>https://vquantpro.it/blog/</loc>
-        <lastmod>2026-05-24</lastmod>
+        <lastmod>2026-05-25</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -117,6 +117,30 @@
         <priority>0.6</priority>
     </url>
     <!-- Articoli (solo blog) -->
+    <url>
+        <loc>https://vquantpro.it/blog/portafoglio-pigro-python.html</loc>
+        <lastmod>2026-05-25</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://vquantpro.it/blog/leva-finanziaria.html</loc>
+        <lastmod>2026-05-25</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://vquantpro.it/blog/backtesting-illusione.html</loc>
+        <lastmod>2026-05-25</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://vquantpro.it/blog/bolla-dot-com.html</loc>
+        <lastmod>2026-05-25</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
     <url>
         <loc>https://vquantpro.it/blog/crisi-covid-mercati.html</loc>
         <lastmod>2026-05-24</lastmod>
