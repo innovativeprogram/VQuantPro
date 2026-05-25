@@ -118,6 +118,30 @@
     </url>
     <!-- Articoli (solo blog) -->
     <url>
+        <loc>https://vquantpro.it/blog/maledizione-market-timing.html</loc>
+        <lastmod>2026-05-25</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://vquantpro.it/blog/costi-nascosti-etf.html</loc>
+        <lastmod>2026-05-25</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://vquantpro.it/blog/matematica-pac.html</loc>
+        <lastmod>2026-05-25</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://vquantpro.it/blog/guida-treynor.html</loc>
+        <lastmod>2026-05-25</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
         <loc>https://vquantpro.it/blog/bias-cognitivi-regole.html</loc>
         <lastmod>2026-05-25</lastmod>
         <changefreq>yearly</changefreq>
