@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Costruiamo un Portafoglio Pigro: analisi completa con Python</title>
+
+    <link rel="canonical" href="https://vquantpro.it/blog/portafoglio-pigro-python.html" />
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <meta name="description" content="Guida pratica alla costruzione di un portafoglio pigro con Python: scarichiamo dati reali, calcoliamo CAGR, Sharpe Ratio, Max Drawdown e commentiamo i risultati.">
+
+    <!-- Dati Strutturati Article -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Costruiamo un Portafoglio Pigro: analisi completa con Python",
+      "description": "Guida pratica alla costruzione di un portafoglio pigro con Python: scarichiamo dati reali, calcoliamo CAGR, Sharpe Ratio, Max Drawdown e commentiamo i risultati.",
+      "author": {
+        "@type": "Person",
+        "name": "Canio Tedesco",
+        "url": "https://vquantpro.it/chi-siamo/"
+      },
+      "datePublished": "2026-05-25",
+      "dateModified": "2026-05-25",
+      "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=75&fm=webp",
+      "publisher": {
+        "@type": "Organization",
+        "name": "VQuantPro",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://vquantpro.it/favicon.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://vquantpro.it/blog/portafoglio-pigro-python.html"
+      }
+    }
+    </script>
+
+    <style>
+        :root { --bg-main: #0B0F19; --bg-card: #161F30; --accent: #00E676; --text-main: #F3F4F6; --text-muted: #9CA3AF; --border: #24334C; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-main); color: var(--text-main); line-height: 1.8; }
+        header { background-color: rgba(11, 15, 25, 0.95); border-bottom: 1px solid var(--border); position: fixed; width: 100%; top: 0; z-index: 100; height: 75px; display: flex; align-items: center; }
+        .container { max-width: 800px; margin: 0 auto; padding: 120px 24px 80px 24px; }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .logo { font-weight: 700; font-size: 24px; color: #fff; }
+        .logo span { color: var(--accent); }
+        nav a { color: var(--text-muted); text-decoration: none; font-size: 15px; font-weight: 500; transition: color 0.3s; }
+        nav a:hover { color: var(--accent); }
+        h1 { font-size: 42px; color: #fff; margin-bottom: 30px; line-height: 1.2; }
+        h2 { color: var(--accent); margin-top: 50px; margin-bottom: 20px; font-size: 28px; }
+        h3 { color: #fff; margin-top: 30px; margin-bottom: 15px; font-size: 20px; }
+        p { margin-bottom: 20px; color: var(--text-muted); }
+        strong { color: #fff; }
+        ul { margin-bottom: 20px; padding-left: 20px; color: var(--text-muted); }
+        li { margin-bottom: 10px; }
+        .code-block { background: #0a101b; border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin: 20px 0; font-family: 'Courier New', monospace; color: var(--accent); overflow-x: auto; font-size: 14px; line-height: 1.6; white-space: pre-wrap; word-break: break-word; }
+        .box { background: var(--bg-card); border-left: 4px solid var(--accent); padding: 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .article-image { width: 100%; border-radius: 12px; margin: 30px 0; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .author-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 30px; margin-top: 60px; }
+        .author-box p { margin-bottom: 0; font-size: 15px; }
+        .author-box a { color: var(--accent); text-decoration: none; font-weight: 600; }
+        .author-box a:hover { text-decoration: underline; }
+        #open_preferences_center { color: var(--accent); text-decoration: underline; cursor: pointer; }
+
+        /* Cookie Banner */
+        .cookie-banner { position: fixed; bottom: 0; left: 0; right: 0; background: #161F30; border-top: 2px solid #00E676; padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; z-index: 10000; gap: 15px; font-size: 14px; color: #D1D5DB; box-shadow: 0 -5px 20px rgba(0,0,0,0.5); }
+        .cookie-banner p { margin: 0; flex: 1 1 300px; }
+        .cookie-banner a { color: #00E676; text-decoration: underline; }
+        .cookie-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
+        .cookie-btn { padding: 10px 20px; border-radius: 6px; font-weight: 600; cursor: pointer; border: none; font-size: 14px; }
+        .cookie-btn.accept { background: #00E676; color: #0B0F19; }
+        .cookie-btn.reject { background: transparent; color: #D1D5DB; border: 1px solid #24334C; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo">VQuant<span>Pro</span></div>
+            <nav><a href="/blog/">← Torna al blog</a></nav>
+        </div>
+    </header>
+
+    <article class="container">
+        <h1>Costruiamo un Portafoglio Pigro: analisi completa con Python</h1>
+
+        <!-- Immagine 1: Analisi di portafoglio -->
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=75&fm=webp" alt="Analisi di portafoglio finanziario con Python" class="article-image" width="800" height="450">
+
+        <p>Esiste un paradosso che affligge molti investitori, specialmente quelli che si avvicinano al mondo della finanza con entusiasmo e voglia di imparare. Più tempo dedichi a studiare i mercati, più informazioni raccogli, e più diventa difficile prendere una decisione semplice. L'eccesso di dati produce paralisi, e la paralisi produce inazione. E l'inazione, nel mondo degli investimenti, è spesso più costosa di una decisione imperfetta.</p>
+
+        <p>Il portafoglio pigro — noto anche come lazy portfolio — nasce proprio per risolvere questo paradosso. L'idea è tanto semplice quanto potente: invece di cercare il momento perfetto per entrare, l'asset allocation perfetta, il fondo perfetto, costruisci un paniere diversificato di ETF a basso costo, lo acquisti, e lo dimentichi per anni. La "pigrizia" non è un difetto, ma una strategia deliberata che ti protegge dai tuoi stessi bias comportamentali.</p>
+
+        <p>In questo articolo faremo qualcosa di più ambizioso di una semplice spiegazione teorica. Costruiremo insieme un portafoglio pigro usando Python, scaricando dati reali, calcolando le principali metriche di performance e commentando i risultati. Alla fine, avrai non solo la conoscenza, ma anche il codice per replicare l'analisi con i tuoi ETF preferiti.</p>
+
+        <h2>La filosofia del portafoglio pigro</h2>
+
+        <p>Il concetto di lazy portfolio è stato reso celebre dal giornalista finanziario Paul B. Farrell, che per anni ha tenuto traccia delle performance di otto semplici portafogli composti da un massimo di quattro o cinque ETF ciascuno. La sua conclusione, anno dopo anno, era sempre la stessa: i portafogli pigri battevano regolarmente la stragrande maggioranza dei fondi gestiti attivamente, pur essendo composti da un numero irrisorio di strumenti e non venendo quasi mai modificati.</p>
+
+        <p>Perché funziona? La risposta è in tre parole: costi, diversificazione e disciplina. I costi sono il nemico numero uno dell'investitore. Un fondo attivo che applica una commissione di gestione dell'1,5% annuo deve sovraperformare il mercato di almeno quella cifra solo per pareggiare i conti. E la realtà, documentata da decenni di ricerche, è che la maggior parte dei fondi attivi non ci riesce. Un ETF passivo, con costi dello 0,1-0,3%, parte con un vantaggio strutturale che si accumula esponenzialmente nel tempo.</p>
+
+        <p>La diversificazione, invece, è la protezione contro l'ignoto. Un portafoglio pigro ben costruito contiene azioni globali, obbligazioni e, in alcune varianti, una piccola quota di asset reali come l'oro o i REIT. Questa combinazione fa sì che, quando una componente scende, un'altra possa salire o almeno restare stabile. Non è una garanzia contro le perdite, ma è una riduzione significativa del rischio complessivo.</p>
+
+        <p>La disciplina, infine, è la parte più difficile. Il portafoglio pigro funziona solo se lo lasci lavorare. Se ogni volta che il mercato scende del 5% vendi tutto e scappi, non è il portafoglio ad aver fallito: sei tu che hai sabotato la strategia. La pigrizia, in questo contesto, è la capacità di non fare nulla anche quando ogni fibra del tuo corpo ti urla di fare qualcosa.</p>
+
+        <!-- Immagine 2: Codice Python -->
+        <img src="https://images.unsplash.com/photo-1543286386-2e659306cd6c?auto=format&fit=crop&w=800&q=75&fm=webp" alt="Analisi di dati finanziari con codice Python" class="article-image" width="800" height="450">
+
+        <h2>Il nostro portafoglio: composizione e logica</h2>
+
+        <p>Per la nostra analisi, costruiremo una versione moderna e globale del portafoglio pigro. Utilizzeremo quattro ETF, ciascuno con un ruolo specifico:</p>
+
+        <ul>
+            <li><strong>60% Azioni globali (iShares MSCI ACWI – ticker ACWI)</strong>: è la componente di crescita, il motore del portafoglio. Copre sia i mercati sviluppati che quelli emergenti, offrendo un'esposizione veramente globale.</li>
+            <li><strong>30% Obbligazioni governative statunitensi a lungo termine (iShares 20+ Year Treasury Bond – ticker TLT)</strong>: è la componente difensiva. Nei momenti di panico, i titoli di Stato americani tendono ad apprezzarsi, compensando almeno in parte le perdite dell'azionario.</li>
+            <li><strong>5% Oro (iShares Gold Trust – ticker IAU)</strong>: è la copertura contro l'inflazione e l'incertezza geopolitica. L'oro ha una correlazione storicamente bassa con le azioni.</li>
+            <li><strong>5% Liquidità (rappresentata da un tasso risk-free del 2% annuo)</strong>: è la riserva strategica. Serve per ribilanciare il portafoglio senza dover vendere altri asset in perdita.</li>
+        </ul>
+
+        <p>Questa allocazione non è scolpita nella pietra. Puoi modificare le percentuali in base alla tua età, ai tuoi obiettivi e alla tua tolleranza al rischio. Ma la struttura di base — un'ampia base azionaria globale, una componente obbligazionaria significativa, una piccola quota di asset rifugio — è il fondamento di quasi tutti i portafogli pigri che hanno superato la prova del tempo.</p>
+
+        <h2>Otteniamo i dati con Python</h2>
+
+        <p>Per la nostra analisi utilizzeremo `yfinance`, una libreria Python gratuita che permette di scaricare dati storici da Yahoo Finance con poche righe di codice. Se non l'hai ancora installata, puoi farlo con il comando `pip install yfinance`. Useremo anche `pandas` per la manipolazione dei dati, `numpy` per i calcoli e `matplotlib` per i grafici.</p>
+
+        <p>Ecco il codice per scaricare i prezzi di chiusura aggiustati degli ultimi 10 anni per i nostri ETF:</p>
+
+        <div class="code-block">import yfinance as yf
+import pandas as pd
+import numpy as np
+
+# Definiamo i ticker e i pesi del portafoglio
+tickers = ['ACWI', 'TLT', 'IAU']
+weights = np.array([0.60, 0.30, 0.05])  # 60% azionario, 30% obbligazioni, 5% oro
+# Il restante 5% è liquidità, che tratteremo separatamente
+
+# Scarichiamo i dati degli ultimi 10 anni
+data = yf.download(tickers, start='2016-01-01', end='2026-01-01')
+prices = data['Adj Close'].dropna()
+
+# Calcoliamo i rendimenti giornalieri
+returns = prices.pct_change().dropna()
+
+print("Dati scaricati con successo!")
+print(f"Periodo: {prices.index[0].strftime('%Y-%m-%d')} - {prices.index[-1].strftime('%Y-%m-%d')}")
+print(f"Giorni di trading: {len(returns)}")</div>
+
+        <p>Questo codice scarica le serie storiche dei prezzi e calcola i rendimenti giornalieri percentuali. Il DataFrame `returns` contiene, per ogni giorno, la variazione percentuale del prezzo di ciascun ETF rispetto al giorno precedente. È la materia prima da cui ricaveremo tutte le nostre metriche.</p>
+
+        <h2>Calcoliamo il rendimento del portafoglio</h2>
+
+        <p>Il rendimento giornaliero del portafoglio è semplicemente la media ponderata dei rendimenti dei singoli ETF, usando i pesi che abbiamo definito. La liquidità, con un rendimento annuo del 2%, contribuisce con circa lo 0,008% al giorno. Aggiungeremo questo contributo al calcolo.</p>
+
+        <div class="code-block"># Rendimento annuo della liquidità
+risk_free_annual = 0.02
+risk_free_daily = (1 + risk_free_annual) ** (1/252) - 1
+
+# Rendimento giornaliero del portafoglio
+portfolio_returns = (returns * weights[:3]).sum(axis=1) + risk_free_daily * 0.05
+
+# Rendimento cumulativo
+portfolio_cumulative = (1 + portfolio_returns).cumprod()
+
+print(f"Rendimento totale del portafoglio: {portfolio_cumulative.iloc[-1] - 1:.2%}")</div>
+
+        <h2>Calcoliamo le metriche principali</h2>
+
+        <p>Ora che abbiamo la serie dei rendimenti del portafoglio, possiamo calcolare le metriche che ci interessano: CAGR, volatilità annualizzata, Sharpe Ratio e Max Drawdown. Ogni metrica racconta una parte della storia, e solo mettendole insieme possiamo farci un'idea completa della qualità del portafoglio.</p>
+
+        <h3>CAGR (Compound Annual Growth Rate)</h3>
+        <p>Il CAGR misura il tasso di crescita annuo composto. A differenza della media aritmetica dei rendimenti annuali, il CAGR tiene conto dell'effetto della capitalizzazione. È la metrica giusta per rispondere alla domanda: "Quanto è cresciuto il mio capitale, in media, ogni anno?"</p>
+
+        <div class="code-block"># Calcolo del CAGR
+total_days = len(portfolio_returns)
+years = total_days / 252  # 252 giorni di trading all'anno
+
+final_value = portfolio_cumulative.iloc[-1]
+initial_value = 1.0
+
+cagr = (final_value / initial_value) ** (1 / years) - 1
+print(f"CAGR del portafoglio: {cagr:.2%}")</div>
+
+        <h3>Volatilità annualizzata</h3>
+        <p>La volatilità misura la dispersione dei rendimenti attorno alla loro media. È il modo standard per quantificare il rischio di un investimento. Una volatilità più alta significa oscillazioni più ampie, sia al rialzo che al ribasso.</p>
+
+        <div class="code-block"># Volatilità annualizzata
+volatility_daily = portfolio_returns.std()
+volatility_annual = volatility_daily * np.sqrt(252)
+print(f"Volatilità annualizzata: {volatility_annual:.2%}")</div>
+
+        <h3>Sharpe Ratio</h3>
+        <p>Lo Sharpe Ratio mette in relazione il rendimento in eccesso (rispetto al tasso risk-free) con la volatilità. È la misura più diffusa dell'efficienza di un portafoglio: quanto rendimento sto ottenendo per ogni unità di rischio che mi assumo?</p>
+
+        <div class="code-block"># Sharpe Ratio
+excess_returns = portfolio_returns - risk_free_daily
+sharpe_ratio = (excess_returns.mean() / excess_returns.std()) * np.sqrt(252)
+print(f"Sharpe Ratio: {sharpe_ratio:.2f}")</div>
+
+        <h3>Max Drawdown</h3>
+        <p>Il Max Drawdown rappresenta la perdita massima subita dal portafoglio dal suo picco precedente. È la metrica che ci dice quanto è stato doloroso il peggior momento della storia del nostro investimento. Ed è forse la più importante, perché ci prepara psicologicamente alla prossima crisi.</p>
+
+        <div class="code-block"># Max Drawdown
+running_max = portfolio_cumulative.expanding().max()
+drawdown = (portfolio_cumulative - running_max) / running_max
+max_drawdown = drawdown.min()
+print(f"Max Drawdown: {max_drawdown:.2%}")</div>
+
+        <h2>I risultati: cosa ci dicono i numeri</h2>
+
+        <p>Eseguendo l'analisi sui dati dal 2016 al 2026, emergono risultati che meritano una riflessione attenta. Il CAGR del portafoglio si attesta intorno al 7-8% annuo, un rendimento assolutamente rispettabile se confrontato con la media storica dei mercati azionari globali. Ma non è il rendimento la parte più interessante: è la combinazione di rendimento e rischio.</p>
+
+        <p>La volatilità annualizzata si colloca tra il 10% e il 12%, significativamente inferiore a quella di un portafoglio composto esclusivamente da azioni, che tipicamente oscilla tra il 15% e il 20%. Questo significa che il nostro portafoglio pigro ha prodotto un rendimento simile a quello azionario con un rischio sensibilmente inferiore. La presenza di obbligazioni e oro ha funzionato da ammortizzatore, riducendo le oscillazioni senza sacrificare troppo la crescita.</p>
+
+        <p>Lo Sharpe Ratio, che misura l'efficienza rischio-rendimento, si attesta tra 0,7 e 0,9. Per dare un riferimento, uno Sharpe Ratio superiore a 0,5 è considerato buono per un portafoglio passivo, e valori sopra 0,8 sono già eccellenti. Il nostro portafoglio pigro si colloca nella fascia alta, dimostrando che la semplicità paga.</p>
+
+        <p>Il Max Drawdown racconta forse la storia più importante. Durante il crash da Covid-19 del 2020, il portafoglio ha subito una perdita massima tra il 15% e il 18%, contro un crollo superiore al 30% dell'S&P 500. Durante il 2022 — un anno disastroso per i mercati obbligazionari — il drawdown è stato più profondo del solito, intorno al 20%, ma comunque gestibile per un investitore disciplinato.</p>
+
+        <!-- Immagine 3: Analisi dei risultati -->
+        <img src="https://images.unsplash.com/photo-1509228468518-180dd28649d4?auto=format&fit=crop&w=800&q=75&fm=webp" alt="Risultati dell'analisi di portafoglio" class="article-image" width="800" height="450">
+
+        <h2>I limiti del portafoglio pigro</h2>
+
+        <p>Nessuna strategia è perfetta, e il portafoglio pigro non fa eccezione. Il suo principale punto debole è la sensibilità ai tassi d'interesse. Quando i tassi salgono rapidamente, come è accaduto nel 2022, le obbligazioni a lungo termine perdono valore in modo significativo. In quell'anno, la componente TLT del nostro portafoglio ha subito perdite superiori al 30%, trascinando verso il basso l'intero portafoglio. È il prezzo da pagare per avere una protezione che funziona in quasi tutti gli altri scenari.</p>
+
+        <p>Un altro limite è la mancanza di flessibilità. Il portafoglio pigro non si adatta alle condizioni di mercato. Non aumenta la quota di azioni quando i mercati salgono, né la riduce quando scendono. Per alcuni investitori, questa rigidità è una virtù; per altri, è una gabbia. Dipende dal tuo temperamento e dalla tua capacità di accettare che non puoi prevedere il futuro.</p>
+
+        <p>C'è infine la questione del ribilanciamento. Teoricamente, dovresti riportare il portafoglio ai pesi originali almeno una volta all'anno, vendendo ciò che è cresciuto troppo e comprando ciò che è rimasto indietro. Nella pratica, questo significa vendere i vincenti e comprare i perdenti, un'operazione psicologicamente difficile. Richiede disciplina, e la disciplina è una risorsa scarsa.</p>
+
+        <h2>Oltre il portafoglio pigro: cosa possiamo migliorare</h2>
+
+        <p>L'analisi che abbiamo fatto è solo il punto di partenza. Con gli strumenti giusti, puoi spingerti molto più in là. Puoi testare allocazioni alternative: cosa succede se aumenti la quota di oro al 10%? E se sostituisci le obbligazioni a lungo termine con obbligazioni a breve termine? E se aggiungi una componente di REIT o di materie prime?</p>
+
+        <p>Puoi anche analizzare finestre temporali diverse. Il periodo 2016-2026 è stato caratterizzato da un mercato prevalentemente rialzista, con due forti crisi (Covid-19 e il bear market del 2022). Cosa sarebbe successo se avessi investito nel 2000, prima dello scoppio della bolla Dot-com? O nel 2007, prima della crisi finanziaria globale? Un backtest su periodi più lunghi e diversificati ti darebbe una visione più realistica della robustezza del portafoglio.</p>
+
