@@ -199,4 +199,65 @@
             <p>Fondatore di VQuantPro e analista quantitativo. <a href="https://vquantpro.it/chi-siamo/">Scopri di più sul mio percorso →</a></p>
         </div>
 
-        <p style="margin-top: 30px;"><span
+        <p style="margin-top: 30px;"><span id="open_preferences_center">Gestisci preferenze cookie</span></p>
+    </article>
+
+    <!-- Cookie Banner Personalizzato -->
+    <div id="cookie-banner" class="cookie-banner" style="display:none;">
+        <p>Questo sito utilizza cookie tecnici necessari al funzionamento. Con il tuo consenso, potremmo utilizzare cookie di terze parti per annunci personalizzati. <a href="/privacy/index.html">Privacy Policy</a></p>
+        <div class="cookie-buttons">
+            <button id="cookie-accept" class="cookie-btn accept">Accetta tutti</button>
+            <button id="cookie-reject" class="cookie-btn reject">Solo necessari</button>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        const banner = document.getElementById('cookie-banner');
+        const acceptBtn = document.getElementById('cookie-accept');
+        const rejectBtn = document.getElementById('cookie-reject');
+        const prefsLink = document.getElementById('open_preferences_center');
+        
+        if (!localStorage.getItem('cookie-consent')) {
+            banner.style.display = 'flex';
+        }
+        
+        function setConsent(value) {
+            localStorage.setItem('cookie-consent', value);
+            banner.style.display = 'none';
+            if (value === 'accepted') loadExternalScripts();
+        }
+        
+        acceptBtn.addEventListener('click', function() { setConsent('accepted'); });
+        rejectBtn.addEventListener('click', function() { setConsent('rejected'); });
+        
+        if (prefsLink) {
+            prefsLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                banner.style.display = 'flex';
+            });
+        }
+        
+        if (localStorage.getItem('cookie-consent') === 'accepted') {
+            loadExternalScripts();
+        }
+        
+        function loadExternalScripts() {
+            if (!document.querySelector('script[src*="adsbygoogle"]')) {
+                var adsScript = document.createElement('script');
+                adsScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2835044924304516';
+                adsScript.async = true;
+                adsScript.crossOrigin = 'anonymous';
+                document.head.appendChild(adsScript);
+                
+                var fcScript = document.createElement('script');
+                fcScript.src = 'https://fundingchoicesmessages.google.com/i/ca-pub-2835044924304516?ers=1';
+                fcScript.async = true;
+                document.head.appendChild(fcScript);
+            }
+        }
+    })();
+    </script>
+
+</body>
+</html>
