@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guida all'Indice di Treynor: la metrica del rischio sistematico | VQuantPro</title>
+
+    <link rel="canonical" href="https://vquantpro.it/blog/guida-treynor.html" />
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <meta name="description" content="Guida completa all'Indice di Treynor: cos'è, come si calcola, come interpretarlo e quali limiti ha. La metrica che misura il rendimento in rapporto al rischio sistematico.">
+
+    <!-- Dati Strutturati Article -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Guida all'Indice di Treynor: la metrica del rischio sistematico",
+      "description": "Guida completa all'Indice di Treynor: cos'è, come si calcola, come interpretarlo e quali limiti ha. La metrica che misura il rendimento in rapporto al rischio sistematico.",
+      "author": {
+        "@type": "Person",
+        "name": "Canio Tedesco",
+        "url": "https://vquantpro.it/chi-siamo/"
+      },
+      "datePublished": "2026-05-25",
+      "dateModified": "2026-05-25",
+      "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=75",
+      "publisher": {
+        "@type": "Organization",
+        "name": "VQuantPro",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://vquantpro.it/favicon.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://vquantpro.it/blog/guida-treynor.html"
+      }
+    }
+    </script>
+
+    <style>
+        :root { --bg-main: #0B0F19; --bg-card: #161F30; --accent: #00E676; --text-main: #F3F4F6; --text-muted: #9CA3AF; --border: #24334C; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-main); color: var(--text-main); line-height: 1.8; }
+        header { background-color: rgba(11, 15, 25, 0.95); border-bottom: 1px solid var(--border); position: fixed; width: 100%; top: 0; z-index: 100; height: 75px; display: flex; align-items: center; }
+        .container { max-width: 800px; margin: 0 auto; padding: 120px 24px 80px 24px; }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .logo { font-weight: 700; font-size: 24px; color: #fff; }
+        .logo span { color: var(--accent); }
+        nav a { color: var(--text-muted); text-decoration: none; font-size: 15px; font-weight: 500; transition: color 0.3s; }
+        nav a:hover { color: var(--accent); }
+        h1 { font-size: 42px; color: #fff; margin-bottom: 30px; line-height: 1.2; }
+        h2 { color: var(--accent); margin-top: 50px; margin-bottom: 20px; font-size: 28px; }
+        h3 { color: #fff; margin-top: 30px; margin-bottom: 15px; font-size: 20px; }
+        p { margin-bottom: 20px; color: var(--text-muted); }
+        strong { color: #fff; }
+        ul { margin-bottom: 20px; padding-left: 20px; color: var(--text-muted); }
+        li { margin-bottom: 10px; }
+        .formula-box { background: var(--bg-card); padding: 25px; border-radius: 12px; border: 1px solid var(--border); text-align: center; margin: 30px 0; font-size: 1.3rem; color: var(--accent); font-family: 'Courier New', monospace; }
+        .box { background: var(--bg-card); border-left: 4px solid var(--accent); padding: 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .article-image { width: 100%; border-radius: 12px; margin: 30px 0; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .author-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 30px; margin-top: 60px; }
+        .author-box p { margin-bottom: 0; font-size: 15px; }
+        .author-box a { color: var(--accent); text-decoration: none; font-weight: 600; }
+        .author-box a:hover { text-decoration: underline; }
+        #open_preferences_center { color: var(--accent); text-decoration: underline; cursor: pointer; }
+
+        /* Cookie Banner */
+        .cookie-banner { position: fixed; bottom: 0; left: 0; right: 0; background: #161F30; border-top: 2px solid #00E676; padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; z-index: 10000; gap: 15px; font-size: 14px; color: #D1D5DB; box-shadow: 0 -5px 20px rgba(0,0,0,0.5); }
+        .cookie-banner p { margin: 0; flex: 1 1 300px; }
+        .cookie-banner a { color: #00E676; text-decoration: underline; }
+        .cookie-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
+        .cookie-btn { padding: 10px 20px; border-radius: 6px; font-weight: 600; cursor: pointer; border: none; font-size: 14px; }
+        .cookie-btn.accept { background: #00E676; color: #0B0F19; }
+        .cookie-btn.reject { background: transparent; color: #D1D5DB; border: 1px solid #24334C; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo">VQuant<span>Pro</span></div>
+            <nav><a href="/blog/">← Torna al blog</a></nav>
+        </div>
+    </header>
+
+    <article class="container">
+        <h1>Guida all'Indice di Treynor: la metrica del rischio sistematico</h1>
+
+        <!-- Immagine 1: Analisi di portafoglio e rischio -->
+        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=75" alt="Analisi di portafoglio e rischio sistematico" class="article-image" width="800" height="450">
+
+        <p>Nel vasto arsenale delle metriche finanziarie, la maggior parte degli investitori ha familiarità con lo Sharpe Ratio. È la stella polare dell'efficienza, il numero che confronta il rendimento con la volatilità. Ma esiste un'altra metrica, meno celebrata eppure altrettanto potente, che guarda il rischio da una prospettiva completamente diversa. Si chiama Indice di Treynor, e se lo Sharpe Ratio misura il rischio totale, il Treynor misura soltanto il rischio che non puoi eliminare: il rischio sistematico.</p>
+
+        <p>Capire la differenza tra queste due misure è come imparare a distinguere tra la turbolenza che colpisce un intero oceano e l'onda che si infrange contro una singola barca. Lo Sharpe ti dice quanto è agitato il mare. Il Treynor ti dice quanto è fragile la tua barca rispetto alla forza dell'oceano. Sono due informazioni complementari, e possederle entrambe è ciò che distingue un investitore consapevole da uno che naviga a vista.</p>
+
+        <p>In questa guida completa esploreremo l'Indice di Treynor in profondità: cosa misura, come si calcola, come interpretarlo, quali sono i suoi punti di forza e i suoi limiti. Soprattutto, vedremo come utilizzarlo insieme allo Sharpe Ratio per costruire un quadro completo dell'efficienza di un portafoglio.</p>
+
+        <h2>Le origini: Jack Treynor e il Capital Asset Pricing Model</h2>
+
+        <p>Per comprendere l'Indice di Treynor, dobbiamo fare un passo indietro fino agli anni '60, quando un giovane economista di nome Jack Treynor pubblicò un articolo che avrebbe cambiato per sempre il modo di pensare al rischio. Treynor era un matematico prestato alla finanza, con una mente capace di vedere connessioni dove altri vedevano solo numeri.</p>
+
+        <p>All'epoca, il Capital Asset Pricing Model (CAPM) stava prendendo forma grazie al lavoro indipendente di Treynor, William Sharpe e John Lintner. Il CAPM afferma che il rendimento atteso di un asset è determinato dal suo Beta, cioè dalla sua sensibilità ai movimenti del mercato. In altre parole, non tutto il rischio viene remunerato: soltanto il rischio sistematico — quello che non può essere eliminato diversificando — merita un premio.</p>
+
+        <p>Fu in questo contesto che Treynor propose la sua metrica. Se il CAPM diceva che solo il Beta conta, allora la misura corretta dell'efficienza non poteva essere basata sulla volatilità totale, ma doveva concentrarsi esclusivamente sul rischio sistematico. Nacque così il Treynor Ratio, o Indice di Treynor: il rendimento in eccesso rispetto al tasso privo di rischio, diviso per il Beta del portafoglio.</p>
+
+        <p>La formula è elegantemente semplice:</p>
+
+        <div class="formula-box">Indice di Treynor = (R<sub>p</sub> - R<sub>f</sub>) / β<sub>p</sub></div>
+
+        <p>Dove R<sub>p</sub> è il rendimento del portafoglio, R<sub>f</sub> è il tasso privo di rischio, e β<sub>p</sub> è il Beta del portafoglio, cioè la sensibilità del portafoglio ai movimenti del mercato.</p>
+
+        <p>L'intuizione di Treynor era profonda. Se un investitore possiede un portafoglio già ben diversificato, il rischio specifico dei singoli titoli è stato eliminato. Ciò che rimane è soltanto il rischio di mercato, quel rischio che nemmeno la migliore diversificazione può cancellare. Ed è proprio su quel rischio residuo che l'investitore merita di essere remunerato.</p>
+
+        <h2>Il Beta: la chiave di volta del Treynor Ratio</h2>
+
+        <p>Per capire davvero l'Indice di Treynor, bisogna prima familiarizzare con il Beta. Il Beta è una misura statistica che indica quanto un titolo o un portafoglio si muove in relazione al mercato. Un Beta di 1 significa che l'asset si muove esattamente come il mercato: se il mercato sale dell'1%, anche l'asset sale dell'1%. Un Beta di 1,5 significa che l'asset è più volatile del mercato: se il mercato sale dell'1%, l'asset sale dell'1,5%. Un Beta di 0,5 significa che l'asset è meno volatile del mercato.</p>
+
+        <p>Il Beta è il cuore del CAPM, e per estensione è il cuore dell'Indice di Treynor. La scelta di Treynor di usare il Beta come misura di rischio è stata tanto brillante quanto controversa. Brillante perché il Beta cattura esattamente il rischio che un investitore diversificato non può eliminare. Controversa perché il Beta è una misura storica, e la storia non sempre si ripete.</p>
+
+        <p>Calcolare il Beta è relativamente semplice con gli strumenti moderni. Basta una regressione lineare tra i rendimenti dell'asset e i rendimenti del mercato. La pendenza della retta di regressione è il Beta. Se la pendenza è 1, l'asset si muove in sincronia con il mercato. Se è maggiore di 1, amplifica i movimenti del mercato. Se è minore di 1, li attenua.</p>
+
+        <p>In Python, il calcolo è immediato:</p>
+
+        <div class="box">
+            <p><strong>Calcolo del Beta in Python</strong></p>
+            <p><code>import numpy as np<br>
+            beta = np.cov(rendimenti_asset, rendimenti_mercato)[0][1] / np.var(rendimenti_mercato)</code></p>
+        </div>
+
+        <p>Ma il Beta ha un limite fondamentale: è una misura statica in un mondo dinamico. Il Beta di un'azienda può cambiare radicalmente nel tempo, specialmente durante le crisi. Un'azienda che sembrava difensiva può improvvisamente diventare ciclica se il suo modello di business viene stravolto. E un Beta calcolato su dati passati potrebbe non avere alcuna rilevanza per il futuro.</p>
+
+        <!-- Immagine 2: Confronto tra metriche di rischio -->
+        <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f193?auto=format&fit=crop&w=800&q=75" alt="Confronto tra metriche di rischio finanziario" class="article-image" width="800" height="450">
+
+        <h2>Come interpretare l'Indice di Treynor</h2>
+
+        <p>L'Indice di Treynor misura il rendimento in eccesso per unità di rischio sistematico. Più alto è il valore, maggiore è il rendimento generato per ogni unità di Beta. In altre parole, un Treynor Ratio elevato indica che il portafoglio ha saputo sfruttare bene il rischio di mercato, generando un premio più che proporzionale rispetto alla sua sensibilità al mercato.</p>
+
+        <p>Ma cosa significa "alto" e "basso" in questo contesto? A differenza dello Sharpe Ratio, che può essere confrontato con soglie generalmente accettate (sopra 1 è buono, sopra 2 è eccellente), il Treynor Ratio è più difficile da giudicare in termini assoluti. Il suo valore dipende fortemente dal periodo di osservazione, dal mercato di riferimento e dal Beta del portafoglio.</p>
+
+        <p>Un modo efficace per interpretarlo è confrontarlo con il Treynor Ratio del mercato stesso. Poiché il Beta del mercato è per definizione 1, il Treynor Ratio del mercato è semplicemente il rendimento in eccesso del mercato. Se il tuo portafoglio ha un Treynor Ratio superiore a quello del mercato, stai generando un rendimento superiore per ogni unità di rischio sistematico. Se è inferiore, stai facendo peggio del mercato.</p>
+
+        <p>Prendiamo un esempio concreto. Immagina di avere un portafoglio con un rendimento annuo del 12%, un Beta di 0,8 e un tasso privo di rischio del 3%. Il Treynor Ratio sarà (12% - 3%) / 0,8 = 11,25. Se il mercato ha reso il 10% nello stesso periodo, il suo Treynor Ratio sarà (10% - 3%) / 1 = 7. Il tuo portafoglio ha un Treynor Ratio superiore a quello del mercato, il che significa che hai ottenuto un rendimento migliore per ogni unità di rischio sistematico.</p>
+
+        <p>Ora immagina un secondo portafoglio con lo stesso rendimento del 12%, ma con un Beta di 1,4. Il suo Treynor Ratio sarà (12% - 3%) / 1,4 = 6,43. Nonostante il rendimento sia identico, questo portafoglio è meno efficiente perché ha assunto molto più rischio di mercato per ottenere lo stesso risultato.</p>
+
+        <h2>Treynor vs Sharpe: due facce della stessa medaglia</h2>
+
+        <p>La differenza fondamentale tra l'Indice di Treynor e lo Sharpe Ratio sta nel denominatore. Lo Sharpe Ratio usa la volatilità totale (deviazione standard dei rendimenti), che include sia il rischio sistematico sia il rischio specifico. Il Treynor Ratio usa soltanto il Beta, che cattura esclusivamente il rischio sistematico.</p>
+
+        <p>Questa differenza ha implicazioni enormi. Lo Sharpe Ratio penalizza qualsiasi forma di volatilità, anche quella che potrebbe essere eliminata con una migliore diversificazione. Se possiedi un portafoglio concentrato in pochi titoli, la volatilità sarà alta, e lo Sharpe Ratio sarà basso, anche se quei titoli hanno Beta contenuti. Il Treynor Ratio, al contrario, ignora il rischio specifico e si concentra soltanto sul rischio di mercato.</p>
+
+        <p>Ne consegue che lo Sharpe Ratio è più adatto per valutare portafogli poco diversificati, dove il rischio specifico è ancora presente. Il Treynor Ratio è più adatto per valutare portafogli già ben diversificati, dove il rischio specifico è stato eliminato e ciò che rimane è soltanto il rischio di mercato.</p>
+
+        <p>Un'altra differenza importante riguarda l'interpretazione. Lo Sharpe Ratio può essere confrontato tra portafogli con diversi livelli di diversificazione, perché la volatilità totale include tutto. Il Treynor Ratio, invece, è significativo soltanto se il portafoglio è sufficientemente diversificato da aver eliminato il rischio specifico. Se applichi il Treynor a un portafoglio concentrato, otterrai un numero che non ha molto significato, perché il denominatore (il Beta) non cattura il rischio reale che stai correndo.</p>
+
+        <div class="box">
+            <h3>Quando usare Treynor e quando usare Sharpe</h3>
+            <p><strong>Usa lo Sharpe Ratio quando:</strong></p>
+            <p>- Il portafoglio non è completamente diversificato.<br>
+            - Vuoi una misura del rischio totale, inclusivo di tutto.<br>
+            - Stai confrontando portafogli con diversi livelli di concentrazione.</p>
+            <p><strong>Usa il Treynor Ratio quando:</strong></p>
+            <p>- Il portafoglio è già ben diversificato.<br>
+            - Vuoi isolare il contributo del rischio di mercato.<br>
+            - Stai confrontando portafogli che fanno parte di un insieme più ampio e già diversificato.</p>
+        </div>
+
+        <h2>I limiti dell'Indice di Treynor</h2>
+
+        <p>Come ogni metrica finanziaria, l'Indice di Treynor ha i suoi punti ciechi. Il primo e più evidente è la dipendenza dal Beta, che è una misura storica e non necessariamente predittiva. Il Beta di un titolo può cambiare radicalmente nel tempo, specialmente durante le crisi, quando le correlazioni tendono a convergere verso 1.</p>
+
+        <p>Il secondo limite è che il Treynor Ratio assume implicitamente che il portafoglio sia già ben diversificato. Se non lo è, il Beta non cattura il rischio specifico, e il Treynor Ratio potrebbe dare una visione distorta dell'efficienza del portafoglio. Un portafoglio concentrato in pochi titoli con Beta basso potrebbe apparire molto efficiente secondo il Treynor, ma nella realtà sta correndo un rischio specifico enorme che la metrica non vede.</p>
+
+        <p>Il terzo limite riguarda la scelta del benchmark. Il Beta è calcolato rispetto a un indice di mercato. Se scegli l'indice sbagliato, il Beta sarà sbagliato, e di conseguenza anche il Treynor Ratio. Per un portafoglio globale, il benchmark appropriato è un indice globale come l'MSCI ACWI. Per un portafoglio settoriale, il benchmark dovrebbe essere un indice di settore. Sbagliare benchmark significa ottenere numeri privi di significato.</p>
+
+        <p>C'è infine un limite filosofico. L'Indice di Treynor si basa sul CAPM, un modello che, per quanto elegante, è stato ampiamente criticato e in parte superato. Il CAPM assume che i mercati siano efficienti, che gli investitori siano razionali, che non ci siano costi di transazione. La realtà, come sappiamo, è molto diversa. Il Treynor Ratio, quindi, va usato con la consapevolezza che poggia su un modello imperfetto.</p>
+
+        <h2>Applicazioni pratiche nell'analisi di portafoglio</h2>
+
+        <p>Nonostante i suoi limiti, l'Indice di Treynor è uno strumento prezioso nell'analisi di portafoglio. In particolare, è utile quando si vogliono confrontare portafogli che fanno parte di un insieme più ampio, come i fondi pensione o i fondi comuni che rappresentano soltanto una componente del patrimonio complessivo dell'investitore.</p>
+
+        <p>Immagina di avere già un portafoglio principale ben diversificato e di voler aggiungere un fondo settoriale. Il rischio specifico del fondo settoriale sarà in gran parte diluito dal portafoglio principale. Ciò che conta, in questo contesto, è soltanto il contributo del fondo al rischio sistematico complessivo. Il Treynor Ratio ti dice esattamente questo: quanto rendimento sta generando il fondo per ogni unità di rischio sistematico che aggiunge al tuo portafoglio.</p>
+
+        <p>Un'altra applicazione interessante riguarda la valutazione dei gestori attivi. Un gestore che ottiene un rendimento superiore al mercato potrebbe averlo fatto assumendo più rischio di mercato (Beta alto) oppure grazie a una reale abilità di selezione dei titoli. Il Treynor Ratio aiuta a distinguere tra queste due situazioni. Se il Treynor Ratio del gestore è superiore a quello del mercato, significa che il gestore ha generato un rendimento più che proporzionale al rischio sistematico assunto. Se è inferiore, il gestore ha fatto peggio del mercato, anche se il rendimento assoluto era superiore.</p>
+
+        <p>Nel contesto della gestione passiva, il Treynor Ratio può aiutare a scegliere tra ETF che replicano lo stesso indice. Due ETF sull'S&P 500 avranno Beta molto simili, ma potrebbero avere Treynor Ratio leggermente diversi a causa di tracking error, costi di gestione o modalità di replica. Un Treynor Ratio più alto segnala un ETF che ha generato lo stesso rendimento con un Beta leggermente inferiore, o un rendimento superiore con lo stesso Beta.</p>
+
+        <!-- Immagine 3: Analisi quantitativa e portafoglio -->
+        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=800&q=75" alt="Analisi quantitativa di portafoglio e Treynor Ratio" class="article-image" width="800" height="450">
+
+        <h2>Il Treynor Ratio nella cassetta degli attrezzi dell'investitore</h2>
+
+        <p>Nessuna metrica, da sola, può raccontare tutta la storia di un portafoglio. Il Treynor Ratio è un tassello di un mosaico più ampio. Va usato insieme allo Sharpe Ratio, al Sortino Ratio, al Calmar Ratio, al Max Drawdown e al CAGR. Ciascuna di queste metriche illumina un aspetto diverso della performance, e soltanto la loro combinazione fornisce un quadro completo.</p>
+
+        <p>Lo Sharpe Ratio ti dice quanto sei efficiente rispetto al rischio totale. Il Sortino Ratio ti dice quanto sei efficiente rispetto al solo rischio di ribasso. Il Calmar Ratio ti dice quanto sei efficiente rispetto alla peggiore perdita storica. Il Treynor Ratio ti dice quanto sei efficiente rispetto al rischio di mercato. Insieme, queste metriche ti permettono di rispondere a domande diverse e di prendere decisioni più informate.</p>
+
+        <p>Nel mondo della finanza quantitativa, l'Indice di Treynor è particolarmente apprezzato perché si inserisce perfettamente nel quadro teorico del CAPM. È una metrica che ha solide fondamenta accademiche e che può essere calcolata con precisione matematica. Non si basa su stime approssimative o su assunzioni arbitrarie: prende il Beta, lo inserisce in una formula, e restituisce un numero. Punto.</p>
+
+        <p>Ma come tutte le cose belle della finanza, la sua eleganza è anche la sua fragilità. Il Beta non è una costante della natura. È una misura statistica che può cambiare, e cambia. Un Treynor Ratio calcolato su tre anni di dati può essere radicalmente diverso da uno calcolato su cinque anni. La scelta della finestra temporale non è neutrale, e investitori diversi possono ottenere risultati diversi a seconda del periodo che scelgono di analizzare.</p>
+
+        <h2>Conclusione: l'umiltà di chi sa di non sapere tutto</h2>
+
+        <p>L'Indice di Treynor è uno strumento potente, ma come tutti gli strumenti potenti va maneggiato con cura. Non è una bacchetta magica che ti dice dove investire. È una lente che ti aiuta a vedere meglio il rapporto tra rendimento e rischio sistematico. E come ogni lente, può distorcere la realtà se non la usi correttamente.</p>
+
+        <p>Il messaggio più importante di questa guida non è "usa il Treynor Ratio". È "usa il Treynor Ratio insieme a tutto il resto". Non fidarti mai di una singola metrica. Non credere mai a un singolo numero. Il mercato è un sistema complesso, adattivo, popolato da milioni di agenti che imparano e si adattano. Ridurlo a una formula è impossibile. Ma usare le formule per capirlo meglio è possibile, ed è esattamente ciò che fanno gli investitori di successo.</p>
+
+        <p>La prossima volta che analizzerai un portafoglio, ricordati di Jack Treynor. Ricordati che il rischio che conta non è tutto il rischio, ma soltanto quello che non puoi eliminare. E ricordati che il rendimento, da solo, non significa nulla: è il rendimento rispetto al rischio che fa la differenza tra un investitore fortunato e un investitore bravo.</p>
+
+        <!-- Blocco Autore -->
+        <div class="author-box">
+            <p><strong>Autore: Canio Tedesco</strong></p>
+            <p>Fondatore di VQuantPro e analista quantitativo. <a href="https://vquantpro.it/chi-siamo/">Scopri di più sul mio percorso →</a></p>
+        </div>
+
+        <p style="margin-top: 30px;"><span id="open_preferences_center">Gestisci preferenze cookie</span></p>
+    </article>
+
+    <!-- Cookie Banner Personalizzato -->
+    <div id="cookie-banner" class="cookie-banner" style="display:none;">
+        <p>Questo sito utilizza cookie tecnici necessari al funzionamento. Con il tuo consenso, potremmo utilizzare cookie di terze parti per annunci personalizzati. <a href="/privacy/index.html">Privacy Policy</a></p>
+        <div class="cookie-buttons">
+            <button id="cookie-accept" class="cookie-btn accept">Accetta tutti</button>
+            <button id="cookie-reject" class="cookie-btn reject">Solo necessari</button>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        const banner = document.getElementById('cookie-banner');
+        const acceptBtn = document.getElementById('cookie-accept');
+        const rejectBtn = document.getElementById('cookie-reject');
+        const prefsLink = document.getElementById('open_preferences_center');
+        
+        if (!localStorage.getItem('cookie-consent')) {
+            banner.style.display = 'flex';
+        }
+        
+        function setConsent(value) {
+            localStorage.setItem('cookie-consent', value);
+            banner.style.display = 'none';
+            if (value === 'accepted') loadExternalScripts();
+        }
+        
+        acceptBtn.addEventListener('click', function() { setConsent('accepted'); });
+        rejectBtn.addEventListener('click', function() { setConsent('rejected'); });
+        
+        if (prefsLink) {
+            prefsLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                banner.style.display = 'flex';
+            });
+        }
+        
+        if (localStorage.getItem('cookie-consent') === 'accepted') {
+            loadExternalScripts();
+        }
+        
+        function loadExternalScripts() {
+            if (!document.querySelector('script[src*="adsbygoogle"]')) {
+                var adsScript = document.createElement('script');
+                adsScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2835044924304516';
+                adsScript.async = true;
+                adsScript.crossOrigin = 'anonymous';
+                document.head.appendChild(adsScript);
+                
+                var fcScript = document.createElement('script');
+                fcScript.src = 'https://fundingchoicesmessages.google.com/i/ca-pub-2835044924304516?ers=1';
+                fcScript.async = true;
+                document.head.appendChild(fcScript);
+            }
+        }
+    })();
+    </script>
+
+</body>
+</html>
