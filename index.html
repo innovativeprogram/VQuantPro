@@ -36,7 +36,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
     
-    <!-- KaTeX CSS: caricato normalmente (senza media="print") -->
+    <!-- Font Awesome (per icone nella sezione) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- KaTeX CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
 
     <style>
@@ -182,6 +185,9 @@
         </div>
     </section>
 
+    <!-- ========== SEZIONE "COME FUNZIONA" CARICATA DINAMICAMENTE ========== -->
+    <div id="come-funziona-container"></div>
+
     <section id="metodi" class="section container">
         <h2 class="section-title">Frontiera Analitica: Gli Strumenti</h2>
         <p class="section-subtitle">Il successo finanziario è un'equazione. Ecco le metriche che utilizziamo per decodificare il comportamento dei mercati.</p>
@@ -231,7 +237,6 @@
                 <a href="guida-calmar.html" class="card-link">Calcola il Calmar →</a>
             </div>
 
-            <!-- 7ª CARD: DIVERSIFICAZIONE -->
             <div class="card">
                 <h3>Diversificazione</h3>
                 <p>Distribuire il capitale tra asset differenti con correlazioni basse è l'unico modo per ridurre il rischio senza sacrificare il rendimento atteso.</p>
@@ -278,37 +283,33 @@
         </div>
     </div>
 
-    <!-- KaTeX: sempre presente, con rendering automatico -->
+    <!-- KaTeX: caricamento e rendering -->
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
 
     <script>
-    // Gestione consensi cookie
+    // Gestione consensi cookie (stessa logica originale)
     (function() {
         const banner = document.getElementById('cookie-banner');
         const acceptBtn = document.getElementById('cookie-accept');
         const rejectBtn = document.getElementById('cookie-reject');
         const prefsLink = document.getElementById('open_preferences_center');
         
-        // Mostra il banner solo se non c'è già una scelta salvata
         if (!localStorage.getItem('cookie-consent')) {
             banner.style.display = 'flex';
         }
         
-        // Funzione per salvare il consenso e nascondere il banner
         function setConsent(value) {
             localStorage.setItem('cookie-consent', value);
             banner.style.display = 'none';
-            // Se ha accettato, carica AdSense e Funding Choices
             if (value === 'accepted') {
                 loadExternalScripts();
             }
         }
         
-        acceptBtn.addEventListener('click', function() { setConsent('accepted'); });
-        rejectBtn.addEventListener('click', function() { setConsent('rejected'); });
+        if (acceptBtn) acceptBtn.addEventListener('click', function() { setConsent('accepted'); });
+        if (rejectBtn) rejectBtn.addEventListener('click', function() { setConsent('rejected'); });
         
-        // Riapri il banner cliccando su "Gestisci preferenze"
         if (prefsLink) {
             prefsLink.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -316,13 +317,11 @@
             });
         }
         
-        // Se il consenso era già stato dato in precedenza, carica subito gli script
         if (localStorage.getItem('cookie-consent') === 'accepted') {
             loadExternalScripts();
         }
         
         function loadExternalScripts() {
-            // AdSense
             if (!document.querySelector('script[src*="adsbygoogle"]')) {
                 var adsScript = document.createElement('script');
                 adsScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2835044924304516';
@@ -330,7 +329,6 @@
                 adsScript.crossOrigin = 'anonymous';
                 document.head.appendChild(adsScript);
                 
-                // Funding Choices
                 var fcScript = document.createElement('script');
                 fcScript.src = 'https://fundingchoicesmessages.google.com/i/ca-pub-2835044924304516?ers=1';
                 fcScript.async = true;
@@ -338,6 +336,24 @@
             }
         }
     })();
+
+    // ========== CARICAMENTO DINAMICO DELLA SEZIONE "COME FUNZIONA" ==========
+    fetch('come-funziona.html')
+        .then(response => {
+            if (!response.ok) throw new Error('File non trovato');
+            return response.text();
+        })
+        .then(html => {
+            document.getElementById('come-funziona-container').innerHTML = html;
+            // Opzionale: riapplicare il rendering KaTeX se ci sono nuove formule
+            if (typeof renderMathInElement !== 'undefined') {
+                renderMathInElement(document.getElementById('come-funziona-container'));
+            }
+        })
+        .catch(error => {
+            console.error('Errore nel caricamento della sezione:', error);
+            document.getElementById('come-funziona-container').innerHTML = '<div class="container" style="padding: 2rem; text-align: center; color: #ff8a8a;">⚠️ Impossibile caricare la sezione "Come funziona". Verifica che il file come-funziona.html sia presente.</div>';
+        });
     </script>
 
 </body>
