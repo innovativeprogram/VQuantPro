@@ -1,174 +1,229 @@
-<!-- SEZIONE "COME FUNZIONA LO STRUMENTO" – VQuantPro -->
-<style>
-    /* Stili dedicati (compatibili con le variabili CSS del sito) */
-    .vqp-howitworks {
-        background: transparent;
-        padding: 0;
-    }
-    .vqp-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 1.8rem;
-        margin: 2rem 0 2rem;
-    }
-    .vqp-card {
-        background: var(--bg-card);
-        border: 1px solid var(--border);
-        border-radius: 1rem;
-        padding: 1.5rem;
-        transition: transform 0.2s ease, border-color 0.2s;
-    }
-    .vqp-card:hover {
-        transform: translateY(-5px);
-        border-color: var(--accent);
-    }
-    .vqp-icon {
-        background: rgba(0, 230, 118, 0.1);
-        width: 56px;
-        height: 56px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 1rem;
-        margin-bottom: 1.5rem;
-    }
-    .vqp-icon i {
-        font-size: 1.8rem;
-        color: var(--accent);
-    }
-    .vqp-card h3 {
-        font-size: 1.5rem;
-        font-weight: 600;
-        margin-bottom: 0.75rem;
-        color: #fff;
-    }
-    .vqp-card p {
-        color: var(--text-muted);
-        font-size: 0.95rem;
-        line-height: 1.5;
-        margin-bottom: 1rem;
-    }
-    .vqp-meta {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        background: rgba(0, 230, 118, 0.12);
-        padding: 0.2rem 0.8rem;
-        border-radius: 30px;
-        font-size: 0.75rem;
-        font-weight: 500;
-        color: var(--accent);
-    }
-    .vqp-insight {
-        background: var(--bg-card);
-        border-radius: 1rem;
-        padding: 2rem;
-        margin-top: 2rem;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1.5rem;
-        border: 1px solid var(--border);
-    }
-    .vqp-insight-text h4 {
-        font-size: 1.4rem;
-        font-weight: 700;
-        color: #fff;
-        margin-bottom: 0.5rem;
-    }
-    .vqp-insight-text p {
-        color: var(--text-muted);
-        margin: 0;
-    }
-    .vqp-btn {
-        background: var(--accent);
-        color: #0B0F19;
-        padding: 0.8rem 1.8rem;
-        border-radius: 2rem;
-        font-weight: 700;
-        text-decoration: none;
-        transition: 0.2s;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-    }
-    .vqp-btn:hover {
-        background: var(--accent-hover);
-        transform: scale(0.98);
-    }
-    .vqp-stats {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1.5rem;
-        justify-content: space-between;
-        margin-top: 2.5rem;
-        padding-top: 2rem;
-        border-top: 1px solid var(--border);
-    }
-    .stat-item {
-        text-align: center;
-        flex: 1;
-    }
-    .stat-number {
-        font-size: 1.8rem;
-        font-weight: 800;
-        color: var(--accent);
-    }
-    .stat-label {
-        font-size: 0.8rem;
-        color: var(--text-muted);
-    }
-    @media (max-width: 680px) {
-        .vqp-grid { gap: 1rem; }
-        .vqp-insight { flex-direction: column; text-align: center; }
-        .vqp-stats { flex-direction: column; gap: 1rem; }
-    }
-</style>
-
-<div class="vqp-howitworks">
-    <h2 class="section-title" style="margin-bottom: 1rem;">📐 Come funziona lo strumento</h2>
-    <p class="section-subtitle" style="margin-bottom: 2rem;">Dai dati grezzi ai segnali operativi: il motore quantitativo di VQuantPro</p>
-
-    <div class="vqp-grid">
-        <div class="vqp-card">
-            <div class="vqp-icon"><i class="fas fa-database"></i></div>
-            <h3>1. Data Fusion</h3>
-            <p>Aggregazione e pulizia di dati multi‑fonte: azioni, crypto, forex, macro e sentiment. Pipeline ETL in tempo reale.</p>
-            <span class="vqp-meta"><i class="fas fa-check-circle"></i> 50+ fonti integrate</span>
-        </div>
-        <div class="vqp-card">
-            <div class="vqp-icon"><i class="fas fa-chart-scatter"></i></div>
-            <h3>2. Quantitative Engine</h3>
-            <p>Modelli statistici, machine learning e backtesting avanzato per identificare pattern non lineari.</p>
-            <span class="vqp-meta"><i class="fas fa-microchip"></i> AI proprietaria</span>
-        </div>
-        <div class="vqp-card">
-            <div class="vqp-icon"><i class="fas fa-flask"></i></div>
-            <h3>3. Backtesting dinamico</h3>
-            <p>Simulazioni walk‑forward, stress test e metriche di rischio: Sharpe, Sortino, Drawdown, Calmar.</p>
-            <span class="vqp-meta"><i class="fas fa-chart-simple"></i> 15+ metriche</span>
-        </div>
-        <div class="vqp-card">
-            <div class="vqp-icon"><i class="fas fa-bullhorn"></i></div>
-            <h3>4. Signal Delivery</h3>
-            <p>Segnali actionable in tempo reale, API REST, webhook e integrazione con broker.</p>
-            <span class="vqp-meta"><i class="fas fa-bolt"></i> Latenza < 250ms</span>
-        </div>
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V‑Quant Pro – Metodo e strumenti di analisi quantitativa</title>
+    <meta name="description" content="V‑Quant Pro è il toolkit gratuito per investitori autonomi: IQ Score, analisi di portafoglio, ottimizzazione Markowitz, AI assistant e metriche istituzionali.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #0a0c10;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+            color: #eef2ff;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #0f1219;
+            border-radius: 2rem;
+            padding: 2rem 1.5rem;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.4);
+            border: 1px solid #1e2432;
+        }
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #FFFFFF 0%, #8B9DC3 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        h2 {
+            font-size: 1.6rem;
+            margin: 1.8rem 0 0.8rem 0;
+            font-weight: 600;
+            border-left: 4px solid #3b82f6;
+            padding-left: 1rem;
+        }
+        h3 {
+            font-size: 1.3rem;
+            margin: 1.2rem 0 0.6rem;
+            font-weight: 500;
+            color: #cbd5e6;
+        }
+        .badge {
+            display: inline-block;
+            background: #1e293b;
+            color: #a5f3fc;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.2rem 0.7rem;
+            border-radius: 30px;
+            margin-right: 0.6rem;
+            letter-spacing: 0.3px;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .card {
+            background: #11161f;
+            border-radius: 1.2rem;
+            padding: 1.2rem;
+            border: 1px solid #252e3c;
+            transition: all 0.2s ease;
+        }
+        .card:hover {
+            border-color: #3b82f6;
+            background: #131a24;
+        }
+        .metric-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #facc15;
+        }
+        .metric-desc {
+            font-size: 0.9rem;
+            color: #b9c3d4;
+            margin-top: 0.3rem;
+        }
+        .btn {
+            display: inline-block;
+            background: #3b82f6;
+            color: white;
+            font-weight: 600;
+            padding: 0.8rem 2rem;
+            border-radius: 60px;
+            text-decoration: none;
+            margin: 1rem 0;
+            transition: background 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: #2563eb;
+        }
+        .footer {
+            margin-top: 3rem;
+            border-top: 1px solid #1e2a3a;
+            padding-top: 1.8rem;
+            font-size: 0.85rem;
+            text-align: center;
+            color: #8b9cb0;
+        }
+        .highlight {
+            color: #facc15;
+        }
+        hr {
+            border-color: #1e2a3a;
+            margin: 1rem 0;
+        }
+        @media (max-width: 640px) {
+            .container { padding: 1.2rem; }
+            h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>📊 V‑Quant Pro</h1>
+    <p style="font-size: 1.2rem; color: #b9c7dd; margin-bottom: 1rem;">Misura. Confronta. Decidi. — Il tuo laboratorio di analisi finanziaria quantitativa</p>
+    
+    <!-- LINK CORRETTO -->
+    <a href="https://vquantpro.streamlit.app/" class="btn" target="_blank" rel="noopener noreferrer">🚀 Accedi alla Dashboard Quantitativa</a>
+    
+    <p><strong>V‑Quant Pro</strong> non è un consulente automatico né un generatore di segnali. È una <strong>suite completa di strumenti quantitativi</strong> per analizzare azioni, ETF, criptovalute e interi portafogli. Forniamo metriche oggettive per aiutarti a valutare rischio, qualità e performance, senza abbonamenti e con trasparenza totale.</p>
+    
+    <h2>🎯 A chi è rivolto</h2>
+    <div class="grid-2">
+        <div class="card">🔹 <strong>Investitori autonomi</strong> – che vogliono andare oltre i grafici e i “consigli del web”.</div>
+        <div class="card">🔹 <strong>Trader quantitativi</strong> – che cercano metriche istituzionali (Sharpe, Sortino, GARCH, Monte Carlo) senza costosi abbonamenti.</div>
+        <div class="card">🔹 <strong>Consulenti finanziari</strong> – che desiderano analizzare rapidamente portafogli complessi.</div>
+        <div class="card">🔹 <strong>Studenti e appassionati</strong> – che vogliono imparare l’analisi finanziaria su dati reali.</div>
     </div>
-
-    <div class="vqp-insight">
-        <div class="vqp-insight-text">
-            <h4><i class="fas fa-cogs" style="margin-right: 8px;"></i> Personalizza ogni fase</h4>
-            <p>Imposta parametri, seleziona asset, definisci la tua tolleranza al rischio. VQuantPro si adatta alla tua strategia.</p>
-        </div>
-        <a href="https://vquantpro.streamlit.app/" class="vqp-btn" target="_blank">Esplora la dashboard <i class="fas fa-arrow-right"></i></a>
+    
+    <h2>🔍 Cosa puoi fare con V‑Quant Pro</h2>
+    <h3>📌 Analizzare un singolo asset (azione, ETF, crypto)</h3>
+    <p>Inserisci un ticker (es. <code>AAPL</code>, <code>ENI.MI</code>, <code>BTC-USD</code>) e ottieni:</p>
+    <ul>
+        <li><span class="badge">IQ Score</span> Punteggio unico 0‑100 che sintetizza qualità, valutazione, timing, rischio e sentiment.</li>
+        <li><span class="badge">Fondamentali</span> ROIC, indebitamento, margini, crescita, Altman Z‑Score, Piotroski F‑Score, Beneish M‑Score e decine di altri indicatori.</li>
+        <li><span class="badge">Analisi tecnica</span> Trend, RSI, bande di Bollinger, MACD, ADX, Aroon, OBV e Timing Score riassuntivo.</li>
+        <li><span class="badge">Metriche di rischio</span> Sharpe, Sortino, Max Drawdown, VaR, CVaR, Ulcer Index, Omega, Calmar, GARCH volatility forecast.</li>
+        <li><span class="badge">Simulazioni Monte Carlo</span> Percorsi futuri dell’equity per valutare scenari probabilistici.</li>
+    </ul>
+    
+    <h3>📁 Gestire il tuo portafoglio multi‑valuta</h3>
+    <ul>
+        <li>Inserisci posizioni con quantità, PMC e valuta (USD, EUR, GBP, CHF, JPY, CAD, AUD).</li>
+        <li>Conversione FX automatica nella valuta base (es. EUR) con tassi reali.</li>
+        <li>Calcolo imposta teorica e compensazione minusvalenze (modello italiano).</li>
+        <li>Allocazione per asset class, geografia, valuta e concentrazione (HHI, numero effettivo).</li>
+    </ul>
+    
+    <h3>⚙️ Ottimizzare e ribilanciare</h3>
+    <ul>
+        <li>Definisci pesi obiettivo per ticker, asset class, geografia o valuta.</li>
+        <li>Suggerimenti su importi da comprare/vendere per riportare il portafoglio in target.</li>
+        <li><strong>Ottimizzazione Markowitz</strong> – portafoglio a massimo Sharpe o minima varianza.</li>
+        <li><strong>CADR (Correlation‑Adjusted Drawdown Risk)</strong> – contributo di ogni asset al drawdown complessivo.</li>
+    </ul>
+    
+    <h3>🤖 Assistente AI – VqAi</h3>
+    <p>Chatbot integrato (basato su Gemini) che risponde in linguaggio naturale alle tue domande sul ticker selezionato. Genera anche report periodici automatici sul portafoglio.</p>
+    
+    <h2>📈 Metriche principali (sintesi)</h2>
+    <div class="grid-2">
+        <div class="card"><span class="metric-name">IQ Score</span><div class="metric-desc">Punteggio unificato proprietario (FQS+VAS+TMS+QRS+Momentum+Sentiment)</div></div>
+        <div class="card"><span class="metric-name">Sharpe / Sortino / Calmar</span><div class="metric-desc">Rendimento corretto per il rischio (totale, ribassista, drawdown)</div></div>
+        <div class="card"><span class="metric-name">Altman Z‑Score / Piotroski F‑Score</span><div class="metric-desc">Rischio di bancarotta e solidità fondamentale</div></div>
+        <div class="card"><span class="metric-name">Beneish M‑Score</span><div class="metric-desc">Probabilità di manipolazione dei bilanci</div></div>
+        <div class="card"><span class="metric-name">GARCH volatility</span><div class="metric-desc">Previsione di volatilità condizionale (modello econometrico)</div></div>
+        <div class="card"><span class="metric-name">Monte Carlo (bootstrap)</span><div class="metric-desc">Simulazione di percorsi futuri dell’equity</div></div>
+        <div class="card"><span class="metric-name">ROIC / CROIC / FCF margin</span><div class="metric-desc">Redditività e generazione di cassa</div></div>
+        <div class="card"><span class="metric-name">EV/EBIT, PEG, P/B, Graham Number</span><div class="metric-desc">Multipli di valutazione e fair value stimato</div></div>
+        <div class="card"><span class="metric-name">Max Drawdown / Ulcer Index</span><div class="metric-desc">Profondità e persistenza delle perdite</div></div>
+        <div class="card"><span class="metric-name">CADR (Correlation‑Adjusted Drawdown Risk)</span><div class="metric-desc">Contributo di ogni asset al drawdown di portafoglio</div></div>
     </div>
-
-    <div class="vqp-stats">
-        <div class="stat-item"><div class="stat-number">∞</div><div class="stat-label">Backtest illimitati</div></div>
-        <div class="stat-item"><div class="stat-number">99.9%</div><div class="stat-label">Uptime garantito</div></div>
-        <div class="stat-item"><div class="stat-number">+200</div><div class="stat-label">Indicatori quant</div></div>
-        <div class="stat-item"><div class="stat-number"><i class="fas fa-cloud-upload-alt"></i> API</div><div class="stat-label">Integrazione full</div></div>
+    
+    <h2>🌍 Asset supportati</h2>
+    <p>Azioni (con suffissi .MI, .DE, .PA, .L, .TO, .AX, ecc.), ETF azionari/obbligazionari/oro, crypto (BTC-USD, ETH-USD), materie prime (oro, petrolio), valute (EUR/USD) e bond governativi (Treasury 10Y).</p>
+    
+    <h2>🔧 Cosa rende V‑Quant Pro diverso</h2>
+    <div class="grid-2">
+        <div class="card">💰 <strong>Completamente gratuito</strong> – accettiamo donazioni volontarie, nessun abbonamento.</div>
+        <div class="card">🔍 <strong>Trasparenza totale</strong> – ogni metrica e peso è visibile e spiegato. Puoi persino modificare i pesi dell’IQ Score.</div>
+        <div class="card">📦 <strong>Open source</strong> – codice pubblico su GitHub. Puoi controllarlo, modificarlo e contribuire.</div>
+        <div class="card">🔐 <strong>Privacy e cloud</strong> – portafoglio salvato su Supabase con crittografia, accessibile solo da te.</div>
+        <div class="card">🧠 <strong>AI contestuale</strong> – VqAi spiega i risultati e genera report automatici.</div>
+        <div class="card">📊 <strong>Metriche istituzionali</strong> – GARCH, CADR, Altman Z″, Monte Carlo, ottimizzazione Markowitz.</div>
+    </div>
+    
+    <h2>🚀 Per iniziare</h2>
+    <ol style="margin-left: 1.5rem;">
+        <li>Vai alla <a href="https://vquantpro.streamlit.app/" target="_blank" style="color:#60a5fa;">Dashboard Quantitativa</a>.</li>
+        <li>Inserisci un ticker o carica un file CSV con più ticker.</li>
+        <li>Esplora l’IQ Score, le metriche e i grafici interattivi.</li>
+        <li>Aggiungi le tue posizioni nel portafoglio e salva i dati (richiede registrazione gratuita con email).</li>
+        <li>Sperimenta con l’ottimizzatore, il ribilanciamento e l’assistente AI VqAi.</li>
+    </ol>
+    
+    <h2>📢 Cosa dicono alcuni utenti</h2>
+    <div class="grid-2">
+        <div class="card">“Finalmente uno strumento che non mi dice cosa comprare, ma mi dà i dati per decidere da solo.”<br>— <strong>Marco</strong>, investitore privato</div>
+        <div class="card">“Lo uso per i miei clienti: in pochi minuti analizzo rischio e allocazione di portafogli complessi.”<br>— <strong>Laura</strong>, consulente finanziario</div>
+        <div class="card">“La trasparenza dell’IQ Score è incredibile. So perché un titolo prende 70 e un altro 40.”<br>— <strong>Davide</strong>, trader quantitativo</div>
+    </div>
+    
+    <hr>
+    <h2>⚠️ Disclaimer importante</h2>
+    <p>V‑Quant Pro è uno strumento <strong>didattico e informativo</strong>. I dati e le metriche fornite non costituiscono consulenza finanziaria, sollecitazione al pubblico risparmio o raccomandazione personalizzata. Ogni decisione di investimento è sotto l’esclusiva responsabilità dell’utente. Le performance passate non garantiscono risultati futuri.</p>
+    
+    <div class="footer">
+        <p>📬 Contatti: <a href="mailto:innovativeprogram@proton.me" style="color:#93c5fd;">info@vquantpro.it</a> &nbsp;|&nbsp; 
+        🌐 <a href="https://vquantpro.it" style="color:#93c5fd;">vquantpro.it</a></p>
+        <p style="margin-top: 0.5rem;">© 2026 V‑Quant Pro – Ingegneria finanziaria per investitori autonomi</p>
     </div>
 </div>
+</body>
+</html>
