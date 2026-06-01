@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://vquantpro.it/guida-max-drawdown.html" />
   <link rel="icon" type="image/png" href="/favicon.png">
 
-  <meta name="description" content="Guida definitiva al Max Drawdown: definizione, formula, calcolo passo-passo, esempi reali su ETF, effetto del recupero (snowball) e come gestire la tolleranza al rischio. Include calcolatore interattivo.">
+  <meta name="description" content="Guida definitiva al Max Drawdown: definizione, formula, calcolo passo-passo, esempi reali su ETF, effetto del recupero (snowball) e come gestire la tolleranza al rischio. Include due calcolatori interattivi.">
   <meta name="keywords" content="Max Drawdown, drawdown massimo, perdita massima, rischio di portafoglio, volatilità, gestione del rischio, recupero investimenti, tolleranza al rischio">
   <meta name="author" content="Canio Tedesco, VQuantPro">
   
@@ -225,6 +225,7 @@
       padding:20px;
       text-align:center;
       transition:all 0.2s ease;
+      margin-bottom:30px;
     }
     .interactive-box input{
       background:var(--code);
@@ -233,8 +234,19 @@
       padding:8px 12px;
       border-radius:8px;
       margin:5px;
-      width:110px;
+      width:140px;
       font-family:'JetBrains Mono',monospace;
+    }
+    .interactive-box textarea{
+      background:var(--code);
+      border:1px solid var(--border);
+      color:var(--title);
+      padding:8px 12px;
+      border-radius:8px;
+      margin:5px;
+      width:80%;
+      font-family:'JetBrains Mono',monospace;
+      font-size:14px;
     }
     .calc-btn{
       background:var(--accent);
@@ -263,6 +275,7 @@
       .hero,.content,.topbar,.footer{padding-left:20px;padding-right:20px}
       h1{font-size:clamp(1.8rem,5vw,2.4rem)}
       .lead{font-size:1rem}
+      .interactive-box input{width:90px;}
     }
 
     /* Cookie Banner Moderno */
@@ -321,12 +334,12 @@
           <ul>
             <li><a href="#definizione" style="color:var(--accent); text-decoration:none;">1. Definizione: il linguaggio concreto del rischio</a></li>
             <li><a href="#formula" style="color:var(--accent); text-decoration:none;">2. La formula e il calcolo passo-passo</a></li>
-            <li><a href="#esempi" style="color:var(--accent); text-decoration:none;">3. Esempi pratici: calcolare il drawdown su ETF e azioni</a></li>
-            <li><a href="#calcolatore" style="color:var(--accent); text-decoration:none;">4. Calcolatore interattivo del Max Drawdown</a></li>
+            <li><a href="#calcolatori" style="color:var(--accent); text-decoration:none;">3. Calcolatori interattivi</a></li>
+            <li><a href="#esempi" style="color:var(--accent); text-decoration:none;">4. Esempi pratici su ETF e azioni</a></li>
             <li><a href="#recupero" style="color:var(--accent); text-decoration:none;">5. L'effetto snowball: perché perdite profonde richiedono recuperi molto più che proporzionali</a></li>
-            <li><a href="#confronto" style="color:var(--accent); text-decoration:none;">6. Max Drawdown vs Volatilità: differenze e complementarità</a></li>
-            <li><a href="#metriche" style="color:var(--accent); text-decoration:none;">7. Metriche derivate: Calmar Ratio, Sterling Ratio e Burke Ratio</a></li>
-            <li><a href="#applicazioni" style="color:var(--accent); text-decoration:none;">8. Applicazioni pratiche: selezione ETF, backtesting e tolleranza al rischio</a></li>
+            <li><a href="#confronto" style="color:var(--accent); text-decoration:none;">6. Max Drawdown vs Volatilità</a></li>
+            <li><a href="#metriche" style="color:var(--accent); text-decoration:none;">7. Metriche derivate: Calmar, Sterling, Burke</a></li>
+            <li><a href="#applicazioni" style="color:var(--accent); text-decoration:none;">8. Applicazioni pratiche nella gestione del rischio</a></li>
             <li><a href="#limiti" style="color:var(--accent); text-decoration:none;">9. Limiti, criticità ed errori frequenti</a></li>
             <li><a href="#bestpractice" style="color:var(--accent); text-decoration:none;">10. Best practice per integrare il Max Drawdown nell'analisi</a></li>
             <li><a href="#" id="open_preferences_center">📌 Gestisci le preferenze sui cookie</a></li>
@@ -337,67 +350,66 @@
         <section id="definizione">
           <h2>1. Definizione: il linguaggio concreto del rischio</h2>
           <p>Il <strong>Max Drawdown (Drawdown Massimo)</strong> rappresenta la perdita percentuale massima registrata da un portafoglio o da uno strumento finanziario tra un picco (massimo storico) e il successivo punto di minimo, prima che venga eventualmente superato il picco precedente. È quindi la <strong>peggior discesa subita dal capitale</strong> lungo l'intero periodo di osservazione.</p>
-          <p>A differenza della volatilità, che misura la dispersione statistica dei rendimenti, il Max Drawdown parla un linguaggio immediato e concreto: <strong>quanti soldi ho rischiato di perdere nel momento peggiore?</strong> Per un investitore, sapere che il proprio portafoglio ha avuto un drawdown storico del 15% o del 45% fa una differenza enorme in termini di gestione emotiva e capacità di rimanere disciplinati durante le fasi di mercato difficili.</p>
           <div class="quote">"Il Max Drawdown non è solo una metrica di rischio: è una misura della resilienza emotiva richiesta all'investitore. Conoscere la profondità delle perdite passate aiuta a prepararsi a quelle future."</div>
         </section>
 
-        <!-- 2. FORMULA E CALCOLO PASSO-PASSO -->
+        <!-- 2. FORMULA E CALCOLO -->
         <section id="formula">
           <h2>2. La formula e il calcolo passo-passo</h2>
           <div class="formula">Max Drawdown = (Valore Minimo Successivo al Picco - Valore di Picco) / Valore di Picco</div>
-          <p>La formula è apparentemente semplice, ma la sua corretta applicazione richiede attenzione alla sequenza temporale. Ecco i passaggi fondamentali:</p>
+          <p>Ecco i passaggi fondamentali:</p>
           <ul>
             <li><strong>Step 1:</strong> Identificare il picco massimo raggiunto dal capitale fino a un certo momento (running maximum).</li>
             <li><strong>Step 2:</strong> Calcolare la distanza percentuale tra il picco corrente e il valore successivo minimo.</li>
-            <li><strong>Step 3:</strong> Ripetere l'operazione per tutto l'istogramma e selezionare la riduzione percentuale più profonda.</li>
+            <li><strong>Step 3:</strong> Ripetere per tutto l'istogramma e selezionare la riduzione percentuale più profonda.</li>
           </ul>
-          <div class="box">
-            <h3>📐 Esempio numerico del calcolo</h3>
-            <p>Supponiamo la seguente sequenza di valori di un portafoglio: 100 → 120 → 110 → 130 → 95 → 115 → 140.</p>
-            <ul>
-              <li>Al primo picco (120), il drawdown successivo è (110-120)/120 = -8,33%.</li>
-              <li>Al secondo picco (130), il drawdown successivo è (95-130)/130 = <strong>-26,92%</strong> (massimo finora).</li>
-              <li>In seguito il capitale risale e raggiunge un nuovo picco a 140.</li>
-            </ul>
-            <p>Il <strong>Max Drawdown</strong> dell'intero periodo è quindi <strong>-26,92%</strong>.</p>
-          </div>
-          <div class="note">💡 Attenzione: il drawdown non si calcola mai rispetto al capitale iniziale, ma sempre rispetto al picco più alto raggiunto prima di ogni discesa. Ignorare questo dettaglio è uno degli errori più comuni nell'analisi amatoriale.</div>
         </section>
 
-        <!-- 3. ESEMPI PRATICI SU ETF E AZIONI -->
+        <!-- 3. CALCOLATORI INTERATTIVI -->
+        <section id="calcolatori">
+          <h2>3. 🧮 Calcolatori interattivi</h2>
+          
+          <!-- Calcolatore del recupero (snowball) -->
+          <div class="interactive-box">
+            <h3>📉 Effetto snowball: recupero necessario dopo una perdita</h3>
+            <p><label>Perdita subita (%) : </label><input type="number" id="lossInput" value="20" step="5"></p>
+            <button class="calc-btn" id="calcRecoveryBtn">Calcola recupero necessario</button>
+            <p id="recoveryOutput" style="font-size:1.3rem; font-weight:bold; color:var(--accent); margin-top:10px;">Recupero necessario = --%</p>
+            <div class="note">💡 Dopo una perdita del X%, il capitale residuo è più piccolo, quindi serve un rendimento percentuale maggiore per tornare al punto di partenza. Più grande è la perdita, più cresce il recupero richiesto.</div>
+          </div>
+
+          <!-- Calcolatore del Max Drawdown da serie di valori -->
+          <div class="interactive-box">
+            <h3>📊 Calcola il Max Drawdown da una lista di valori</h3>
+            <p><label>Inserisci i valori (separati da virgola):</label><br>
+            <textarea id="valuesList" rows="2" cols="40">100, 120, 110, 130, 95, 115, 140</textarea></p>
+            <button class="calc-btn" id="calcDrawdownBtn">Calcola Max Drawdown</button>
+            <p id="drawdownResult" style="font-size:1.2rem; font-weight:bold; color:var(--accent); margin-top:10px;">Max Drawdown = --%</p>
+            <div class="note">💡 Inserisci una sequenza di prezzi o valori patrimoniali (es. 100, 120, 110, 130, 95). Il calcolatore troverà il massimo drawdown tra picco e minimo successivo.</div>
+          </div>
+        </section>
+
+        <!-- 4. ESEMPI PRATICI -->
         <section id="esempi">
-          <h2>3. Esempi pratici: calcolare il drawdown su ETF e azioni</h2>
+          <h2>4. Esempi pratici su ETF e azioni</h2>
           <div class="grid">
             <div class="box">
-              <h3>📊 Esempio 1: ETF S&P500 (2020-2023)</h3>
-              <p>Tra febbraio e marzo 2020, l'S&P500 ha subito un crollo di oltre il 33% a causa della pandemia COVID-19. Quel drawdown è stato il peggiore dal 2008. Un investitore che avesse avuto l'intero portafoglio azionario avrebbe visto il capitale ridursi di un terzo in poche settimane, prima di recuperare nei mesi successivi.</p>
-              <p><strong>Dato rilevante:</strong> un drawdown del 33% richiede un recupero del +50% per tornare al punto di partenza. Questo esempio mostra l'importanza di non sottovalutare la profondità delle perdite.</p>
+              <h3>📊 Esempio 1: ETF S&P500 (2020)</h3>
+              <p>A febbraio 2020 l'S&P500 ha subito un drawdown di circa -33% a causa del COVID-19. Per recuperare serviva un +50%.</p>
             </div>
             <div class="box">
-              <h3>📈 Esempio 2: Azione singola (ETF ARKK)</h3>
-              <p>L'ETF ARKK (innovazione tecnologica) ha avuto un drawdown del -72% dal picco del febbraio 2021 al minimo del 2023. Un drawdown così estremo significa che per tornare ai vecchi massimi sarebbe stato necessario un recupero del +257%. Molti investitori hanno abbandonato la posizione ben prima di quel recupero, realizzando perdite ingenti.</p>
+              <h3>📈 Esempio 2: ETF ARKK (2021-2023)</h3>
+              <p>Drawdown del -72% dal picco. Recupero necessario: +257%.</p>
             </div>
           </div>
           <div class="warning-box">
-            <strong>⚠️ Lezione importante:</strong> un drawdown del 50% non si recupera con un +50%, ma con un <strong>+100%</strong>. Più profondo è il drawdown, più il recupero diventa matematicamente impegnativo. Questo effetto viene spesso sottovalutato anche da investitori esperti.
+            <strong>⚠️ Lezione importante:</strong> un drawdown del 50% non si recupera con un +50%, ma con un <strong>+100%</strong>. Più profondo è il drawdown, più il recupero diventa matematicamente impegnativo.
           </div>
         </section>
 
-        <!-- 4. CALCOLATORE INTERATTIVO DEL MAX DRAWDOWN -->
-        <section id="calcolatore">
-          <h2>4. 🧮 Calcolatore interattivo del Max Drawdown e del recupero necessario</h2>
-          <div class="interactive-box">
-            <p><label>Perdita subita (%) : </label><input type="number" id="lossInput" value="20" step="5"></p>
-            <p><label>Rendimento necessario per recuperare (%) : </label><span id="recoveryOutput" style="font-weight:bold; color:var(--accent);">--</span></p>
-            <button class="calc-btn" id="calcRecoveryBtn">Calcola</button>
-            <div class="note">💡 Inserisci la perdita percentuale subita (es. 20 per -20%) e scopri di quanto deve crescere il capitale per tornare al valore iniziale. Più la perdita è grande, più il recupero richiesto cresce esponenzialmente.</div>
-          </div>
-        </section>
-
-        <!-- 5. EFFETTO SNOWBALL DEL RECUPERO -->
+        <!-- 5. EFFETTO SNOWBALL -->
         <section id="recupero">
-          <h2>5. L'effetto snowball: perché perdite profonde richiedono recuperi molto più che proporzionali</h2>
-          <p>Una proprietà fondamentale e spesso fraintesa della matematica finanziaria è che le perdite e i guadagni non sono simmetrici: dopo una perdita, il capitale base su cui calcolare i rendimenti futuri è più piccolo, quindi serve un rendimento percentuale maggiore per tornare al punto di partenza. Questo fenomeno è noto come <strong>effetto snowball del recupero</strong>.</p>
+          <h2>5. L'effetto snowball del recupero</h2>
           <ul>
             <li>Dopo un drawdown del <strong>-10%</strong>, serve un <strong>+11,1%</strong> per recuperare.</li>
             <li>Dopo un drawdown del <strong>-20%</strong>, serve un <strong>+25,0%</strong> per recuperare.</li>
@@ -406,29 +418,62 @@
             <li>Dopo un drawdown del <strong>-75%</strong>, serve un <strong>+300%</strong> per recuperare.</li>
           </ul>
           <div class="quote">"Difendere il capitale nelle fasi negative non è soltanto una scelta prudente: è una condizione necessaria per evitare che il tempo di recupero diventi il vero costo nascosto dell'investimento."</div>
-          <p>Questa asimmetria spiega perché i grandi gestori attribuiscono così tanta importanza al controllo del drawdown. Evitare perdite profonde non è solo una questione di conforto psicologico, ma un elemento chiave per preservare il capitale e la capacità di ottenere rendimenti composti nel lungo periodo.</p>
         </section>
 
-        <!-- 6. MAX DRAWDOWN VS VOLATILITÀ -->
+        <!-- 6. VS VOLATILITÀ -->
         <section id="confronto">
-          <h2>6. Max Drawdown vs Volatilità: differenze e complementarità</h2>
+          <h2>6. Max Drawdown vs Volatilità</h2>
           <table class="comparison-table">
-            <thead>
-              <tr><th>Metrica</th><th>Definizione</th><th>Cosa misura</th><th>Limitazione</th></tr>
-            </thead>
+            <thead><tr><th>Metrica</th><th>Definizione</th><th>Cosa misura</th></tr></thead>
             <tbody>
-              <tr><td><strong>Volatilità (σ)</strong></td>
-                <td>Deviazione standard dei rendimenti</td>
-                <td>Dispersione media dei rendimenti attorno alla media, sia positivi che negativi</td>
-                <td>Non distingue tra oscillazioni positive e negative; ignora l'asimmetria dei recuperi</td>
-              </tr>
-              <tr>
-                <td><strong>Max Drawdown</strong></td>
-                <td>Perdita massima dal picco al minimo</td>
-                <td>Evento estremo di perdita, la peggior discesa subita</td>
-                <td>Dipende dal periodo osservato; ignora la frequenza delle perdite</td>
-              </tr>
-              <tr>
-                <td><strong>Downside Deviation</strong></td>
-                <td>Deviazione standard dei soli rendimenti negativi</td>
-                <td>
+              <tr><td><strong>Volatilità (σ)</strong></td><td>Deviazione standard dei rendimenti</td><td>Dispersione media dei rendimenti (sia positivi che negativi)</td></tr>
+              <tr><td><strong>Max Drawdown</strong></td><td>Perdita massima dal picco al minimo</td><td>Evento estremo di perdita, la peggior discesa subita</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- 7. METRICHE DERIVATE -->
+        <section id="metriche">
+          <h2>7. Metriche derivate: Calmar Ratio e altre</h2>
+          <ul>
+            <li><strong>Calmar Ratio = CAGR / |Max Drawdown|</strong> (più alto è, meglio è).</li>
+            <li><strong>Sterling Ratio</strong> – corregge il Calmar per la frequenza dei drawdown.</li>
+            <li><strong>Burke Ratio</strong> – media quadratica dei drawdown.</li>
+          </ul>
+        </section>
+
+        <!-- 8. APPLICAZIONI -->
+        <section id="applicazioni">
+          <h2>8. Applicazioni pratiche nella gestione del rischio</h2>
+          <div class="grid">
+            <div class="box"><h3>🎯 Selezione ETF</h3><p>Prima di investire, controlla il drawdown storico massimo. Un drawdown del -30% su un ETF azionario globale è accettabile, -60% su un obbligazionario è allarmante.</p></div>
+            <div class="box"><h3>🛠️ Backtesting</h3><p>Nel backtesting, il Max Drawdown è un criterio per scartare strategie troppo fragili (es. drawdown superiori al -40%).</p></div>
+            <div class="box"><h3>🛡️ Tolleranza al rischio</h3><p>Conosci la tua soglia psicologica: se il -20% è il tuo limite, evita strategie che hanno storicamente superato quel valore.</p></div>
+            <div class="box"><h3>📊 Asset allocation dinamica</h3><p>Monitora i drawdown correnti per ridurre l'esposizione quando superano una certa soglia (es. -15% da picco).</p></div>
+          </div>
+        </section>
+
+        <!-- 9. LIMITI -->
+        <section id="limiti">
+          <h2>9. Limiti, criticità ed errori frequenti</h2>
+          <div class="warning-box">
+            <strong>⚠️ Attenzione ai limiti del Max Drawdown:</strong>
+          </div>
+          <ul>
+            <li>Dipende fortemente dal periodo osservato.</li>
+            <li>Ignora la frequenza delle perdite.</li>
+            <li>Sensibile a outlier e crisi sistemiche.</li>
+            <li>Non predice il futuro.</li>
+            <li>Errore comune: confrontare drawdown su periodi non omogenei.</li>
+          </ul>
+        </section>
+
+        <!-- 10. BEST PRACTICE -->
+        <section id="bestpractice">
+          <h2>10. Best practice per integrare il Max Drawdown nell'analisi</h2>
+          <ul>
+            <li>Usalo insieme a Sharpe, Sortino e Calmar Ratio.</li>
+            <li>Calcola il drawdown su finestre mobili (rolling drawdown).</li>
+            <li>Osserva anche il tempo di recupero (recovery time).</li>
+            <li>Contestualizza il drawdown storico (es. crisi 2008 vs anno normale).</li>
+   
