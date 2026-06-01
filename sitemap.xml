@@ -1,246 +1,257 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <!-- Homepage -->
     <url>
         <loc>https://vquantpro.it/</loc>
-        <lastmod>2026-05-24</lastmod>
+        <lastmod>2026-06-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>1.0</priority>
     </url>
+    
+    <!-- Sezioni principali -->
     <url>
         <loc>https://vquantpro.it/masterclass/</loc>
-        <lastmod>2026-05-24</lastmod>
+        <lastmod>2026-06-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/blog/</loc>
-        <lastmod>2026-05-30</lastmod>
+        <lastmod>2026-06-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
+    
+    <!-- Pagine secondarie -->
     <url>
         <loc>https://vquantpro.it/risorse.html</loc>
-        <lastmod>2026-05-24</lastmod>
+        <lastmod>2026-06-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/libri-consigliati.html</loc>
-        <lastmod>2026-05-24</lastmod>
+        <lastmod>2026-06-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
-    <!-- Guide versione ROOT -->
+    
+    <!-- Guide versione ROOT (priorità più alta) -->
     <url>
         <loc>https://vquantpro.it/guida-cagr.html</loc>
-        <lastmod>2026-05-24</lastmod>
+        <lastmod>2026-06-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/guida-sharpe.html</loc>
-        <lastmod>2026-05-24</lastmod>
+        <lastmod>2026-06-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/guida-sortino.html</loc>
-        <lastmod>2026-05-24</lastmod>
+        <lastmod>2026-06-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/guida-calmar.html</loc>
-        <lastmod>2026-05-24</lastmod>
+        <lastmod>2026-06-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/guida-volatilita.html</loc>
-        <lastmod>2026-05-24</lastmod>
+        <lastmod>2026-06-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/guida-max-drawdown.html</loc>
-        <lastmod>2026-05-24</lastmod>
+        <lastmod>2026-06-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/guida-diversificazione.html</loc>
-        <lastmod>2026-05-24</lastmod>
+        <lastmod>2026-06-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.7</priority>
     </url>
-    <!-- Guide versione BLOG -->
+    
+    <!-- Guide versione BLOG (priorità inferiore) -->
     <url>
         <loc>https://vquantpro.it/blog/guida-cagr.html</loc>
-        <lastmod>2026-05-24</lastmod>
+        <lastmod>2026-06-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/blog/guida-sharpe.html</loc>
-        <lastmod>2026-05-24</lastmod>
+        <lastmod>2026-06-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/blog/guida-sortino.html</loc>
-        <lastmod>2026-05-24</lastmod>
+        <lastmod>2026-06-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/blog/guida-calmar.html</loc>
-        <lastmod>2026-05-24</lastmod>
+        <lastmod>2026-06-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/blog/guida-volatilita.html</loc>
-        <lastmod>2026-05-24</lastmod>
+        <lastmod>2026-06-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/blog/guida-max-drawdown.html</loc>
-        <lastmod>2026-05-24</lastmod>
+        <lastmod>2026-06-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/blog/guida-diversificazione.html</loc>
-        <lastmod>2026-05-24</lastmod>
+        <lastmod>2026-06-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.5</priority>
     </url>
-    <!-- Articoli (solo blog) -->
+    
+    <!-- Articoli del blog -->
     <url>
         <loc>https://vquantpro.it/blog/matematica-paura-vix.html</loc>
-        <lastmod>2026-05-30</lastmod>
+        <lastmod>2026-06-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/blog/maledizione-market-timing.html</loc>
-        <lastmod>2026-05-25</lastmod>
+        <lastmod>2026-06-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/blog/costi-nascosti-etf.html</loc>
-        <lastmod>2026-05-25</lastmod>
+        <lastmod>2026-06-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/blog/matematica-pac.html</loc>
-        <lastmod>2026-05-25</lastmod>
+        <lastmod>2026-06-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/blog/guida-treynor.html</loc>
-        <lastmod>2026-05-25</lastmod>
+        <lastmod>2026-06-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/blog/bias-cognitivi-regole.html</loc>
-        <lastmod>2026-05-25</lastmod>
+        <lastmod>2026-06-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/blog/diversificazione-30-azioni.html</loc>
-        <lastmod>2026-05-25</lastmod>
+        <lastmod>2026-06-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/blog/portafoglio-pigro-python.html</loc>
-        <lastmod>2026-05-25</lastmod>
+        <lastmod>2026-06-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/blog/leva-finanziaria.html</loc>
-        <lastmod>2026-05-25</lastmod>
+        <lastmod>2026-06-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/blog/backtesting-illusione.html</loc>
-        <lastmod>2026-05-25</lastmod>
+        <lastmod>2026-06-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/blog/bolla-dot-com.html</loc>
-        <lastmod>2026-05-25</lastmod>
+        <lastmod>2026-06-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/blog/crisi-covid-mercati.html</loc>
-        <lastmod>2026-05-24</lastmod>
+        <lastmod>2026-06-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/blog/anatomia-collasso-2008.html</loc>
-        <lastmod>2026-05-17</lastmod>
+        <lastmod>2026-06-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/blog/manifesto.html</loc>
-        <lastmod>2026-05-11</lastmod>
+        <lastmod>2026-06-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/blog/l-illusione-del-1929.html</loc>
-        <lastmod>2026-05-11</lastmod>
+        <lastmod>2026-06-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.6</priority>
     </url>
-    <!-- Pagine del sito -->
+    
+    <!-- Pagine istituzionali -->
     <url>
         <loc>https://vquantpro.it/chi-siamo/</loc>
-        <lastmod>2026-05-24</lastmod>
+        <lastmod>2026-06-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/contatti.html</loc>
-        <lastmod>2026-05-24</lastmod>
+        <lastmod>2026-06-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.5</priority>
     </url>
+    
+    <!-- Pagine legali (priorità bassa) -->
     <url>
         <loc>https://vquantpro.it/legal/</loc>
-        <lastmod>2026-05-24</lastmod>
+        <lastmod>2026-06-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/privacy/</loc>
-        <lastmod>2026-05-24</lastmod>
+        <lastmod>2026-06-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/cookie/</loc>
-        <lastmod>2026-05-24</lastmod>
+        <lastmod>2026-06-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/disclaimer.html</loc>
-        <lastmod>2026-05-24</lastmod>
+        <lastmod>2026-06-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
     </url>
