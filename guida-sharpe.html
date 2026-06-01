@@ -3,39 +3,306 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sharpe Ratio: rendimento corretto per il rischio | VQuantPro</title>
+  <title>Sharpe Ratio: guida completa al rendimento corretto per il rischio | VQuantPro</title>
   
   <link rel="canonical" href="https://vquantpro.it/guida-sharpe-ratio.html" />
   <link rel="icon" type="image/png" href="/favicon.png">
 
-  <meta name="description" content="Guida professionale allo Sharpe Ratio: come si calcola, cosa misura, come interpretarlo e quali limiti considerare nell'analisi quantitativa.">
+  <meta name="description" content="Guida definitiva allo Sharpe Ratio: formula, calcolo passo-passo, interpretazione, limiti e confronto con Sortino e Calmar. Include calcolatore interattivo e applicazioni pratiche per ETF e portafogli.">
+  <meta name="keywords" content="Sharpe Ratio, rischio rendimento, volatilità, premio per il rischio, tasso risk free, indice di Sharpe, finanza quantitativa, confronto ETF">
+  <meta name="author" content="Canio Tedesco, VQuantPro">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    :root{--bg:#0b1020;--panel:#131b2f;--panel-2:#17233b;--border:#273553;--text:#d8e1ef;--muted:#99a8bf;--title:#f8fbff;--accent:#26c6da;--accent-soft:rgba(38,198,218,.12);--code:#0a1324;--shadow:0 18px 50px rgba(0,0,0,.35)}
-    *{box-sizing:border-box} body{margin:0;font-family:'Inter',sans-serif;background:linear-gradient(180deg,#0a0f1c 0%,#0b1020 100%);color:var(--text);line-height:1.75}
-    .wrap{max-width:980px;margin:0 auto;padding:28px 20px 60px}.card{background:linear-gradient(180deg,var(--panel) 0%,var(--panel-2) 100%);border:1px solid var(--border);border-radius:20px;box-shadow:var(--shadow);overflow:hidden}
-    .topbar,.footer{padding:18px 24px;border-bottom:1px solid var(--border)} .footer{border-top:1px solid var(--border);border-bottom:none;color:var(--muted);font-size:.93rem}
-    .topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;background:rgba(255,255,255,.02)} .brand{font-weight:700;color:var(--title)}
-    .back{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;text-decoration:none;background:#1c2942;color:#eaf2ff;border:1px solid #314261}
-    .hero{padding:38px 24px 16px}.eyebrow{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--accent-soft);border:1px solid rgba(38,198,218,.25);color:#a8eef7;font-size:13px;font-weight:600}
-    h1{font-size:clamp(2rem,3vw,3rem);line-height:1.08;color:var(--title);margin:18px 0 14px}.lead{font-size:1.08rem;color:#c7d3e5;max-width:72ch}
-    .content{padding:8px 24px 34px} h2{font-size:1.45rem;margin:34px 0 12px;padding-left:14px;border-left:4px solid var(--accent);color:var(--title)} h3{color:var(--title);margin:24px 0 10px}
-    p{margin:0 0 18px} ul{margin:0;padding-left:20px} li{margin:0 0 12px}.box,.formula,.quote{margin:24px 0}.box{background:rgba(8,15,30,.42);border:1px solid var(--border);border-radius:16px;padding:20px}
-    .formula{background:var(--code);border:1px solid #1c3450;border-radius:14px;padding:18px 20px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#97f1fb;font-size:1.03rem;text-align:center}
-    .quote{padding:22px;border-left:4px solid var(--accent);background:var(--accent-soft);border-radius:0 14px 14px 0;color:#eefcff}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.note{color:var(--muted);font-size:.96rem}
-    @media (max-width:760px){.grid{grid-template-columns:1fr}.hero,.content,.topbar,.footer{padding-left:18px;padding-right:18px}}
+    :root{
+      --bg:#0b1020;
+      --panel:#131b2f;
+      --panel-2:#17233b;
+      --border:#273553;
+      --text:#d8e1ef;
+      --muted:#99a8bf;
+      --title:#f8fbff;
+      --accent:#26c6da;
+      --accent-soft:rgba(38,198,218,.12);
+      --code:#0a1324;
+      --shadow:0 18px 50px rgba(0,0,0,.35);
+      --accent-dark:#00b4cc;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:'Inter',sans-serif;
+      background:linear-gradient(180deg,#0a0f1c 0%,#0b1020 100%);
+      color:var(--text);
+      line-height:1.75;
+      font-size:16px;
+    }
+    .wrap{max-width:980px;margin:0 auto;padding:28px 20px 60px}
+    .card{
+      background:linear-gradient(180deg,var(--panel) 0%,var(--panel-2) 100%);
+      border:1px solid var(--border);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      transition:transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card:hover {
+      transform:translateY(-2px);
+      box-shadow:0 20px 40px rgba(0,0,0,0.4);
+    }
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+      align-items:center;
+      padding:18px 28px;
+      border-bottom:1px solid var(--border);
+      background:rgba(255,255,255,.02)
+    }
+    .brand{
+      font-weight:800;
+      letter-spacing:-0.01em;
+      font-size:1.35rem;
+      background:linear-gradient(135deg,#fff 0%,var(--accent) 100%);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+    .back{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:40px;
+      text-decoration:none;
+      background:#1c2942;
+      color:#eaf2ff;
+      border:1px solid #314261;
+      transition:all 0.2s ease;
+    }
+    .back:hover{
+      background:#233153;
+      border-color:var(--accent);
+      color:var(--accent);
+    }
+    .hero{padding:38px 28px 16px}
+    .eyebrow{
+      display:inline-block;
+      padding:6px 12px;
+      border-radius:999px;
+      background:var(--accent-soft);
+      border:1px solid rgba(38,198,218,.25);
+      color:#a8eef7;
+      font-size:12px;
+      font-weight:600;
+      letter-spacing:.02em;
+      text-transform:uppercase;
+    }
+    h1{
+      font-size:clamp(2rem,4vw,3.2rem);
+      line-height:1.15;
+      font-weight:800;
+      color:var(--title);
+      margin:18px 0 14px;
+      letter-spacing:-0.02em;
+    }
+    .lead{
+      font-size:1.15rem;
+      color:#c7d3e5;
+      max-width:75ch;
+      font-weight:400;
+      border-left:3px solid var(--accent);
+      padding-left:20px;
+      margin-top:10px;
+    }
+    .content{padding:8px 28px 34px}
+    .toc,.box,.formula,.quote,.highlight-box{margin:28px 0}
+    .toc,.box{
+      background:rgba(8,15,30,.5);
+      border:1px solid var(--border);
+      border-radius:20px;
+      padding:24px;
+      backdrop-filter:blur(4px);
+    }
+    .toc h2,.box h2,section h2{
+      font-size:1.45rem;
+      font-weight:700;
+      margin:0 0 16px 0;
+      padding-left:0;
+      border-left:none;
+      color:var(--title);
+    }
+    h2{
+      font-size:1.65rem;
+      font-weight:700;
+      margin:48px 0 16px;
+      padding-bottom:8px;
+      border-bottom:2px solid rgba(38,198,218,0.3);
+      color:var(--title);
+    }
+    h3{
+      color:var(--title);
+      margin:28px 0 12px;
+      font-size:1.25rem;
+      font-weight:600;
+    }
+    p{
+      margin:0 0 18px;
+      color:var(--text);
+      line-height:1.7;
+    }
+    ul{margin:0;padding-left:20px}
+    li{margin:0 0 8px;color:var(--muted)}
+    .formula{
+      background:var(--code);
+      border:1px solid #1c3450;
+      border-radius:16px;
+      padding:20px 24px;
+      font-family:'JetBrains Mono',monospace;
+      color:#97f1fb;
+      font-size:1.2rem;
+      text-align:center;
+      overflow-x:auto;
+      font-weight:500;
+    }
+    .quote{
+      padding:24px;
+      border-left:4px solid var(--accent);
+      background:var(--accent-soft);
+      border-radius:0 20px 20px 0;
+      color:#eefcff;
+      font-style:italic;
+      font-size:1.05rem;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:24px
+    }
+    .note{
+      color:var(--muted);
+      font-size:.9rem;
+      padding:12px;
+      background:rgba(0,0,0,0.2);
+      border-radius:12px;
+    }
+    .footer{
+      padding:24px 28px;
+      border-top:1px solid var(--border);
+      color:var(--muted);
+      font-size:.85rem;
+      background:rgba(0,0,0,0.2);
+    }
+    .inline-code{
+      background:var(--code);
+      padding:3px 8px;
+      border-radius:8px;
+      font-family:'JetBrains Mono',monospace;
+      font-size:.85em;
+      color:var(--accent);
+    }
+    .comparison-table{
+      width:100%;
+      border-collapse:collapse;
+      margin:20px 0;
+    }
+    .comparison-table th,.comparison-table td{
+      border:1px solid var(--border);
+      padding:12px;
+      text-align:left;
+    }
+    .comparison-table th{
+      background:rgba(38,198,218,0.1);
+      color:var(--accent);
+      font-weight:600;
+    }
+    .interactive-box{
+      background:rgba(0,0,0,0.3);
+      border-radius:16px;
+      padding:20px;
+      text-align:center;
+      transition:all 0.2s ease;
+    }
+    .interactive-box input{
+      background:var(--code);
+      border:1px solid var(--border);
+      color:var(--title);
+      padding:8px 12px;
+      border-radius:8px;
+      margin:5px;
+      width:110px;
+      font-family:'JetBrains Mono',monospace;
+    }
+    .calc-btn{
+      background:var(--accent);
+      color:var(--code);
+      border:none;
+      padding:10px 24px;
+      border-radius:40px;
+      font-weight:bold;
+      cursor:pointer;
+      transition:0.2s;
+      margin-top:10px;
+    }
+    .calc-btn:hover{
+      background:var(--accent-dark);
+      transform:scale(0.98);
+    }
+    .warning-box{
+      background:rgba(38,198,218,0.15);
+      border-left:4px solid var(--accent);
+      padding:16px 20px;
+      border-radius:12px;
+      margin:20px 0;
+    }
+    @media (max-width:760px){
+      .grid{grid-template-columns:1fr}
+      .hero,.content,.topbar,.footer{padding-left:20px;padding-right:20px}
+      h1{font-size:clamp(1.8rem,5vw,2.4rem)}
+      .lead{font-size:1rem}
+    }
 
-    /* Cookie Banner */
-    .cookie-banner { position: fixed; bottom: 0; left: 0; right: 0; background: #161F30; border-top: 2px solid #26c6da; padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; z-index: 10000; gap: 15px; font-size: 14px; color: #D1D5DB; box-shadow: 0 -5px 20px rgba(0,0,0,0.5); }
-    .cookie-banner p { margin: 0; flex: 1 1 300px; }
-    .cookie-banner a { color: #26c6da; text-decoration: underline; }
-    .cookie-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
-    .cookie-btn { padding: 10px 20px; border-radius: 6px; font-weight: 600; cursor: pointer; border: none; font-size: 14px; }
-    .cookie-btn.accept { background: #26c6da; color: #0B0F19; }
-    .cookie-btn.reject { background: transparent; color: #D1D5DB; border: 1px solid #24334C; }
+    /* Cookie Banner Moderno */
+    .cookie-banner{
+      position:fixed;
+      bottom:20px;
+      left:20px;
+      right:20px;
+      background:#161F30;
+      border:1px solid rgba(38,198,218,0.3);
+      backdrop-filter:blur(10px);
+      border-radius:20px;
+      padding:20px 24px;
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+      z-index:10000;
+      gap:15px;
+      font-size:14px;
+      color:#D1D5DB;
+      box-shadow:0 20px 35px -8px rgba(0,0,0,0.5);
+    }
+    .cookie-banner p{margin:0;flex:1 1 300px}
+    .cookie-banner a{color:#26c6da;text-decoration:underline}
+    .cookie-buttons{display:flex;gap:12px;flex-wrap:wrap}
+    .cookie-btn{
+      padding:10px 20px;
+      border-radius:40px;
+      font-weight:600;
+      cursor:pointer;
+      border:none;
+      font-size:14px;
+      transition:0.2s;
+    }
+    .cookie-btn.accept{background:#26c6da;color:#0B0F19}
+    .cookie-btn.accept:hover{background:#00b4cc;transform:translateY(-1px)}
+    .cookie-btn.reject{background:transparent;color:#D1D5DB;border:1px solid #24334C}
+    .cookie-btn.reject:hover{background:rgba(255,255,255,0.05);border-color:#26c6da}
+    @media (max-width:600px){.cookie-banner{bottom:10px;left:10px;right:10px;padding:16px}}
   </style>
 </head>
 <body>
@@ -45,77 +312,203 @@
       <header class="hero">
         <span class="eyebrow">Guida rischio/rendimento</span>
         <h1>Sharpe Ratio: quanto rendimento stai ottenendo per ogni unità di rischio</h1>
-        <p class="lead">Lo Sharpe Ratio è una delle metriche più diffuse nell'analisi quantitativa perché collega due dimensioni centrali di qualsiasi investimento: il rendimento e la volatilità. Non si limita a chiedere quanto hai guadagnato, ma valuta quanta instabilità hai dovuto sopportare per ottenerlo.</p>
+        <p class="lead">Lo <strong>Sharpe Ratio (Indice di Sharpe)</strong> è una delle metriche più diffuse nell'analisi quantitativa perché collega due dimensioni centrali di qualsiasi investimento: il rendimento e la volatilità. Non si limita a chiedere <em>quanto hai guadagnato</em>, ma valuta <em>quanta instabilità hai dovuto sopportare</em> per ottenerlo. Questa guida completa ti spiegherà formula, calcolo, interpretazione, limiti e come utilizzarlo nella pratica.</p>
       </header>
       <div class="content">
-        <section>
-          <h2>Che cosa misura</h2>
-          <p>Lo Sharpe Ratio misura il rendimento in eccesso rispetto a un tasso privo di rischio, diviso per la volatilità del portafoglio o dello strumento analizzato. In termini semplici, valuta l'efficienza con cui un investimento ha trasformato il rischio assunto in rendimento aggiuntivo.</p>
-          
-          <div class="formula">Sharpe Ratio = (Rendimento Portafoglio - Tasso Risk Free) / Volatilità</div>
-          
+        <!-- Indice dei contenuti -->
+        <section class="toc">
+          <h2>📑 Indice della guida</h2>
+          <ul>
+            <li><a href="#definizione" style="color:var(--accent); text-decoration:none;">1. Che cosa misura lo Sharpe Ratio?</a></li>
+            <li><a href="#formula" style="color:var(--accent); text-decoration:none;">2. La formula e il significato dei componenti</a></li>
+            <li><a href="#calcolatore" style="color:var(--accent); text-decoration:none;">3. Calcolatore interattivo dello Sharpe Ratio</a></li>
+            <li><a href="#esempi" style="color:var(--accent); text-decoration:none;">4. Esempi pratici su ETF e portafogli</a></li>
+            <li><a href="#interpretazione" style="color:var(--accent); text-decoration:none;">5. Come interpretare il valore (scala di riferimento)</a></li>
+            <li><a href="#confronto" style="color:var(--accent); text-decoration:none;">6. Sharpe Ratio vs Sortino Ratio vs Calmar Ratio</a></li>
+            <li><a href="#limiti" style="color:var(--accent); text-decoration:none;">7. Limiti, criticità ed errori frequenti</a></li>
+            <li><a href="#applicazioni" style="color:var(--accent); text-decoration:none;">8. Applicazioni pratiche: selezione ETF e backtesting</a></li>
+            <li><a href="#bestpractice" style="color:var(--accent); text-decoration:none;">9. Best practice per usare lo Sharpe Ratio in modo professionale</a></li>
+            <li><a href="#" id="open_preferences_center">📌 Gestisci le preferenze sui cookie</a></li>
+          </ul>
+        </section>
+
+        <!-- 1. DEFINIZIONE -->
+        <section id="definizione">
+          <h2>1. Che cosa misura lo Sharpe Ratio?</h2>
+          <p>Ideato dal premio Nobel <strong>William F. Sharpe</strong> nel 1966, lo Sharpe Ratio misura il <strong>premio per il rischio</strong> (rendimento in eccesso rispetto a un'attività priva di rischio) per ogni unità di volatilità sopportata. In altre parole, risponde alla domanda: "quanto rendimento extra ho ottenuto per ogni punto percentuale di oscillazione del mio portafoglio?"</p>
           <p>Il principio è intuitivo: se due strumenti hanno prodotto lo stesso rendimento, ma uno lo ha fatto con oscillazioni molto più contenute, sarà considerato migliore sotto il profilo dello Sharpe Ratio. Questa logica rende la metrica particolarmente utile per confrontare strategie diverse in modo più rigoroso del semplice rendimento assoluto.</p>
+          <div class="quote">"Lo Sharpe Ratio non è la verità assoluta, ma è il miglior tentativo di normalizzare il rendimento con il rischio. Un portafoglio con Sharpe 0,8 è, a parità di altre condizioni, più efficiente di uno con Sharpe 0,4." — William F. Sharpe</div>
         </section>
 
-        <section>
-          <h2>Perché il rendimento da solo non basta</h2>
-          <p>Un portafoglio che chiude l'anno a +12% può apparire attraente finché non si scopre che durante l'anno ha subito forti cadute, alta volatilità e movimenti erratici. Lo Sharpe Ratio nasce proprio per evitare questo tipo di lettura superficiale: il risultato finale non basta, conta anche il prezzo pagato in termini di instabilità.</p>
-          <p>Per un investitore disciplinato, il rischio non è un concetto accessorio ma una parte strutturale dell'analisi. Le strategie più robuste non sono necessariamente quelle con il rendimento più alto in assoluto, ma quelle che mostrano una relazione più efficiente tra crescita e variabilità.</p>
+        <!-- 2. FORMULA -->
+        <section id="formula">
+          <h2>2. La formula e il significato dei componenti</h2>
+          <div class="formula">Sharpe Ratio = (Rendimento Portafoglio - Tasso Risk Free) / Volatilità (σ)</div>
+          <p>Dove:</p>
+          <ul>
+            <li><strong>Rendimento Portafoglio</strong>: rendimento medio del portafoglio o dello strumento nel periodo considerato (spesso annualizzato).</li>
+            <li><strong>Tasso Risk Free</strong>: rendimento di un'attività priva di rischio, tipicamente i titoli di stato a breve termine (es. BOT a 12 mesi, Bund tedesco o Treasury USA). In Italia si usa spesso il rendimento dei BTP a 10 anni o l'euribor a 3 mesi.</li>
+            <li><strong>Volatilità (σ)</strong>: scarto quadratico medio (deviazione standard) dei rendimenti del portafoglio. Misura l'oscillazione media attorno al rendimento medio.</li>
+          </ul>
+          <p>Il numeratore è il <strong>premio per il rischio</strong> – il compenso che l'investitore riceve per aver scelto un'attività rischiosa invece di una priva di rischio. Più alto è il premio, migliore è la performance risk-adjusted. Il denominatore è la volatilità: più bassa è, più stabile è il percorso.</p>
         </section>
 
-        <section>
-          <h2>Come interpretarlo</h2>
+        <!-- 3. CALCOLATORE INTERATTIVO -->
+        <section id="calcolatore">
+          <h2>3. 🧮 Calcolatore interattivo dello Sharpe Ratio</h2>
+          <div class="interactive-box">
+            <p><label>Rendimento portafoglio (% annuo): </label><input type="number" id="rendimento" value="12" step="0.5"></p>
+            <p><label>Tasso Risk Free (% annuo): </label><input type="number" id="riskfree" value="3" step="0.5"></p>
+            <p><label>Volatilità (σ, % annua): </label><input type="number" id="volatilita" value="15" step="1"></p>
+            <button class="calc-btn" id="calcSharpeBtn">Calcola Sharpe Ratio</button>
+            <p id="sharpeResult" style="font-size:1.4rem; font-weight:bold; color:var(--accent); margin-top:10px;">Sharpe = --</p>
+            <div class="note">💡 Inserisci i dati del tuo portafoglio o ETF. Un Sharpe > 1 è considerato eccellente, tra 0,5 e 1 buono, tra 0 e 0,5 scarso, negativo significa che il rendimento è inferiore al tasso risk free.</div>
+          </div>
+        </section>
+
+        <!-- 4. ESEMPI PRATICI -->
+        <section id="esempi">
+          <h2>4. Esempi pratici su ETF e portafogli</h2>
           <div class="grid">
             <div class="box">
-              <h3>Valori bassi</h3>
-              <p>Uno Sharpe Ratio basso o vicino a zero suggerisce che il rendimento extra rispetto al tasso privo di rischio è modesto in rapporto alla volatilità sopportata. In pratica, il portafoglio non sta remunerando il rischio in modo soddisfacente.</p>
+              <h3>📊 Esempio 1: ETF Azionario Globale</h3>
+              <p>Rendimento medio annuo = 10%, Risk Free = 2%, Volatilità = 15%<br>
+              Sharpe = (10-2)/15 = 8/15 = <strong>0,53</strong>. Un valore nella media per un ETF azionario globale su lungo periodo (es. MSCI World).</p>
             </div>
             <div class="box">
-              <h3>Valori più elevati</h3>
-              <p>Uno Sharpe Ratio più alto indica invece una migliore efficienza rischio/rendimento. Non significa assenza di rischio, ma segnala che per ogni unità di volatilità il portafoglio ha generato un premio più convincente.</p>
+              <h3>📈 Esempio 2: Portafoglio bilanciato 60/40</h3>
+              <p>Rendimento = 8%, Risk Free = 2%, Volatilità = 9%<br>
+              Sharpe = (8-2)/9 = 6/9 = <strong>0,67</strong>. Migliore dell'azionario puro grazie alla minore volatilità dovuta alle obbligazioni.</p>
+            </div>
+            <div class="box">
+              <h3>⚡ Esempio 3: Hedge Fund trend-following</h3>
+              <p>Rendimento = 15%, Risk Free = 2%, Volatilità = 12%<br>
+              Sharpe = (15-2)/12 = 13/12 = <strong>1,08</strong>. Un valore eccellente, tipico di strategie che sanno limitare i drawdown.</p>
+            </div>
+            <div class="box">
+              <h3>🔻 Esempio 4: Sharpe negativo</h3>
+              <p>Rendimento = 1%, Risk Free = 3%, Volatilità = 20%<br>
+              Sharpe = (1-3)/20 = -2/20 = <strong>-0,10</strong>. Il portafoglio ha reso meno del tasso privo di rischio, peggiore di un semplice BOT.</p>
             </div>
           </div>
-          <p>È importante ricordare che lo Sharpe Ratio non va letto in modo assoluto e isolato. Va sempre contestualizzato rispetto alla tipologia di strategia, all'orizzonte temporale, al benchmark di riferimento e alla fase di mercato considerata.</p>
         </section>
 
-        <section>
-          <h2>Ambiti di utilizzo</h2>
-          <div class="box">
-            <ul>
-              <li>Confronto tra ETF con rendimento simile ma volatilità diversa.</li>
-              <li>Valutazione di portafogli multi-asset con differenti livelli di diversificazione.</li>
-              <li>Monitoraggio dell'efficienza di una strategia quantitativa nel tempo.</li>
-              <li>Selezione di approcci che privilegiano stabilità e coerenza, non solo performance lorda.</li>
-              <li><a href="#" id="open_preferences_center">Gestisci le preferenze sui cookie</a></li>
-            </ul>
+        <!-- 5. INTERPRETAZIONE DEI VALORI -->
+        <section id="interpretazione">
+          <h2>5. Come interpretare il valore (scala di riferimento)</h2>
+          <p>Non esiste una soglia universale, ma in ambito finanziario si utilizzano queste indicazioni orientative:</p>
+          <ul>
+            <li><strong>Sharpe < 0:</strong> Il portafoglio ha reso meno di un investimento privo di rischio. Da evitare o rivedere radicalmente.</li>
+            <li><strong>Sharpe tra 0 e 0,5:</strong> Performance risk-adjusted modesta o scarsa. Il premio per il rischio non compensa adeguatamente la volatilità.</li>
+            <li><strong>Sharpe tra 0,5 e 1:</strong> Buono. Per la maggior parte dei portafogli diversificati (azionario globale, bilanciato) è un target realistico.</li>
+            <li><strong>Sharpe tra 1 e 2:</strong> Eccellente. Tipico di hedge fund, strategie market neutral o periodi di mercato favorevoli.</li>
+            <li><strong>Sharpe > 2:</strong> Eccezionale (ma spesso insostenibile nel lungo periodo o frutto di data snooping).</li>
+          </ul>
+          <div class="warning-box">
+            <strong>⚠️ Attenzione:</strong> lo Sharpe Ratio va confrontato tra strategie simili e sullo stesso orizzonte temporale. Un Sharpe di 1,2 su 3 anni non è direttamente paragonabile a uno Sharpe di 0,8 su 10 anni, perché il rischio e le condizioni di mercato cambiano.
           </div>
         </section>
 
-        <section>
-          <h2>I limiti dello Sharpe Ratio</h2>
-          <p>Pur essendo molto utile, lo Sharpe Ratio presenta alcuni limiti concettuali. Il primo è che usa la volatilità come misura generale del rischio, trattando allo stesso modo oscillazioni positive e negative. Tuttavia, per molti investitori la vera preoccupazione non è tutta la volatilità, ma soprattutto la componente negativa.</p>
-          <p>Inoltre, la metrica può essere sensibile alla finestra temporale e alle ipotesi sul tasso risk free. Strategie con distribuzioni dei rendimenti molto asimmetriche, oppure con eventi estremi poco frequenti, possono apparire migliori o peggiori di quanto siano in realtà se lette soltanto attraverso lo Sharpe Ratio.</p>
-          <div class="quote">Lo Sharpe Ratio è eccellente per misurare l'efficienza media di un portafoglio, ma non sostituisce un'analisi completa della profondità delle perdite, della simmetria dei rendimenti e della sostenibilità del percorso.</div>
+        <!-- 6. CONFRONTO CON SORTINO E CALMAR -->
+        <section id="confronto">
+          <h2>6. Sharpe Ratio vs Sortino Ratio vs Calmar Ratio</h2>
+          <table class="comparison-table">
+            <thead>
+              <tr><th>Metrica</th><th>Rischio considerato</th><th>Vantaggio</th><th>Svantaggio</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Sharpe Ratio</strong></td>
+                <td>Volatilità totale (up e down)</td>
+                <td>Molto diffuso, facile da calcolare</td>
+                <td>Considera allo stesso modo le oscillazioni positive e negative</td>
+              </tr>
+              <tr>
+                <td><strong>Sortino Ratio</strong></td>
+                <td>Solo volatilità al ribasso (downside deviation)</td>
+                <td>Più adatto per investitori che temono solo le perdite</td>
+                <td>Richiede una soglia minima (MAR) da definire</td>
+              </tr>
+              <tr>
+                <td><strong>Calmar Ratio</strong></td>
+                <td>Max Drawdown (perdita massima storica)</td>
+                <td>Molto intuitivo, legato a un evento reale</td>
+                <td>Sensibile a outlier e dipendente dal periodo</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>Nell'analisi quantitativa professionale si usano tutte e tre le metriche. Lo Sharpe è il punto di partenza; il Sortino lo integra penalizzando solo la volatilità negativa; il Calmar valuta la robustezza estrema.</p>
         </section>
 
-        <section>
-          <h2>Sharpe Ratio e altre metriche</h2>
-          <p>Una lettura professionale affianca sempre lo Sharpe Ratio ad altre misure. Il Sortino Ratio isola la volatilità negativa; il Max Drawdown mostra la perdita massima dal picco; il CAGR misura la crescita composta; il Calmar Ratio collega rendimento e drawdown. Insieme, queste metriche forniscono una visione più equilibrata di robustezza e fragilità.</p>
+        <!-- 7. LIMITI ED ERRORI FREQUENTI -->
+        <section id="limiti">
+          <h2>7. Limiti, criticità ed errori frequenti</h2>
+          <div class="warning-box">
+            <strong>⚠️ I limiti dello Sharpe Ratio che devi conoscere:</strong>
+          </div>
+          <ul>
+            <li><strong>Assume distribuzione normale dei rendimenti:</strong> nei mercati finanziari i rendimenti hanno code spesse (eventi estremi più frequenti di quanto previsto da una normale). Lo Sharpe sottostima il rischio di coda.</li>
+            <li><strong>Non distingue tra volatilità positiva e negativa:</strong> per molti investitori, le oscillazioni verso l'alto non sono un rischio, ma lo Sharpe le penalizza ugualmente.</li>
+            <li><strong>Sensibile alla frequenza di campionamento:</strong> lo Sharpe calcolato su rendimenti giornalieri, mensili o annuali può differire significativamente (problema della serial correlazione).</li>
+            <li><strong>Dipende dalla scelta del tasso risk free:</strong> usare un BOT a 3 mesi o un BTP a 10 anni cambia il risultato. La prassi è usare un tasso a breve termine (es. rendimento dei titoli di stato a 1 anno).</li>
+            <li><strong>Non considera la liquidità o i costi di transazione:</strong> uno Sharpe alto su dati lordi può crollare al netto dei costi.</li>
+            <li><strong>Errore comune:</strong> confrontare Sharpe di strategie con orizzonti temporali diversi. Annualizzare lo Sharpe mensile non è sempre corretto se i rendimenti non sono indipendenti.</li>
+          </ul>
+          <div class="quote">"Lo Sharpe Ratio è come un termometro: ti dice se c'è febbre, ma non la causa. Usalo con altre metriche per capire la salute del portafoglio."</div>
         </section>
 
-        <section>
-          <h2>Come usarlo in modo corretto</h2>
-          <p>Lo Sharpe Ratio è più utile quando viene confrontato tra strumenti omogenei e su periodi sufficientemente lunghi. Va interpretato come indicatore di efficienza, non come giudizio definitivo. Una strategia solida non è quella che massimizza un singolo indicatore, ma quella che mantiene coerenza tra rendimento, controllo del rischio e sostenibilità nel tempo.</p>
-          <p class="note">Contenuto informativo ed educativo. Non costituisce consulenza finanziaria o raccomandazione personalizzata.</p>
+        <!-- 8. APPLICAZIONI PRATICHE -->
+        <section id="applicazioni">
+          <h2>8. Applicazioni pratiche: selezione ETF e backtesting</h2>
+          <div class="grid">
+            <div class="box">
+              <h3>🎯 Selezione tra ETF simili</h3>
+              <p>Due ETF sull'S&P500 possono avere rendimenti simili ma Sharpe diversi a causa di tracking error, costi o diversa gestione del rischio. Preferisci quello con Sharpe storico più alto.</p>
+            </div>
+            <div class="box">
+              <h3>🛠️ Ottimizzazione di portafoglio</h3>
+              <p>Nella Teoria Moderna del Portafoglio (Markowitz), si cerca di massimizzare lo Sharpe Ratio per trovare il portafoglio tangente (efficiente). È l'obiettivo principale dell'allocazione dei pesi tra asset.</p>
+            </div>
+            <div class="box">
+              <h3>📊 Valutazione di un fondo comune</h3>
+              <p>Prima di investire in un fondo, confronta il suo Sharpe con quello del benchmark e della categoria. Un fondo attivo dovrebbe giustificare le commissioni con uno Sharpe superiore al benchmark.</p>
+            </div>
+            <div class="box">
+              <h3>⏱️ Monitoraggio nel tempo (rolling Sharpe)</h3>
+              <p>Calcolare lo Sharpe su finestre mobili (es. 36 mesi) aiuta a vedere se l'efficienza della strategia si sta deteriorando. Un Sharpe in calo costante è un segnale di allarme.</p>
+            </div>
+          </div>
         </section>
+
+        <!-- 9. BEST PRACTICE -->
+        <section id="bestpractice">
+          <h2>9. Best practice per usare lo Sharpe Ratio in modo professionale</h2>
+          <ul>
+            <li><strong>Annualizza correttamente:</strong> per rendimenti mensili, moltiplica il rendimento medio per 12 e la volatilità per √12. La formula completa: Sharpe annuale = (rendimento medio mensile * 12 - risk free) / (volatilità mensile * √12).</li>
+            <li><strong>Usa il tasso risk free appropriato:</strong> per portafogli in euro, usa l'€STR o il rendimento dei BOT a 12 mesi. Per portafogli globali, spesso si usa il tasso dei Treasury USA a 3 mesi.</li>
+            <li><strong>Affianca sempre lo Sharpe ad altre metriche:</strong> Sortino, Calmar, Max Drawdown, e anche il rapporto di Information Ratio se confronti con un benchmark.</li>
+            <li><strong>Non fidarti di Sharpe calcolati su periodi troppo brevi (< 3 anni):</strong> un anno favorevole può gonfiare artificialmente lo Sharpe.</li>
+            <li><strong>Attenzione alla non normalità:</strong> se la strategia presenta rendimenti fortemente asimmetrici (es. vendita di opzioni), lo Sharpe può essere fuorviante. In quei casi usa il Sortino o il rapporto di Omega.</li>
+          </ul>
+          <div class="box">
+            <h3>📐 Esempio di calcolo annualizzato da dati mensili</h3>
+            <p>Supponiamo rendimento medio mensile = 0,8%, volatilità mensile = 4%.<br>
+            Rendimento annualizzato = 0,8% * 12 = 9,6%.<br>
+            Volatilità annualizzata = 4% * √12 = 4% * 3,464 = 13,86%.<br>
+            Sharpe (con risk free annuale 2%) = (9,6-2)/13,86 = 7,6/13,86 = 0,55.</p>
+          </div>
+          <p class="note"><strong>Contenuto informativo ed educativo:</strong> Le informazioni contenute in questa guida non costituiscono consulenza finanziaria, sollecitazione all'investimento o raccomandazione personalizzata. Prima di qualsiasi decisione di investimento, consultare un consulente finanziario indipendente.</p>
+        </section>
+
+        <p><span id="open_preferences_center_bottom" style="color: var(--accent); text-decoration: underline; cursor: pointer;">📌 Gestisci le preferenze sui cookie</span></p>
       </div>
       <footer class="footer">VQuantPro · Metriche che aiutano a leggere il rapporto tra rendimento ottenuto e rischio sopportato.</footer>
     </article>
   </main>
 
-  <!-- Cookie Banner Personalizzato -->
+  <!-- Cookie Banner Interattivo -->
   <div id="cookie-banner" class="cookie-banner" style="display:none;">
-      <p>Questo sito utilizza cookie tecnici necessari al funzionamento. Con il tuo consenso, potremmo utilizzare cookie di terze parti per annunci personalizzati. <a href="/privacy/index.html">Privacy Policy</a></p>
+      <p>🔐 Utilizziamo cookie tecnici per il funzionamento del sito. Con il tuo consenso, utilizziamo cookie di terze parti per annunci personalizzati. <a href="/privacy/index.html">Privacy Policy</a> | <a href="/cookie/index.html">Cookie Policy</a></p>
       <div class="cookie-buttons">
           <button id="cookie-accept" class="cookie-btn accept">Accetta tutti</button>
           <button id="cookie-reject" class="cookie-btn reject">Solo necessari</button>
@@ -128,6 +521,7 @@
       const acceptBtn = document.getElementById('cookie-accept');
       const rejectBtn = document.getElementById('cookie-reject');
       const prefsLink = document.getElementById('open_preferences_center');
+      const prefsLinkBottom = document.getElementById('open_preferences_center_bottom');
       
       if (!localStorage.getItem('cookie-consent')) {
           banner.style.display = 'flex';
@@ -136,18 +530,19 @@
       function setConsent(value) {
           localStorage.setItem('cookie-consent', value);
           banner.style.display = 'none';
-          if (value === 'accepted') loadExternalScripts();
+          if (value === 'accepted') {
+              loadExternalScripts();
+          } else {
+              removeExternalScripts();
+          }
       }
       
-      acceptBtn.addEventListener('click', function() { setConsent('accepted'); });
-      rejectBtn.addEventListener('click', function() { setConsent('rejected'); });
+      if (acceptBtn) acceptBtn.addEventListener('click', () => setConsent('accepted'));
+      if (rejectBtn) rejectBtn.addEventListener('click', () => setConsent('rejected'));
       
-      if (prefsLink) {
-          prefsLink.addEventListener('click', function(e) {
-              e.preventDefault();
-              banner.style.display = 'flex';
-          });
-      }
+      const handlePrefs = (e) => { e.preventDefault(); banner.style.display = 'flex'; };
+      if (prefsLink) prefsLink.addEventListener('click', handlePrefs);
+      if (prefsLinkBottom) prefsLinkBottom.addEventListener('click', handlePrefs);
       
       if (localStorage.getItem('cookie-consent') === 'accepted') {
           loadExternalScripts();
@@ -167,8 +562,37 @@
               document.head.appendChild(fcScript);
           }
       }
+      
+      function removeExternalScripts() {
+          var scripts = document.querySelectorAll('script[src*="adsbygoogle"], script[src*="fundingchoicesmessages"]');
+          scripts.forEach(script => script.remove());
+      }
+  })();
+
+  // Calcolatore Sharpe interattivo
+  (function(){
+      const calcBtn = document.getElementById('calcSharpeBtn');
+      if(calcBtn){
+          calcBtn.addEventListener('click', function(){
+              let rend = parseFloat(document.getElementById('rendimento').value);
+              let rf = parseFloat(document.getElementById('riskfree').value);
+              let vol = parseFloat(document.getElementById('volatilita').value);
+              const resultEl = document.getElementById('sharpeResult');
+              if(isNaN(rend) || isNaN(rf) || isNaN(vol) || vol <= 0){
+                  resultEl.innerHTML = "Inserisci valori validi (volatilità > 0)";
+                  return;
+              }
+              const sharpe = (rend - rf) / vol;
+              resultEl.innerHTML = `Sharpe = ${sharpe.toFixed(2)}`;
+              // Aggiunta di un commento interpretativo
+              if(sharpe > 1) resultEl.innerHTML += " (eccellente)";
+              else if(sharpe > 0.5) resultEl.innerHTML += " (buono)";
+              else if(sharpe > 0) resultEl.innerHTML += " (scarso)";
+              else resultEl.innerHTML += " (negativo, sotto risk free)";
+          });
+          document.getElementById('calcSharpeBtn').click();
+      }
   })();
   </script>
-
 </body>
 </html>
