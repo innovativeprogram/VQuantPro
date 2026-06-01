@@ -3,168 +3,420 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Diversificazione: ridurre il rischio senza spegnere il rendimento | VQuantPro</title>
+  <title>Diversificazione: la guida completa per ridurre il rischio senza spegnere il rendimento | VQuantPro</title>
   
   <link rel="canonical" href="https://vquantpro.it/guida-diversificazione.html" />
   <link rel="icon" type="image/png" href="/favicon.png">
 
-  <meta name="description" content="Guida professionale alla diversificazione: perché funziona, come costruirla, quali errori evitare e come usarla nei portafogli ETF.">
+  <meta name="description" content="Guida definitiva alla diversificazione di portafoglio: teoria, formula della correlazione, errori comuni e consigli pratici su come costruire un portafoglio resiliente. Include calcolatore interattivo.">
+  <meta name="keywords" content="diversificazione, portafoglio diversificato, correlazione, teoria moderna del portafoglio, Markowitz, riduzione del rischio, asset allocation, diversificazione settoriale">
+  <meta name="author" content="Canio Tedesco, VQuantPro">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
   <style>
-    body{margin:0;font-family:'Inter',sans-serif;background:linear-gradient(180deg,#0a0f1c 0%,#0b1020 100%);color:#d8e1ef;line-height:1.75}
+    :root{
+      --bg:#0b1020;
+      --panel:#131b2f;
+      --panel-2:#17233b;
+      --border:#273553;
+      --text:#d8e1ef;
+      --muted:#99a8bf;
+      --title:#f8fbff;
+      --accent:#10b981;
+      --accent-soft:rgba(16,185,129,.12);
+      --code:#0a1324;
+      --shadow:0 18px 50px rgba(0,0,0,.35);
+      --accent-dark:#059669;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:'Inter',sans-serif;
+      background:linear-gradient(180deg,#0a0f1c 0%,#0b1020 100%);
+      color:var(--text);
+      line-height:1.75;
+      font-size:16px;
+    }
     .wrap{max-width:980px;margin:0 auto;padding:28px 20px 60px}
-    .card{background:linear-gradient(180deg,#131b2f 0%,#17233b 100%);border:1px solid #273553;border-radius:20px;box-shadow:0 18px 50px rgba(0,0,0,.35);overflow:hidden}
-    .topbar,.footer{padding:18px 24px;border-bottom:1px solid #273553}
-    .footer{border-top:1px solid #273553;border-bottom:none;color:#99a8bf;font-size:.93rem}
-    .topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;background:rgba(255,255,255,.02)}
-    .brand{font-weight:700;color:#f8fbff}
-    .back{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;text-decoration:none;background:#1c2942;color:#eaf2ff;border:1px solid #314261}
-    .hero{padding:38px 24px 16px}
-    .eyebrow{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25);color:#cdfbe8;font-size:13px;font-weight:600}
-    h1{font-size:clamp(2rem,3vw,3rem);line-height:1.08;color:#f8fbff;margin:18px 0 14px}
-    .lead{font-size:1.08rem;color:#c7d3e5;max-width:72ch}
-    .content{padding:8px 24px 34px}
-    h2{font-size:1.45rem;margin:34px 0 12px;padding-left:14px;border-left:4px solid #10b981;color:#f8fbff}
-    h3{color:#f8fbff;margin:24px 0 10px}
-    p{margin:0 0 18px}
+    .card{
+      background:linear-gradient(180deg,var(--panel) 0%,var(--panel-2) 100%);
+      border:1px solid var(--border);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      transition:transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card:hover {
+      transform:translateY(-2px);
+      box-shadow:0 20px 40px rgba(0,0,0,0.4);
+    }
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+      align-items:center;
+      padding:18px 28px;
+      border-bottom:1px solid var(--border);
+      background:rgba(255,255,255,.02)
+    }
+    .brand{
+      font-weight:800;
+      letter-spacing:-0.01em;
+      font-size:1.35rem;
+      background:linear-gradient(135deg,#fff 0%,var(--accent) 100%);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+    .back{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:40px;
+      text-decoration:none;
+      background:#1c2942;
+      color:#eaf2ff;
+      border:1px solid #314261;
+      transition:all 0.2s ease;
+    }
+    .back:hover{
+      background:#233153;
+      border-color:var(--accent);
+      color:var(--accent);
+    }
+    .hero{padding:38px 28px 16px}
+    .eyebrow{
+      display:inline-block;
+      padding:6px 12px;
+      border-radius:999px;
+      background:var(--accent-soft);
+      border:1px solid rgba(16,185,129,.25);
+      color:#cdfbe8;
+      font-size:12px;
+      font-weight:600;
+      letter-spacing:.02em;
+      text-transform:uppercase;
+    }
+    h1{
+      font-size:clamp(2rem,4vw,3.2rem);
+      line-height:1.15;
+      font-weight:800;
+      color:var(--title);
+      margin:18px 0 14px;
+      letter-spacing:-0.02em;
+    }
+    .lead{
+      font-size:1.15rem;
+      color:#c7d3e5;
+      max-width:75ch;
+      font-weight:400;
+      border-left:3px solid var(--accent);
+      padding-left:20px;
+      margin-top:10px;
+    }
+    .content{padding:8px 28px 34px}
+    .toc,.box,.formula,.quote,.highlight-box{margin:28px 0}
+    .toc,.box{
+      background:rgba(8,15,30,.5);
+      border:1px solid var(--border);
+      border-radius:20px;
+      padding:24px;
+      backdrop-filter:blur(4px);
+    }
+    .toc h2,.box h2,section h2{
+      font-size:1.45rem;
+      font-weight:700;
+      margin:0 0 16px 0;
+      padding-left:0;
+      border-left:none;
+      color:var(--title);
+    }
+    h2{
+      font-size:1.65rem;
+      font-weight:700;
+      margin:48px 0 16px;
+      padding-bottom:8px;
+      border-bottom:2px solid rgba(16,185,129,0.3);
+      color:var(--title);
+    }
+    h3{
+      color:var(--title);
+      margin:28px 0 12px;
+      font-size:1.25rem;
+      font-weight:600;
+    }
+    p{
+      margin:0 0 18px;
+      color:var(--text);
+      line-height:1.7;
+    }
     ul{margin:0;padding-left:20px}
-    li{margin:0 0 12px}
-    .box,.formula,.quote{margin:24px 0}
-    .box{background:rgba(8,15,30,.42);border:1px solid #273553;border-radius:16px;padding:20px}
-    .formula{background:#0a1324;border:1px solid #1c3450;border-radius:14px;padding:18px 20px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#a7f3d0;font-size:1.03rem;text-align:center}
-    .quote{padding:22px;border-left:4px solid #10b981;background:rgba(16,185,129,.12);border-radius:0 14px 14px 0;color:#f0fff9}
-    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
-    .note{color:#99a8bf;font-size:.96rem}
-    @media (max-width:760px){.grid{grid-template-columns:1fr}.hero,.content,.topbar,.footer{padding-left:18px;padding-right:18px}}
+    li{margin:0 0 8px;color:var(--muted)}
+    .formula{
+      background:var(--code);
+      border:1px solid #1c3450;
+      border-radius:16px;
+      padding:20px 24px;
+      font-family:'JetBrains Mono',monospace;
+      color:#a7f3d0;
+      font-size:1.2rem;
+      text-align:center;
+      overflow-x:auto;
+      font-weight:500;
+    }
+    .quote{
+      padding:24px;
+      border-left:4px solid var(--accent);
+      background:var(--accent-soft);
+      border-radius:0 20px 20px 0;
+      color:#f0fff9;
+      font-style:italic;
+      font-size:1.05rem;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:24px
+    }
+    .note{
+      color:var(--muted);
+      font-size:.9rem;
+      padding:12px;
+      background:rgba(0,0,0,0.2);
+      border-radius:12px;
+    }
+    .footer{
+      padding:24px 28px;
+      border-top:1px solid var(--border);
+      color:var(--muted);
+      font-size:.85rem;
+      background:rgba(0,0,0,0.2);
+    }
+    .inline-code{
+      background:var(--code);
+      padding:3px 8px;
+      border-radius:8px;
+      font-family:'JetBrains Mono',monospace;
+      font-size:.85em;
+      color:var(--accent);
+    }
+    .comparison-table{
+      width:100%;
+      border-collapse:collapse;
+      margin:20px 0;
+    }
+    .comparison-table th,.comparison-table td{
+      border:1px solid var(--border);
+      padding:12px;
+      text-align:left;
+    }
+    .comparison-table th{
+      background:rgba(16,185,129,0.1);
+      color:var(--accent);
+      font-weight:600;
+    }
+    .interactive-box{
+      background:rgba(0,0,0,0.3);
+      border-radius:16px;
+      padding:20px;
+      text-align:center;
+      transition:all 0.2s ease;
+    }
+    .interactive-box input{
+      background:var(--code);
+      border:1px solid var(--border);
+      color:var(--title);
+      padding:8px 12px;
+      border-radius:8px;
+      margin:5px;
+      width:100px;
+      font-family:'JetBrains Mono',monospace;
+    }
+    .calc-btn{
+      background:var(--accent);
+      color:var(--code);
+      border:none;
+      padding:10px 24px;
+      border-radius:40px;
+      font-weight:bold;
+      cursor:pointer;
+      transition:0.2s;
+      margin-top:10px;
+    }
+    .calc-btn:hover{
+      background:var(--accent-dark);
+      transform:scale(0.98);
+    }
+    @media (max-width:760px){
+      .grid{grid-template-columns:1fr}
+      .hero,.content,.topbar,.footer{padding-left:20px;padding-right:20px}
+      h1{font-size:clamp(1.8rem,5vw,2.4rem)}
+      .lead{font-size:1rem}
+    }
 
-    /* Cookie Banner */
-    .cookie-banner { position: fixed; bottom: 0; left: 0; right: 0; background: #161F30; border-top: 2px solid #10b981; padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; z-index: 10000; gap: 15px; font-size: 14px; color: #D1D5DB; box-shadow: 0 -5px 20px rgba(0,0,0,0.5); }
-    .cookie-banner p { margin: 0; flex: 1 1 300px; }
-    .cookie-banner a { color: #10b981; text-decoration: underline; }
-    .cookie-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
-    .cookie-btn { padding: 10px 20px; border-radius: 6px; font-weight: 600; cursor: pointer; border: none; font-size: 14px; }
-    .cookie-btn.accept { background: #10b981; color: #0B0F19; }
-    .cookie-btn.reject { background: transparent; color: #D1D5DB; border: 1px solid #24334C; }
+    /* Cookie Banner Moderno */
+    .cookie-banner{
+      position:fixed;
+      bottom:20px;
+      left:20px;
+      right:20px;
+      background:#161F30;
+      border:1px solid rgba(16,185,129,0.3);
+      backdrop-filter:blur(10px);
+      border-radius:20px;
+      padding:20px 24px;
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+      z-index:10000;
+      gap:15px;
+      font-size:14px;
+      color:#D1D5DB;
+      box-shadow:0 20px 35px -8px rgba(0,0,0,0.5);
+    }
+    .cookie-banner p{margin:0;flex:1 1 300px}
+    .cookie-banner a{color:#10b981;text-decoration:underline}
+    .cookie-buttons{display:flex;gap:12px;flex-wrap:wrap}
+    .cookie-btn{
+      padding:10px 20px;
+      border-radius:40px;
+      font-weight:600;
+      cursor:pointer;
+      border:none;
+      font-size:14px;
+      transition:0.2s;
+    }
+    .cookie-btn.accept{background:#10b981;color:#0B0F19}
+    .cookie-btn.accept:hover{background:#059669;transform:translateY(-1px)}
+    .cookie-btn.reject{background:transparent;color:#D1D5DB;border:1px solid #24334C}
+    .cookie-btn.reject:hover{background:rgba(255,255,255,0.05);border-color:#10b981}
+    @media (max-width:600px){.cookie-banner{bottom:10px;left:10px;right:10px;padding:16px}}
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="card">
+  <main class="wrap">
+    <article class="card">
       <div class="topbar">
         <div class="brand">VQuantPro</div>
         <a class="back" href="/">← Torna alla Home</a>
       </div>
-      <div class="hero">
-        <span class="eyebrow">Guida portafoglio</span>
+      <header class="hero">
+        <span class="eyebrow">Guida costruzione portafoglio</span>
         <h1>Diversificazione: ridurre il rischio senza spegnere il rendimento</h1>
-        <p class="lead">La diversificazione è uno dei principi più solidi della costruzione di portafoglio. L'idea è semplice: non concentrare tutto in un solo asset, settore, paese o stile d'investimento, così da ridurre l'impatto di un singolo errore o di una fase di mercato sfavorevole.</p>
-      </div>
+        <p class="lead">La <strong>diversificazione</strong> è uno dei principi più solidi e razionali della costruzione di portafoglio. L'idea è semplice: non concentrare tutto il capitale in un solo asset, settore, paese o stile d'investimento, così da ridurre l'impatto di un singolo evento avverso o di una fase di mercato sfavorevole. Questa guida completa esplora la teoria, la pratica e gli errori da evitare per costruire un portafoglio resiliente.</p>
+      </header>
       <div class="content">
-        <h2>Il principio di base</h2>
-        <p>Diversificare significa distribuire il capitale tra asset differenti che non si muovono sempre nello stesso modo. Se alcuni titoli o strumenti scendono, altri possono compensare almeno in parte la perdita. Il risultato non è l'eliminazione del rischio, ma una sua gestione più efficiente.</p>
-
-        <p>In teoria, un portafoglio ben costruito dovrebbe contenere elementi con correlazioni non perfettamente allineate. È proprio la combinazione tra attività differenti a produrre una riduzione del rischio complessivo rispetto alla somma delle singole parti prese isolate.</p>
-
-        <h2>Perché funziona</h2>
-        <p>Il cuore della diversificazione è il fatto che i mercati non si muovono tutti nello stesso momento e con la stessa intensità. Alcuni asset reagiscono meglio all'inflazione, altri ai tassi, altri ancora alla crescita economica. Mettere insieme strumenti diversi significa costruire un portafoglio più resistente ai cambiamenti di scenario.</p>
-
-        <div class="formula">Rischio portafoglio &lt; somma dei rischi dei singoli asset</div>
-        <p>Questa non è magia, ma semplice statistica applicata alla correlazione. Quando gli asset non sono perfettamente correlati, il portafoglio complessivo può avere una volatilità inferiore rispetto alla media ponderata delle sue componenti.</p>
-
-        <h2>Come si costruisce bene</h2>
-        <div class="grid">
-          <div class="box">
-            <h3>Diversificazione tra asset</h3>
-            <p>Combinare azioni, obbligazioni, liquidità, materie prime o altri strumenti con comportamenti differenti aiuta a ridurre l'esposizione a un solo fattore di mercato.</p>
-          </div>
-          <div class="box">
-            <h3>Diversificazione interna</h3>
-            <p>Anche all'interno della stessa asset class è utile distribuire il rischio tra settori, aree geografiche, capitalizzazioni e stili diversi.</p>
-          </div>
-        </div>
-
-        <h2>Gli errori più comuni</h2>
-        <div class="box">
+        <!-- Indice dei contenuti -->
+        <section class="toc">
+          <h2>📑 Indice della guida</h2>
           <ul>
-            <li>Concentrare troppo capitale in strumenti che sembrano diversi ma che in realtà sono altamente correlati.</li>
-            <li>Scambiare la quantità di posizioni per vera diversificazione.</li>
-            <li>Aggiungere complessità senza ridurre davvero il rischio complessivo.</li>
-            <li>Dimenticare che la diversificazione non elimina i ribassi di mercato generale.</li>
-            <li><a href="#" id="open_preferences_center">Gestisci le preferenze sui cookie</a></li>
+            <li><a href="#principio" style="color:var(--accent); text-decoration:none;">1. Il principio di base: l'unico pasto gratis della finanza</a></li>
+            <li><a href="#matematica" style="color:var(--accent); text-decoration:none;">2. La matematica della diversificazione: correlazione e varianza</a></li>
+            <li><a href="#calcolatore" style="color:var(--accent); text-decoration:none;">3. Calcolatore interattivo della correlazione</a></li>
+            <li><a href="#costruzione" style="color:var(--accent); text-decoration:none;">4. Come si costruisce un portafoglio ben diversificato</a></li>
+            <li><a href="#quantificare" style="color:var(--accent); text-decoration:none;">5. Quanti titoli servono davvero?</a></li>
+            <li><a href="#rischio" style="color:var(--accent); text-decoration:none;">6. Rischio sistematico e non sistematico</a></li>
+            <li><a href="#errori" style="color:var(--accent); text-decoration:none;">7. Gli errori più comuni e la sovra-diversificazione</a></li>
+            <li><a href="#esempi" style="color:var(--accent); text-decoration:none;">8. Esempi concreti di portafogli diversificati</a></li>
+            <li><a href="#correlazioni" style="color:var(--accent); text-decoration:none;">9. Correlazioni attuali nel 2026: cosa sta cambiando</a></li>
+            <li><a href="#conclusione" style="color:var(--accent); text-decoration:none;">10. Conclusioni e best practice operative</a></li>
+            <li><a href="#" id="open_preferences_center">📌 Gestisci le preferenze sui cookie</a></li>
           </ul>
-        </div>
+        </section>
 
-        <h2>Diversificazione e rendimento</h2>
-        <p>Un portafoglio molto diversificato può risultare meno volatile, ma non è automaticamente il migliore in termini di rendimento. Il punto non è massimizzare il numero di strumenti, bensì trovare un equilibrio coerente con l'obiettivo dell'investitore. Una buona diversificazione riduce il rischio specifico senza annullare la possibilità di crescita.</p>
-        <div class="quote">Diversificare non significa costruire un portafoglio casuale e affollato. Significa mettere insieme asset che reagiscono in modo diverso per rendere il risultato finale più robusto.</div>
+        <!-- 1. PRINCIPIO DI BASE -->
+        <section id="principio">
+          <h2>1. Il principio di base: l'unico pasto gratis della finanza</h2>
+          <p>In finanza, non esistono pasti gratis: rendimenti più elevati di solito comportano rischi maggiori. Tuttavia, come ha dimostrato il premio Nobel Harry Markowitz, esiste un'eccezione fondamentale: la <strong>diversificazione</strong>. Combinando asset non perfettamente correlati, è possibile ridurre il rischio complessivo di un portafoglio <strong>senza necessariamente sacrificare il rendimento atteso</strong>. Questa intuizione è il cuore della Teoria Moderna del Portafoglio (MPT).</p>
+          <div class="quote">"La diversificazione è l'unico pasto gratis nella finanza." — Harry Markowitz, premio Nobel per l'economia.</div>
+          <p>In pratica, diversificare significa distribuire il capitale tra asset che non si muovono sempre nella stessa direzione e con la stessa intensità. Quando alcuni titoli o strumenti scendono, altri possono compensare almeno in parte la perdita. Il risultato non è l'eliminazione del rischio, ma una sua gestione più efficiente: a parità di rendimento atteso, si riduce la volatilità e la probabilità di perdite estreme.</p>
+        </section>
 
-        <h2>Quando è davvero utile</h2>
-        <p>La diversificazione è fondamentale soprattutto quando il capitale è significativo, l'orizzonte temporale è lungo e l'investitore vuole evitare che un singolo errore comprometta l'intero percorso. È uno dei modi più efficaci per rendere il portafoglio più resiliente nelle fasi di stress.</p>
-        <p class="note">Contenuto informativo ed educativo. Non costituisce consulenza finanziaria o raccomandazione personalizzata.</p>
-      </div>
-      <div class="footer">VQuantPro · La diversificazione non elimina il rischio, ma lo rende più gestibile e più distribuito.</div>
-    </div>
-  </div>
+        <!-- 2. MATEMATICA DELLA DIVERSIFICAZIONE -->
+        <section id="matematica">
+          <h2>2. La matematica della diversificazione: correlazione e varianza</h2>
+          <p>Il cuore matematico della diversificazione è la <strong>correlazione</strong>, una misura statistica che indica quanto due asset si muovono insieme. Il coefficiente di correlazione (ρ) varia tra -1 e +1:</p>
+          <ul>
+            <li><strong>Correlazione +1</strong>: i due asset si muovono in perfetta sincronia. La diversificazione non offre alcun beneficio.</li>
+            <li><strong>Correlazione 0</strong>: i movimenti sono indipendenti. La diversificazione riduce il rischio in modo significativo.</li>
+            <li><strong>Correlazione -1</strong>: i movimenti sono perfettamente opposti. È il caso ideale (ma raro) perché le perdite di uno sono compensate dai guadagni dell'altro.</li>
+          </ul>
+          <p>La varianza (rischio) di un portafoglio con due asset A e B è data dalla formula:</p>
+          <div class="formula">σ²_portafoglio = w²_A·σ²_A + w²_B·σ²_B + 2·w_A·w_B·ρ_AB·σ_A·σ_B</div>
+          <p>Quando la correlazione è bassa o negativa, il termine incrociato riduce la varianza complessiva, spesso al di sotto della media ponderata dei singoli rischi. Questo effetto è il motivo per cui un portafoglio ben bilanciato può essere meno rischioso di ciascuno dei suoi componenti presi singolarmente.</p>
+          <div class="box">
+            <h3>📊 Esempio numerico dell'effetto correlazione</h3>
+            <p>Immaginiamo due asset con stessa volatilità (σ = 15%) e stesso rendimento atteso (10%).</p>
+            <ul>
+              <li>Se correlazione = +1 (perfetta): il rischio del portafoglio 50/50 è ancora 15%.</li>
+              <li>Se correlazione = 0 (indipendente): il rischio scende al 10,6%.</li>
+              <li>Se correlazione = -0,5: il rischio scende ancora di più, al 7,5%.</li>
+            </ul>
+            <p>In pratica, la combinazione di asset decorrelati riduce la volatilità a parità di rendimento atteso, migliorando l'efficienza del portafoglio.</p>
+          </div>
+        </section>
 
-  <!-- Cookie Banner Personalizzato -->
-  <div id="cookie-banner" class="cookie-banner" style="display:none;">
-      <p>Questo sito utilizza cookie tecnici necessari al funzionamento. Con il tuo consenso, potremmo utilizzare cookie di terze parti per annunci personalizzati. <a href="/privacy/index.html">Privacy Policy</a></p>
-      <div class="cookie-buttons">
-          <button id="cookie-accept" class="cookie-btn accept">Accetta tutti</button>
-          <button id="cookie-reject" class="cookie-btn reject">Solo necessari</button>
-      </div>
-  </div>
+        <!-- 3. CALCOLATORE CORRELAZIONE -->
+        <section id="calcolatore">
+          <h2>3. 🧮 Calcolatore interattivo della correlazione</h2>
+          <div class="interactive-box">
+            <p><label>Rischio Asset A (σ, %): </label><input type="number" id="riskA" value="15" step="1"></p>
+            <p><label>Rischio Asset B (σ, %): </label><input type="number" id="riskB" value="15" step="1"></p>
+            <p><label>Correlazione (ρ): </label><input type="number" id="correlazione" value="0.5" step="0.05" min="-1" max="1"></p>
+            <p><label>Peso Asset A (%): </label><input type="number" id="pesoA" value="50" step="5"></p>
+            <button class="calc-btn" id="calcCorrBtn">Calcola Rischio Portafoglio</button>
+            <p id="corrResult" style="font-size:1.2rem; font-weight:bold; color:var(--accent); margin-top:10px;">Rischio portafoglio = --%</p>
+            <div class="note">💡 Modifica i parametri per osservare come la correlazione e i pesi influenzano il rischio complessivo. Più bassa è la correlazione, maggiore è il beneficio della diversificazione.</div>
+          </div>
+        </section>
 
-  <script>
-  (function() {
-      const banner = document.getElementById('cookie-banner');
-      const acceptBtn = document.getElementById('cookie-accept');
-      const rejectBtn = document.getElementById('cookie-reject');
-      const prefsLink = document.getElementById('open_preferences_center');
-      
-      if (!localStorage.getItem('cookie-consent')) {
-          banner.style.display = 'flex';
-      }
-      
-      function setConsent(value) {
-          localStorage.setItem('cookie-consent', value);
-          banner.style.display = 'none';
-          if (value === 'accepted') loadExternalScripts();
-      }
-      
-      acceptBtn.addEventListener('click', function() { setConsent('accepted'); });
-      rejectBtn.addEventListener('click', function() { setConsent('rejected'); });
-      
-      if (prefsLink) {
-          prefsLink.addEventListener('click', function(e) {
-              e.preventDefault();
-              banner.style.display = 'flex';
-          });
-      }
-      
-      if (localStorage.getItem('cookie-consent') === 'accepted') {
-          loadExternalScripts();
-      }
-      
-      function loadExternalScripts() {
-          if (!document.querySelector('script[src*="adsbygoogle"]')) {
-              var adsScript = document.createElement('script');
-              adsScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2835044924304516';
-              adsScript.async = true;
-              adsScript.crossOrigin = 'anonymous';
-              document.head.appendChild(adsScript);
-              
-              var fcScript = document.createElement('script');
-              fcScript.src = 'https://fundingchoicesmessages.google.com/i/ca-pub-2835044924304516?ers=1';
-              fcScript.async = true;
-              document.head.appendChild(fcScript);
-          }
-      }
-  })();
-  </script>
+        <!-- 4. COME COSTRUIRE UN PORTAFOGLIO DIVERSIFICATO -->
+        <section id="costruzione">
+          <h2>4. Come si costruisce un portafoglio ben diversificato</h2>
+          <div class="grid">
+            <div class="box">
+              <h3>📊 Diversificazione tra classi di asset</h3>
+              <p>Combinare <strong>azioni, obbligazioni, liquidità, materie prime, oro e immobiliare</strong>. Ogni classe reagisce in modo diverso a inflazione, tassi di interesse e ciclo economico. Un mix tradizionale come <strong>60% azioni / 40% obbligazioni</strong> ha storicamente offerto un buon compromesso tra crescita e stabilità.</p>
+            </div>
+            <div class="box">
+              <h3>🌍 Diversificazione geografica</h3>
+              <p>Distribuire il capitale tra diverse aree geografiche: <strong>Stati Uniti, Europa, Giappone, mercati emergenti e Asia-Pacifico</strong>. La deglobalizzazione recente ha ridotto la correlazione tra i mercati, rendendo la diversificazione geografica ancora più efficace.[reference:0]</p>
+            </div>
+            <div class="box">
+              <h3>🏭 Diversificazione settoriale e per stile</h3>
+              <p>All'interno dell'azionario, bilanciare tra settori (tech, sanità, energia, finanziario, utility) e stili (growth vs value, large cap vs small cap). Una buona regola pratica è non superare il 25-30% in un singolo settore.[reference:1]</p>
+            </div>
+            <div class="box">
+              <h3>⏱️ Diversificazione temporale (dollar cost averaging)</h3>
+              <p>Investire gradualmente nel tempo, riducendo il rischio di entrare nel mercato in un picco sfavorevole. Il <strong>Piano di Accumulo del Capitale (PAC)</strong> è una forma di diversificazione temporale particolarmente adatta per orizzonti lunghi.</p>
+            </div>
+          </div>
+        </section>
 
-</body>
-</html>
+        <!-- 5. QUANTI TITOLI SERVIREBBERO -->
+        <section id="quantificare">
+          <h2>5. Quanti titoli servono davvero per diversificare?</h2>
+          <p>Non esiste un numero magico, ma gli studi statistici suggeriscono alcune soglie indicative:</p>
+          <ul>
+            <li><strong>5-10 titoli</strong>: diversificazione molto limitata, rischio specifico ancora elevato. Un portafoglio così concentrato è vulnerabile a scandali societari o crisi settoriali.[reference:2]</li>
+            <li><strong>15-20 titoli</strong>: si elimina la maggior parte del rischio specifico (non sistematico). La volatilità residua è dominata dal rischio di mercato.[reference:3]</li>
+            <li><strong>20-30+ titoli</strong>: i benefici marginali della diversificazione aggiuntiva si riducono notevolmente. A questo punto, la qualità della diversificazione (distribuzione per settori e geografie) conta più della quantità.[reference:4]</li>
+          </ul>
+          <p>Per l'investitore retail, gli <strong>ETF (Exchange Traded Funds)</strong> rappresentano lo strumento più efficiente per raggiungere un'elevata diversificazione con un solo strumento: un ETF sull'S&P500 offre esposizione a 500 aziende, mentre un ETF All-World copre migliaia di titoli in decine di paesi.</p>
+        </section>
+
+        <!-- 6. RISCHIO SISTEMATICO E NON SISTEMATICO -->
+        <section id="rischio">
+          <h2>6. Rischio sistematico e non sistematico</h2>
+          <p>Per comprendere appieno la diversificazione, è fondamentale distinguere tra due tipi di rischio:</p>
+          <ul>
+            <li><strong>Rischio non sistematico (specifico, diversificabile)</strong>: è il rischio legato a un'azienda specifica (es. scandalo contabile, fallimento, crisi di settore). Può essere <strong>quasi eliminato</strong> con un'adeguata diversificazione. È per questo che la diversificazione è così efficace.[reference:5]</li>
+            <li><strong>Rischio sistematico (di mercato, non diversificabile)</strong>: è il rischio che colpisce l'intero mercato (es. recessione globale, crisi finanziaria, aumento dei tassi di interesse). <strong>Non può essere eliminato</strong> con la diversificazione, ma solo gestito tramite asset allocation (es. riducendo l'esposizione azionaria in periodi di incertezza).[reference:6]</li>
+          </ul>
+          <div class="quote">🎯 La diversificazione non protegge dai crolli generalizzati del mercato, ma riduce l'impatto di ev
