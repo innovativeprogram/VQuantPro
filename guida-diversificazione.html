@@ -302,10 +302,7 @@
 <body>
   <main class="wrap">
     <article class="card">
-      <div class="topbar">
-        <div class="brand">VQuantPro</div>
-        <a class="back" href="/">← Torna alla Home</a>
-      </div>
+      <div class="topbar"><div class="brand">VQuantPro</div><a class="back" href="/">← Torna alla Home</a></div>
       <header class="hero">
         <span class="eyebrow">Guida costruzione portafoglio</span>
         <h1>Diversificazione: ridurre il rischio senza spegnere il rendimento</h1>
@@ -318,7 +315,7 @@
           <ul>
             <li><a href="#principio" style="color:var(--accent); text-decoration:none;">1. Il principio di base: l'unico pasto gratis della finanza</a></li>
             <li><a href="#matematica" style="color:var(--accent); text-decoration:none;">2. La matematica della diversificazione: correlazione e varianza</a></li>
-            <li><a href="#calcolatore" style="color:var(--accent); text-decoration:none;">3. Calcolatore interattivo della correlazione</a></li>
+            <li><a href="#calcolatore" style="color:var(--accent); text-decoration:none;">3. Calcolatore interattivo della correlazione (corretto)</a></li>
             <li><a href="#costruzione" style="color:var(--accent); text-decoration:none;">4. Come si costruisce un portafoglio ben diversificato</a></li>
             <li><a href="#quantificare" style="color:var(--accent); text-decoration:none;">5. Quanti titoli servono davvero?</a></li>
             <li><a href="#rischio" style="color:var(--accent); text-decoration:none;">6. Rischio sistematico e non sistematico</a></li>
@@ -335,7 +332,6 @@
           <h2>1. Il principio di base: l'unico pasto gratis della finanza</h2>
           <p>In finanza, non esistono pasti gratis: rendimenti più elevati di solito comportano rischi maggiori. Tuttavia, come ha dimostrato il premio Nobel Harry Markowitz, esiste un'eccezione fondamentale: la <strong>diversificazione</strong>. Combinando asset non perfettamente correlati, è possibile ridurre il rischio complessivo di un portafoglio <strong>senza necessariamente sacrificare il rendimento atteso</strong>. Questa intuizione è il cuore della Teoria Moderna del Portafoglio (MPT).</p>
           <div class="quote">"La diversificazione è l'unico pasto gratis nella finanza." — Harry Markowitz, premio Nobel per l'economia.</div>
-          <p>In pratica, diversificare significa distribuire il capitale tra asset che non si muovono sempre nella stessa direzione e con la stessa intensità. Quando alcuni titoli o strumenti scendono, altri possono compensare almeno in parte la perdita. Il risultato non è l'eliminazione del rischio, ma una sua gestione più efficiente: a parità di rendimento atteso, si riduce la volatilità e la probabilità di perdite estreme.</p>
         </section>
 
         <!-- 2. MATEMATICA DELLA DIVERSIFICAZIONE -->
@@ -345,31 +341,20 @@
           <ul>
             <li><strong>Correlazione +1</strong>: i due asset si muovono in perfetta sincronia. La diversificazione non offre alcun beneficio.</li>
             <li><strong>Correlazione 0</strong>: i movimenti sono indipendenti. La diversificazione riduce il rischio in modo significativo.</li>
-            <li><strong>Correlazione -1</strong>: i movimenti sono perfettamente opposti. È il caso ideale (ma raro) perché le perdite di uno sono compensate dai guadagni dell'altro.</li>
+            <li><strong>Correlazione -1</strong>: i movimenti sono perfettamente opposti. È il caso ideale (ma raro).</li>
           </ul>
           <p>La varianza (rischio) di un portafoglio con due asset A e B è data dalla formula:</p>
           <div class="formula">σ²_portafoglio = w²_A·σ²_A + w²_B·σ²_B + 2·w_A·w_B·ρ_AB·σ_A·σ_B</div>
-          <p>Quando la correlazione è bassa o negativa, il termine incrociato riduce la varianza complessiva, spesso al di sotto della media ponderata dei singoli rischi. Questo effetto è il motivo per cui un portafoglio ben bilanciato può essere meno rischioso di ciascuno dei suoi componenti presi singolarmente.</p>
-          <div class="box">
-            <h3>📊 Esempio numerico dell'effetto correlazione</h3>
-            <p>Immaginiamo due asset con stessa volatilità (σ = 15%) e stesso rendimento atteso (10%).</p>
-            <ul>
-              <li>Se correlazione = +1 (perfetta): il rischio del portafoglio 50/50 è ancora 15%.</li>
-              <li>Se correlazione = 0 (indipendente): il rischio scende al 10,6%.</li>
-              <li>Se correlazione = -0,5: il rischio scende ancora di più, al 7,5%.</li>
-            </ul>
-            <p>In pratica, la combinazione di asset decorrelati riduce la volatilità a parità di rendimento atteso, migliorando l'efficienza del portafoglio.</p>
-          </div>
         </section>
 
-        <!-- 3. CALCOLATORE CORRELAZIONE -->
+        <!-- 3. CALCOLATORE CORRELAZIONE (CORRETTO) -->
         <section id="calcolatore">
           <h2>3. 🧮 Calcolatore interattivo della correlazione</h2>
           <div class="interactive-box">
             <p><label>Rischio Asset A (σ, %): </label><input type="number" id="riskA" value="15" step="1"></p>
             <p><label>Rischio Asset B (σ, %): </label><input type="number" id="riskB" value="15" step="1"></p>
             <p><label>Correlazione (ρ): </label><input type="number" id="correlazione" value="0.5" step="0.05" min="-1" max="1"></p>
-            <p><label>Peso Asset A (%): </label><input type="number" id="pesoA" value="50" step="5"></p>
+            <p><label>Peso Asset A (%): </label><input type="number" id="pesoA" value="50" step="5" min="0" max="100"></p>
             <button class="calc-btn" id="calcCorrBtn">Calcola Rischio Portafoglio</button>
             <p id="corrResult" style="font-size:1.2rem; font-weight:bold; color:var(--accent); margin-top:10px;">Rischio portafoglio = --%</p>
             <div class="note">💡 Modifica i parametri per osservare come la correlazione e i pesi influenzano il rischio complessivo. Più bassa è la correlazione, maggiore è il beneficio della diversificazione.</div>
@@ -380,43 +365,186 @@
         <section id="costruzione">
           <h2>4. Come si costruisce un portafoglio ben diversificato</h2>
           <div class="grid">
-            <div class="box">
-              <h3>📊 Diversificazione tra classi di asset</h3>
-              <p>Combinare <strong>azioni, obbligazioni, liquidità, materie prime, oro e immobiliare</strong>. Ogni classe reagisce in modo diverso a inflazione, tassi di interesse e ciclo economico. Un mix tradizionale come <strong>60% azioni / 40% obbligazioni</strong> ha storicamente offerto un buon compromesso tra crescita e stabilità.</p>
-            </div>
-            <div class="box">
-              <h3>🌍 Diversificazione geografica</h3>
-              <p>Distribuire il capitale tra diverse aree geografiche: <strong>Stati Uniti, Europa, Giappone, mercati emergenti e Asia-Pacifico</strong>. La deglobalizzazione recente ha ridotto la correlazione tra i mercati, rendendo la diversificazione geografica ancora più efficace.[reference:0]</p>
-            </div>
-            <div class="box">
-              <h3>🏭 Diversificazione settoriale e per stile</h3>
-              <p>All'interno dell'azionario, bilanciare tra settori (tech, sanità, energia, finanziario, utility) e stili (growth vs value, large cap vs small cap). Una buona regola pratica è non superare il 25-30% in un singolo settore.[reference:1]</p>
-            </div>
-            <div class="box">
-              <h3>⏱️ Diversificazione temporale (dollar cost averaging)</h3>
-              <p>Investire gradualmente nel tempo, riducendo il rischio di entrare nel mercato in un picco sfavorevole. Il <strong>Piano di Accumulo del Capitale (PAC)</strong> è una forma di diversificazione temporale particolarmente adatta per orizzonti lunghi.</p>
-            </div>
+            <div class="box"><h3>📊 Tra classi di asset</h3><p>Combinare azioni, obbligazioni, liquidità, materie prime, oro e immobiliare. Un mix 60/40 azioni/obbligazioni ha storicamente offerto un buon compromesso.</p></div>
+            <div class="box"><h3>🌍 Geografica</h3><p>Distribuire tra USA, Europa, Giappone, emergenti e Asia-Pacifico.</p></div>
+            <div class="box"><h3>🏭 Settoriale e per stile</h3><p>Bilanciare tra tech, sanità, energia, finanziario, utility, e tra growth e value.</p></div>
+            <div class="box"><h3>⏱️ Temporale (PAC)</h3><p>Investire gradualmente riduce il rischio di entrare in un picco di mercato.</p></div>
           </div>
         </section>
 
         <!-- 5. QUANTI TITOLI SERVIREBBERO -->
         <section id="quantificare">
           <h2>5. Quanti titoli servono davvero per diversificare?</h2>
-          <p>Non esiste un numero magico, ma gli studi statistici suggeriscono alcune soglie indicative:</p>
           <ul>
-            <li><strong>5-10 titoli</strong>: diversificazione molto limitata, rischio specifico ancora elevato. Un portafoglio così concentrato è vulnerabile a scandali societari o crisi settoriali.[reference:2]</li>
-            <li><strong>15-20 titoli</strong>: si elimina la maggior parte del rischio specifico (non sistematico). La volatilità residua è dominata dal rischio di mercato.[reference:3]</li>
-            <li><strong>20-30+ titoli</strong>: i benefici marginali della diversificazione aggiuntiva si riducono notevolmente. A questo punto, la qualità della diversificazione (distribuzione per settori e geografie) conta più della quantità.[reference:4]</li>
+            <li><strong>5-10 titoli:</strong> diversificazione limitata, rischio specifico elevato.</li>
+            <li><strong>15-20 titoli:</strong> si elimina la maggior parte del rischio specifico.</li>
+            <li><strong>20-30+ titoli:</strong> i benefici marginali si riducono. Meglio ETF globali.</li>
           </ul>
-          <p>Per l'investitore retail, gli <strong>ETF (Exchange Traded Funds)</strong> rappresentano lo strumento più efficiente per raggiungere un'elevata diversificazione con un solo strumento: un ETF sull'S&P500 offre esposizione a 500 aziende, mentre un ETF All-World copre migliaia di titoli in decine di paesi.</p>
         </section>
 
         <!-- 6. RISCHIO SISTEMATICO E NON SISTEMATICO -->
         <section id="rischio">
           <h2>6. Rischio sistematico e non sistematico</h2>
-          <p>Per comprendere appieno la diversificazione, è fondamentale distinguere tra due tipi di rischio:</p>
+          <p><strong>Non sistematico (diversificabile):</strong> legato all'azienda/settore. Si elimina con la diversificazione.<br>
+          <strong>Sistematico (di mercato, non diversificabile):</strong> colpisce tutto il mercato. Non si elimina, si gestisce con l'asset allocation.</p>
+          <div class="quote">🎯 La diversificazione non protegge dai crolli generalizzati del mercato, ma riduce l'impatto di eventi specifici.</div>
+        </section>
+
+        <!-- 7. ERRORI COMUNI -->
+        <section id="errori">
+          <h2>7. Gli errori più comuni e la sovra-diversificazione</h2>
+          <div class="grid">
+            <div class="box"><h3>🔴 Sottodiversificazione</h3><p>Concentrarsi in pochi strumenti o un unico settore.</p></div>
+            <div class="box"><h3>🟡 Confondere quantità con qualità</h3><p>Avere 20 ETF che replicano l'S&P500 non è diversificazione.</p></div>
+            <div class="box"><h3>🟠 Sovra-diversificazione</h3><p>Oltre 30 titoli, i benefici marginali sono nulli e i costi aumentano.</p></div>
+            <div class="box"><h3>📉 Ignorare il contesto</h3><p>In crisi, molte correlazioni aumentano, riducendo l'efficacia della diversificazione.</p></div>
+          </div>
+        </section>
+
+        <!-- 8. ESEMPI DI PORTAFOGLI -->
+        <section id="esempi">
+          <h2>8. Esempi concreti di portafogli diversificati</h2>
+          <table class="comparison-table">
+            <thead><tr><th>Tipologia</th><th>Composizione</th></tr></thead>
+            <tbody>
+              <tr><td>Bilanciato classico</td><td>60% Azioni Globali / 40% Obbligazioni Governative</td></tr>
+              <tr><td>All-Weather (Ray Dalio)</td><td>30% Azioni, 40% Obbligazioni LT, 15% Obbligazioni IT, 7,5% Oro, 7,5% Commodity</td></tr>
+              <tr><td>Lazy 3-fund</td><td>ETF Azionario Totale USA + ETF Azionario Internazionale + ETF Obbligazionario Totale</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- 9. CORRELAZIONI NEL 2026 -->
+        <section id="correlazioni">
+          <h2>9. Correlazioni attuali nel 2026: cosa sta cambiando</h2>
+          <p>Azioni vs Obbligazioni: in contesti di stagflazione la correlazione può diventare positiva. Azioni vs Oro: correlazione bassa (~13%). Mercati sviluppati vs emergenti: la dispersione è aumentata, premiando una corretta diversificazione geografica.</p>
+        </section>
+
+        <!-- 10. CONCLUSIONI -->
+        <section id="conclusione">
+          <h2>10. Conclusioni e best practice operative</h2>
+          <div class="quote">"Non mettere tutte le uova nello stesso paniere" — un antico adagio che la finanza moderna ha trasformato in scienza.</div>
           <ul>
-            <li><strong>Rischio non sistematico (specifico, diversificabile)</strong>: è il rischio legato a un'azienda specifica (es. scandalo contabile, fallimento, crisi di settore). Può essere <strong>quasi eliminato</strong> con un'adeguata diversificazione. È per questo che la diversificazione è così efficace.[reference:5]</li>
-            <li><strong>Rischio sistematico (di mercato, non diversificabile)</strong>: è il rischio che colpisce l'intero mercato (es. recessione globale, crisi finanziaria, aumento dei tassi di interesse). <strong>Non può essere eliminato</strong> con la diversificazione, ma solo gestito tramite asset allocation (es. riducendo l'esposizione azionaria in periodi di incertezza).[reference:6]</li>
+            <li>Diversificare tra classi di asset (azioni, obbligazioni, oro, commodity).</li>
+            <li>Utilizzare ETF a basso costo per ottenere un'elevata diversificazione.</li>
+            <li>Monitorare le correlazioni senza farsi prendere dal panico.</li>
+            <li>Evitare sia la sottodiversificazione che la sovra-diversificazione (20-30 titoli o 3-4 ETF globali sono sufficienti).</li>
+            <li>Ribilanciare periodicamente (ogni 6-12 mesi).</li>
           </ul>
-          <div class="quote">🎯 La diversificazione non protegge dai crolli generalizzati del mercato, ma riduce l'impatto di ev
+          <p class="note"><strong>Contenuto informativo ed educativo:</strong> Le informazioni contenute in questa guida non costituiscono consulenza finanziaria, sollecitazione all'investimento o raccomandazione personalizzata.</p>
+        </section>
+
+        <p><span id="open_preferences_center_bottom" style="color: var(--accent); text-decoration: underline; cursor: pointer;">📌 Gestisci le preferenze sui cookie</span></p>
+      </div>
+      <footer class="footer">VQuantPro · Analisi quantitativa, metriche e strumenti per una lettura più rigorosa di rischio e rendimento.</footer>
+    </article>
+  </main>
+
+  <!-- Cookie Banner Interattivo -->
+  <div id="cookie-banner" class="cookie-banner" style="display:none;">
+      <p>🔐 Utilizziamo cookie tecnici per il funzionamento del sito. Con il tuo consenso, utilizziamo cookie di terze parti per annunci personalizzati. <a href="/privacy/index.html">Privacy Policy</a> | <a href="/cookie/index.html">Cookie Policy</a></p>
+      <div class="cookie-buttons">
+          <button id="cookie-accept" class="cookie-btn accept">Accetta tutti</button>
+          <button id="cookie-reject" class="cookie-btn reject">Solo necessari</button>
+      </div>
+  </div>
+
+  <script>
+  (function() {
+      const banner = document.getElementById('cookie-banner');
+      const acceptBtn = document.getElementById('cookie-accept');
+      const rejectBtn = document.getElementById('cookie-reject');
+      const prefsLink = document.getElementById('open_preferences_center');
+      const prefsLinkBottom = document.getElementById('open_preferences_center_bottom');
+      
+      if (!localStorage.getItem('cookie-consent')) {
+          banner.style.display = 'flex';
+      }
+      
+      function setConsent(value) {
+          localStorage.setItem('cookie-consent', value);
+          banner.style.display = 'none';
+          if (value === 'accepted') {
+              loadExternalScripts();
+          } else {
+              removeExternalScripts();
+          }
+      }
+      
+      if (acceptBtn) acceptBtn.addEventListener('click', () => setConsent('accepted'));
+      if (rejectBtn) rejectBtn.addEventListener('click', () => setConsent('rejected'));
+      
+      const handlePrefs = (e) => { e.preventDefault(); banner.style.display = 'flex'; };
+      if (prefsLink) prefsLink.addEventListener('click', handlePrefs);
+      if (prefsLinkBottom) prefsLinkBottom.addEventListener('click', handlePrefs);
+      
+      if (localStorage.getItem('cookie-consent') === 'accepted') {
+          loadExternalScripts();
+      }
+      
+      function loadExternalScripts() {
+          if (!document.querySelector('script[src*="adsbygoogle"]')) {
+              var adsScript = document.createElement('script');
+              adsScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2835044924304516';
+              adsScript.async = true;
+              adsScript.crossOrigin = 'anonymous';
+              document.head.appendChild(adsScript);
+              
+              var fcScript = document.createElement('script');
+              fcScript.src = 'https://fundingchoicesmessages.google.com/i/ca-pub-2835044924304516?ers=1';
+              fcScript.async = true;
+              document.head.appendChild(fcScript);
+          }
+      }
+      
+      function removeExternalScripts() {
+          var scripts = document.querySelectorAll('script[src*="adsbygoogle"], script[src*="fundingchoicesmessages"]');
+          scripts.forEach(script => script.remove());
+      }
+  })();
+
+  // Calcolatore correlazione interattivo (corretto)
+  (function(){
+      const calcBtn = document.getElementById('calcCorrBtn');
+      if(calcBtn){
+          calcBtn.addEventListener('click', function(){
+              // Ottieni i valori dagli input
+              let riskA = parseFloat(document.getElementById('riskA').value);
+              let riskB = parseFloat(document.getElementById('riskB').value);
+              let rho = parseFloat(document.getElementById('correlazione').value);
+              let pesoA = parseFloat(document.getElementById('pesoA').value);
+              const resultEl = document.getElementById('corrResult');
+              
+              // Validazione
+              if(isNaN(riskA) || isNaN(riskB) || isNaN(rho) || isNaN(pesoA) || 
+                 riskA < 0 || riskB < 0 || rho < -1 || rho > 1 || pesoA < 0 || pesoA > 100){
+                  resultEl.innerHTML = "⚠️ Inserisci valori validi (rischio >0, correlazione tra -1 e 1, peso tra 0 e 100)";
+                  return;
+              }
+              
+              const pesoB = 100 - pesoA;
+              // Converti pesi in decimali e rischi in decimali (es. 15% -> 0.15)
+              const wA = pesoA / 100;
+              const wB = pesoB / 100;
+              const sA = riskA / 100;
+              const sB = riskB / 100;
+              
+              // Formula varianza: wA^2 * sA^2 + wB^2 * sB^2 + 2 * wA * wB * rho * sA * sB
+              const varPort = (wA * wA * sA * sA) + (wB * wB * sB * sB) + (2 * wA * wB * rho * sA * sB);
+              const riskPort = Math.sqrt(varPort); // rischio in decimali
+              const riskPercent = riskPort * 100;   // riconverti in percentuale
+              
+              resultEl.innerHTML = `📊 Rischio portafoglio = ${riskPercent.toFixed(2)}%`;
+              // Aggiungi una nota sul beneficio della diversificazione
+              const mediaPonderata = (wA * sA + wB * sB) * 100;
+              if(riskPercent < mediaPonderata) {
+                  resultEl.innerHTML += ` (riduzione del ${(mediaPonderata - riskPercent).toFixed(1)}% rispetto alla media ponderata)`;
+              }
+          });
+          // Esegui il calcolo automatico al caricamento della pagina
+          setTimeout(() => { if(calcBtn) calcBtn.click(); }, 100);
+      }
+  })();
+  </script>
+</body>
+</html>
