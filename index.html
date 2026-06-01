@@ -299,7 +299,7 @@
 
 <!-- Cookie Banner -->
 <div id="cookie-banner" class="cookie-banner" style="display:none;">
-    <p>Questo sito utilizza cookie tecnici necessari al funzionamento. Con il tuo consenso, potremmo utilizzare cookie di terze parti per annunci personalizzati. <a href="/privacy/index.html">Privacy Policy</a></p>
+    <p>Questo sito utilizza cookie tecnici necessari al funzionamento. Con il tuo consenso, potremmo utilizzare cookie di terze parti per annunci personalizzati. <a href="/privacy/index.html">Privacy Policy</a> | <a href="/cookie/index.html">Cookie Policy</a></p>
     <div class="cookie-buttons">
         <button id="cookie-accept" class="cookie-btn accept">Accetta tutti</button>
         <button id="cookie-reject" class="cookie-btn reject">Solo necessari</button>
@@ -310,7 +310,7 @@
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
 
 <script>
-    // Gestione cookie
+    // Gestione cookie + Monetag
     (function() {
         const banner = document.getElementById('cookie-banner');
         const acceptBtn = document.getElementById('cookie-accept');
@@ -322,16 +322,26 @@
         function setConsent(value) {
             localStorage.setItem('cookie-consent', value);
             banner.style.display = 'none';
-            if (value === 'accepted') loadExternalScripts();
+            if (value === 'accepted') {
+                // Aggiorna GA4 se disponibile
+                if (typeof window.updateGA4Consent === 'function') window.updateGA4Consent();
+                loadExternalScripts();
+            } else {
+                removeExternalScripts();
+            }
         }
         
         if (acceptBtn) acceptBtn.addEventListener('click', () => setConsent('accepted'));
         if (rejectBtn) rejectBtn.addEventListener('click', () => setConsent('rejected'));
         if (prefsLink) prefsLink.addEventListener('click', (e) => { e.preventDefault(); banner.style.display = 'flex'; });
         
-        if (localStorage.getItem('cookie-consent') === 'accepted') loadExternalScripts();
+        if (localStorage.getItem('cookie-consent') === 'accepted') {
+            if (typeof window.updateGA4Consent === 'function') window.updateGA4Consent();
+            loadExternalScripts();
+        }
         
         function loadExternalScripts() {
+            // AdSense (se in futuro vorrai attivarlo)
             if (!document.querySelector('script[src*="adsbygoogle"]')) {
                 var adsScript = document.createElement('script');
                 adsScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2835044924304516';
@@ -344,6 +354,21 @@
                 fcScript.async = true;
                 document.head.appendChild(fcScript);
             }
+            
+            // Monetag (solo se non già caricato)
+            if (!document.querySelector('script[src*="quge5.com/88/tag.min.js"]')) {
+                var monetagScript = document.createElement('script');
+                monetagScript.src = 'https://quge5.com/88/tag.min.js';
+                monetagScript.setAttribute('data-zone', '245093');
+                monetagScript.async = true;
+                monetagScript.setAttribute('data-cfasync', 'false');
+                document.head.appendChild(monetagScript);
+            }
+        }
+        
+        function removeExternalScripts() {
+            var scripts = document.querySelectorAll('script[src*="adsbygoogle"], script[src*="fundingchoicesmessages"], script[src*="quge5.com"]');
+            scripts.forEach(script => script.remove());
         }
     })();
 </script>
