@@ -8,14 +8,16 @@
     <link rel="canonical" href="https://vquantpro.it/disclaimer.html" />
     <link rel="icon" type="image/png" href="/favicon.png">
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
     
     <style>
-        :root { 
-            --bg-main: #0B0F19; 
-            --bg-card: #161F30; 
-            --accent: #00E676; 
-            --text-main: #F3F4F6; 
+        :root {
+            --bg-main: #0B0F19;
+            --bg-card: #161F30;
+            --accent: #00E676;
+            --text-main: #F3F4F6;
             --text-muted: #9CA3AF;
             --border: #24334C;
         }
@@ -34,10 +36,13 @@
             border-radius: 12px; 
             border: 1px solid var(--border); 
         }
-        h1 { color: #fff; margin-bottom: 20px; }
-        h2 { color: var(--accent); margin-top: 30px; font-size: 20px; }
+        h1 { color: var(--accent); margin-bottom: 20px; }
+        h2 { color: #fff; margin-top: 30px; margin-bottom: 15px; font-size: 24px; }
         p { color: var(--text-muted); margin-bottom: 20px; }
-        .back-btn { 
+        ul { color: var(--text-muted); margin-bottom: 20px; padding-left: 20px; }
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .back-link { 
             display: inline-block; 
             margin-bottom: 20px; 
             padding: 10px 20px; 
@@ -47,7 +52,7 @@
             text-decoration: none;
             font-size: 14px;
         }
-        .back-btn:hover { background: #374a6b; }
+        .back-link:hover { background: #374a6b; }
         footer { 
             border-top: 1px solid var(--border); 
             padding: 40px 24px; 
@@ -69,23 +74,35 @@
 </head>
 <body>
     <div class="container">
-        <a href="/" class="back-btn">← Torna alla Home</a>
+        <a href="/" class="back-link">← Torna alla Home</a>
         
         <h1>Disclaimer</h1>
+        <p><strong>Ultimo aggiornamento:</strong> 1 giugno 2026</p>
         
-        <h2>Natura Informativa</h2>
-        <p>VQuantPro è una piattaforma dedicata esclusivamente all'analisi quantitativa e alla didattica finanziaria. Nessun contenuto presente su questo sito — inclusi articoli, grafici, simulazioni o masterclass — costituisce consulenza finanziaria personalizzata, sollecitazione all'investimento o raccomandazione all'acquisto o alla vendita di alcuno strumento finanziario.</p>
+        <h2>1. Natura esclusivamente informativa</h2>
+        <p>VQuantPro è una piattaforma dedicata esclusivamente all'analisi quantitativa e alla didattica finanziaria. Nessun contenuto presente su questo sito — inclusi articoli, grafici, simulazioni, guide, masterclass, dati storici o output della dashboard — costituisce consulenza finanziaria, fiscale, legale o di investimento personalizzata, né sollecitazione al pubblico risparmio, raccomandazione all'acquisto o alla vendita di alcuno strumento finanziario (azioni, ETF, obbligazioni, criptovalute, derivati, ecc.).</p>
+        <p>Le informazioni fornite hanno scopo puramente educativo e informativo. Non devono essere interpretate come una consulenza personalizzata. Si consiglia vivamente di consultare un consulente finanziario certificato e abilitato prima di intraprendere qualsiasi operazione di investimento basata su analisi tecniche o quantitative.</p>
 
-        <h2>Responsabilità</h2>
-        <p>Ogni decisione di investimento è di esclusiva responsabilità dell'utente. I mercati finanziari comportano rischi intrinseci e la performance passata non è indicativa di risultati futuri. Non investire mai capitale di cui hai necessità per il mantenimento del tuo stile di vita o che non sei disposto a perdere integralmente.</p>
+        <h2>2. Responsabilità e rischio di perdita</h2>
+        <p>Ogni decisione di investimento è di esclusiva responsabilità dell'utente. I mercati finanziari comportano rischi intrinseci, inclusa la possibilità di perdere tutto il capitale investito. VQuantPro non si assume alcuna responsabilità per perdite, danni diretti o indiretti, mancati profitti, o qualsiasi altra conseguenza negativa derivante dall'uso delle informazioni, degli strumenti di calcolo (dashboard), delle simulazioni o dei dati presenti sul Sito. Le performance passate, presentate attraverso i nostri strumenti, non sono in alcun modo indicative di risultati futuri.</p>
+        <p>Non investire mai capitale di cui hai necessità per il mantenimento del tuo stile di vita o che non sei disposto a perdere integralmente. Il trading e gli investimenti comportano rischi significativi.</p>
 
-        <h2>Analisi e Dati</h2>
-        <p>Sebbene ci sforziamo di garantire l'accuratezza dei dati analizzati, VQuantPro non garantisce la completezza o l'esattezza delle informazioni fornite. Prima di operare qualsiasi scelta operativa, ti invitiamo sempre a verificare le fonti e, se necessario, a consultare un consulente finanziario professionista regolarmente abilitato.</p>
+        <h2>3. Analisi, Dati e Strumenti Interattivi</h2>
+        <p>La dashboard quantitativa accessibile tramite il Sito (<a href="https://vquantpro.streamlit.app/" target="_blank">https://vquantpro.streamlit.app/</a>) è fornita “così com’è”, senza alcuna garanzia di accuratezza, completezza, tempestività o idoneità a uno scopo specifico. I calcoli generati sono basati su modelli matematici e dati storici che potrebbero contenere errori o non riflettere condizioni di mercato future. Sebbene ci sforziamo di garantire l'accuratezza dei dati analizzati, VQuantPro non garantisce la completezza o l'esattezza delle informazioni fornite. Prima di operare qualsiasi scelta operativa, ti invitiamo sempre a verificare le fonti e, se necessario, a consultare un consulente finanziario professionista regolarmente abilitato.</p>
 
-        <h2>Pubblicità</h2>
-        <p>Il sito può contenere annunci pubblicitari di terze parti (tramite Google AdSense). La presenza di tali annunci non costituisce una nostra approvazione dei prodotti o servizi pubblicizzati.</p>
+        <h2>4. Link di affiliazione – Trasparenza</h2>
+        <p>Alcuni link presenti sul Sito (ad esempio nella sezione “Libri consigliati”) sono <strong>link di affiliazione</strong>. Ciò significa che, se clicchi su uno di questi link e effettui un acquisto, potremmo ricevere una piccola commissione senza alcun costo aggiuntivo per te. Questo meccanismo aiuta a sostenere i costi di gestione del Sito e a mantenerne i contenuti gratuiti. La presenza di link di affiliazione non influenza in alcun modo l’indipendenza e l’obiettività delle nostre recensioni o raccomandazioni.</p>
+
+        <h2>5. Pubblicità di terze parti</h2>
+        <p>Il sito può contenere annunci pubblicitari di terze parti (tramite Google AdSense). La presenza di tali annunci non costituisce una nostra approvazione dei prodotti o servizi pubblicizzati. Google AdSense utilizza cookie e web beacon per raccogliere informazioni e mostrare annunci pertinenti in base alle tue visite precedenti su questo e su altri siti web. Per maggiori informazioni su come Google utilizza i cookie, consulta la nostra <a href="/cookie/index.html">Cookie Policy</a> e la <a href="https://policies.google.com/technologies/cookies" target="_blank">Informativa cookie di Google</a>.</p>
+
+        <h2>6. Proprietà intellettuale</h2>
+        <p>Tutti i contenuti presenti su questo sito (testi, grafici, loghi, immagini, codici, formule) sono protetti da diritto d'autore. È vietata la riproduzione, anche parziale, senza preventiva autorizzazione scritta da parte di VQuantPro. È consentito condividere estratti con citazione della fonte (link al Sito).</p>
+
+        <h2>7. Legge applicabile e foro competente</h2>
+        <p>Il presente disclaimer è regolato dalla legge italiana. Per qualsiasi controversia connessa all’utilizzo del Sito, il foro competente è quello di residenza o domicilio dell’utente se situato in Italia, altrimenti il foro di Bari (Italia).</p>
         
-        <p style="margin-top: 20px;"><a href="#" id="open_preferences_center" style="color: var(--accent);">Gestisci le preferenze sui cookie</a></p>
+        <p style="margin-top: 20px;"><a href="#" id="open_preferences_center" style="color: var(--accent);">📌 Gestisci le preferenze sui cookie</a></p>
     </div>
 
     <footer>
@@ -94,7 +111,7 @@
 
     <!-- Cookie Banner Personalizzato -->
     <div id="cookie-banner" class="cookie-banner" style="display:none;">
-        <p>Questo sito utilizza cookie tecnici necessari al funzionamento. Con il tuo consenso, potremmo utilizzare cookie di terze parti per annunci personalizzati. <a href="/privacy/index.html">Privacy Policy</a></p>
+        <p>Questo sito utilizza cookie tecnici necessari al funzionamento. Con il tuo consenso, potremmo utilizzare cookie di terze parti per annunci personalizzati. <a href="/privacy/index.html">Privacy Policy</a> | <a href="/cookie/index.html">Cookie Policy</a></p>
         <div class="cookie-buttons">
             <button id="cookie-accept" class="cookie-btn accept">Accetta tutti</button>
             <button id="cookie-reject" class="cookie-btn reject">Solo necessari</button>
@@ -115,11 +132,15 @@
         function setConsent(value) {
             localStorage.setItem('cookie-consent', value);
             banner.style.display = 'none';
-            if (value === 'accepted') loadExternalScripts();
+            if (value === 'accepted') {
+                loadExternalScripts();
+            } else {
+                removeExternalScripts();
+            }
         }
         
-        acceptBtn.addEventListener('click', function() { setConsent('accepted'); });
-        rejectBtn.addEventListener('click', function() { setConsent('rejected'); });
+        if (acceptBtn) acceptBtn.addEventListener('click', function() { setConsent('accepted'); });
+        if (rejectBtn) rejectBtn.addEventListener('click', function() { setConsent('rejected'); });
         
         if (prefsLink) {
             prefsLink.addEventListener('click', function(e) {
@@ -146,8 +167,12 @@
                 document.head.appendChild(fcScript);
             }
         }
+        
+        function removeExternalScripts() {
+            var scripts = document.querySelectorAll('script[src*="adsbygoogle"], script[src*="fundingchoicesmessages"]');
+            scripts.forEach(script => script.remove());
+        }
     })();
     </script>
-
 </body>
 </html>
