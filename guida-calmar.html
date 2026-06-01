@@ -3,116 +3,490 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calmar Ratio: rendimento e drawdown insieme | VQuantPro</title>
-  
+  <title>Calmar Ratio: guida completa a rendimento e drawdown | VQuantPro</title>
+
   <link rel="canonical" href="https://vquantpro.it/guida-calmar.html" />
   <link rel="icon" type="image/png" href="/favicon.png">
 
-  <meta name="description" content="Guida professionale al Calmar Ratio: formula, significato, interpretazione, limiti e applicazione nell'analisi di strategie e portafogli.">
-  
+  <meta name="description" content="Guida definitiva al Calmar Ratio: formula, calcolo, esempio pratico per ETF, backtesting e strategie di investimento. Include calcolatore interattivo e confronto con Sharpe e Sortino.">
+  <meta name="keywords" content="Calmar Ratio, risk-adjusted return, maximum drawdown, CAGR, investimenti, finanza quantitativa">
+  <meta name="author" content="Canio Tedesco, VQuantPro">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
-  <style>
-    body{margin:0;font-family:'Inter',sans-serif;background:linear-gradient(180deg,#0a0f1c 0%,#0b1020 100%);color:#d8e1ef;line-height:1.75}
-    .wrap{max-width:980px;margin:0 auto;padding:28px 20px 60px}
-    .card{background:linear-gradient(180deg,#131b2f 0%,#17233b 100%);border:1px solid #273553;border-radius:20px;box-shadow:0 18px 50px rgba(0,0,0,.35);overflow:hidden}
-    .topbar,.footer{padding:18px 24px;border-bottom:1px solid #273553}
-    .footer{border-top:1px solid #273553;border-bottom:none;color:#99a8bf;font-size:.93rem}
-    .topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;background:rgba(255,255,255,.02)}
-    .brand{font-weight:700;color:#f8fbff}
-    .back{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;text-decoration:none;background:#1c2942;color:#eaf2ff;border:1px solid #314261}
-    .hero{padding:38px 24px 16px}
-    .eyebrow{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(249,115,22,.12);border:1px solid rgba(249,115,22,.25);color:#ffd8bf;font-size:13px;font-weight:600}
-    h1{font-size:clamp(2rem,3vw,3rem);line-height:1.08;color:#f8fbff;margin:18px 0 14px}
-    .lead{font-size:1.08rem;color:#c7d3e5;max-width:72ch}
-    .content{padding:8px 24px 34px}
-    h2{font-size:1.45rem;margin:34px 0 12px;padding-left:14px;border-left:4px solid #f97316;color:#f8fbff}
-    h3{color:#f8fbff;margin:24px 0 10px}
-    p{margin:0 0 18px}
-    ul{margin:0;padding-left:20px}
-    li{margin:0 0 12px}
-    .box,.formula,.quote{margin:24px 0}
-    .box{background:rgba(8,15,30,.42);border:1px solid #273553;border-radius:16px;padding:20px}
-    .formula{background:#0a1324;border:1px solid #1c3450;border-radius:14px;padding:18px 20px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#ffcfab;font-size:1.03rem;text-align:center}
-    .quote{padding:22px;border-left:4px solid #f97316;background:rgba(249,115,22,.12);border-radius:0 14px 14px 0;color:#fff4ec}
-    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
-    .note{color:#99a8bf;font-size:.96rem}
-    @media (max-width:760px){.grid{grid-template-columns:1fr}.hero,.content,.topbar,.footer{padding-left:18px;padding-right:18px}}
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-    /* Cookie Banner */
-    .cookie-banner { position: fixed; bottom: 0; left: 0; right: 0; background: #161F30; border-top: 2px solid #f97316; padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; z-index: 10000; gap: 15px; font-size: 14px; color: #D1D5DB; box-shadow: 0 -5px 20px rgba(0,0,0,0.5); }
-    .cookie-banner p { margin: 0; flex: 1 1 300px; }
-    .cookie-banner a { color: #f97316; text-decoration: underline; }
-    .cookie-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
-    .cookie-btn { padding: 10px 20px; border-radius: 6px; font-weight: 600; cursor: pointer; border: none; font-size: 14px; }
-    .cookie-btn.accept { background: #f97316; color: #0B0F19; }
-    .cookie-btn.reject { background: transparent; color: #D1D5DB; border: 1px solid #24334C; }
+  <style>
+    :root{
+      --bg:#0b1020;
+      --panel:#131b2f;
+      --panel-2:#17233b;
+      --border:#273553;
+      --text:#d8e1ef;
+      --muted:#99a8bf;
+      --title:#f8fbff;
+      --accent:#f97316;
+      --accent-soft:rgba(249,115,22,.12);
+      --code:#0a1324;
+      --shadow:0 18px 50px rgba(0,0,0,.35);
+      --accent-dark:#ea580c;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:'Inter',sans-serif;
+      background:linear-gradient(180deg,#0a0f1c 0%,#0b1020 100%);
+      color:var(--text);
+      line-height:1.75;
+      font-size:16px;
+    }
+    .wrap{max-width:980px;margin:0 auto;padding:28px 20px 60px}
+    .card{
+      background:linear-gradient(180deg,var(--panel) 0%,var(--panel-2) 100%);
+      border:1px solid var(--border);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      transition:transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card:hover {
+      transform:translateY(-2px);
+      box-shadow:0 20px 40px rgba(0,0,0,0.4);
+    }
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+      align-items:center;
+      padding:18px 28px;
+      border-bottom:1px solid var(--border);
+      background:rgba(255,255,255,.02)
+    }
+    .brand{
+      font-weight:800;
+      letter-spacing:-0.01em;
+      font-size:1.35rem;
+      background:linear-gradient(135deg,#fff 0%,var(--accent) 100%);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+    .back{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:40px;
+      text-decoration:none;
+      background:#1c2942;
+      color:#eaf2ff;
+      border:1px solid #314261;
+      transition:all 0.2s ease;
+    }
+    .back:hover{
+      background:#233153;
+      border-color:var(--accent);
+      color:var(--accent);
+    }
+    .hero{padding:38px 28px 16px}
+    .eyebrow{
+      display:inline-block;
+      padding:6px 12px;
+      border-radius:999px;
+      background:var(--accent-soft);
+      border:1px solid rgba(249,115,22,.25);
+      color:#ffd8bf;
+      font-size:12px;
+      font-weight:600;
+      letter-spacing:.02em;
+      text-transform:uppercase;
+    }
+    h1{
+      font-size:clamp(2rem,4vw,3.2rem);
+      line-height:1.15;
+      font-weight:800;
+      color:var(--title);
+      margin:18px 0 14px;
+      letter-spacing:-0.02em;
+    }
+    .lead{
+      font-size:1.15rem;
+      color:#c7d3e5;
+      max-width:75ch;
+      font-weight:400;
+      border-left:3px solid var(--accent);
+      padding-left:20px;
+      margin-top:10px;
+    }
+    .content{padding:8px 28px 34px}
+    .toc,.box,.formula,.quote,.highlight-box{margin:28px 0}
+    .toc,.box{
+      background:rgba(8,15,30,.5);
+      border:1px solid var(--border);
+      border-radius:20px;
+      padding:24px;
+      backdrop-filter:blur(4px);
+    }
+    .toc h2,.box h2,section h2{
+      font-size:1.45rem;
+      font-weight:700;
+      margin:0 0 16px 0;
+      padding-left:0;
+      border-left:none;
+      color:var(--title);
+    }
+    h2{
+      font-size:1.65rem;
+      font-weight:700;
+      margin:48px 0 16px;
+      padding-bottom:8px;
+      border-bottom:2px solid rgba(249,115,22,0.3);
+      color:var(--title);
+    }
+    h3{
+      color:var(--title);
+      margin:28px 0 12px;
+      font-size:1.25rem;
+      font-weight:600;
+    }
+    p{
+      margin:0 0 18px;
+      color:var(--text);
+      line-height:1.7;
+    }
+    ul{margin:0;padding-left:20px}
+    li{margin:0 0 8px;color:var(--muted)}
+    .formula{
+      background:var(--code);
+      border:1px solid #1c3450;
+      border-radius:16px;
+      padding:20px 24px;
+      font-family:'JetBrains Mono',monospace;
+      color:#ffcfab;
+      font-size:1.2rem;
+      text-align:center;
+      overflow-x:auto;
+      font-weight:500;
+    }
+    .quote{
+      padding:24px;
+      border-left:4px solid var(--accent);
+      background:var(--accent-soft);
+      border-radius:0 20px 20px 0;
+      color:#fff4ec;
+      font-style:italic;
+      font-size:1.05rem;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:24px
+    }
+    .note{
+      color:var(--muted);
+      font-size:.9rem;
+      padding:12px;
+      background:rgba(0,0,0,0.2);
+      border-radius:12px;
+    }
+    .footer{
+      padding:24px 28px;
+      border-top:1px solid var(--border);
+      color:var(--muted);
+      font-size:.85rem;
+      background:rgba(0,0,0,0.2);
+    }
+    .inline-code{
+      background:var(--code);
+      padding:3px 8px;
+      border-radius:8px;
+      font-family:'JetBrains Mono',monospace;
+      font-size:.85em;
+      color:var(--accent);
+    }
+    .comparison-table{
+      width:100%;
+      border-collapse:collapse;
+      margin:20px 0;
+    }
+    .comparison-table th,.comparison-table td{
+      border:1px solid var(--border);
+      padding:12px;
+      text-align:left;
+    }
+    .comparison-table th{
+      background:rgba(249,115,22,0.1);
+      color:var(--accent);
+      font-weight:600;
+    }
+    .interactive-box{
+      background:rgba(0,0,0,0.3);
+      border-radius:16px;
+      padding:20px;
+      text-align:center;
+      transition:all 0.2s ease;
+    }
+    .interactive-box input{
+      background:var(--code);
+      border:1px solid var(--border);
+      color:var(--title);
+      padding:8px 12px;
+      border-radius:8px;
+      margin:5px;
+      width:130px;
+      font-family:'JetBrains Mono',monospace;
+    }
+    .calc-btn{
+      background:var(--accent);
+      color:var(--code);
+      border:none;
+      padding:10px 24px;
+      border-radius:40px;
+      font-weight:bold;
+      cursor:pointer;
+      transition:0.2s;
+      margin-top:10px;
+    }
+    .calc-btn:hover{
+      background:var(--accent-dark);
+      transform:scale(0.98);
+    }
+    @media (max-width:760px){
+      .grid{grid-template-columns:1fr}
+      .hero,.content,.topbar,.footer{padding-left:20px;padding-right:20px}
+      h1{font-size:clamp(1.8rem,5vw,2.4rem)}
+      .lead{font-size:1rem}
+    }
+
+    /* Cookie Banner Moderno */
+    .cookie-banner{
+      position:fixed;
+      bottom:20px;
+      left:20px;
+      right:20px;
+      background:#161F30;
+      border:1px solid rgba(249,115,22,0.3);
+      backdrop-filter:blur(10px);
+      border-radius:20px;
+      padding:20px 24px;
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+      z-index:10000;
+      gap:15px;
+      font-size:14px;
+      color:#D1D5DB;
+      box-shadow:0 20px 35px -8px rgba(0,0,0,0.5);
+    }
+    .cookie-banner p{margin:0;flex:1 1 300px}
+    .cookie-banner a{color:#f97316;text-decoration:underline}
+    .cookie-buttons{display:flex;gap:12px;flex-wrap:wrap}
+    .cookie-btn{
+      padding:10px 20px;
+      border-radius:40px;
+      font-weight:600;
+      cursor:pointer;
+      border:none;
+      font-size:14px;
+      transition:0.2s;
+    }
+    .cookie-btn.accept{background:#f97316;color:#0B0F19}
+    .cookie-btn.accept:hover{background:#ea580c;transform:translateY(-1px)}
+    .cookie-btn.reject{background:transparent;color:#D1D5DB;border:1px solid #24334C}
+    .cookie-btn.reject:hover{background:rgba(255,255,255,0.05);border-color:#f97316}
+    @media (max-width:600px){.cookie-banner{bottom:10px;left:10px;right:10px;padding:16px}}
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="card">
+  <main class="wrap">
+    <article class="card">
       <div class="topbar">
         <div class="brand">VQuantPro</div>
         <a class="back" href="/">← Torna alla Home</a>
       </div>
-      <div class="hero">
-        <span class="eyebrow">Guida efficienza/rischio</span>
+      <header class="hero">
+        <span class="eyebrow">Guida avanzata al rischio</span>
         <h1>Calmar Ratio: rendimento e drawdown insieme</h1>
-        <p class="lead">Il Calmar Ratio mette in relazione il rendimento di una strategia con il suo drawdown massimo. È molto utile quando si vuole capire se un buon risultato è stato ottenuto in modo ordinato oppure pagando perdite profonde lungo il percorso.</p>
-      </div>
+        <p class="lead">Il <strong>Calmar Ratio</strong> mette in relazione il rendimento di una strategia con il suo drawdown massimo. È la metrica ideale per capire se un buon risultato è stato ottenuto in modo ordinato oppure pagando perdite profonde lungo il percorso.</p>
+      </header>
       <div class="content">
-        <h2>Che cosa misura</h2>
-        <p>Il Calmar Ratio confronta la crescita annualizzata con la perdita massima osservata in un certo periodo. La metrica è particolarmente apprezzata perché introduce un concetto molto concreto: non basta guadagnare, conta anche quanto si è dovuto sopportare per arrivarci.</p>
-        
-        <div class="formula">Calmar Ratio = CAGR / |Max Drawdown|</div>
-
-        <p>In pratica, un valore più alto segnala una strategia che ha generato rendimento senza attraversare crolli eccessivi. Questo la rende utile per valutare fondi, ETF o portafogli gestiti con attenzione al comportamento durante le fasi difficili.</p>
-
-        <h2>Perché è interessante</h2>
-        <p>Molte metriche di rendimento guardano alla media o alla volatilità, ma il Calmar Ratio si concentra su una variabile che per l'investitore conta moltissimo: la profondità della perdita peggiore. È un approccio molto diretto, perché il drawdown massimo è spesso il momento in cui un portafoglio mette realmente alla prova la disciplina dell'investitore.</p>
-        <p>Per questo il Calmar è spesso usato per strategie trend-following, hedge fund e portafogli in cui la protezione del capitale è una priorità. La sua forza è legare la crescita al peggior scenario concreto osservato nel periodo.</p>
-
-        <h2>Come interpretarlo</h2>
-        <div class="grid">
-          <div class="box">
-            <h3>Calmar alto</h3>
-            <p>Indica che il rendimento è stato ottenuto con drawdown relativamente contenuti. La strategia appare più efficiente nel trasformare rischio in crescita.</p>
-          </div>
-          <div class="box">
-            <h3>Calmar basso</h3>
-            <p>Segnala che il rendimento non compensa adeguatamente le perdite massime subite. In genere mostra un profilo meno robusto.</p>
-          </div>
-        </div>
-
-        <h2>Rapporto con il CAGR</h2>
-        <p>Il CAGR dice quanto il capitale è cresciuto in media su base composta. Il Calmar aggiunge una domanda in più: quanto era profondo il peggiore scivolone necessario per ottenere quel risultato? È questa combinazione che rende la metrica molto utile nell'analisi quantitativa professionale.</p>
-        <div class="quote">Il Calmar Ratio non premia solo chi cresce, ma chi cresce senza attraversare ferite troppo profonde. È una metrica molto vicina al concetto di resilienza del portafoglio.</div>
-
-        <h2>Quando usarlo</h2>
-        <div class="box">
+        <!-- Indice dei contenuti -->
+        <section class="toc">
+          <h2>📑 Indice della guida</h2>
           <ul>
-            <li>Per confrontare strategie con stesso rendimento ma drawdown diversi.</li>
-            <li>Per analizzare fondi o ETF con profilo orientato alla stabilità.</li>
-            <li>Per valutare se una crescita apparente è stata ottenuta in modo sostenibile.</li>
-            <li>Per integrare le metriche di rischio/rendimento con una misura molto concreta delle perdite estreme.</li>
-            <li><a href="#" id="open_preferences_center">Gestisci le preferenze sui cookie</a></li>
+            <li><a href="#definizione" style="color:var(--accent); text-decoration:none;">1. Che cosa misura il Calmar Ratio?</a></li>
+            <li><a href="#formula" style="color:var(--accent); text-decoration:none;">2. La formula e il suo significato</a></li>
+            <li><a href="#esempi" style="color:var(--accent); text-decoration:none;">3. Esempi pratici di calcolo</a></li>
+            <li><a href="#calcolatore" style="color:var(--accent); text-decoration:none;">4. Calcolatore interattivo del Calmar Ratio</a></li>
+            <li><a href="#interpretazione" style="color:var(--accent); text-decoration:none;">5. Come interpretare il valore</a></li>
+            <li><a href="#confronto" style="color:var(--accent); text-decoration:none;">6. Calmar vs Sharpe vs Sortino</a></li>
+            <li><a href="#usi" style="color:var(--accent); text-decoration:none;">7. Applicazioni nell'analisi di portafoglio</a></li>
+            <li><a href="#limiti" style="color:var(--accent); text-decoration:none;">8. Limiti, criticità ed errori frequenti</a></li>
+            <li><a href="#conclusione" style="color:var(--accent); text-decoration:none;">9. Conclusioni e best practice operative</a></li>
+            <li><a href="#" id="open_preferences_center">📌 Gestisci le preferenze sui cookie</a></li>
           </ul>
-        </div>
+        </section>
 
-        <h2>Limiti della metrica</h2>
-        <p>Il Calmar Ratio dipende fortemente dal periodo osservato e dal drawdown massimo registrato. Se cambi finestra temporale, il risultato può cambiare molto. Inoltre non descrive la frequenza delle perdite, ma solo la peggiore tra esse.</p>
-        <p class="note">Contenuto informativo ed educativo. Non costituisce consulenza finanziaria o raccomandazione personalizzata.</p>
+        <!-- 1. DEFINIZIONE -->
+        <section id="definizione">
+          <h2>1. Che cosa misura il Calmar Ratio?</h2>
+          <p>Il <strong>Calmar Ratio</strong> (dove "Calmar" sta per "<strong>Cal</strong>mar <strong>Mar</strong>ket" dal nome della società che lo ha introdotto) è una metrica di performance risk-adjusted che confronta il tasso di crescita annualizzato di un investimento (<strong>CAGR</strong>) con il suo <strong>drawdown massimo</strong> (Maximum Drawdown, MDD). In altre parole, risponde alla domanda: "quanto rendimento ho ottenuto per ogni unità di sofferenza massima sopportata?"[reference:0]</p>
+          <p>Questa metrica è particolarmente apprezzata perché introduce un concetto molto concreto: non basta guadagnare, conta anche quanto si è dovuto sopportare per arrivarci. Un fondo che cresce del 15% annuo ma che ha subito un crollo del -30% durante il percorso non è necessariamente migliore di un fondo che cresce del 10% annuo con un drawdown massimo del -5%.</p>
+        </section>
+
+        <!-- 2. FORMULA -->
+        <section id="formula">
+          <h2>2. La formula e il suo significato</h2>
+          <div class="formula">Calmar Ratio = CAGR / |Max Drawdown|</div>
+          <p>Il <strong>CAGR (Compound Annual Growth Rate)</strong> rappresenta la crescita media annua composta, mentre il <strong>Max Drawdown</strong> misura la perdita massima dal picco al minimo durante il periodo osservato. Il denominatore viene preso in valore assoluto (positivo) per restituire un numero positivo e interpretabile come efficienza del rischio.[reference:1]</p>
+          <div class="quote">💡 <strong>Attenzione:</strong> Tradizionalmente, il Calmar Ratio viene calcolato su un periodo di <strong>tre anni</strong>. Questo orizzonte temporale bilancia la necessità di avere un campione statistico sufficiente senza includere cicli di mercato eccessivamente vecchi e potenzialmente non rappresentativi.[reference:2]</p>
+        </section>
+
+        <!-- 3. ESEMPI PRATICI CON TABELLA -->
+        <section id="esempi">
+          <h2>3. Esempi pratici di calcolo</h2>
+          <div class="grid">
+            <div class="box">
+              <h3>📊 Esempio 1: Due ETF a confronto</h3>
+              <p><strong>ETF A:</strong> CAGR = 12%, Max Drawdown = -8% → Calmar = 12 / 8 = <strong>1,5</strong><br>
+              <strong>ETF B:</strong> CAGR = 12%, Max Drawdown = -15% → Calmar = 12 / 15 = <strong>0,8</strong></p>
+              <p>A parità di rendimento, l'ETF A ha un Calmar molto più alto, indicando un profilo di rischio più efficiente. La perdita massima subita è quasi la metà rispetto all'ETF B.</p>
+            </div>
+            <div class="box">
+              <h3>📈 Esempio 2: Strategia trend-following</h3>
+              <p>Una strategia di trend-following su un hedge fund ha generato un CAGR del 18% negli ultimi tre anni. Tuttavia, durante il crollo del 2022, ha subito un drawdown del -12%.<br>
+              Calmar = 18 / 12 = <strong>1,5</strong>. Questo valore indica una buona resilienza: il rendimento compensa adeguatamente le perdite subite durante la fase più difficile del mercato.</p>
+            </div>
+          </div>
+          <div class="box">
+            <h3>🧠 Esempio 3: Confronto tra due portafogli</h3>
+            <p>Supponiamo di avere due portafogli con CAGR identici (10% annuo) ma profili di rischio opposti:</p>
+            <ul>
+              <li><strong>Portafoglio X:</strong> percorso stabile, Max Drawdown = -5% → Calmar = 2,0</li>
+              <li><strong>Portafoglio Y:</strong> percorso volatile, Max Drawdown = -25% → Calmar = 0,4</li>
+            </ul>
+            <p>Nonostante lo stesso rendimento finale, il Portafoglio X ha un Calmar cinque volte superiore, segnalando una qualità della crescita molto più elevata. Un investitore con bassa tolleranza al rischio dovrebbe preferire il Portafoglio X, mentre uno più aggressivo potrebbe accettare il profilo del Portafoglio Y se confida nel recupero successivo ai drawdown.</p>
+          </div>
+        </section>
+
+        <!-- 4. CALCOLATORE INTERATTIVO -->
+        <section id="calcolatore">
+          <h2>4. 🧮 Calcolatore interattivo del Calmar Ratio</h2>
+          <div class="interactive-box">
+            <p><label>CAGR (%) annuo: </label><input type="number" id="cagrVal" value="15" step="0.5" style="width:120px"></p>
+            <p><label>Max Drawdown (%): </label><input type="number" id="mddVal" value="10" step="0.5" style="width:120px"></p>
+            <button class="calc-btn" id="calcBtn">Calcola Calmar Ratio</button>
+            <p id="calmarResult" style="font-size:1.4rem; font-weight:bold; color:var(--accent); margin-top:10px;">Calmar = --</p>
+            <div class="note">💡 Utilizza questo tool per valutare rapidamente l'efficienza di una strategia: un Calmar superiore a 1 è generalmente considerato accettabile, mentre valori superiori a 2 indicano un'eccellente resilienza.</div>
+          </div>
+        </section>
+
+        <!-- 5. INTERPRETAZIONE -->
+        <section id="interpretazione">
+          <h2>5. Come interpretare il valore del Calmar Ratio</h2>
+          <div class="grid">
+            <div class="box">
+              <h3>🟢 Calmar > 1</h3>
+              <p>Il rendimento annualizzato supera il drawdown massimo. Segnale generalmente positivo, indica che la strategia ha compensato adeguatamente le perdite subite.</p>
+            </div>
+            <div class="box">
+              <h3>🟡 Calmar tra 0,5 e 1</h3>
+              <p>Il rendimento è inferiore al drawdown massimo. La strategia potrebbe essere ancora accettabile in contesti di mercato favorevoli, ma merita un'analisi approfondita dei drawdown più recenti.</p>
+            </div>
+            <div class="box">
+              <h3>🔴 Calmar &lt; 0,5</h3>
+              <p>Il rendimento è notevolmente inferiore al drawdown. Segnale di allarme: il rischio di perdita non è adeguatamente compensato dal rendimento atteso. Molto spesso associato a strategie speculative o a periodi di mercato estremamente difficili.</p>
+            </div>
+            <div class="box">
+              <h3>⭐ Calmar > 2</h3>
+              <p>Eccellente. Indica che la strategia ha generato più del doppio del rendimento rispetto alla perdita massima sopportata. Tipico di portafogli ben diversificati e strategie robuste.</p>
+            </div>
+          </div>
+          <div class="quote">🎯 Un Calmar Ratio <strong>elevato</strong> suggerisce che la strategia è stata in grado di generare rendimenti interessanti senza subire crolli rovinosi. Un Calmar <strong>negativo</strong> (CAGR negativo) indica che l'investimento ha perso valore nel periodo e la metrica perde significato, perché il denominatore (drawdown) è positivo ma il numeratore è negativo.[reference:3]</div>
+        </section>
+
+        <!-- 6. CONFRONTO CON ALTRE METRICHE -->
+        <section id="confronto">
+          <h2>6. Calmar vs Sharpe Ratio vs Sortino Ratio</h2>
+          <table class="comparison-table">
+            <thead>
+              <tr><th>Metrica</th><th>Definizione</th><th>Unità di rischio considerata</th><th>Quando usarla</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Sharpe Ratio</strong></td><td>(Rendimento - RiskFree) / Volatilità</td><td>Volatilità totale (upside e downside)</td><td>Per valutare la stabilità complessiva del portafoglio</td></tr>
+              <tr><td><strong>Sortino Ratio</strong></td><td>(Rendimento - RiskFree) / Downside Deviation</td><td>Volatilità negativa (solo perdite)</td><td>Quando gli investitori temono più le perdite che la volatilità generale</td></tr>
+              <tr><td><strong>Calmar Ratio</strong></td><td>CAGR / |Max Drawdown|</td><td>Drawdown massimo (perdita peggiore)</td><td>Per strategie trend-following, hedge fund e investitori focalizzati sulla protezione del capitale</td></tr>
+            </tbody>
+          </table>
+          <p>Mentre Sharpe e Sortino utilizzano la volatilità (totale o negativa) come misura di rischio, il Calmar si concentra sull'evento estremo: la perdita peggiore effettivamente subita. Per questo è particolarmente adatto a strategie in cui la protezione del capitale è prioritaria o in contesti di mercato stressati.[reference:4]</p>
+        </section>
+
+        <!-- 7. APPLICAZIONI -->
+        <section id="usi">
+          <h2>7. Applicazioni nell'analisi di portafoglio</h2>
+          <div class="grid">
+            <div class="box">
+              <h3>🎯 Selezione di hedge fund</h3>
+              <p>Gli hedge fund utilizzano spesso il Calmar Ratio nei loro report di performance perché enfatizza la capacità di limitare le perdite durante i crolli di mercato. Un Calmar superiore a 1 è considerato un parametro di eccellenza nel settore.</p>
+            </div>
+            <div class="box">
+              <h3>📊 Backtesting di strategie quantitative</h3>
+              <p>Nel backtesting, il Calmar Ratio viene utilizzato insieme allo Sharpe Ratio per valutare la robustezza di una strategia. Una strategia con Sharpe elevato ma Calmar basso potrebbe essere vulnerabile a shock improvvisi.</p>
+            </div>
+            <div class="box">
+              <h3>📈 Confronto tra ETF e fondi comuni</h3>
+              <p>Quando si confrontano ETF azionari, obbligazionari o misti, il Calmar Ratio offre una visione complementare al CAGR. Due ETF con CAGR simili possono avere Calmar molto diversi, rivelando differenze sostanziali nella gestione del rischio.</p>
+            </div>
+            <div class="box">
+              <h3>📉 Analisi di portafogli pensionistici</h3>
+              <p>Per gli investitori in prossimità della pensione, il drawdown massimo è una variabile critica. Un Calmar Ratio elevato fornisce maggiore tranquillità durante le fasi di mercato difficili, riducendo il rischio di dover posticipare il pensionamento a causa di perdite temporanee ma profonde.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 8. LIMITI -->
+        <section id="limiti">
+          <h2>8. Limiti, criticità ed errori frequenti</h2>
+          <ul>
+            <li><strong>Dipendenza dal periodo di osservazione:</strong> Il Calmar Ratio varia significativamente in base alla finestra temporale scelta. Un drawdown grave avvenuto oltre i tre anni non viene considerato nel tradizionale Calmar triennale, ma potrebbe essere stato comunque traumatico per l'investitore.</li>
+            <li><strong>Ignora la frequenza delle perdite:</strong> Il Calmar considera solo la perdita peggiore, non quante volte il portafoglio è andato in rosso o quanto a lungo è rimasto in drawdown. Un investimento potrebbe avere un drawdown massimo contenuto ma drawdown frequenti e prolungati.</li>
+            <li><strong>Sensibilità a dati anomali:</strong> Un singolo evento estremo di mercato (es. crisi finanziaria del 2008, COVID-19) può abbassare drasticamente il Calmar Ratio anche per strategie altrimenti solide.</li>
+            <li><strong>Non tiene conto del rischio di coda:</strong> Il drawdown massimo è comunque una misura storica; non garantisce che in futuro non si verifichi un drawdown ancora più profondo.</li>
+            <li><strong>Errore frequente:</strong> Confondere il Calmar con il rapporto tra rendimento medio annuale (non composto) e drawdown. La corretta prassi richiede l'utilizzo del CAGR per tenere conto dell'interesse composto.</li>
+          </ul>
+          <div class="box">
+            <h3>⚠️ Esempio di limite: il caso di due strategie identiche</h3>
+            <p>Immagina due strategie con CAGR = 10% e Max Drawdown = -10% (Calmar = 1,0). La prima strategia ha avuto un solo drawdown del -10% durato 3 mesi; la seconda ha avuto tre drawdown del -9% ciascuno, distribuiti su 18 mesi. Il Calmar non distingue tra queste due situazioni, ma la seconda strategia è psicologicamente molto più gravosa per l'investitore. Per questo motivo, affianchiamo sempre il Calmar con altre metriche come l'Ulcer Index o il Recovery Time.</p>
+          </div>
+        </section>
+
+        <!-- 9. CONCLUSIONI -->
+        <section id="conclusione">
+          <h2>9. Conclusioni e best practice operative</h2>
+          <div class="quote">"Il Calmar Ratio non premia solo chi cresce, ma chi cresce senza attraversare ferite troppo profonde. È una metrica molto vicina al concetto di resilienza del portafoglio."</div>
+          <p>Il <strong>Calmar Ratio</strong> è uno strumento prezioso nell'arsenale dell'analisi quantitativa, ma come ogni metrica, va utilizzato consapevolmente. Le best practice operative prevedono:</p>
+          <ul>
+            <li>Utilizzare il Calmar Ratio <strong>insieme</strong> allo Sharpe Ratio e allo Sortino Ratio per una visione a 360 gradi del profilo rischio-rendimento.</li>
+            <li>Calcolare il Calmar su <strong>finestra mobile</strong> (rolling Calmar) per osservare l'evoluzione della resilienza nel tempo, identificando periodi di maggiore vulnerabilità.</li>
+            <li>Prestare attenzione al <strong>contesto di mercato</strong>: un Calmar basso in un anno di crisi sistemica non è necessariamente un campanello d'allarme, mentre un Calmar basso in un anno di mercato rialzista è più preoccupante.</li>
+            <li>Utilizzare il Calmar Ratio come uno dei criteri di <strong>screening iniziale</strong> per filtrare strategie troppo fragili, prima di procedere con analisi più approfondite.</li>
+          </ul>
+          <p class="note"><strong>Contenuto informativo ed educativo:</strong> Le informazioni contenute in questa guida non costituiscono consulenza finanziaria, sollecitazione all'investimento o raccomandazione personalizzata. Prima di qualsiasi decisione di investimento, consultare un consulente finanziario indipendente.</p>
+        </section>
+
+        <p><span id="open_preferences_center_bottom" style="color: var(--accent); text-decoration: underline; cursor: pointer;">📌 Gestisci le preferenze sui cookie</span></p>
       </div>
-      <div class="footer">VQuantPro · Una buona crescita vale di più quando non è stata pagata con perdite eccessive.</div>
-    </div>
-  </div>
+      <footer class="footer">
+        VQuantPro · Analisi quantitativa, metriche e strumenti per una lettura più rigorosa di rischio e rendimento.
+      </footer>
+    </article>
+  </main>
 
-  <!-- Cookie Banner Personalizzato -->
+  <!-- Cookie Banner Interattivo -->
   <div id="cookie-banner" class="cookie-banner" style="display:none;">
-      <p>Questo sito utilizza cookie tecnici necessari al funzionamento. Con il tuo consenso, potremmo utilizzare cookie di terze parti per annunci personalizzati. <a href="/privacy/index.html">Privacy Policy</a></p>
+      <p>🔐 Utilizziamo cookie tecnici per il funzionamento del sito. Con il tuo consenso, utilizziamo cookie di terze parti per annunci personalizzati. <a href="/privacy/index.html">Privacy Policy</a> | <a href="/cookie/index.html">Cookie Policy</a></p>
       <div class="cookie-buttons">
           <button id="cookie-accept" class="cookie-btn accept">Accetta tutti</button>
           <button id="cookie-reject" class="cookie-btn reject">Solo necessari</button>
@@ -125,6 +499,7 @@
       const acceptBtn = document.getElementById('cookie-accept');
       const rejectBtn = document.getElementById('cookie-reject');
       const prefsLink = document.getElementById('open_preferences_center');
+      const prefsLinkBottom = document.getElementById('open_preferences_center_bottom');
       
       if (!localStorage.getItem('cookie-consent')) {
           banner.style.display = 'flex';
@@ -133,18 +508,19 @@
       function setConsent(value) {
           localStorage.setItem('cookie-consent', value);
           banner.style.display = 'none';
-          if (value === 'accepted') loadExternalScripts();
+          if (value === 'accepted') {
+              loadExternalScripts();
+          } else {
+              removeExternalScripts();
+          }
       }
       
-      acceptBtn.addEventListener('click', function() { setConsent('accepted'); });
-      rejectBtn.addEventListener('click', function() { setConsent('rejected'); });
+      if (acceptBtn) acceptBtn.addEventListener('click', () => setConsent('accepted'));
+      if (rejectBtn) rejectBtn.addEventListener('click', () => setConsent('rejected'));
       
-      if (prefsLink) {
-          prefsLink.addEventListener('click', function(e) {
-              e.preventDefault();
-              banner.style.display = 'flex';
-          });
-      }
+      const handlePrefs = (e) => { e.preventDefault(); banner.style.display = 'flex'; };
+      if (prefsLink) prefsLink.addEventListener('click', handlePrefs);
+      if (prefsLinkBottom) prefsLinkBottom.addEventListener('click', handlePrefs);
       
       if (localStorage.getItem('cookie-consent') === 'accepted') {
           loadExternalScripts();
@@ -164,8 +540,36 @@
               document.head.appendChild(fcScript);
           }
       }
+      
+      function removeExternalScripts() {
+          var scripts = document.querySelectorAll('script[src*="adsbygoogle"], script[src*="fundingchoicesmessages"]');
+          scripts.forEach(script => script.remove());
+      }
+  })();
+  
+  // Calcolatore Calmar interattivo
+  (function(){
+      const calcBtn = document.getElementById('calcBtn');
+      if(calcBtn){
+          calcBtn.addEventListener('click', function(){
+              let cagr = parseFloat(document.getElementById('cagrVal').value);
+              let mdd = parseFloat(document.getElementById('mddVal').value);
+              const resultEl = document.getElementById('calmarResult');
+              if(isNaN(cagr) || isNaN(mdd) || mdd <= 0){
+                  resultEl.innerHTML = "Calmar = Inserisci valori validi (Drawdown > 0)";
+                  return;
+              }
+              // Se il CAGR è negativo, il Calmar diventa negativo; manteniamo la formula corretta
+              if(cagr < 0){
+                  resultEl.innerHTML = `Calmar = ${(cagr / mdd).toFixed(2)} (CAGR negativo)`;
+                  return;
+              }
+              const calmar = cagr / mdd;
+              resultEl.innerHTML = `Calmar = ${calmar.toFixed(2)}`;
+          });
+          document.getElementById('calcBtn').click();
+      }
   })();
   </script>
-
 </body>
 </html>
