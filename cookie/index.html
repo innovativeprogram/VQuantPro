@@ -47,7 +47,7 @@
         .back-link:hover { opacity: 0.9; }
         #open_preferences_center { color: var(--accent); text-decoration: underline; cursor: pointer; }
 
-        /* Cookie Banner (stesso stile delle altre pagine) */
+        /* Cookie Banner */
         .cookie-banner { position: fixed; bottom: 0; left: 0; right: 0; background: #161F30; border-top: 2px solid #00E676; padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; z-index: 10000; gap: 15px; font-size: 14px; color: #D1D5DB; box-shadow: 0 -5px 20px rgba(0,0,0,0.5); }
         .cookie-banner p { margin: 0; flex: 1 1 300px; }
         .cookie-banner a { color: #00E676; text-decoration: underline; }
@@ -72,11 +72,12 @@
     Utilizziamo Google Analytics per raccogliere informazioni aggregate sul numero di visitatori, sulle pagine visualizzate e sul comportamento di navigazione. Questi cookie ci aiutano a migliorare il Sito. L’indirizzo IP viene anonimizzato. Per questi cookie richiediamo il tuo consenso.</p>
     
     <p><strong>Cookie di profilazione e advertising</strong><br>
-    Attraverso Google AdSense, potremmo mostrare annunci personalizzati in base ai tuoi interessi e alla tua navigazione su altri siti. Questi cookie monitorano la navigazione per creare profili. Richiedono il tuo consenso esplicito.</p>
+    Attraverso Monetag e Google AdSense, potremmo mostrare annunci personalizzati in base ai tuoi interessi e alla tua navigazione su altri siti. Questi cookie monitorano la navigazione per creare profili. Richiedono il tuo consenso esplicito.</p>
     
     <h2>3. Cookie di terze parti</h2>
     <p>Il Sito integra servizi di terze parti che possono installare cookie propri. Ecco i principali:</p>
     <ul>
+        <li><strong>Monetag</strong> (pubblicità): <a href="https://monetag.com/privacy-policy" target="_blank">Privacy Policy di Monetag</a></li>
         <li><strong>Google AdSense</strong> (pubblicità): <a href="https://policies.google.com/technologies/cookies" target="_blank">Informativa cookie Google</a></li>
         <li><strong>Google Analytics</strong> (statistiche): <a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank">Utilizzo dei cookie da Google Analytics</a></li>
         <li><strong>Google Fonts</strong> e <strong>Font Awesome</strong> (caricamento di caratteri e icone): potrebbero raccogliere dati anonimi; maggiori dettagli nelle rispettive privacy policy.</li>
@@ -89,7 +90,7 @@
     <p>Inoltre, puoi impostare il tuo browser per bloccare o eliminare i cookie (compresi quelli tecnici) – ma ciò potrebbe compromettere alcune funzionalità del Sito. Le istruzioni per i browser più comuni sono disponibili nei rispettivi menu “Aiuto” o “Preferenze”.</p>
     
     <h2>5. Durata dei cookie</h2>
-    <p>I cookie tecnici e di analisi hanno una durata massima di 12 mesi. I cookie di profilazione (AdSense) hanno durata variabile (tipicamente 30 giorni per i cookie di targeting). Al termine, vengono automaticamente cancellati dal browser.</p>
+    <p>I cookie tecnici e di analisi hanno una durata massima di 12 mesi. I cookie di profilazione (Monetag, AdSense) hanno durata variabile (tipicamente 30-90 giorni). Al termine, vengono automaticamente cancellati dal browser.</p>
     
     <h2>6. Diritti dell’utente</h2>
     <p>Hai il diritto di revocare il consenso in qualsiasi momento, senza pregiudicare la liceità del trattamento basata sul consenso prima della revoca. Per esercitare i tuoi diritti in materia di dati personali (accesso, rettifica, cancellazione, ecc.), consulta la nostra <a href="/privacy/index.html">Privacy Policy</a> o scrivi a privacy@vquantpro.it.</p>
@@ -101,7 +102,7 @@
     
     <a href="/" class="back-link">← Torna alla Home</a>
 
-    <!-- Cookie Banner (identico a quello delle altre pagine per uniformità) -->
+    <!-- Cookie Banner (identico a quello delle altre pagine) -->
     <div id="cookie-banner" class="cookie-banner" style="display:none;">
         <p>Questo sito utilizza cookie tecnici necessari al funzionamento. Con il tuo consenso, potremmo utilizzare cookie di terze parti per annunci personalizzati. <a href="/privacy/index.html">Privacy Policy</a> | <a href="/cookie/index.html">Cookie Policy</a></p>
         <div class="cookie-buttons">
@@ -127,9 +128,10 @@
             localStorage.setItem('cookie-consent', value);
             banner.style.display = 'none';
             if (value === 'accepted') {
+                // Aggiorna GA4 se disponibile
+                if (typeof window.updateGA4Consent === 'function') window.updateGA4Consent();
                 loadExternalScripts();
             } else {
-                // Se rifiuta, eventualmente rimuove script già caricati (opzionale)
                 removeExternalScripts();
             }
         }
@@ -150,6 +152,7 @@
         }
         
         function loadExternalScripts() {
+            // AdSense
             if (!document.querySelector('script[src*="adsbygoogle"]')) {
                 var adsScript = document.createElement('script');
                 adsScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2835044924304516';
@@ -162,11 +165,19 @@
                 fcScript.async = true;
                 document.head.appendChild(fcScript);
             }
+            // Monetag
+            if (!document.querySelector('script[src*="quge5.com/88/tag.min.js"]')) {
+                var monetagScript = document.createElement('script');
+                monetagScript.src = 'https://quge5.com/88/tag.min.js';
+                monetagScript.setAttribute('data-zone', '245093');
+                monetagScript.async = true;
+                monetagScript.setAttribute('data-cfasync', 'false');
+                document.head.appendChild(monetagScript);
+            }
         }
         
         function removeExternalScripts() {
-            // Non è obbligatorio rimuovere, ma si può fare per coerenza
-            var scripts = document.querySelectorAll('script[src*="adsbygoogle"], script[src*="fundingchoicesmessages"]');
+            var scripts = document.querySelectorAll('script[src*="adsbygoogle"], script[src*="fundingchoicesmessages"], script[src*="quge5.com"]');
             scripts.forEach(script => script.remove());
         }
     })();
