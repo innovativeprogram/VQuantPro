@@ -3,162 +3,439 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Volatilità: misurare l'instabilità dei rendimenti | VQuantPro</title>
+  <title>Volatilità: guida completa alla misura dell'instabilità dei rendimenti | VQuantPro</title>
 
   <link rel="canonical" href="https://vquantpro.it/guida-volatilita.html" />
   <link rel="icon" type="image/png" href="/favicon.png">
 
-  <meta name="description" content="Guida professionale alla volatilità: significato, formula, interpretazione, limiti e ruolo nell'analisi di portafogli, ETF e strategie quantitative.">
+  <meta name="description" content="Guida definitiva alla volatilità finanziaria: definizione, formula di calcolo (deviazione standard), interpretazione, volatilità storica vs implicita, VIX, clustering, limiti e ruolo nell'analisi di portafogli. Include calcolatore interattivo e best practice.">
+  <meta name="keywords" content="volatilità, deviazione standard, rischio finanziario, VIX, volatilità storica, volatilità implicita, clustering della volatilità, Sharpe Ratio, gestione del rischio, finanza quantitativa">
+  <meta name="author" content="Canio Tedesco, VQuantPro">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    body{margin:0;font-family:'Inter',sans-serif;background:linear-gradient(180deg,#0a0f1c 0%,#0b1020 100%);color:#d8e1ef;line-height:1.75}
+    :root{
+      --bg:#0b1020;
+      --panel:#131b2f;
+      --panel-2:#17233b;
+      --border:#273553;
+      --text:#d8e1ef;
+      --muted:#99a8bf;
+      --title:#f8fbff;
+      --accent:#60a5fa;
+      --accent-soft:rgba(96,165,250,.12);
+      --code:#0a1324;
+      --shadow:0 18px 50px rgba(0,0,0,.35);
+      --accent-dark:#3b82f6;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:'Inter',sans-serif;
+      background:linear-gradient(180deg,#0a0f1c 0%,#0b1020 100%);
+      color:var(--text);
+      line-height:1.75;
+      font-size:16px;
+    }
     .wrap{max-width:980px;margin:0 auto;padding:28px 20px 60px}
-    .card{background:linear-gradient(180deg,#131b2f 0%,#17233b 100%);border:1px solid #273553;border-radius:20px;box-shadow:0 18px 50px rgba(0,0,0,.35);overflow:hidden}
-    .topbar,.footer{padding:18px 24px;border-bottom:1px solid #273553}
-    .footer{border-top:1px solid #273553;border-bottom:none;color:#99a8bf;font-size:.93rem}
-    .topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;background:rgba(255,255,255,.02)}
-    .brand{font-weight:700;color:#f8fbff}
-    .back{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;text-decoration:none;background:#1c2942;color:#eaf2ff;border:1px solid #314261}
-    .hero{padding:38px 24px 16px}
-    .eyebrow{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(96,165,250,.12);border:1px solid rgba(96,165,250,.25);color:#d7ecff;font-size:13px;font-weight:600}
-    h1{font-size:clamp(2rem,3vw,3rem);line-height:1.08;color:#f8fbff;margin:18px 0 14px}
-    .lead{font-size:1.08rem;color:#c7d3e5;max-width:72ch}
-    .content{padding:8px 24px 34px}
-    h2{font-size:1.45rem;margin:34px 0 12px;padding-left:14px;border-left:4px solid #60a5fa;color:#f8fbff}
-    h3{color:#f8fbff;margin:24px 0 10px}
-    p{margin:0 0 18px}
+    .card{
+      background:linear-gradient(180deg,var(--panel) 0%,var(--panel-2) 100%);
+      border:1px solid var(--border);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      transition:transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card:hover {
+      transform:translateY(-2px);
+      box-shadow:0 20px 40px rgba(0,0,0,0.4);
+    }
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+      align-items:center;
+      padding:18px 28px;
+      border-bottom:1px solid var(--border);
+      background:rgba(255,255,255,.02)
+    }
+    .brand{
+      font-weight:800;
+      letter-spacing:-0.01em;
+      font-size:1.35rem;
+      background:linear-gradient(135deg,#fff 0%,var(--accent) 100%);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+    .back{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:40px;
+      text-decoration:none;
+      background:#1c2942;
+      color:#eaf2ff;
+      border:1px solid #314261;
+      transition:all 0.2s ease;
+    }
+    .back:hover{
+      background:#233153;
+      border-color:var(--accent);
+      color:var(--accent);
+    }
+    .hero{padding:38px 28px 16px}
+    .eyebrow{
+      display:inline-block;
+      padding:6px 12px;
+      border-radius:999px;
+      background:var(--accent-soft);
+      border:1px solid rgba(96,165,250,.25);
+      color:#d7ecff;
+      font-size:12px;
+      font-weight:600;
+      letter-spacing:.02em;
+      text-transform:uppercase;
+    }
+    h1{
+      font-size:clamp(2rem,4vw,3.2rem);
+      line-height:1.15;
+      font-weight:800;
+      color:var(--title);
+      margin:18px 0 14px;
+      letter-spacing:-0.02em;
+    }
+    .lead{
+      font-size:1.15rem;
+      color:#c7d3e5;
+      max-width:75ch;
+      font-weight:400;
+      border-left:3px solid var(--accent);
+      padding-left:20px;
+      margin-top:10px;
+    }
+    .content{padding:8px 28px 34px}
+    .toc,.box,.formula,.quote,.highlight-box{margin:28px 0}
+    .toc,.box{
+      background:rgba(8,15,30,.5);
+      border:1px solid var(--border);
+      border-radius:20px;
+      padding:24px;
+      backdrop-filter:blur(4px);
+    }
+    .toc h2,.box h2,section h2{
+      font-size:1.45rem;
+      font-weight:700;
+      margin:0 0 16px 0;
+      padding-left:0;
+      border-left:none;
+      color:var(--title);
+    }
+    h2{
+      font-size:1.65rem;
+      font-weight:700;
+      margin:48px 0 16px;
+      padding-bottom:8px;
+      border-bottom:2px solid rgba(96,165,250,0.3);
+      color:var(--title);
+    }
+    h3{
+      color:var(--title);
+      margin:28px 0 12px;
+      font-size:1.25rem;
+      font-weight:600;
+    }
+    p{
+      margin:0 0 18px;
+      color:var(--text);
+      line-height:1.7;
+    }
     ul{margin:0;padding-left:20px}
-    li{margin:0 0 12px}
-    .box,.formula,.quote{margin:24px 0}
-    .box{background:rgba(8,15,30,.42);border:1px solid #273553;border-radius:16px;padding:20px}
-    .formula{background:#0a1324;border:1px solid #1c3450;border-radius:14px;padding:18px 20px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#9fd2ff;font-size:1.03rem;text-align:center}
-    .quote{padding:22px;border-left:4px solid #60a5fa;background:rgba(96,165,250,.12);border-radius:0 14px 14px 0;color:#eff8ff}
-    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
-    .note{color:#99a8bf;font-size:.96rem}
-    @media (max-width:760px){.grid{grid-template-columns:1fr}.hero,.content,.topbar,.footer{padding-left:18px;padding-right:18px}}
+    li{margin:0 0 8px;color:var(--muted)}
+    .formula{
+      background:var(--code);
+      border:1px solid #1c3450;
+      border-radius:16px;
+      padding:20px 24px;
+      font-family:'JetBrains Mono',monospace;
+      color:#9fd2ff;
+      font-size:1.2rem;
+      text-align:center;
+      overflow-x:auto;
+      font-weight:500;
+    }
+    .quote{
+      padding:24px;
+      border-left:4px solid var(--accent);
+      background:var(--accent-soft);
+      border-radius:0 20px 20px 0;
+      color:#eff8ff;
+      font-style:italic;
+      font-size:1.05rem;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:24px
+    }
+    .note{
+      color:var(--muted);
+      font-size:.9rem;
+      padding:12px;
+      background:rgba(0,0,0,0.2);
+      border-radius:12px;
+    }
+    .footer{
+      padding:24px 28px;
+      border-top:1px solid var(--border);
+      color:var(--muted);
+      font-size:.85rem;
+      background:rgba(0,0,0,0.2);
+    }
+    .inline-code{
+      background:var(--code);
+      padding:3px 8px;
+      border-radius:8px;
+      font-family:'JetBrains Mono',monospace;
+      font-size:.85em;
+      color:var(--accent);
+    }
+    .comparison-table{
+      width:100%;
+      border-collapse:collapse;
+      margin:20px 0;
+    }
+    .comparison-table th,.comparison-table td{
+      border:1px solid var(--border);
+      padding:12px;
+      text-align:left;
+    }
+    .comparison-table th{
+      background:rgba(96,165,250,0.1);
+      color:var(--accent);
+      font-weight:600;
+    }
+    .interactive-box{
+      background:rgba(0,0,0,0.3);
+      border-radius:16px;
+      padding:20px;
+      text-align:center;
+      transition:all 0.2s ease;
+    }
+    .interactive-box input{
+      background:var(--code);
+      border:1px solid var(--border);
+      color:var(--title);
+      padding:8px 12px;
+      border-radius:8px;
+      margin:5px;
+      width:110px;
+      font-family:'JetBrains Mono',monospace;
+    }
+    .calc-btn{
+      background:var(--accent);
+      color:var(--code);
+      border:none;
+      padding:10px 24px;
+      border-radius:40px;
+      font-weight:bold;
+      cursor:pointer;
+      transition:0.2s;
+      margin-top:10px;
+    }
+    .calc-btn:hover{
+      background:var(--accent-dark);
+      transform:scale(0.98);
+    }
+    .warning-box{
+      background:rgba(96,165,250,0.15);
+      border-left:4px solid var(--accent);
+      padding:16px 20px;
+      border-radius:12px;
+      margin:20px 0;
+    }
+    @media (max-width:760px){
+      .grid{grid-template-columns:1fr}
+      .hero,.content,.topbar,.footer{padding-left:20px;padding-right:20px}
+      h1{font-size:clamp(1.8rem,5vw,2.4rem)}
+      .lead{font-size:1rem}
+    }
 
-    /* Cookie Banner */
-    .cookie-banner { position: fixed; bottom: 0; left: 0; right: 0; background: #161F30; border-top: 2px solid #60a5fa; padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; z-index: 10000; gap: 15px; font-size: 14px; color: #D1D5DB; box-shadow: 0 -5px 20px rgba(0,0,0,0.5); }
-    .cookie-banner p { margin: 0; flex: 1 1 300px; }
-    .cookie-banner a { color: #60a5fa; text-decoration: underline; }
-    .cookie-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
-    .cookie-btn { padding: 10px 20px; border-radius: 6px; font-weight: 600; cursor: pointer; border: none; font-size: 14px; }
-    .cookie-btn.accept { background: #60a5fa; color: #0B0F19; }
-    .cookie-btn.reject { background: transparent; color: #D1D5DB; border: 1px solid #24334C; }
+    /* Cookie Banner Moderno */
+    .cookie-banner{
+      position:fixed;
+      bottom:20px;
+      left:20px;
+      right:20px;
+      background:#161F30;
+      border:1px solid rgba(96,165,250,0.3);
+      backdrop-filter:blur(10px);
+      border-radius:20px;
+      padding:20px 24px;
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+      z-index:10000;
+      gap:15px;
+      font-size:14px;
+      color:#D1D5DB;
+      box-shadow:0 20px 35px -8px rgba(0,0,0,0.5);
+    }
+    .cookie-banner p{margin:0;flex:1 1 300px}
+    .cookie-banner a{color:#60a5fa;text-decoration:underline}
+    .cookie-buttons{display:flex;gap:12px;flex-wrap:wrap}
+    .cookie-btn{
+      padding:10px 20px;
+      border-radius:40px;
+      font-weight:600;
+      cursor:pointer;
+      border:none;
+      font-size:14px;
+      transition:0.2s;
+    }
+    .cookie-btn.accept{background:#60a5fa;color:#0B0F19}
+    .cookie-btn.accept:hover{background:#3b82f6;transform:translateY(-1px)}
+    .cookie-btn.reject{background:transparent;color:#D1D5DB;border:1px solid #24334C}
+    .cookie-btn.reject:hover{background:rgba(255,255,255,0.05);border-color:#60a5fa}
+    @media (max-width:600px){.cookie-banner{bottom:10px;left:10px;right:10px;padding:16px}}
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="card">
-      <div class="topbar">
-        <div class="brand">VQuantPro</div>
-        <a class="back" href="/">← Torna alla Home</a>
-      </div>
-      <div class="hero">
-        <span class="eyebrow">Guida al rischio</span>
+  <main class="wrap">
+    <article class="card">
+      <div class="topbar"><div class="brand">VQuantPro</div><a class="back" href="/">← Torna alla Home</a></div>
+      <header class="hero">
+        <span class="eyebrow">Guida completa al rischio finanziario</span>
         <h1>Volatilità: misurare l'instabilità dei rendimenti</h1>
-        <p class="lead">La volatilità indica quanto i rendimenti di un asset o di un portafoglio si discostano in modo tipico dal loro valore medio. In pratica misura l'ampiezza delle oscillazioni: più i risultati sono irregolari, più la volatilità tende ad essere elevata.</p>
-      </div>
+        <p class="lead">La <strong>volatilità</strong> è una delle misure di rischio più utilizzate in finanza. Indica quanto i rendimenti di un asset o di un portafoglio si discostano in modo tipico dal loro valore medio, ovvero misura l'ampiezza delle oscillazioni: più i risultati sono irregolari, più la volatilità tende ad essere elevata. Questa guida completa ti mostrerà come calcolarla, interpretarla e utilizzarla per la gestione del rischio.</p>
+      </header>
       <div class="content">
-        <h2>Che cosa rappresenta</h2>
-        <p>In finanza la volatilità è una delle prime approssimazioni del rischio. Non dice se un investimento stia andando bene o male, ma indica quanto il suo andamento è stabile o imprevedibile. Per questo viene spesso calcolata come deviazione standard dei rendimenti su un certo periodo.</p>
-        
-        <div class="formula">Volatilità = deviazione standard dei rendimenti</div>
-        <p>In un contesto operativo si parla spesso di volatilità annualizzata, cioè trasformata in base annua per rendere confrontabili strumenti osservati su frequenze diverse. È una scelta utile perché consente di leggere meglio ETF, indici e portafogli anche se i dati di partenza sono giornalieri o mensili.</p>
-
-        <h2>Perché è importante</h2>
-        <p>La volatilità aiuta a capire se un certo rendimento è stato ottenuto in modo ordinato oppure attraverso movimenti molto agitati. Due strumenti possono chiudere lo stesso periodo con lo stesso guadagno, ma quello meno volatile sarà in genere più facile da gestire, più coerente con un approccio disciplinato e spesso più adatto a chi ragiona in ottica di lungo termine.</p>
-        <p>Non va però confusa con la perdita. Un asset può essere molto volatile ma terminare il periodo in rialzo. La volatilità misura la dispersione dei rendimenti, non la direzione del prezzo.</p>
-
-        <h2>Come interpretarla</h2>
-        <div class="grid">
-          <div class="box">
-            <h3>Volatilità bassa</h3>
-            <p>Indica oscillazioni contenute e percorso più regolare. È tipica di asset difensivi, portafogli ben diversificati o mercati meno turbolenti.</p>
-          </div>
-          <div class="box">
-            <h3>Volatilità alta</h3>
-            <p>Segnala movimenti più ampi e maggiore incertezza sul percorso dei prezzi. Può offrire opportunità, ma richiede una maggiore tolleranza psicologica e gestionale.</p>
-          </div>
-        </div>
-
-        <h2>Limiti della metrica</h2>
-        <p>La volatilità tratta allo stesso modo oscillazioni positive e negative. Questo è utile per la statistica, ma non sempre riflette la percezione reale dell'investitore, che di solito teme soprattutto le perdite. Inoltre, una volatilità elevata non implica automaticamente un cattivo investimento: in alcuni casi può essere il prezzo da pagare per un potenziale di rendimento superiore.</p>
-        <div class="quote">La volatilità descrive quanto un percorso è irregolare, ma non dice da sola se quel percorso è stato efficiente, distruttivo o semplicemente tempestoso.</div>
-
-        <h2>Come usarla bene</h2>
-        <div class="box">
+        <!-- Indice dei contenuti -->
+        <section class="toc">
+          <h2>📑 Indice della guida</h2>
           <ul>
-            <li>La lettura corretta nasce dal confronto con altre metriche: CAGR per la crescita, drawdown per la profondità delle perdite, Sharpe e Sortino per il rendimento corretto per il rischio.</li>
-            <li>Da sola è un indicatore utile, ma non basta mai a giudicare un portafoglio in modo completo.</li>
-            <li><a href="#" id="open_preferences_center">Gestisci le preferenze sui cookie</a></li>
+            <li><a href="#definizione" style="color:var(--accent); text-decoration:none;">1. Che cosa rappresenta la volatilità?</a></li>
+            <li><a href="#formula" style="color:var(--accent); text-decoration:none;">2. La formula della volatilità (deviazione standard)</a></li>
+            <li><a href="#calcolatore" style="color:var(--accent); text-decoration:none;">3. Calcolatore interattivo della volatilità</a></li>
+            <li><a href="#esempi" style="color:var(--accent); text-decoration:none;">4. Esempi pratici su ETF e azioni</a></li>
+            <li><a href="#annualizzazione" style="color:var(--accent); text-decoration:none;">5. Annualizzazione della volatilità</a></li>
+            <li><a href="#tipi" style="color:var(--accent); text-decoration:none;">6. Volatilità storica vs implicita e VIX</a></li>
+            <li><a href="#clustering" style="color:var(--accent); text-decoration:none;">7. Il clustering della volatilità</a></li>
+            <li><a href="#limitazioni" style="color:var(--accent); text-decoration:none;">8. Limiti e criticità della volatilità come misura di rischio</a></li>
+            <li><a href="#applicazioni" style="color:var(--accent); text-decoration:none;">9. Applicazioni pratiche nella gestione del portafoglio</a></li>
+            <li><a href="#bestpractice" style="color:var(--accent); text-decoration:none;">10. Best practice per l'uso professionale della volatilità</a></li>
+            <li><a href="#" id="open_preferences_center">📌 Gestisci le preferenze sui cookie</a></li>
           </ul>
-        </div>
-        <p class="note">Contenuto informativo ed educativo. Non costituisce consulenza finanziaria o raccomandazione personalizzata.</p>
-      </div>
-      <div class="footer">VQuantPro · La volatilità aiuta a leggere la stabilità del percorso, non soltanto il risultato finale.</div>
-    </div>
-  </div>
+        </section>
 
-  <!-- Cookie Banner Personalizzato -->
-  <div id="cookie-banner" class="cookie-banner" style="display:none;">
-      <p>Questo sito utilizza cookie tecnici necessari al funzionamento. Con il tuo consenso, potremmo utilizzare cookie di terze parti per annunci personalizzati. <a href="/privacy/index.html">Privacy Policy</a></p>
-      <div class="cookie-buttons">
-          <button id="cookie-accept" class="cookie-btn accept">Accetta tutti</button>
-          <button id="cookie-reject" class="cookie-btn reject">Solo necessari</button>
-      </div>
-  </div>
+        <!-- 1. DEFINIZIONE -->
+        <section id="definizione">
+          <h2>1. Che cosa rappresenta la volatilità?</h2>
+          <p>In finanza, la volatilità è una delle prime e più diffuse approssimazioni del rischio. Non dice se un investimento stia andando bene o male, ma indica quanto il suo andamento è stabile o imprevedibile. Viene tipicamente calcolata come <strong>deviazione standard dei rendimenti</strong> su un certo periodo. Più alta è la volatilità, maggiore è l'incertezza sui futuri movimenti del prezzo.</p>
+          <div class="quote">"La volatilità non è il rischio. Il rischio è la probabilità di perdere permanentemente il capitale. La volatilità è solo il rumore di fondo."</div>
+          <p>Due strumenti possono chiudere lo stesso periodo con lo stesso guadagno, ma quello meno volatile sarà in genere più facile da gestire, più coerente con un approccio disciplinato e spesso più adatto a chi ragiona in ottica di lungo termine.</p>
+        </section>
 
-  <script>
-  (function() {
-      const banner = document.getElementById('cookie-banner');
-      const acceptBtn = document.getElementById('cookie-accept');
-      const rejectBtn = document.getElementById('cookie-reject');
-      const prefsLink = document.getElementById('open_preferences_center');
-      
-      if (!localStorage.getItem('cookie-consent')) {
-          banner.style.display = 'flex';
-      }
-      
-      function setConsent(value) {
-          localStorage.setItem('cookie-consent', value);
-          banner.style.display = 'none';
-          if (value === 'accepted') loadExternalScripts();
-      }
-      
-      acceptBtn.addEventListener('click', function() { setConsent('accepted'); });
-      rejectBtn.addEventListener('click', function() { setConsent('rejected'); });
-      
-      if (prefsLink) {
-          prefsLink.addEventListener('click', function(e) {
-              e.preventDefault();
-              banner.style.display = 'flex';
-          });
-      }
-      
-      if (localStorage.getItem('cookie-consent') === 'accepted') {
-          loadExternalScripts();
-      }
-      
-      function loadExternalScripts() {
-          if (!document.querySelector('script[src*="adsbygoogle"]')) {
-              var adsScript = document.createElement('script');
-              adsScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2835044924304516';
-              adsScript.async = true;
-              adsScript.crossOrigin = 'anonymous';
-              document.head.appendChild(adsScript);
-              
-              var fcScript = document.createElement('script');
-              fcScript.src = 'https://fundingchoicesmessages.google.com/i/ca-pub-2835044924304516?ers=1';
-              fcScript.async = true;
-              document.head.appendChild(fcScript);
-          }
-      }
-  })();
-  </script>
+        <!-- 2. FORMULA -->
+        <section id="formula">
+          <h2>2. La formula della volatilità (deviazione standard)</h2>
+          <div class="formula">σ = √[ (1/N) × Σ (Ri - μ)² ]</div>
+          <p>Dove:</p>
+          <ul>
+            <li><strong>σ (sigma)</strong>: volatilità (deviazione standard dei rendimenti).</li>
+            <li><strong>N</strong>: numero di osservazioni (es. giorni, mesi).</li>
+            <li><strong>Ri</strong>: rendimento del periodo i-esimo.</li>
+            <li><strong>μ (mu)</strong>: rendimento medio del campione.</li>
+          </ul>
+          <p>La formula misura la dispersione dei rendimenti attorno alla loro media. Più i rendimenti sono distanti dalla media, maggiore è la volatilità. Un vantaggio di questa misura è la sua universalità: consente di confrontare la variabilità di asset diversi (azioni, obbligazioni, ETF, criptovalute) su un'unica scala.</p>
+          <div class="warning-box">
+            <strong>⚠️ Attenzione:</strong> La volatilità non distingue tra oscillazioni positive e negative. Per questo motivo, uno stesso valore di volatilità può corrispondere a profili di rischio molto diversi. Affiancala sempre ad altre metriche come il Max Drawdown o il Sortino Ratio.
+          </div>
+        </section>
 
-</body>
-</html>
+        <!-- 3. CALCOLATORE INTERATTIVO -->
+        <section id="calcolatore">
+          <h2>3. 🧮 Calcolatore interattivo della volatilità</h2>
+          <div class="interactive-box">
+            <p><label>Inserisci i rendimenti (%) separati da virgola:</label><br>
+            <input type="text" id="returnsList" value="+1.2, -0.8, +2.3, -1.5, +0.5, +1.8, -2.1, +0.9, -0.4, +1.1" style="width:80%"></p>
+            <button class="calc-btn" id="calcVolatilityBtn">Calcola Volatilità</button>
+            <p id="volatilityResult" style="font-size:1.2rem; font-weight:bold; color:var(--accent); margin-top:10px;">Volatilità = --%</p>
+            <div class="note">💡 Inserisci una serie di rendimenti percentuali (es. +1,2, -0,8, +2,3). Più i valori sono dispersi, maggiore sarà la volatilità. Questo tool calcola la deviazione standard del campione.</div>
+          </div>
+        </section>
+
+        <!-- 4. ESEMPI PRATICI -->
+        <section id="esempi">
+          <h2>4. Esempi pratici su ETF e azioni</h2>
+          <div class="grid">
+            <div class="box">
+              <h3>📊 Esempio 1: ETF obbligazionario vs azionario</h3>
+              <p><strong>ETF obbligazionario governativo (es. AGGH):</strong> volatilità storica su 5 anni ~4-6%.<br>
+              <strong>ETF azionario globale (es. MSCI World):</strong> volatilità storica su 5 anni ~12-16%.<br>
+              La maggiore volatilità dell'azionario riflette la sua maggiore rischiosità percepita e il potenziale di rendimenti più elevati.</p>
+            </div>
+            <div class="box">
+              <h3>📈 Esempio 2: Azione singola vs settore</h3>
+              <p>Un titolo tecnologico growth può avere volatilità annua del 35-40%, mentre un ETF sullo stesso settore raramente supera il 25%. La diversificazione riduce la volatilità specifica.</p>
+            </div>
+            <div class="box">
+              <h3>⚡ Esempio 3: Confronto tra asset class</h3>
+              <p>Volatilità annua tipica (storica):</p>
+              <ul>
+                <li>Conti deposito / BOT: ~0,5-1%</li>
+                <li>Obbligazioni governative IT: ~5-8%</li>
+                <li>Azioni blue chip: ~15-20%</li>
+                <li>Azioni small cap: ~25-35%</li>
+                <li>Criptovalute (BTC/ETH): ~50-80%</li>
+              </ul>
+            </div>
+            <div class="box">
+              <h3>🔻 Esempio 4: Cluster di volatilità</h3>
+              <p>Nel 2022, l'indice VIX (volatilità implicita dell'S&P500) è passato da una media di 15-18 a picchi superiori a 30 durante le fasi di stress. Le crisi generano "cluster di volatilità": periodi in cui i mercati oscillano molto più del normale, con perdite spesso concentrate nel tempo.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. ANNUALIZZAZIONE -->
+        <section id="annualizzazione">
+          <h2>5. Annualizzazione della volatilità</h2>
+          <p>In finanza si utilizza spesso la <strong>volatilità annualizzata</strong>, che trasforma la volatilità calcolata su frequenze diverse (giornaliera, mensile) in un numero su base annua, per rendere confrontabili strumenti osservati su periodi differenti. La formula è:</p>
+          <div class="formula">Volatilità Annualizzata = σgiornaliera × √(252)</div>
+          <p>Oppure, per dati mensili: σmensile × √(12). Il fattore √252 deriva dal numero approssimativo di giorni di trading in un anno (252). Annualizzare è necessario perché la volatilità giornaliera di un ETF (es. 1%) è molto piccola, ma moltiplicata per √252 diventa più rappresentativa del rischio annuo.</p>
+          <div class="box">
+            <h3>📐 Esempio di annualizzazione</h3>
+            <p>Un ETF ha una volatilità giornaliera dell'1,2%.<br>
+            Volatilità annualizzata = 1,2% × √252 = 1,2% × 15,87 = <strong>19,04%</strong>.<br>
+            Questo valore può essere direttamente confrontato con la volatilità di altri asset annualizzata sulla stessa base.</p>
+          </div>
+          <div class="warning-box">
+            <strong>⚠️ Attenzione:</strong> L'annualizzazione assume che i rendimenti giornalieri siano indipendenti (ipotesi di random walk). Nei mercati reali, esiste una certa autocorrelazione, quindi l'annualizzazione è un'approssimazione, ma sufficientemente accurata per la maggior parte degli usi pratici.
+          </div>
+        </section>
+
+        <!-- 6. VOLATILITÀ STORICA VS IMPLICITA E VIX -->
+        <section id="tipi">
+          <h2>6. Volatilità storica vs implicita e VIX</h2>
+          <p>Esistono due principali concetti di volatilità:</p>
+          <ul>
+            <li><strong>Volatilità storica (realizzata):</strong> calcolata sui rendimenti passati. È una misura backward-looking, utile per descrivere il rischio già accaduto.</li>
+            <li><strong>Volatilità implicita:</strong> derivata dai prezzi delle opzioni. Rappresenta l'aspettativa del mercato sulla volatilità futura (forward-looking). È un input fondamentale per il pricing delle opzioni (modello Black-Scholes).</li>
+          </ul>
+          <div class="quote">Il <strong>VIX (Volatility Index)</strong>, noto come "indice della paura", misura la volatilità implicita a 30 giorni delle opzioni sull'S&P500. Quando il VIX sale sopra 30, segnala forte incertezza; sopra 40, panico. Valori inferiori a 15 indicano calma piatta.</div>
+          <p>La volatilità implicita tende a essere più alta della volatilità storica in periodi di stress (crisi, elezioni, crisi geopolitiche) e più bassa in periodi di calma. La differenza tra le due misura il premio per il rischio di eventi estremi.</p>
+        </section>
+
+        <!-- 7. CLUSTERING DELLA VOLATILITÀ -->
+        <section id="clustering">
+          <h2>7. Il clustering della volatilità</h2>
+          <p>Un fenomeno osservato nei mercati finanziari è il <strong>clustering della volatilità</strong>: grandi movimenti (positivi o negativi) tendono a essere seguiti da altri grandi movimenti, e periodi di calma da altri periodi di calma. Questo comportamento, identificato da Mandelbrot e poi modellato con i modelli GARCH (Generalized Autoregressive Conditional Heteroskedasticity), implica che la volatilità non è costante nel tempo, ma varia in modo persistente.</p>
+          <div class="warning-box">
+            <strong>📌 Implicazioni pratiche:</strong>
+            <ul>
+              <li>Un crollo improvviso (es. COVID-19, crisi 2008) tende a generare settiman
