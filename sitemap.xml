@@ -35,86 +35,86 @@
         <loc>https://vquantpro.it/guida-cagr.html</loc>
         <lastmod>2026-05-24</lastmod>
         <changefreq>yearly</changefreq>
-        <priority>0.6</priority>
+        <priority>0.7</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/guida-sharpe.html</loc>
         <lastmod>2026-05-24</lastmod>
         <changefreq>yearly</changefreq>
-        <priority>0.6</priority>
+        <priority>0.7</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/guida-sortino.html</loc>
         <lastmod>2026-05-24</lastmod>
         <changefreq>yearly</changefreq>
-        <priority>0.6</priority>
+        <priority>0.7</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/guida-calmar.html</loc>
         <lastmod>2026-05-24</lastmod>
         <changefreq>yearly</changefreq>
-        <priority>0.6</priority>
+        <priority>0.7</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/guida-volatilita.html</loc>
         <lastmod>2026-05-24</lastmod>
         <changefreq>yearly</changefreq>
-        <priority>0.6</priority>
+        <priority>0.7</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/guida-max-drawdown.html</loc>
         <lastmod>2026-05-24</lastmod>
         <changefreq>yearly</changefreq>
-        <priority>0.6</priority>
+        <priority>0.7</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/guida-diversificazione.html</loc>
         <lastmod>2026-05-24</lastmod>
         <changefreq>yearly</changefreq>
-        <priority>0.6</priority>
+        <priority>0.7</priority>
     </url>
     <!-- Guide versione BLOG -->
     <url>
         <loc>https://vquantpro.it/blog/guida-cagr.html</loc>
         <lastmod>2026-05-24</lastmod>
         <changefreq>yearly</changefreq>
-        <priority>0.6</priority>
+        <priority>0.5</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/blog/guida-sharpe.html</loc>
         <lastmod>2026-05-24</lastmod>
         <changefreq>yearly</changefreq>
-        <priority>0.6</priority>
+        <priority>0.5</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/blog/guida-sortino.html</loc>
         <lastmod>2026-05-24</lastmod>
         <changefreq>yearly</changefreq>
-        <priority>0.6</priority>
+        <priority>0.5</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/blog/guida-calmar.html</loc>
         <lastmod>2026-05-24</lastmod>
         <changefreq>yearly</changefreq>
-        <priority>0.6</priority>
+        <priority>0.5</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/blog/guida-volatilita.html</loc>
         <lastmod>2026-05-24</lastmod>
         <changefreq>yearly</changefreq>
-        <priority>0.6</priority>
+        <priority>0.5</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/blog/guida-max-drawdown.html</loc>
         <lastmod>2026-05-24</lastmod>
         <changefreq>yearly</changefreq>
-        <priority>0.6</priority>
+        <priority>0.5</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/blog/guida-diversificazione.html</loc>
         <lastmod>2026-05-24</lastmod>
         <changefreq>yearly</changefreq>
-        <priority>0.6</priority>
+        <priority>0.5</priority>
     </url>
     <!-- Articoli (solo blog) -->
     <url>
@@ -224,24 +224,24 @@
         <loc>https://vquantpro.it/legal/</loc>
         <lastmod>2026-05-24</lastmod>
         <changefreq>yearly</changefreq>
-        <priority>0.4</priority>
+        <priority>0.3</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/privacy/</loc>
         <lastmod>2026-05-24</lastmod>
         <changefreq>yearly</changefreq>
-        <priority>0.4</priority>
+        <priority>0.3</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/cookie/</loc>
         <lastmod>2026-05-24</lastmod>
         <changefreq>yearly</changefreq>
-        <priority>0.4</priority>
+        <priority>0.3</priority>
     </url>
     <url>
         <loc>https://vquantpro.it/disclaimer.html</loc>
         <lastmod>2026-05-24</lastmod>
         <changefreq>yearly</changefreq>
-        <priority>0.4</priority>
+        <priority>0.3</priority>
     </url>
 </urlset>
