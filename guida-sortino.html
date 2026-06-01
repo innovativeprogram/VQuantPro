@@ -3,116 +3,528 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sortino Ratio: il rischio che conta davvero | VQuantPro</title>
+  <title>Sortino Ratio: guida completa al rischio che conta davvero | VQuantPro</title>
   
   <link rel="canonical" href="https://vquantpro.it/guida-sortino-ratio.html" />
   <link rel="icon" type="image/png" href="/favicon.png">
 
-  <meta name="description" content="Guida professionale al Sortino Ratio: formula, significato, interpretazione e differenze rispetto allo Sharpe Ratio.">
+  <meta name="description" content="Guida definitiva al Sortino Ratio: formula, calcolo della downside deviation, interpretazione, differenze con lo Sharpe Ratio e applicazioni pratiche. Include calcolatore interattivo e confronto con altre metriche di rischio.">
+  <meta name="keywords" content="Sortino Ratio, downside deviation, rischio di ribasso, Sharpe Ratio, investimenti asimmetrici, hedge fund, protezione del capitale">
+  <meta name="author" content="Canio Tedesco, VQuantPro">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    body{margin:0;font-family:'Inter',sans-serif;background:linear-gradient(180deg,#0a0f1c 0%,#0b1020 100%);color:#d8e1ef;line-height:1.75}
+    :root{
+      --bg:#0b1020;
+      --panel:#131b2f;
+      --panel-2:#17233b;
+      --border:#273553;
+      --text:#d8e1ef;
+      --muted:#99a8bf;
+      --title:#f8fbff;
+      --accent:#a855f7;
+      --accent-soft:rgba(168,85,247,.12);
+      --code:#0a1324;
+      --shadow:0 18px 50px rgba(0,0,0,.35);
+      --accent-dark:#9333ea;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:'Inter',sans-serif;
+      background:linear-gradient(180deg,#0a0f1c 0%,#0b1020 100%);
+      color:var(--text);
+      line-height:1.75;
+      font-size:16px;
+    }
     .wrap{max-width:980px;margin:0 auto;padding:28px 20px 60px}
-    .card{background:linear-gradient(180deg,#131b2f 0%,#17233b 100%);border:1px solid #273553;border-radius:20px;box-shadow:0 18px 50px rgba(0,0,0,.35);overflow:hidden}
-    .topbar,.footer{padding:18px 24px;border-bottom:1px solid #273553}
-    .footer{border-top:1px solid #273553;border-bottom:none;color:#99a8bf;font-size:.93rem}
-    .topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;background:rgba(255,255,255,.02)}
-    .brand{font-weight:700;color:#f8fbff}
-    .back{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;text-decoration:none;background:#1c2942;color:#eaf2ff;border:1px solid #314261}
-    .hero{padding:38px 24px 16px}
-    .eyebrow{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(168,85,247,.12);border:1px solid rgba(168,85,247,.25);color:#ebd8ff;font-size:13px;font-weight:600}
-    h1{font-size:clamp(2rem,3vw,3rem);line-height:1.08;color:#f8fbff;margin:18px 0 14px}
-    .lead{font-size:1.08rem;color:#c7d3e5;max-width:72ch}
-    .content{padding:8px 24px 34px}
-    h2{font-size:1.45rem;margin:34px 0 12px;padding-left:14px;border-left:4px solid #a855f7;color:#f8fbff}
-    h3{color:#f8fbff;margin:24px 0 10px}
-    p{margin:0 0 18px}
+    .card{
+      background:linear-gradient(180deg,var(--panel) 0%,var(--panel-2) 100%);
+      border:1px solid var(--border);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      transition:transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card:hover {
+      transform:translateY(-2px);
+      box-shadow:0 20px 40px rgba(0,0,0,0.4);
+    }
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+      align-items:center;
+      padding:18px 28px;
+      border-bottom:1px solid var(--border);
+      background:rgba(255,255,255,.02)
+    }
+    .brand{
+      font-weight:800;
+      letter-spacing:-0.01em;
+      font-size:1.35rem;
+      background:linear-gradient(135deg,#fff 0%,var(--accent) 100%);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+    .back{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:40px;
+      text-decoration:none;
+      background:#1c2942;
+      color:#eaf2ff;
+      border:1px solid #314261;
+      transition:all 0.2s ease;
+    }
+    .back:hover{
+      background:#233153;
+      border-color:var(--accent);
+      color:var(--accent);
+    }
+    .hero{padding:38px 28px 16px}
+    .eyebrow{
+      display:inline-block;
+      padding:6px 12px;
+      border-radius:999px;
+      background:var(--accent-soft);
+      border:1px solid rgba(168,85,247,.25);
+      color:#ebd8ff;
+      font-size:12px;
+      font-weight:600;
+      letter-spacing:.02em;
+      text-transform:uppercase;
+    }
+    h1{
+      font-size:clamp(2rem,4vw,3.2rem);
+      line-height:1.15;
+      font-weight:800;
+      color:var(--title);
+      margin:18px 0 14px;
+      letter-spacing:-0.02em;
+    }
+    .lead{
+      font-size:1.15rem;
+      color:#c7d3e5;
+      max-width:75ch;
+      font-weight:400;
+      border-left:3px solid var(--accent);
+      padding-left:20px;
+      margin-top:10px;
+    }
+    .content{padding:8px 28px 34px}
+    .toc,.box,.formula,.quote,.highlight-box{margin:28px 0}
+    .toc,.box{
+      background:rgba(8,15,30,.5);
+      border:1px solid var(--border);
+      border-radius:20px;
+      padding:24px;
+      backdrop-filter:blur(4px);
+    }
+    .toc h2,.box h2,section h2{
+      font-size:1.45rem;
+      font-weight:700;
+      margin:0 0 16px 0;
+      padding-left:0;
+      border-left:none;
+      color:var(--title);
+    }
+    h2{
+      font-size:1.65rem;
+      font-weight:700;
+      margin:48px 0 16px;
+      padding-bottom:8px;
+      border-bottom:2px solid rgba(168,85,247,0.3);
+      color:var(--title);
+    }
+    h3{
+      color:var(--title);
+      margin:28px 0 12px;
+      font-size:1.25rem;
+      font-weight:600;
+    }
+    p{
+      margin:0 0 18px;
+      color:var(--text);
+      line-height:1.7;
+    }
     ul{margin:0;padding-left:20px}
-    li{margin:0 0 12px}
-    .box,.formula,.quote{margin:24px 0}
-    .box{background:rgba(8,15,30,.42);border:1px solid #273553;border-radius:16px;padding:20px}
-    .formula{background:#0a1324;border:1px solid #1c3450;border-radius:14px;padding:18px 20px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#d9b8ff;font-size:1.03rem;text-align:center}
-    .quote{padding:22px;border-left:4px solid #a855f7;background:rgba(168,85,247,.12);border-radius:0 14px 14px 0;color:#f5efff}
-    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
-    .note{color:#99a8bf;font-size:.96rem}
-    @media (max-width:760px){.grid{grid-template-columns:1fr}.hero,.content,.topbar,.footer{padding-left:18px;padding-right:18px}}
+    li{margin:0 0 8px;color:var(--muted)}
+    .formula{
+      background:var(--code);
+      border:1px solid #1c3450;
+      border-radius:16px;
+      padding:20px 24px;
+      font-family:'JetBrains Mono',monospace;
+      color:#d9b8ff;
+      font-size:1.2rem;
+      text-align:center;
+      overflow-x:auto;
+      font-weight:500;
+    }
+    .quote{
+      padding:24px;
+      border-left:4px solid var(--accent);
+      background:var(--accent-soft);
+      border-radius:0 20px 20px 0;
+      color:#f5efff;
+      font-style:italic;
+      font-size:1.05rem;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:24px
+    }
+    .note{
+      color:var(--muted);
+      font-size:.9rem;
+      padding:12px;
+      background:rgba(0,0,0,0.2);
+      border-radius:12px;
+    }
+    .footer{
+      padding:24px 28px;
+      border-top:1px solid var(--border);
+      color:var(--muted);
+      font-size:.85rem;
+      background:rgba(0,0,0,0.2);
+    }
+    .inline-code{
+      background:var(--code);
+      padding:3px 8px;
+      border-radius:8px;
+      font-family:'JetBrains Mono',monospace;
+      font-size:.85em;
+      color:var(--accent);
+    }
+    .comparison-table{
+      width:100%;
+      border-collapse:collapse;
+      margin:20px 0;
+    }
+    .comparison-table th,.comparison-table td{
+      border:1px solid var(--border);
+      padding:12px;
+      text-align:left;
+    }
+    .comparison-table th{
+      background:rgba(168,85,247,0.1);
+      color:var(--accent);
+      font-weight:600;
+    }
+    .interactive-box{
+      background:rgba(0,0,0,0.3);
+      border-radius:16px;
+      padding:20px;
+      text-align:center;
+      transition:all 0.2s ease;
+    }
+    .interactive-box input{
+      background:var(--code);
+      border:1px solid var(--border);
+      color:var(--title);
+      padding:8px 12px;
+      border-radius:8px;
+      margin:5px;
+      width:110px;
+      font-family:'JetBrains Mono',monospace;
+    }
+    .calc-btn{
+      background:var(--accent);
+      color:var(--code);
+      border:none;
+      padding:10px 24px;
+      border-radius:40px;
+      font-weight:bold;
+      cursor:pointer;
+      transition:0.2s;
+      margin-top:10px;
+    }
+    .calc-btn:hover{
+      background:var(--accent-dark);
+      transform:scale(0.98);
+    }
+    .warning-box{
+      background:rgba(168,85,247,0.15);
+      border-left:4px solid var(--accent);
+      padding:16px 20px;
+      border-radius:12px;
+      margin:20px 0;
+    }
+    @media (max-width:760px){
+      .grid{grid-template-columns:1fr}
+      .hero,.content,.topbar,.footer{padding-left:20px;padding-right:20px}
+      h1{font-size:clamp(1.8rem,5vw,2.4rem)}
+      .lead{font-size:1rem}
+    }
 
-    /* Cookie Banner */
-    .cookie-banner { position: fixed; bottom: 0; left: 0; right: 0; background: #161F30; border-top: 2px solid #a855f7; padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; z-index: 10000; gap: 15px; font-size: 14px; color: #D1D5DB; box-shadow: 0 -5px 20px rgba(0,0,0,0.5); }
-    .cookie-banner p { margin: 0; flex: 1 1 300px; }
-    .cookie-banner a { color: #a855f7; text-decoration: underline; }
-    .cookie-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
-    .cookie-btn { padding: 10px 20px; border-radius: 6px; font-weight: 600; cursor: pointer; border: none; font-size: 14px; }
-    .cookie-btn.accept { background: #a855f7; color: #0B0F19; }
-    .cookie-btn.reject { background: transparent; color: #D1D5DB; border: 1px solid #24334C; }
+    /* Cookie Banner Moderno */
+    .cookie-banner{
+      position:fixed;
+      bottom:20px;
+      left:20px;
+      right:20px;
+      background:#161F30;
+      border:1px solid rgba(168,85,247,0.3);
+      backdrop-filter:blur(10px);
+      border-radius:20px;
+      padding:20px 24px;
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+      z-index:10000;
+      gap:15px;
+      font-size:14px;
+      color:#D1D5DB;
+      box-shadow:0 20px 35px -8px rgba(0,0,0,0.5);
+    }
+    .cookie-banner p{margin:0;flex:1 1 300px}
+    .cookie-banner a{color:#a855f7;text-decoration:underline}
+    .cookie-buttons{display:flex;gap:12px;flex-wrap:wrap}
+    .cookie-btn{
+      padding:10px 20px;
+      border-radius:40px;
+      font-weight:600;
+      cursor:pointer;
+      border:none;
+      font-size:14px;
+      transition:0.2s;
+    }
+    .cookie-btn.accept{background:#a855f7;color:#0B0F19}
+    .cookie-btn.accept:hover{background:#9333ea;transform:translateY(-1px)}
+    .cookie-btn.reject{background:transparent;color:#D1D5DB;border:1px solid #24334C}
+    .cookie-btn.reject:hover{background:rgba(255,255,255,0.05);border-color:#a855f7}
+    @media (max-width:600px){.cookie-banner{bottom:10px;left:10px;right:10px;padding:16px}}
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="card">
-      <div class="topbar">
-        <div class="brand">VQuantPro</div>
-        <a class="back" href="/">← Torna alla Home</a>
-      </div>
-      <div class="hero">
-        <span class="eyebrow">Guida risk-adjusted</span>
+  <main class="wrap">
+    <article class="card">
+      <div class="topbar"><div class="brand">VQuantPro</div><a class="back" href="/">← Torna alla Home</a></div>
+      <header class="hero">
+        <span class="eyebrow">Guida avanzata al rischio di ribasso</span>
         <h1>Sortino Ratio: il rischio che conta davvero</h1>
-        <p class="lead">Il Sortino Ratio è simile allo Sharpe Ratio, ma si concentra solo sulla parte negativa della volatilità. Questa scelta lo rende molto utile per chi vuole misurare il rendimento rispetto al rischio realmente sgradito: le perdite, non le oscillazioni positive.</p>
-      </div>
+        <p class="lead">Il <strong>Sortino Ratio (Indice di Sortino)</strong> è una potente metrica di performance risk-adjusted che migliora lo Sharpe Ratio concentrandosi esclusivamente sulla volatilità al ribasso. Mentre lo Sharpe penalizza qualsiasi oscillazione (sia verso l'alto che verso il basso), il Sortino Ratio misura quanto rendimento stai ottenendo per ogni unità di <strong>rischio realmente dannoso</strong> – le perdite. Questa guida completa ti mostrerà formula, calcolo, interpretazione e come utilizzarlo per costruire portafogli più resilienti.</p>
+      </header>
       <div class="content">
-        <h2>Che cosa misura</h2>
-        <p>Il Sortino Ratio confronta il rendimento di un investimento con il suo tasso privo di rischio e divide il risultato per la downside deviation, cioè la deviazione dei rendimenti negativi rispetto a una soglia minima accettabile. In questo modo non penalizza i movimenti al rialzo, che per l'investitore non rappresentano un rischio.</p>
-        
-        <div class="formula">Sortino Ratio = (Rendimento - Tasso Risk Free) / Downside Deviation</div>
-        <p>La logica è più raffinata di una misura basata sulla volatilità totale, perché distingue il "rumore buono" dal "rumore cattivo". È per questo che il Sortino Ratio viene spesso preferito quando si vuole giudicare una strategia in base alla qualità del rischio assunto.</p>
-
-        <h2>Perché è utile</h2>
-        <p>Molti strumenti mostrano oscillazioni frequenti, ma non tutte le oscillazioni sono uguali. Un investitore può tollerare una certa variabilità se questa è accompagnata da una tendenza positiva e da correzioni limitate. Il Sortino Ratio cerca di fotografare proprio questo aspetto: quanto rendimento è stato prodotto rispetto al solo rischio di scendere sotto una soglia considerata critica.</p>
-        
-        <p>Per portafogli orientati alla crescita di lungo periodo, questa metrica è spesso più intuitiva della sola volatilità, perché allinea il calcolo con la preoccupazione reale dell'investitore: proteggere il capitale nelle fasi avverse.</p>
-
-        <h2>Come interpretarlo</h2>
-        <div class="grid">
-          <div class="box">
-            <h3>Sortino basso</h3>
-            <p>Significa che il rendimento generato non compensa in modo adeguato la frequenza o l'intensità dei movimenti negativi. La strategia può essere poco efficiente nella gestione del downside risk.</p>
-          </div>
-          <div class="box">
-            <h3>Sortino alto</h3>
-            <p>Indica che l'investimento ha trasformato bene il rischio negativo in rendimento. In genere segnala un profilo più interessante per chi cerca efficienza nella parte critica del percorso.</p>
-          </div>
-        </div>
-        <p>Come tutte le metriche, anche il Sortino va letto con attenzione. Un valore elevato è positivo, ma va comunque confrontato con durata del periodo, condizioni di mercato e profondità delle perdite effettive.</p>
-
-        <h2>Differenza con lo Sharpe Ratio</h2>
-        <p>La differenza principale è nel tipo di rischio considerato. Lo Sharpe Ratio usa la volatilità totale, mentre il Sortino si concentra solo sulla volatilità negativa. Questo significa che due portafogli con la stessa variabilità complessiva possono essere valutati in modo diverso se uno dei due concentra le oscillazioni soprattutto verso l'alto.</p>
-        <div class="quote">Il Sortino Ratio è spesso più vicino al modo in cui ragiona un investitore reale: non teme che il prezzo salga e scenda in astratto, teme soprattutto le cadute che erodono capitale e fiducia.</div>
-
-        <h2>Applicazioni pratiche</h2>
-        <div class="box">
+        <!-- Indice dei contenuti -->
+        <section class="toc">
+          <h2>📑 Indice della guida</h2>
           <ul>
-            <li>Valutazione di ETF e portafogli che devono contenere il rischio al ribasso.</li>
-            <li>Confronto tra strategie con distribuzioni di rendimento asimmetriche.</li>
-            <li>Analisi di soluzioni pensate per investitori che privilegiano la protezione del capitale.</li>
-            <li>Integrazione con CAGR, drawdown e Sharpe per una lettura più completa.</li>
-            <li><a href="#" id="open_preferences_center">Gestisci le preferenze sui cookie</a></li>
+            <li><a href="#definizione" style="color:var(--accent); text-decoration:none;">1. Che cosa misura il Sortino Ratio?</a></li>
+            <li><a href="#formula" style="color:var(--accent); text-decoration:none;">2. La formula e il calcolo della Downside Deviation</a></li>
+            <li><a href="#calcolatore" style="color:var(--accent); text-decoration:none;">3. Calcolatore interattivo del Sortino Ratio</a></li>
+            <li><a href="#esempi" style="color:var(--accent); text-decoration:none;">4. Esempi pratici passo-passo</a></li>
+            <li><a href="#interpretazione" style="color:var(--accent); text-decoration:none;">5. Come interpretare il valore (scala di riferimento)</a></li>
+            <li><a href="#confronto" style="color:var(--accent); text-decoration:none;">6. Sortino Ratio vs Sharpe Ratio: differenze chiave</a></li>
+            <li><a href="#applicazioni" style="color:var(--accent); text-decoration:none;">7. Applicazioni pratiche: hedge fund, opzioni e portafogli asimmetrici</a></li>
+            <li><a href="#limiti" style="color:var(--accent); text-decoration:none;">8. Limiti, criticità ed errori frequenti</a></li>
+            <li><a href="#bestpractice" style="color:var(--accent); text-decoration:none;">9. Best practice per usare il Sortino Ratio in modo professionale</a></li>
+            <li><a href="#" id="open_preferences_center">📌 Gestisci le preferenze sui cookie</a></li>
           </ul>
-        </div>
+        </section>
 
-        <h2>Limiti della metrica</h2>
-        <p>Anche il Sortino Ratio non è perfetto. La sua qualità dipende dalla soglia scelta per definire il downside risk, dalla frequenza dei dati e dalla stabilità del campione osservato. Inoltre, come ogni metrica storica, fotografa il passato e non garantisce che il comportamento si ripeta in futuro.</p>
-        <p class="note">Contenuto informativo ed educativo. Non costituisce consulenza finanziaria o raccomandazione personalizzata.</p>
+        <!-- 1. DEFINIZIONE -->
+        <section id="definizione">
+          <h2>1. Che cosa misura il Sortino Ratio?</h2>
+          <p>Ideato da <strong>Frank A. Sortino</strong> come raffinamento dello Sharpe Ratio, il Sortino Ratio misura il rendimento in eccesso rispetto a un tasso privo di rischio (o a un rendimento minimo accettabile, MAR) diviso per la <strong>downside deviation</strong> – la volatilità dei soli rendimenti negativi. La logica è intuitiva: per un investitore, non tutte le oscillazioni sono uguali. I movimenti verso l'alto sono desiderabili; quelli verso il basso sono il vero rischio.[reference:0][reference:1]</p>
+          <div class="quote">"Il Sortino Ratio è più vicino al modo in cui ragiona un investitore reale: non teme che il prezzo salga e scenda in astratto, teme soprattutto le cadute che erodono capitale e fiducia."</div>
+          <p>Due portafogli possono avere lo stesso Sharpe Ratio ma profili di rischio molto diversi: uno stabile, l'altro con drawdown profondi e recuperi violenti. Il Sortino Ratio discrimina proprio queste situazioni, premiando chi sa contenere le perdite.[reference:2]</p>
+        </section>
+
+        <!-- 2. FORMULA E DOWN SIDE DEVIATION -->
+        <section id="formula">
+          <h2>2. La formula e il calcolo della Downside Deviation</h2>
+          <div class="formula">Sortino Ratio = (Rendimento Portafoglio - MAR) / Downside Deviation (σd)</div>
+          <p>Dove:</p>
+          <ul>
+            <li><strong>Rendimento Portafoglio (Rp)</strong>: rendimento medio del portafoglio nel periodo considerato (spesso annualizzato).</li>
+            <li><strong>MAR (Minimum Acceptable Return)</strong>: rendimento minimo accettabile. Può essere il tasso risk free (es. BOT a 12 mesi), zero (per strategie di preservazione del capitale) o un target personalizzato (es. 8%).[reference:3]</li>
+            <li><strong>Downside Deviation (σd)</strong>: scarto quadratico medio dei soli rendimenti inferiori al MAR. Si calcola isolando i periodi in cui il rendimento è inferiore al MAR, calcolando il quadrato della differenza, facendo la media e estraendo la radice quadrata.[reference:4][reference:5]</li>
+          </ul>
+          <div class="box">
+            <h3>📐 Formula matematica della Downside Deviation</h3>
+            <div class="formula" style="font-size:0.95rem;">σd = √[ (1/N) × Σ min(Rt - MAR, 0)² ]</div>
+            <p>In pratica: per ogni periodo, prendi la differenza tra rendimento e MAR, conservi solo i valori negativi (i periodi in cui il rendimento è stato inferiore al target), li elevi al quadrato, fai la media e infine la radice quadrata. I periodi con rendimenti superiori al MAR contribuiscono con zero alla downside deviation.[reference:6]</p>
+          </div>
+          <div class="warning-box">
+            <strong>⚠️ Attenzione:</strong> La downside deviation ignora completamente la volatilità positiva. Un portafoglio che oscilla molto verso l'alto ma raramente verso il basso avrà una downside deviation bassa e quindi un Sortino Ratio potenzialmente elevato – il che è corretto, perché l'investitore non viene penalizzato per i guadagni volatili.
+          </div>
+        </section>
+
+        <!-- 3. CALCOLATORE INTERATTIVO -->
+        <section id="calcolatore">
+          <h2>3. 🧮 Calcolatore interattivo del Sortino Ratio</h2>
+          <div class="interactive-box">
+            <p><label>Rendimento portafoglio (% annuo): </label><input type="number" id="rendimentoPort" value="12" step="0.5"></p>
+            <p><label>MAR (Minimum Acceptable Return, %): </label><input type="number" id="marPort" value="2" step="0.5"></p>
+            <p><label>Downside Deviation (σd, % annua): </label><input type="number" id="downsideVol" value="8" step="1"></p>
+            <button class="calc-btn" id="calcSortinoBtn">Calcola Sortino Ratio</button>
+            <p id="sortinoResult" style="font-size:1.4rem; font-weight:bold; color:var(--accent); margin-top:10px;">Sortino = --</p>
+            <div class="note">💡 Inserisci il rendimento del portafoglio, il Minimum Acceptable Return (MAR) – tipicamente il tasso risk free o zero – e la downside deviation. Un Sortino > 1,5 è considerato eccellente per strategie asimmetriche.[reference:7]</div>
+          </div>
+        </section>
+
+        <!-- 4. ESEMPI PRATICI PASSO-PASSO -->
+        <section id="esempi">
+          <h2>4. Esempi pratici passo-passo</h2>
+          <div class="grid">
+            <div class="box">
+              <h3>📊 Esempio 1: Calcolo completo su 5 anni</h3>
+              <p>Rendimenti annuali: +14%, +9%, -3%, +18%, +12%. MAR = 2% (tasso risk free).<br>
+              <strong>Passo 1:</strong> Rendimento medio = (14+9-3+18+12)/5 = <strong>10%</strong>.<br>
+              <strong>Passo 2:</strong> Identifico i rendimenti inferiori al 2%: solo -3% (differenza = -5%).<br>
+              <strong>Passo 3:</strong> Downside deviation = √[(0+0+25+0+0)/5] = √5 ≈ <strong>2,24%</strong>.<br>
+              <strong>Passo 4:</strong> Sortino = (10-2)/2,24 = 8/2,24 = <strong>3,57</strong>.<br>
+              Un valore eccellente, grazie all'assenza di altre performance negative. La strategia ha premiato bene il rischio di ribasso.[reference:8]</p>
+            </div>
+            <div class="box">
+              <h3>📈 Esempio 2: Confronto tra due fondi</h3>
+              <p>Fondo A: rendimento 9,33%, downside deviation 0,33% → Sortino ≈ 4,0.<br>
+              Fondo B: rendimento 10%, downside deviation 0,67% → Sortino ≈ 2,98.<br>
+              Il Fondo A ha un Sortino superiore nonostante un rendimento medio leggermente inferiore, perché la sua downside deviation è molto più bassa. Per un investitore conservatore, è la scelta migliore.[reference:9]</p>
+            </div>
+            <div class="box">
+              <h3>⚡ Esempio 3: Strategia con elevata asimmetria</h3>
+              <p>Una strategia di opzioni genera rendimenti: +25%, +20%, -5%, +30%, -2%. MAR = 2%.<br>
+              Rendimento medio = 13,6%. Rendimenti inferiori al 2%: -5% (diff -7%), -2% (diff -4%).<br>
+              Downside deviation = √[(49+0+0+0+16)/5] = √13 ≈ 3,61%.<br>
+              Sortino = (13,6-2)/3,61 = 11,6/3,61 ≈ <strong>3,21</strong>.<br>
+              Lo Sharpe Ratio penalizzerebbe la strategia per la volatilità complessiva (che è alta a causa dei forti rialzi), ma il Sortino la premia perché il rischio di ribasso è contenuto. È il caso tipico delle strategie trend-following o di vendita di opzioni.[reference:10]</p>
+            </div>
+            <div class="box">
+              <h3>🔻 Esempio 4: Portafoglio instabile</h3>
+              <p>Rendimenti: +10%, -15%, +20%, -10%, +12%. MAR = 2%.<br>
+              Rendimento medio = 3,4%. Rendimenti inferiori al 2%: -15% (diff -17%), -10% (diff -12%).<br>
+              Downside deviation = √[(289+0+0+144+0)/5] = √86,6 ≈ 9,31%.<br>
+              Sortino = (3,4-2)/9,31 = 1,4/9,31 ≈ <strong>0,15</strong>.<br>
+              Valore molto basso, segnala che il portafoglio non compensa adeguatamente il rischio di ribasso, nonostante alcuni anni positivi.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. INTERPRETAZIONE DEI VALORI -->
+        <section id="interpretazione">
+          <h2>5. Come interpretare il valore (scala di riferimento)</h2>
+          <p>Non esiste una soglia universale, ma in ambito finanziario si utilizzano queste indicazioni orientative:</p>
+          <ul>
+            <li><strong>Sortino < 0:</strong> Il portafoglio ha reso meno del MAR (es. meno del tasso risk free). Da evitare o rivedere radicalmente.</li>
+            <li><strong>Sortino tra 0 e 0,5:</strong> Performance risk-adjusted modesta o scarsa. Il premio per il rischio di ribasso non compensa adeguatamente le perdite subite.</li>
+            <li><strong>Sortino tra 0,5 e 1,5:</strong> Buono. Per la maggior parte dei portafogli diversificati (azionario globale, bilanciato) è un target realistico.</li>
+            <li><strong>Sortino tra 1,5 e 2,5:</strong> Eccellente. Tipico di hedge fund, strategie market neutral o periodi di mercato favorevoli.[reference:11]</li>
+            <li><strong>Sortino > 2,5:</strong> Eccezionale. Indica una protezione del capitale molto forte e una gestione superiore del rischio di ribasso. Raro nei mercati reali su periodi lunghi.</li>
+          </ul>
+          <div class="quote">💡 Una regola pratica: se il Sortino Ratio è significativamente superiore allo Sharpe Ratio (ad esempio Sortino 2,5 vs Sharpe 1,2), significa che la strategia ha una <strong>skewness positiva</strong> – i rendimenti sono asimmetrici verso l'alto, con perdite limitate. Questo è un segnale molto positivo per strategie aggressive.</div>
+        </section>
+
+        <!-- 6. SORTINO VS SHARPE -->
+        <section id="confronto">
+          <h2>6. Sortino Ratio vs Sharpe Ratio: differenze chiave</h2>
+          <table class="comparison-table">
+            <thead>
+              <tr><th>Metrica</th><th>Rischio considerato</th><th>Vantaggio</th><th>Svantaggio</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Sharpe Ratio</strong></td>
+                <td>Volatilità totale (up e down) [deviazione standard]</td>
+                <td>Molto diffuso, facile da calcolare, confronta qualsiasi asset</td>
+                <td>Penalizza anche la volatilità positiva – irrilevante per molti investitori[reference:12]</td>
+              </tr>
+              <tr>
+                <td><strong>Sortino Ratio</strong></td>
+                <td>Solo volatilità al ribasso (downside deviation)</td>
+                <td>Penalizza solo le perdite – più intuitivo per la protezione del capitale[reference:13]</td>
+                <td>Richiede la definizione del MAR (non universale)</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="box">
+            <p><strong>Quando usare lo Sharpe Ratio:</strong> Per confrontare asset con distribuzioni di rendimento simmetriche (es. azioni vs obbligazioni, portafogli bilanciati).[reference:14]</p>
+            <p><strong>Quando usare il Sortino Ratio:</strong> Per strategie con rendimenti asimmetrici (opzioni, trend-following, hedge fund), per investitori focalizzati sulla protezione del capitale e per valutare strategie che cercano di evitare i drawdown.[reference:15]</p>
+          </div>
+          <div class="warning-box">
+            <strong>⚠️ Insight fondamentale:</strong> Se per lo stesso portafoglio il Sortino Ratio è <strong>maggiore</strong> dello Sharpe Ratio, significa che la volatilità positiva è prevalente – buon segnale. Se il Sortino è <strong>minore</strong> dello Sharpe, la volatilità negativa è prevalente – campanello d'allarme.[reference:16]
+          </div>
+        </section>
+
+        <!-- 7. APPLICAZIONI PRATICHE -->
+        <section id="applicazioni">
+          <h2>7. Applicazioni pratiche: hedge fund, opzioni e portafogli asimmetrici</h2>
+          <div class="grid">
+            <div class="box">
+              <h3>🎯 Hedge fund e fondi alternativi</h3>
+              <p>Gli hedge fund spesso hanno distribuzioni di rendimento asimmetriche (piccole perdite frequenti, pochi grandi guadagni). Il Sortino Ratio è la metrica preferita per valutarli, perché non penalizza la volatilità positiva ma premia la capacità di limitare i drawdown.[reference:17]</p>
+            </div>
+            <div class="box">
+              <h3>⚡ Strategie di opzioni e vendita di volatilità</h3>
+              <p>Le strategie di vendita di opzioni generano premi costanti con drawdown occasionali ma profondi. Il Sortino Ratio aiuta a capire se il premio raccolto compensa adeguatamente il rischio di perdite improvvise.</p>
+            </div>
+            <div class="box">
+              <h3>📊 Trend-following e momentum</h3>
+              <p>Le strategie trend-following hanno spesso rendimenti "a denti di sega": lunghi periodi di piccole perdite, occasionali grandi guadagni. Il Sortino Ratio è più adatto dello Sharpe per valutare la loro efficienza nel gestire il rischio al ribasso.[reference:18]</p>
+            </div>
+            <div class="box">
+              <h3>🛡️ Portafogli con protezione del capitale</h3>
+              <p>Per gli investitori in prossimità della pensione o con bassa tolleranza al rischio, il Sortino Ratio offre una visione più realistica della performance: ciò che conta davvero è evitare le perdite, non limitare i guadagni.[reference:19]</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 8. LIMITI ED ERRORI FREQUENTI -->
+        <section id="limiti">
+          <h2>8. Limiti, criticità ed errori frequenti</h2>
+          <div class="warning-box">
+            <strong>⚠️ I limiti del Sortino Ratio che devi conoscere:</strong>
+          </div>
+          <ul>
+            <li><strong>Sensibilità alla scelta del MAR:</strong> Un MAR troppo basso (es. 0%) rende il Sortino simile allo Sharpe; un MAR troppo alto (es. 10%) può restituire valori distorti. La prassi è usare il tasso risk free a breve termine o un target personalizzato coerente con la strategia.[reference:20]</li>
+            <li><strong>Non considera la frequenza delle perdite:</strong> Due strategie con stessa downside deviation ma distribuzione temporale diversa (perdita concentrata vs perdite frequenti) ottengono lo stesso Sortino Ratio, ma il percorso psicologico è molto diverso.</li>
+            <li><strong>Dipendenza dal periodo di osservazione:</strong> Un evento estremo di mercato (es. crisi finanziaria 2008) può aumentare la downside deviation e abbassare il Sortino Ratio anche per strategie altrimenti solide.</li>
+            <li><strong>Non cattura il rischio di coda:</strong> La downside deviation si basa su dati storici e non garantisce che in futuro non si verifichino perdite più profonde.</li>
+            <li><strong>Errore comune:</strong> Non annualizzare correttamente la downside deviation. Per rendimenti mensili, la downside deviation va moltiplicata per √12; per rendimenti giornalieri per √252.[reference:21]</li>
+          </ul>
+          <div class="quote">"Il Sortino Ratio è eccellente per misurare l'efficienza media del rischio di ribasso, ma non sostituisce un'analisi completa della profondità delle perdite, della loro durata e della resilienza psicologica dell'investitore."</div>
+        </section>
+
+        <!-- 9. BEST PRACTICE -->
+        <section id="bestpractice">
+          <h2>9. Best practice per usare il Sortino Ratio in modo professionale</h2>
+          <ul>
+            <li><strong>Scegli un MAR coerente con la strategia:</strong> Per portafogli a lungo termine, usa il tasso risk free (es. rendimento BOT a 12 mesi). Per strategie di preservazione del capitale, usa MAR = 0. Per fondi pensione, usa l'inflazione attesa come MAR.</li>
+            <li><strong>Annualizza correttamente:</strong> Se usi rendimenti mensili, rendimento annualizzato = rendimento medio mensile × 12; downside deviation annualizzata = downside deviation mensile × √12. Mescolare frequenze è un errore grave.[reference:22]</li>
+            <li><strong>Utilizza il rolling Sortino:</strong> Calcola il Sortino Ratio su finestre mobili (es. 36 mesi) per osservare l'evoluzione della gestione del rischio di ribasso nel tempo.</li>
+            <li><strong>Affianca sempre il Sortino ad altre metriche:</strong> Sharpe, Calmar, Max Drawdown, Omega Ratio. Nessuna metrica da sola racconta tutta la storia.</li>
+            <li><strong>Non confrontare Sortino tra periodi con MAR diversi:</strong> Il MAR deve essere lo stesso per tutti i confronti, altrimenti i valori non sono comparabili.</li>
+            <li><strong>Attenzione alla frequenza dei dati:</strong> Il Sortino calcolato su rendimenti giornalieri può differire significativamente da quello calcolato su rendimenti mensili a causa dell'autocorrelazione. La prassi è usare rendimenti mensili per orizzonti di 3-5 anni.</li>
+          </ul>
+          <div class="box">
+            <h3>📐 Esempio di annualizzazione da dati mensili</h3>
+            <p>Supponiamo rendimento medio mensile = 0,8%, downside deviation mensile = 2,5%.<br>
+            Rendimento annualizzato = 0,8% × 12 = 9,6%.<br>
+            Downside deviation annualizzata = 2,5% × √12 = 2,5% × 3,464 = 8,66%.<br>
+            Se MAR annuale = 2%, Sortino annuale = (9,6-2)/8,66 = 7,6/8,66 ≈ 0,88.</p>
+          </div>
+          <p class="note"><strong>Contenuto informativo ed educativo:</strong> Le informazioni contenute in questa guida non costituiscono consulenza finanziaria, sollecitazione all'investimento o raccomandazione personalizzata. Prima di qualsiasi decisione di investimento, consultare un consulente finanziario indipendente.</p>
+        </section>
+
+        <p><span id="open_preferences_center_bottom" style="color: var(--accent); text-decoration: underline; cursor: pointer;">📌 Gestisci le preferenze sui cookie</span></p>
       </div>
-      <div class="footer">VQuantPro · Misurare il rischio negativo aiuta a capire quanto un rendimento sia davvero meritorio.</div>
-    </div>
-  </div>
+      <footer class="footer">VQuantPro · Misurare il rischio negativo aiuta a capire quanto un rendimento sia davvero meritorio.</footer>
+    </article>
+  </main>
 
-  <!-- Cookie Banner Personalizzato -->
+  <!-- Cookie Banner Interattivo -->
   <div id="cookie-banner" class="cookie-banner" style="display:none;">
-      <p>Questo sito utilizza cookie tecnici necessari al funzionamento. Con il tuo consenso, potremmo utilizzare cookie di terze parti per annunci personalizzati. <a href="/privacy/index.html">Privacy Policy</a></p>
+      <p>🔐 Utilizziamo cookie tecnici per il funzionamento del sito. Con il tuo consenso, utilizziamo cookie di terze parti per annunci personalizzati. <a href="/privacy/index.html">Privacy Policy</a> | <a href="/cookie/index.html">Cookie Policy</a></p>
       <div class="cookie-buttons">
           <button id="cookie-accept" class="cookie-btn accept">Accetta tutti</button>
           <button id="cookie-reject" class="cookie-btn reject">Solo necessari</button>
@@ -125,6 +537,7 @@
       const acceptBtn = document.getElementById('cookie-accept');
       const rejectBtn = document.getElementById('cookie-reject');
       const prefsLink = document.getElementById('open_preferences_center');
+      const prefsLinkBottom = document.getElementById('open_preferences_center_bottom');
       
       if (!localStorage.getItem('cookie-consent')) {
           banner.style.display = 'flex';
@@ -133,18 +546,19 @@
       function setConsent(value) {
           localStorage.setItem('cookie-consent', value);
           banner.style.display = 'none';
-          if (value === 'accepted') loadExternalScripts();
+          if (value === 'accepted') {
+              loadExternalScripts();
+          } else {
+              removeExternalScripts();
+          }
       }
       
-      acceptBtn.addEventListener('click', function() { setConsent('accepted'); });
-      rejectBtn.addEventListener('click', function() { setConsent('rejected'); });
+      if (acceptBtn) acceptBtn.addEventListener('click', () => setConsent('accepted'));
+      if (rejectBtn) rejectBtn.addEventListener('click', () => setConsent('rejected'));
       
-      if (prefsLink) {
-          prefsLink.addEventListener('click', function(e) {
-              e.preventDefault();
-              banner.style.display = 'flex';
-          });
-      }
+      const handlePrefs = (e) => { e.preventDefault(); banner.style.display = 'flex'; };
+      if (prefsLink) prefsLink.addEventListener('click', handlePrefs);
+      if (prefsLinkBottom) prefsLinkBottom.addEventListener('click', handlePrefs);
       
       if (localStorage.getItem('cookie-consent') === 'accepted') {
           loadExternalScripts();
@@ -164,8 +578,37 @@
               document.head.appendChild(fcScript);
           }
       }
+      
+      function removeExternalScripts() {
+          var scripts = document.querySelectorAll('script[src*="adsbygoogle"], script[src*="fundingchoicesmessages"]');
+          scripts.forEach(script => script.remove());
+      }
+  })();
+
+  // Calcolatore Sortino interattivo
+  (function(){
+      const calcBtn = document.getElementById('calcSortinoBtn');
+      if(calcBtn){
+          calcBtn.addEventListener('click', function(){
+              let rend = parseFloat(document.getElementById('rendimentoPort').value);
+              let mar = parseFloat(document.getElementById('marPort').value);
+              let downside = parseFloat(document.getElementById('downsideVol').value);
+              const resultEl = document.getElementById('sortinoResult');
+              if(isNaN(rend) || isNaN(mar) || isNaN(downside) || downside <= 0){
+                  resultEl.innerHTML = "Inserisci valori validi (downside deviation > 0)";
+                  return;
+              }
+              const sortino = (rend - mar) / downside;
+              resultEl.innerHTML = `Sortino = ${sortino.toFixed(2)}`;
+              if(sortino > 2.5) resultEl.innerHTML += " (eccezionale)";
+              else if(sortino > 1.5) resultEl.innerHTML += " (eccellente)";
+              else if(sortino > 0.5) resultEl.innerHTML += " (buono)";
+              else if(sortino > 0) resultEl.innerHTML += " (scarso)";
+              else resultEl.innerHTML += " (negativo, sotto MAR)";
+          });
+          document.getElementById('calcSortinoBtn').click();
+      }
   })();
   </script>
-
 </body>
 </html>
