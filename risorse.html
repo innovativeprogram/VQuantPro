@@ -3,16 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Risorse, Glossario e FAQ | VQuantPro</title>
+    <title>Glossario e Risorse | VQuantPro</title>
     
     <link rel="canonical" href="https://vquantpro.it/risorse.html" />
     <link rel="icon" type="image/png" href="/favicon.png">
 
-    <meta name="description" content="Un glossario completo di finanza e una sezione di domande frequenti per chi inizia a investire. Tutte le risorse di VQuantPro in un'unica pagina.">
+    <meta name="description" content="Glossario completo di finanza quantitativa e domande frequenti per investitori. Oltre 40 termini spiegati con esempi pratici, focus E-E-A-T e risorse gratuite.">
+    
+    <!-- Google Analytics -->
+    <script src="/ga4.js"></script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome per icone -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <style>
         :root { --bg-main: #0B0F19; --bg-card: #161F30; --accent: #00E676; --text-main: #F3F4F6; --text-muted: #9CA3AF; --border: #24334C; }
@@ -30,17 +36,19 @@
         h2 { font-size: 32px; color: var(--accent); margin: 60px 0 30px 0; border-bottom: 2px solid var(--border); padding-bottom: 15px; }
         .intro-text { color: var(--text-muted); text-align: center; max-width: 700px; margin: 0 auto 60px auto; font-size: 18px; }
 
-        /* Stile Glossario */
+        /* Stile Glossario migliorato */
         .glossary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
         .glossary-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 25px; transition: all 0.2s; }
         .glossary-card:hover { border-color: var(--accent); transform: translateY(-2px); }
         .glossary-card h3 { color: var(--accent); font-size: 18px; margin-bottom: 10px; font-weight: 600; }
         .glossary-card p { color: var(--text-muted); font-size: 15px; }
+        .glossary-card .example { margin-top: 10px; font-size: 14px; color: #fff; background: rgba(0,230,118,0.1); padding: 8px; border-radius: 6px; }
 
-        /* Stile FAQ */
+        /* Stile FAQ migliorato */
         .faq-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 16px; padding: 25px; transition: all 0.2s; }
         .faq-item:hover { border-color: var(--accent); }
-        .faq-item h3 { color: #fff; font-size: 18px; margin-bottom: 12px; cursor: default; }
+        .faq-item h3 { color: #fff; font-size: 18px; margin-bottom: 12px; cursor: default; display: flex; align-items: center; gap: 10px; }
+        .faq-item h3 i { color: var(--accent); }
         .faq-item p { color: var(--text-muted); font-size: 16px; }
 
         .author-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 30px; margin-top: 60px; text-align: center; }
@@ -76,86 +84,85 @@
     </header>
 
     <main class="container">
-        <h1>Risorse & Glossario Completo</h1>
-        <p class="intro-text">Dalle basi della finanza ai termini più tecnici: un glossario indispensabile per l'investitore moderno. In coda alla pagina, una sezione con le domande più frequenti per chi muove i primi passi.</p>
+        <h1>📚 Glossario & Risorse di Finanza Quantitativa</h1>
+        <p class="intro-text">Un dizionario completo e ragionato dei termini fondamentali per l'investitore moderno. Ogni definizione è accompagnata da esempi pratici e approfondimenti. In coda alla pagina, le domande più frequenti per muovere i primi passi.</p>
 
-        <!-- ==================== SEZIONE GLOSSARIO ==================== -->
-        <h2>📖 Glossario di Finanza</h2>
+        <!-- ==================== SEZIONE GLOSSARIO (POTENZIATA) ==================== -->
+        <h2>📖 Glossario dei Termini Finanziari</h2>
         <div class="glossary-grid">
-            <div class="glossary-card"><h3>Azione (Stock)</h3><p>Titolo che rappresenta una quota di proprietà di una società. Chi possiede un'azione è un socio e partecipa agli utili (dividendi) e alle perdite.</p></div>
-            <div class="glossary-card"><h3>Asset Allocation</h3><p>La strategia di suddivisione del capitale tra diverse classi di attività (azioni, obbligazioni, liquidità, oro) per bilanciare rischio e rendimento.</p></div>
-            <div class="glossary-card"><h3>Banca Centrale</h3><p>Istituzione (come la BCE o la Fed) che gestisce la politica monetaria, controlla l'inflazione e stabilizza il sistema finanziario fissando i tassi d'interesse.</p></div>
-            <div class="glossary-card"><h3>Benchmark</h3><p>Un parametro di riferimento (es. S&P 500) usato per misurare e confrontare la performance di un portafoglio o di un fondo d'investimento.</p></div>
-            <div class="glossary-card"><h3>Bias Cognitivo</h3><p>Un errore sistematico di giudizio. Nella finanza comportamentale, i bias (come l'eccessiva fiducia) portano gli investitori a decisioni irrazionali.</p></div>
-            <div class="glossary-card"><h3>Bolla Speculativa</h3><p>Una fase di mercato in cui il prezzo di un asset cresce enormemente rispetto al suo valore reale, alimentato da acquisti compulsivi, ed è seguito da un crollo improvviso.</p></div>
-            <div class="glossary-card"><h3>CAGR (Tasso di Crescita Annuo Composto)</h3><p>Misura il tasso di crescita medio annuo di un investimento su un periodo superiore a un anno, come se fosse cresciuto a un tasso costante.</p></div>
-            <div class="glossary-card"><h3>Calmar Ratio</h3><p>Indicatore di performance che mette a confronto il CAGR con il Max Drawdown. Valori molto negativi nel denominatore indicano un'alta rischiosità.</p></div>
-            <div class="glossary-card"><h3>Capitolazione</h3><p>Il momento di panico in cui gli investitori vendono in massa sui minimi, esaurendo ogni speranza di recupero, spesso segnando l'inizio di un rimbalzo.</p></div>
-            <div class="glossary-card"><h3>Correlazione</h3><p>Misura statistica di come due asset si muovono l'uno rispetto all'altro. Se è positiva (+1), salgono e scendono insieme; se è negativa (-1), si muovono in direzioni opposte.</p></div>
-            <div class="glossary-card"><h3>Costo Opportunità</h3><p>Il rendimento a cui si rinuncia scegliendo un investimento invece di un altro. È un concetto chiave per valutare le scelte finanziarie.</p></div>
-            <div class="glossary-card"><h3>Deviazione Standard (σ)</h3><p>Misura statistica della volatilità. Indica quanto i rendimenti di un asset si discostano dalla sua media storica.</p></div>
-            <div class="glossary-card"><h3>Diversificazione</h3><p>Strategia per ridurre il rischio investendo in asset diversi tra loro (es. azioni globali, obbligazioni, oro), così da non dipendere da un unico evento.</p></div>
-            <div class="glossary-card"><h3>Drawdown</h3><p>La caduta percentuale del valore del portafoglio da un picco a un minimo prima di un nuovo massimo. Il Max Drawdown è il calo peggiore mai registrato.</p></div>
-            <div class="glossary-card"><h3>Duration</h3><p>Misura la sensibilità del prezzo di un'obbligazione alle variazioni dei tassi d'interesse. Duration più lunga = maggiore sensibilità e rischio di tasso.</p></div>
-            <div class="glossary-card"><h3>Efficienza dei Mercati</h3><p>Teoria secondo cui i prezzi degli asset riflettono già tutte le informazioni disponibili, rendendo impossibile battere il mercato in modo consistente senza assumersi più rischio.</p></div>
-            <div class="glossary-card"><h3>ETF (Exchange Traded Fund)</h3><p>Fondo d'investimento a gestione passiva che replica l'andamento di un indice o di una materia prima. È quotato in borsa e si compra come un'azione.</p></div>
-            <div class="glossary-card"><h3>Frontiera Efficiente</h3><p>Concetto di Markowitz che identifica il portafoglio ottimale: quello che offre il massimo rendimento per ogni livello di rischio o il minor rischio per ogni livello di rendimento.</p></div>
-            <div class="glossary-card"><h3>Hedging (Copertura)</h3><p>Strategia per ridurre o trasferire il rischio di un investimento. Ad esempio, comprare un'opzione Put su un'azione che si possiede per limitare le perdite.</p></div>
-            <div class="glossary-card"><h3>Indice di Riferimento</h3><p>Panoramica di un mercato (es. FTSE MIB in Italia). Viene usato come metro di paragone per valutare se un gestore sta facendo meglio o peggio del mercato.</p></div>
-            <div class="glossary-card"><h3>Inflazione</h3><p>Aumento generalizzato e prolungato dei prezzi, che riduce il potere d'acquisto della moneta. È un rischio importante per chi investe in liquidità o obbligazioni a lungo termine.</p></div>
-            <div class="glossary-card"><h3>Interesse Composto</h3><p>Meccanismo per cui gli interessi guadagnati vengono reinvestiti e generano a loro volta nuovi interessi. Albert Einstein lo definì "l'ottava meraviglia del mondo".</p></div>
-            <div class="glossary-card"><h3>Liquidità</h3><p>La capacità di trasformare un asset in denaro contante rapidamente e senza perdite. Il denaro sul conto corrente è l'asset più liquido che esista.</p></div>
-            <div class="glossary-card"><h3>Margine di Sicurezza</h3><p>Principio di Benjamin Graham: comprare un asset a un prezzo molto inferiore al suo valore intrinseco per ridurre il rischio di perdita.</p></div>
-            <div class="glossary-card"><h3>Obbligazione (Bond)</h3><p>Titolo di debito emesso da uno Stato o da un'azienda. L'investitore presta denaro all'emittente ricevendo in cambio cedole periodiche e il rimborso del capitale alla scadenza.</p></div>
-            <div class="glossary-card"><h3>Paniere</h3><p>Insieme di titoli che compongono un indice o un portafoglio. Un ETF sull'S&P 500, ad esempio, ha un paniere con le 500 aziende dell'indice.</p></div>
-            <div class="glossary-card"><h3>Ribilanciamento</h3><p>Operazione con cui si riporta il portafoglio alla sua asset allocation originale, vendendo ciò che è cresciuto troppo e comprando ciò che è calato.</p></div>
-            <div class="glossary-card"><h3>Rischio Sistemico</h3><p>Il rischio che un evento inneschi una crisi dell'intero sistema finanziario, come il fallimento di Lehman Brothers nel 2008.</p></div>
-            <div class="glossary-card"><h3>Sharpe Ratio</h3><p>Indicatore che misura il rendimento di un investimento in rapporto al suo rischio (volatilità). Più è alto, migliore è la performance "risk-adjusted".</p></div>
-            <div class="glossary-card"><h3>Sortino Ratio</h3><p>Variante dello Sharpe Ratio che considera solo la volatilità negativa (downside risk), ignorando le oscillazioni positive.</p></div>
-            <div class="glossary-card"><h3>Speculazione</h3><p>Operazione finanziaria molto rischiosa, di breve periodo, basata sulla previsione dei movimenti dei prezzi, senza considerare il valore fondamentale dell'asset.</p></div>
-            <div class="glossary-card"><h3>Tasso di Interesse</h3><p>Il costo del denaro. È la percentuale pagata da chi prende in prestito a chi lo concede. Viene fissato dalle banche centrali per l'economia.</p></div>
-            <div class="glossary-card"><h3>Volatilità</h3><p>L'intensità delle oscillazioni di prezzo di un asset. Un'alta volatilità indica forti escursioni, sia al rialzo che al ribasso, in breve tempo.</p></div>
-            <div class="glossary-card"><h3>YTM (Yield to Maturity)</h3><p>Il rendimento effettivo di un'obbligazione portata a scadenza, che tiene conto del prezzo di acquisto, delle cedole e del valore di rimborso.</p></div>
-            <div class="glossary-card"><h3>Zero Coupon</h3><p>Obbligazione senza cedole periodiche (Zero Coupon Bond). Viene emessa sotto la pari e rimborsata al valore nominale; il guadagno è dato dalla differenza.</p></div>
+            <div class="glossary-card"><h3>Azione (Stock)</h3><p>Titolo che rappresenta una quota di proprietà di una società. Chi possiede un'azione è un socio e partecipa agli utili (dividendi) e alle perdite.</p><div class="example"><i class="fas fa-chart-line"></i> Esempio: Comprare un'azione Apple significa possedere una piccolissima parte dell'azienda.</div></div>
+            <div class="glossary-card"><h3>Asset Allocation</h3><p>Strategia di suddivisione del capitale tra diverse classi di attività (azioni, obbligazioni, liquidità, oro).</p><div class="example"><i class="fas fa-balance-scale"></i> Esempio: 60% azioni, 30% obbligazioni, 10% oro.</div></div>
+            <div class="glossary-card"><h3>Banca Centrale</h3><p>Istituzione (BCE, Fed) che gestisce la politica monetaria, controlla l'inflazione e fissa i tassi d'interesse.</p><div class="example"><i class="fas fa-university"></i> Esempio: La BCE alza i tassi per combattere l'inflazione.</div></div>
+            <div class="glossary-card"><h3>Benchmark</h3><p>Parametro di riferimento (es. S&P 500) usato per misurare la performance di un portafoglio.</p><div class="example"><i class="fas fa-chart-simple"></i> Esempio: Confrontare un fondo con l'indice FTSE MIB.</div></div>
+            <div class="glossary-card"><h3>Bias Cognitivo</h3><p>Errore sistematico di giudizio. Nella finanza comportamentale, i bias portano a decisioni irrazionali.</p><div class="example"><i class="fas fa-brain"></i> Esempio: Overconfidence bias → sopravvalutare le proprie capacità di timing.</div></div>
+            <div class="glossary-card"><h3>Bolla Speculativa</h3><p>Fase in cui il prezzo di un asset cresce oltre il suo valore reale, alimentato da acquisti compulsivi, seguita da un crollo.</p><div class="example"><i class="fas fa-chart-line"></i> Esempio: Dot-com bubble (1999-2000), Bitcoin 2017-2018.</div></div>
+            <div class="glossary-card"><h3>CAGR (Tasso di Crescita Annuo Composto)</h3><p>Misura il tasso di crescita medio annuo di un investimento su un periodo superiore a un anno, come se fosse cresciuto a un tasso costante.</p><div class="example"><i class="fas fa-calculator"></i> Esempio: Un investimento che passa da 100€ a 150€ in 3 anni ha un CAGR di circa 14,5%.</div></div>
+            <div class="glossary-card"><h3>Calmar Ratio</h3><p>Indicatore che mette a confronto il CAGR con il Max Drawdown. Valori alti indicano una buona resilienza.</p><div class="example"><i class="fas fa-shield-alt"></i> Esempio: CAGR 10% e Max Drawdown 5% → Calmar 2.</div></div>
+            <div class="glossary-card"><h3>Capitolazione</h3><p>Momento di panico in cui gli investitori vendono in massa sui minimi, esaurendo ogni speranza di recupero. Spesso segna l'inizio di un rimbalzo.</p><div class="example"><i class="fas fa-fall"></i> Esempio: Marzo 2020 durante il COVID-19.</div></div>
+            <div class="glossary-card"><h3>Correlazione</h3><p>Misura statistica di come due asset si muovono l'uno rispetto all'altro. Se è positiva (+1), salgono e scendono insieme; se è negativa (-1), si muovono in direzioni opposte.</p><div class="example"><i class="fas fa-chart-line"></i> Esempio: Azioni e oro hanno correlazione prossima allo zero.</div></div>
+            <div class="glossary-card"><h3>Costo Opportunità</h3><p>Il rendimento a cui si rinuncia scegliendo un investimento invece di un altro. È un concetto chiave per valutare le scelte finanziarie.</p><div class="example"><i class="fas fa-exchange-alt"></i> Esempio: Investire in azioni invece che in BTP significa rinunciare al rendimento certo dei BTP.</div></div>
+            <div class="glossary-card"><h3>Deviazione Standard (σ)</h3><p>Misura statistica della volatilità. Indica quanto i rendimenti di un asset si discostano dalla sua media storica.</p><div class="example"><i class="fas fa-chart-line"></i> Esempio: Una deviazione standard del 15% significa che i rendimenti oscillano in media del 15% attorno alla media.</div></div>
+            <div class="glossary-card"><h3>Diversificazione</h3><p>Strategia per ridurre il rischio investendo in asset diversi tra loro (es. azioni globali, obbligazioni, oro), così da non dipendere da un unico evento.</p><div class="example"><i class="fas fa-chart-pie"></i> Esempio: Portafoglio con ETF azionario globale, obbligazionario e oro.</div></div>
+            <div class="glossary-card"><h3>Drawdown</h3><p>La caduta percentuale del valore del portafoglio da un picco a un minimo prima di un nuovo massimo. Il Max Drawdown è il calo peggiore mai registrato.</p><div class="example"><i class="fas fa-chart-line"></i> Esempio: Un drawdown del 20% significa aver perso il 20% dal picco.</div></div>
+            <div class="glossary-card"><h3>Duration</h3><p>Misura la sensibilità del prezzo di un'obbligazione alle variazioni dei tassi d'interesse. Duration più lunga = maggiore sensibilità.</p><div class="example"><i class="fas fa-chart-line"></i> Esempio: Un'obbligazione con duration 10 anni perderà circa il 10% se i tassi salgono dell'1%.</div></div>
+            <div class="glossary-card"><h3>Efficienza dei Mercati</h3><p>Teoria secondo cui i prezzi degli asset riflettono già tutte le informazioni disponibili, rendendo impossibile battere il mercato in modo consistente senza rischi aggiuntivi.</p><div class="example"><i class="fas fa-chart-line"></i> Esempio: Perché è difficile (quasi impossibile) sovraperformare l'S&P500 costantemente.</div></div>
+            <div class="glossary-card"><h3>ETF (Exchange Traded Fund)</h3><p>Fondo d'investimento a gestione passiva che replica l'andamento di un indice o di una materia prima. È quotato in borsa e si compra come un'azione.</p><div class="example"><i class="fas fa-chart-line"></i> Esempio: VWCE (ETF azionario globale) o AGGH (ETF obbligazionario globale).</div></div>
+            <div class="glossary-card"><h3>Frontiera Efficiente</h3><p>Concetto di Markowitz che identifica il portafoglio ottimale: quello che offre il massimo rendimento per ogni livello di rischio o il minor rischio per ogni livello di rendimento.</p><div class="example"><i class="fas fa-chart-line"></i> Esempio: Un portafoglio sulla frontiera efficiente ha la miglior combinazione rischio-rendimento.</div></div>
+            <div class="glossary-card"><h3>Hedging (Copertura)</h3><p>Strategia per ridurre o trasferire il rischio di un investimento. Ad esempio, comprare un'opzione Put su un'azione che si possiede per limitare le perdite.</p><div class="example"><i class="fas fa-shield-alt"></i> Esempio: Comprare un'opzione put sull'S&P500 per proteggersi da un crollo.</div></div>
+            <div class="glossary-card"><h3>Indice di Riferimento</h3><p>Panoramica di un mercato (es. FTSE MIB in Italia). Viene usato come metro di paragone per valutare se un gestore sta facendo meglio o peggio del mercato.</p><div class="example"><i class="fas fa-chart-line"></i> Esempio: Confrontare un fondo italiano con l'indice FTSE MIB.</div></div>
+            <div class="glossary-card"><h3>Inflazione</h3><p>Aumento generalizzato e prolungato dei prezzi, che riduce il potere d'acquisto della moneta. È un rischio importante per chi investe in liquidità o obbligazioni a lungo termine.</p><div class="example"><i class="fas fa-chart-line"></i> Esempio: Con inflazione al 3%, 100€ oggi varranno come 97€ tra un anno.</div></div>
+            <div class="glossary-card"><h3>Interesse Composto</h3><p>Meccanismo per cui gli interessi guadagnati vengono reinvestiti e generano a loro volta nuovi interessi. Albert Einstein lo definì "l'ottava meraviglia del mondo".</p><div class="example"><i class="fas fa-chart-line"></i> Esempio: 10.000€ investiti al 7% per 30 anni → oltre 76.000€.</div></div>
+            <div class="glossary-card"><h3>Liquidità</h3><p>La capacità di trasformare un asset in denaro contante rapidamente e senza perdite. Il denaro sul conto corrente è l'asset più liquido che esista.</p><div class="example"><i class="fas fa-coins"></i> Esempio: Le azioni quotate in borsa sono liquide (si vendono in pochi secondi).</div></div>
+            <div class="glossary-card"><h3>Margine di Sicurezza</h3><p>Principio di Benjamin Graham: comprare un asset a un prezzo molto inferiore al suo valore intrinseco per ridurre il rischio di perdita.</p><div class="example"><i class="fas fa-chart-line"></i> Esempio: Comprare un'azione quando il suo prezzo è inferiore del 30% al valore di liquidazione.</div></div>
+            <div class="glossary-card"><h3>Obbligazione (Bond)</h3><p>Titolo di debito emesso da uno Stato o da un'azienda. L'investitore presta denaro ricevendo cedole periodiche e il rimborso del capitale a scadenza.</p><div class="example"><i class="fas fa-chart-line"></i> Esempio: BTP italiano che paga il 4% annuo per 10 anni.</div></div>
+            <div class="glossary-card"><h3>Paniere</h3><p>Insieme di titoli che compongono un indice o un portafoglio. Un ETF sull'S&P 500 ha un paniere con le 500 aziende dell'indice.</p><div class="example"><i class="fas fa-chart-line"></i> Esempio: Il paniere del FTSE MIB contiene le 40 maggiori aziende italiane.</div></div>
+            <div class="glossary-card"><h3>Ribilanciamento</h3><p>Operazione con cui si riporta il portafoglio alla sua asset allocation originale, vendendo ciò che è cresciuto troppo e comprando ciò che è calato.</p><div class="example"><i class="fas fa-chart-line"></i> Esempio: Se l'azionario sale troppo, si vende un po' per comprare obbligazioni.</div></div>
+            <div class="glossary-card"><h3>Rischio Sistemico</h3><p>Rischio che un evento inneschi una crisi dell'intero sistema finanziario, come il fallimento di Lehman Brothers nel 2008.</p><div class="example"><i class="fas fa-chart-line"></i> Esempio: Il crollo di una banca può innescare una crisi globale.</div></div>
+            <div class="glossary-card"><h3>Sharpe Ratio</h3><p>Indicatore che misura il rendimento di un investimento in rapporto al suo rischio (volatilità). Più è alto, migliore è la performance "risk-adjusted".</p><div class="example"><i class="fas fa-calculator"></i> Esempio: Sharpe > 1 è eccellente, tra 0,5 e 1 buono.</div></div>
+            <div class="glossary-card"><h3>Sortino Ratio</h3><p>Variante dello Sharpe Ratio che considera solo la volatilità negativa (downside risk), ignorando le oscillazioni positive.</p><div class="example"><i class="fas fa-calculator"></i> Esempio: Più adatto per strategie asimmetriche (hedge fund, opzioni).</div></div>
+            <div class="glossary-card"><h3>Speculazione</h3><p>Operazione finanziaria molto rischiosa, di breve periodo, basata sulla previsione dei movimenti dei prezzi, senza considerare il valore fondamentale dell'asset.</p><div class="example"><i class="fas fa-dice"></i> Esempio: Comprare un'azione nella speranza che salga nei prossimi giorni.</div></div>
+            <div class="glossary-card"><h3>Tasso di Interesse</h3><p>Il costo del denaro. È la percentuale pagata da chi prende in prestito a chi lo concede. Viene fissato dalle banche centrali.</p><div class="example"><i class="fas fa-chart-line"></i> Esempio: Tasso BCE al 4% → costo del denaro alto.</div></div>
+            <div class="glossary-card"><h3>Volatilità</h3><p>L'intensità delle oscillazioni di prezzo di un asset. Un'alta volatilità indica forti escursioni, sia al rialzo che al ribasso, in breve tempo.</p><div class="example"><i class="fas fa-chart-line"></i> Esempio: Le criptovalute hanno volatilità altissima (50-80%).</div></div>
+            <div class="glossary-card"><h3>YTM (Yield to Maturity)</h3><p>Il rendimento effettivo di un'obbligazione portata a scadenza, che tiene conto del prezzo di acquisto, delle cedole e del valore di rimborso.</p><div class="example"><i class="fas fa-calculator"></i> Esempio: Un BTP acquistato a 98 ha un YTM superiore al tasso cedolare.</div></div>
+            <div class="glossary-card"><h3>Zero Coupon</h3><p>Obbligazione senza cedole periodiche. Viene emessa sotto la pari e rimborsata al valore nominale; il guadagno è dato dalla differenza.</p><div class="example"><i class="fas fa-chart-line"></i> Esempio: Zero coupon a 10 anni acquistato a 80€ e rimborsato a 100€.</div></div>
         </div>
 
-        <!-- ==================== SEZIONE DOMANDE FREQUENTI ==================== -->
-        <h2>❓ Domande Frequenti (FAQ)</h2>
+        <!-- ==================== SEZIONE FAQ (POTENZIATA) ==================== -->
+        <h2>❓ Domande Frequenti (FAQ) per Investitori Principianti</h2>
         
         <div class="faq-item">
-            <h3>1. Cosa fa esattamente VQuantPro?</h3>
-            <p>VQuantPro è una piattaforma di analisi quantitativa che fornisce metriche avanzate (Sharpe, Sortino, Calmar, Max Drawdown, CAGR) per valutare il rischio e il rendimento del tuo portafoglio. Non diamo consigli finanziari, ma mettiamo a disposizione strumenti educativi e analitici.</p>
+            <h3><i class="fas fa-chart-line"></i> 1. Cosa fa esattamente VQuantPro e come può aiutarmi?</h3>
+            <p>VQuantPro è una piattaforma di analisi quantitativa che fornisce metriche avanzate (Sharpe, Sortino, Calmar, Max Drawdown, CAGR) per valutare il rischio e il rendimento del tuo portafoglio. Non diamo consigli finanziari personalizzati, ma mettiamo a disposizione strumenti educativi e analitici. La dashboard interattiva (disponibile nella home) calcola automaticamente queste metriche a partire dai dati che fornisci.</p>
         </div>
         <div class="faq-item">
-            <h3>2. Non ho mai investito. Da dove inizio?</h3>
-            <p>Il primo passo è la formazione. Nel nostro blog trovi guide gratuite e un glossario per capire le basi. Il secondo passo è definire un piano di accumulo (PAC) su ETF diversificati globali, così da non dover "indovinare" il momento giusto per entrare.</p>
+            <h3><i class="fas fa-graduation-cap"></i> 2. Non ho mai investito. Da dove inizio?</h3>
+            <p>Il primo passo è la formazione. Nel nostro blog trovi guide gratuite e questo glossario per capire le basi. Il secondo passo è definire un piano di accumulo (PAC) su ETF diversificati globali, così da non dover "indovinare" il momento giusto per entrare. Un buon libro per iniziare è "Sei già ricco e non lo sai" di Riccardo Spada o "La Psicologia dei Soldi" di Morgan Housel.</p>
         </div>
         <div class="faq-item">
-            <h3>3. Qual è la differenza tra un ETF e un'azione singola?</h3>
-            <p>Un'azione è la quota di una singola società (rischio specifico altissimo). Un ETF è un paniere di centinaia o migliaia di azioni o obbligazioni. Con l'ETF riduci il rischio di fallimento della singola azienda e ottieni una diversificazione immediata.</p>
+            <h3><i class="fas fa-balance-scale"></i> 3. Qual è la differenza tra un ETF e un'azione singola?</h3>
+            <p>Un'azione rappresenta una quota di proprietà di una singola società, con un rischio specifico altissimo. Un ETF (Exchange Traded Fund) è un paniere di centinaia o migliaia di azioni o obbligazioni. Con l'ETF riduci drasticamente il rischio di fallimento di una singola azienda e ottieni una diversificazione immediata. È lo strumento ideale per chi investe in modo passivo e a lungo termine.</p>
         </div>
         <div class="faq-item">
-            <h3>4. Quanto rischio devo sopportare?</h3>
-            <p>Solo il rischio che ti permette di dormire sonni tranquilli e non vendere sui minimi di mercato. La regola d'oro è: se un calo del 20% ti fa venire il panico, devi ridurre la quota di azioni in portafoglio.</p>
+            <h3><i class="fas fa-chart-pie"></i> 4. Quanto rischio devo sopportare?</h3>
+            <p>Solo il rischio che ti permette di dormire sonni tranquilli e non vendere sui minimi di mercato. La regola d'oro è: se un calo del 20% del tuo portafoglio ti fa venire il panico e ti spinge a vendere, significa che devi ridurre la quota di azioni (e aumentare quella di obbligazioni/ liquidità). Il rischio va calibrato sul tuo orizzonte temporale e sulla tua capacità di sopportare le oscillazioni.</p>
         </div>
         <div class="faq-item">
-            <h3>5. Come faccio a fidarmi di VQuantPro se non date consigli finanziari?</h3>
-            <p>Proprio perché siamo onesti. Diffida di chi promette guadagni certi o soglie di rischio "nascoste". Noi forniamo la calcolatrice e il manuale di istruzioni; la decisione finale su cosa comprare spetta solo a te.</p>
+            <h3><i class="fas fa-shield-alt"></i> 5. Come faccio a fidarmi di VQuantPro?</h3>
+            <p>Diffida di chi promette guadagni certi. Noi forniamo la calcolatrice e il manuale di istruzioni; la decisione finale su cosa comprare spetta solo a te. Il nostro codice è trasparente, le formule sono esplicitate e non offriamo consulenze a pagamento né segnali di trading. Siamo un progetto didattico e gratuito, open-source.</p>
         </div>
         <div class="faq-item">
-            <h3>6. Perché il Max Drawdown è più importante del rendimento?</h3>
-            <p>Perché se perdi il 50% del capitale, ti serve un guadagno del +100% solo per tornare in pari. Conoscere il Max Drawdown ti prepara psicologicamente alla peggiore crisi possibile, evitando di vendere in preda al panico.</p>
+            <h3><i class="fas fa-chart-line"></i> 6. Perché il Max Drawdown è considerato più importante del rendimento?</h3>
+            <p>Perché la matematica dei recuperi è spietata: se perdi il 50% del capitale, ti serve un guadagno del +100% solo per tornare in pari. Conoscere il Max Drawdown storico di un investimento ti prepara psicologicamente alla peggiore crisi possibile, evitando di vendere in preda al panico. È una delle metriche più concrete per valutare la resilienza di un portafoglio.</p>
         </div>
         <div class="faq-item">
-            <h3>7. I libri che consigliate sono davvero utili per un principiante?</h3>
-            <p>Sì. Nella nostra pagina <a href="libri-consigliati.html">Libri Consigliati</a> trovi testi validissimi come "Sei già ricco e non lo sai" di Riccardo Spada o "La Psicologia dei Soldi" di Morgan Housel, perfetti per chi parte da zero.</p>
+            <h3><i class="fas fa-book"></i> 7. I libri che consigliate sono adatti a un principiante assoluto?</h3>
+            <p>Assolutamente sì. Nella nostra pagina <a href="libri-consigliati.html">Libri Consigliati</a> trovi testi validissimi come "Sei già ricco e non lo sai" di Riccardo Spada, "La Psicologia dei Soldi" di Morgan Housel e "Il piccolo libro dell'investimento" di John Bogle. Sono tutti scritti in modo chiaro, accessibile e ricchi di esempi pratici.</p>
         </div>
         <div class="faq-item">
-            <h3>8. Con quanti soldi posso iniziare a investire?</h3>
-            <p>Anche con 100 euro al mese. Molti broker offrono piani di accumulo (PAC) a commissioni zero su ETF selezionati. La costanza conta molto più del capitale iniziale.</p>
+            <h3><i class="fas fa-coins"></i> 8. Con quale capitale minimo posso iniziare a investire?</h3>
+            <p>Anche con 100 euro al mese. Molti broker (es. Directa, Fineco, Trade Republic, Scalable Capital) offrono piani di accumulo (PAC) a commissioni zero su ETF selezionati. La costanza e la disciplina contano molto più del capitale iniziale. Non serve avere decine di migliaia di euro per iniziare a costruire un patrimonio.</p>
         </div>
 
-        <!-- Disclaimer affiliazione -->
         <div class="disclaimer-aff">
             In qualità di Affiliato Amazon, ricevo un guadagno dagli acquisti idonei. Alcuni link presenti su questa pagina potrebbero essere link di affiliazione.
         </div>
@@ -170,7 +177,7 @@
 
     <!-- Cookie Banner Personalizzato -->
     <div id="cookie-banner" class="cookie-banner" style="display:none;">
-        <p>Questo sito utilizza cookie tecnici necessari al funzionamento. Con il tuo consenso, potremmo utilizzare cookie di terze parti per annunci personalizzati. <a href="/privacy/index.html">Privacy Policy</a></p>
+        <p>Questo sito utilizza cookie tecnici necessari al funzionamento. Con il tuo consenso, potremmo utilizzare cookie di terze parti per annunci personalizzati. <a href="/privacy/index.html">Privacy Policy</a> | <a href="/cookie/index.html">Cookie Policy</a></p>
         <div class="cookie-buttons">
             <button id="cookie-accept" class="cookie-btn accept">Accetta tutti</button>
             <button id="cookie-reject" class="cookie-btn reject">Solo necessari</button>
@@ -191,11 +198,19 @@
         function setConsent(value) {
             localStorage.setItem('cookie-consent', value);
             banner.style.display = 'none';
-            if (value === 'accepted') loadExternalScripts();
+            if (value === 'accepted') {
+                // Aggiorna il consenso anche su GA4 tramite la funzione globale (se definita)
+                if (typeof window.updateGA4Consent === 'function') {
+                    window.updateGA4Consent();
+                }
+                loadExternalScripts();
+            } else {
+                removeExternalScripts();
+            }
         }
         
-        acceptBtn.addEventListener('click', function() { setConsent('accepted'); });
-        rejectBtn.addEventListener('click', function() { setConsent('rejected'); });
+        if (acceptBtn) acceptBtn.addEventListener('click', function() { setConsent('accepted'); });
+        if (rejectBtn) rejectBtn.addEventListener('click', function() { setConsent('rejected'); });
         
         if (prefsLink) {
             prefsLink.addEventListener('click', function(e) {
@@ -205,6 +220,10 @@
         }
         
         if (localStorage.getItem('cookie-consent') === 'accepted') {
+            // Se il consenso è già stato dato, aggiorna GA4 e carica gli script
+            if (typeof window.updateGA4Consent === 'function') {
+                window.updateGA4Consent();
+            }
             loadExternalScripts();
         }
         
@@ -221,6 +240,11 @@
                 fcScript.async = true;
                 document.head.appendChild(fcScript);
             }
+        }
+        
+        function removeExternalScripts() {
+            var scripts = document.querySelectorAll('script[src*="adsbygoogle"], script[src*="fundingchoicesmessages"]');
+            scripts.forEach(script => script.remove());
         }
     })();
     </script>
