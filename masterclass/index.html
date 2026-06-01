@@ -3,11 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Masterclass VQuantPro | Architettura del Portafoglio</title>
+    <title>Masterclass VQuantPro | Architettura del Portafoglio Quantitativo</title>
     
     <link rel="canonical" href="https://vquantpro.it/masterclass/index.html" />
     <link rel="icon" type="image/png" href="/favicon.png">
     
+    <meta name="description" content="Masterclass gratuita di finanza quantitativa: impara a costruire un portafoglio resistente usando metriche di rischio come Sharpe, Sortino, CAGR e Max Drawdown. Lezioni teoriche e casi pratici.">
+
+    <!-- Google Analytics -->
+    <script src="/ga4.js"></script>
+
+    <!-- Font Awesome per icone -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" media="print" onload="this.media='all'">
@@ -24,7 +32,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; background-color: var(--bg-main); color: var(--text-main); line-height: 1.7; }
         
-        header { background-color: rgba(11, 15, 25, 0.95); border-bottom: 1px solid var(--border); height: 75px; display: flex; align-items: center; position: sticky; top: 0; z-index: 100; }
+        header { background-color: rgba(11, 15, 25, 0.95); border-bottom: 1px solid var(--border); height: 75px; display: flex; align-items: center; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px); }
         .nav-container { display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 900px; margin: 0 auto; padding: 0 24px; }
         .logo { font-weight: 700; font-size: 24px; color: #fff; }
         .logo span { color: var(--accent); }
@@ -40,8 +48,15 @@
         li { margin-bottom: 10px; color: var(--text-muted); }
         
         .content-img { width: 100%; height: auto; border-radius: 12px; margin: 30px 0; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .formula-box { background: var(--bg-card); padding: 20px; border-radius: 8px; border: 1px solid var(--border); text-align: center; margin: 30px 0; font-size: 1.2rem; }
-        #open_preferences_center { color: var(--accent); text-decoration: underline; cursor: pointer; }
+        .formula-box { background: var(--bg-card); padding: 20px; border-radius: 8px; border: 1px solid var(--border); text-align: center; margin: 30px 0; font-size: 1.2rem; font-family: monospace; color: var(--accent); }
+        .highlight { color: var(--accent); font-weight: 600; }
+        .insight-box { background: rgba(0,230,118,0.05); border-left: 4px solid var(--accent); padding: 20px; margin: 30px 0; border-radius: 0 12px 12px 0; }
+        .signup-form { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 30px; margin: 50px 0; text-align: center; }
+        .signup-form h3 { margin-top: 0; }
+        .signup-form input { padding: 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-main); color: var(--text-main); width: 70%; margin-right: 10px; }
+        .signup-form button { background: var(--accent); color: #0B0F19; border: none; padding: 12px 24px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        .signup-form button:hover { background: #00b359; transform: translateY(-2px); }
+        #open_preferences_center { color: var(--accent); text-decoration: underline; cursor: pointer; display: block; text-align: center; margin: 30px 0; }
 
         /* Cookie Banner */
         .cookie-banner { position: fixed; bottom: 0; left: 0; right: 0; background: #161F30; border-top: 2px solid #00E676; padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; z-index: 10000; gap: 15px; font-size: 14px; color: #D1D5DB; box-shadow: 0 -5px 20px rgba(0,0,0,0.5); }
@@ -51,6 +66,10 @@
         .cookie-btn { padding: 10px 20px; border-radius: 6px; font-weight: 600; cursor: pointer; border: none; font-size: 14px; }
         .cookie-btn.accept { background: #00E676; color: #0B0F19; }
         .cookie-btn.reject { background: transparent; color: #D1D5DB; border: 1px solid #24334C; }
+
+        @media (max-width: 600px) {
+            .signup-form input { width: 100%; margin-bottom: 15px; }
+        }
     </style>
 </head>
 <body>
@@ -63,49 +82,105 @@
     </header>
 
     <main>
-        <h1>Masterclass: Il Metodo</h1>
+        <h1>📘 Masterclass: Il Metodo Quantitativo</h1>
         
         <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=75&fm=webp" alt="Analisi dei dati" class="content-img" width="800" height="450">
 
-        <section>
-            <h2>Modulo 1: L'Architettura del Portafoglio</h2>
-            <h3>Introduzione: Il Portafoglio come Sistema, non come Elenco</h3>
-            <p>Molti investitori commettono l'errore di vedere il proprio portafoglio come una collezione di simboli ticker. Se il tuo portafoglio è solo una lista di titoli che "hanno fatto bene ultimamente", non hai una strategia: hai un insieme di fortuna e coincidenze. Un portafoglio è un'architettura difensiva. È il luogo dove il tuo capitale risiede mentre attraversa i cicli economici. La sua funzione primaria non è massimizzare il profitto nel breve termine, ma massimizzare la probabilità di sopravvivenza nel lungo termine.</p>
-        </section>
+        <p class="lead">Questa masterclass gratuita è pensata per chi vuole passare dalle chiacchiere ai fatti. Imparerai a costruire un portafoglio resistente usando <strong>metriche quantitative reali</strong> (Sharpe, Sortino, CAGR, Max Drawdown) e a prendere decisioni basate sui dati, non sulle emozioni. Nessuna formula magica, solo matematica e buon senso.</p>
 
+        <!-- Modulo 1 (già presente ma espanso) -->
         <section>
-            <h2>1. La Diversificazione non è Dispersione</h2>
-            <img src="https://images.unsplash.com/photo-1543286386-2e659306cd6c?auto=format&fit=crop&w=800&q=75&fm=webp" alt="Struttura e Diversificazione" class="content-img" width="800" height="450">
-            
-            <p>L'errore più comune è la cosiddetta <em>diworsification</em>. Possedere 50 titoli che corrono tutti nella stessa direzione non è diversificazione; è solo una forma di caos organizzato.</p>
-            <h3>Il Ruolo degli Asset</h3>
-            <p>Ogni strumento nel tuo portafoglio deve avere un "mandato". Chiediti: Perché questo asset è qui? È per la crescita (Growth)? È per proteggere dall'inflazione? È per generare cassa durante un crollo (Liquidità/Hedging)?</p>
-        </section>
-
-        <section>
-            <h2>5. La Matematica Inesorabile del Recupero</h2>
-            <img src="https://images.unsplash.com/photo-1509228468518-180dd28649d4?auto=format&fit=crop&w=800&q=75&fm=webp" alt="Analisi Matematica" class="content-img" width="800" height="450">
-            
-            <p>C'è un motivo matematico per cui in VQuantPro siamo ossessionati dal Max Drawdown. Molti ignorano l'asimmetria del recupero. Se perdi il 10%, hai bisogno di un +11% per tornare in pari. Ma se perdi il 50%, hai bisogno di un +100% per tornare dove eri partito.</p>
-
-            <p>La formula che definisce il rendimento necessario ($R_{rec}$) per recuperare una perdita ($L$) è:</p>
-            <div class="formula-box">
-                \[R_{rec} = \left( \frac{1}{1 - L} \right) - 1\]
+            <h2>📐 Modulo 1: L'Architettura del Portafoglio</h2>
+            <h3>Il Portafoglio come Sistema, non come Elenco di Titoli</h3>
+            <p>Molti investitori commettono l'errore di vedere il proprio portafoglio come una collezione di simboli ticker. Se il tuo portafoglio è solo una lista di titoli che "hanno fatto bene ultimamente", non hai una strategia: hai un insieme di fortuna e coincidenze. Un portafoglio è un'<strong>architettura difensiva</strong>. È il luogo dove il tuo capitale risiede mentre attraversa i cicli economici. La sua funzione primaria non è massimizzare il profitto nel breve termine, ma <span class="highlight">massimizzare la probabilità di sopravvivenza nel lungo termine</span>.</p>
+            <div class="insight-box">
+                <i class="fas fa-chart-line"></i> <strong>Obiettivo del modulo:</strong> Capire perché la correlazione tra asset è più importante del singolo rendimento e come costruire un portafoglio che regga agli shock.
             </div>
-            <p>Questa semplice equazione è il motivo per cui difendere il capitale è più importante che cercare il rendimento stellare. Un portafoglio che evita le perdite catastrofiche batte costantemente un portafoglio che cerca rendimenti elevati ma accetta Drawdown profondi.</p>
         </section>
 
         <section>
-            <h2>Conclusione del Modulo</h2>
-            <p>L'architettura del portafoglio non è un progetto che si finisce. È un processo che si vive. Il mercato cambierà, le condizioni economiche evolveranno, ma i principi di difesa del capitale, controllo della correlazione e umiltà operativa rimarranno immutati.</p>
-            <p><strong>Benvenuto nel lato quantitativo della finanza.</strong></p>
-            <p><span id="open_preferences_center">Gestisci preferenze cookie</span></p>
+            <h2>🧩 1.1 La Diversificazione non è Dispersione</h2>
+            <img src="https://images.unsplash.com/photo-1543286386-2e659306cd6c?auto=format&fit=crop&w=800&q=75&fm=webp" alt="Struttura e Diversificazione" class="content-img" width="800" height="450">
+            <p>L'errore più comune è la cosiddetta <em>diworsification</em>. Possedere 50 titoli che corrono tutti nella stessa direzione non è diversificazione; è solo una forma di caos organizzato. La vera diversificazione si ottiene combinando asset con <strong>bassa correlazione</strong> (es. azioni globali, obbligazioni governative, oro, liquidità).</p>
+            <p>Nel corso vedremo come calcolare la correlazione e come utilizzarla per ridurre il rischio complessivo del portafoglio senza sacrificare il rendimento atteso.</p>
         </section>
+
+        <section>
+            <h2>⚖️ 1.2 Il Ruolo di Ogni Asset</h2>
+            <p>Ogni strumento nel tuo portafoglio deve avere un "mandato". Chiediti: <em>Perché questo asset è qui?</em> È per la crescita (Growth)? È per proteggere dall'inflazione (Oro, Commodity)? È per generare cassa durante un crollo (Liquidità, Obbligazioni a breve)? Esamineremo esempi concreti di portafogli modello (60/40, All-Weather, Permanent Portfolio) e le loro performance in diverse fasi di mercato.</p>
+        </section>
+
+        <!-- Modulo 2: Metriche di Rischio (nuovo) -->
+        <section>
+            <h2>📊 Modulo 2: Metriche di Rischio che Devi Conoscere</h2>
+            <h3>2.1 CAGR: La Crescita Reale</h3>
+            <p>Il CAGR (Compound Annual Growth Rate) è il tasso di crescita annuo composto. A differenza della media aritmetica, tiene conto dell'interesse composto ed è la metrica più onesta per confrontare performance su periodi lunghi.</p>
+            <div class="formula-box">CAGR = (Valore Finale / Valore Iniziale)^(1/anni) - 1</div>
+            <p>Esempio pratico: un investimento di 10.000€ che diventa 16.000€ in 5 anni ha un CAGR del 9,86%.</p>
+
+            <h3>2.2 Max Drawdown e il Recupero</h3>
+            <p>Il Max Drawdown misura la perdita massima dal picco al minimo. È fondamentale perché, come vedremo, le perdite profonde richiedono recuperi enormi.</p>
+            <div class="formula-box">Recupero necessario = (1 / (1 - Perdita%)) - 1</div>
+            <p>Se perdi il 30%, hai bisogno di un +42,86% per tornare in pari. Se perdi il 50%, serve +100%. Questa asimmetria spiega perché la protezione del capitale è prioritaria.</p>
+
+            <h3>2.3 Sharpe Ratio e Sortino Ratio</h3>
+            <p>Lo Sharpe Ratio misura il rendimento in eccesso per ogni unità di volatilità totale. Il Sortino Ratio, più raffinato, considera solo la volatilità negativa (downside deviation). Un Sortino alto indica una strategia che sa evitare le perdite, anche se è volatile verso l'alto.</p>
+            <div class="insight-box">
+                <i class="fas fa-microphone-alt"></i> <strong>In questa masterclass:</strong> Ti mostrerò come calcolare queste metriche passo dopo passo usando fogli di calcolo e la dashboard VQuantPro.
+            </div>
+        </section>
+
+        <!-- Modulo 3: Psicologia e Comportamento (nuovo) -->
+        <section>
+            <h2>🧠 Modulo 3: La Psicologia dell'Investitore Quantitativo</h2>
+            <p>Le migliori metriche sono inutili se non riesci a rimanere disciplinato durante i crolli. In questo modulo esploreremo i bias cognitivi più comuni (overconfidence, avversione alle perdite, recency bias) e come costruire un sistema di regole che ti impedisca di sabotarti.</p>
+            <ul>
+                <li><strong>Il piano di investimento scritto:</strong> definire asset allocation, ribilanciamento e soglie di tolleranza prima ancora di comprare.</li>
+                <li><strong>Il diario delle decisioni:</strong> tenere traccia di ogni operazione e delle emozioni associate.</li>
+                <li><strong>La regola del “non fare nulla”:</strong> nei momenti di massima volatilità, la scelta migliore è spesso restare fermi.</li>
+            </ul>
+        </section>
+
+        <!-- Modulo 4: Casi Studio (nuovo) -->
+        <section>
+            <h2>📈 Modulo 4: Casi Studio Reali</h2>
+            <p>Analizzeremo la performance storica di tre strategie:</p>
+            <ul>
+                <li><strong>Portafoglio 100% Azionario (S&P500)</strong> vs <strong>Portafoglio 60/40</strong> negli ultimi 20 anni.</li>
+                <li><strong>L'effetto del ribilanciamento periodico:</strong> perché vendere i vincitori e comprare i vinti migliora i rendimenti risk-adjusted.</li>
+                <li><strong>Come un drawdown del 30% cambia la pianificazione pensionistica:</strong> simulazione con dati reali.</li>
+            </ul>
+            <p>Ogni caso studio sarà accompagnato da dati scaricabili e da una sessione pratica con la dashboard VQuantPro.</p>
+        </section>
+
+        <section>
+            <h2>🎯 Conclusione: Da Dove Iniziare Domani Mattina</h2>
+            <p>Al termine della masterclass, avrai un piano concreto:</p>
+            <ul>
+                <li>La tua personale asset allocation basata sulla tua tolleranza al rischio.</li>
+                <li>Le metriche quantitative da monitorare ogni mese.</li>
+                <li>Un foglio di calcolo (o l'uso della dashboard) per tracciare Sharpe, Drawdown e CAGR del tuo portafoglio.</li>
+            </ul>
+            <p>La masterclass è completamente gratuita e accessibile a chiunque abbia voglia di imparare. Non promettiamo rendimenti facili, ma strumenti robusti per navigare i mercati con maggiore consapevolezza.</p>
+        </section>
+
+        <!-- Form di iscrizione (opzionale, puoi rimuoverlo o sostituire con link a una mailing list) -->
+        <div class="signup-form">
+            <h3><i class="fas fa-envelope-open-text"></i> Ricevi gli aggiornamenti della masterclass</h3>
+            <p>Iscriviti alla newsletter (gratuita) per ricevere nuovi moduli, case study e promemoria per il ribilanciamento.</p>
+            <form action="https://formspree.io/f/mkgjkkgd" method="POST">
+                <input type="email" name="email" placeholder="La tua email" required>
+                <button type="submit">Iscrivimi</button>
+            </form>
+            <p style="font-size: 12px; margin-top: 10px;">Niente spam. Disiscrizione in un click.</p>
+        </div>
+
+        <p><span id="open_preferences_center">📌 Gestisci preferenze cookie</span></p>
     </main>
 
     <!-- Cookie Banner Personalizzato -->
     <div id="cookie-banner" class="cookie-banner" style="display:none;">
-        <p>Questo sito utilizza cookie tecnici necessari al funzionamento. Con il tuo consenso, potremmo utilizzare cookie di terze parti per annunci personalizzati. <a href="/privacy/index.html">Privacy Policy</a></p>
+        <p>Questo sito utilizza cookie tecnici necessari al funzionamento. Con il tuo consenso, potremmo utilizzare cookie di terze parti per annunci personalizzati. <a href="/privacy/index.html">Privacy Policy</a> | <a href="/cookie/index.html">Cookie Policy</a></p>
         <div class="cookie-buttons">
             <button id="cookie-accept" class="cookie-btn accept">Accetta tutti</button>
             <button id="cookie-reject" class="cookie-btn reject">Solo necessari</button>
@@ -126,20 +201,26 @@
         function setConsent(value) {
             localStorage.setItem('cookie-consent', value);
             banner.style.display = 'none';
-            if (value === 'accepted') loadExternalScripts();
+            if (value === 'accepted') {
+                if (typeof window.updateGA4Consent === 'function') window.updateGA4Consent();
+                loadExternalScripts();
+            } else {
+                removeExternalScripts();
+            }
         }
         
-        acceptBtn.addEventListener('click', function() { setConsent('accepted'); });
-        rejectBtn.addEventListener('click', function() { setConsent('rejected'); });
+        if (acceptBtn) acceptBtn.addEventListener('click', () => setConsent('accepted'));
+        if (rejectBtn) rejectBtn.addEventListener('click', () => setConsent('rejected'));
         
         if (prefsLink) {
-            prefsLink.addEventListener('click', function(e) {
+            prefsLink.addEventListener('click', (e) => {
                 e.preventDefault();
                 banner.style.display = 'flex';
             });
         }
         
         if (localStorage.getItem('cookie-consent') === 'accepted') {
+            if (typeof window.updateGA4Consent === 'function') window.updateGA4Consent();
             loadExternalScripts();
         }
         
@@ -157,7 +238,12 @@
                 document.head.appendChild(fcScript);
             }
         }
-
+        
+        function removeExternalScripts() {
+            var scripts = document.querySelectorAll('script[src*="adsbygoogle"], script[src*="fundingchoicesmessages"]');
+            scripts.forEach(script => script.remove());
+        }
+        
         // KaTeX: caricato solo se ci sono formule nella pagina
         function loadKaTeX() {
             var hasFormulas = document.querySelector('.formula-box');
