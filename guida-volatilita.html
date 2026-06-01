@@ -438,4 +438,164 @@
           <div class="warning-box">
             <strong>📌 Implicazioni pratiche:</strong>
             <ul>
-              <li>Un crollo improvviso (es. COVID-19, crisi 2008) tende a generare settiman
+              <li>Un crollo improvviso (es. COVID-19, crisi 2008) tende a generare settimane di elevata volatilità, con pericolo di ulteriori perdite.</li>
+              <li>Le strategie che assumono volatilità costante (es. Value at Risk semplice) possono sottostimare il rischio di coda.</li>
+              <li>Per questo motivo, i risk manager utilizzano modelli GARCH oEWMA per stimare la volatilità condizionale al passato recente.</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 8. LIMITI E CRITICITÀ -->
+        <section id="limitazioni">
+          <h2>8. Limiti e criticità della volatilità come misura di rischio</h2>
+          <div class="warning-box">
+            <strong>⚠️ I limiti della volatilità che devi conoscere:</strong>
+          </div>
+          <ul>
+            <li><strong>Tratta allo stesso modo oscillazioni positive e negative:</strong> Per un investitore, i movimenti verso l'alto non sono un rischio, ma la volatilità li penalizza allo stesso modo. Per questo lo Sharpe Ratio può essere fuorviante se usato da solo.</li>
+            <li><strong>Non distingue tra perdite frequenti e perdite rare ma profonde:</strong> Un portafoglio con piccole perdite frequenti (downside deviation bassa) e uno con un'unica perdita gigantesca (downside deviation alta) possono avere la stessa volatilità totale.</li>
+            <li><strong>Sensibile a outlier e distribuzioni non normali:</strong> I rendimenti finanziari hanno code spesse (eventi estremi più frequenti di quanto previsto da una normale). La volatilità tende a sottostimare il rischio di coda.</li>
+            <li><strong>Non considera la sequenza temporale delle perdite:</strong> due sequenze con stessa volatilità possono avere percorsi psicologici molto diversi (perdite concentrate vs distribuite).</li>
+            <li><strong>La volatilità passata non garantisce quella futura:</strong> I modelli GARCH aiutano, ma il futuro può sempre riservare sorprese.</li>
+          </ul>
+          <div class="quote">"La volatilità descrive quanto un percorso è irregolare, ma non dice da sola se quel percorso è stato efficiente, distruttivo o semplicemente tempestoso. Per giudicare il rischio, è necessario affiancare altre metriche come il Max Drawdown e il Sortino Ratio."</div>
+        </section>
+
+        <!-- 9. APPLICAZIONI PRATICHE -->
+        <section id="applicazioni">
+          <h2>9. Applicazioni pratiche nella gestione del portafoglio</h2>
+          <div class="grid">
+            <div class="box">
+              <h3>🎯 Calcolo del Value at Risk (VaR)</h3>
+              <p>Il VaR utilizza la volatilità per stimare la perdita massima attesa con un certo livello di confidenza (es. 95%). Un portafoglio con volatilità del 15% avrà un VaR giornaliero (95%) di circa 1,645 × 15% / √252 ≈ 1,55%.</p>
+            </div>
+            <div class="box">
+              <h3>📊 Asset allocation e ottimizzazione</h3>
+              <p>Nella frontiera efficiente di Markowitz, la volatilità è la misura di rischio da minimizzare a parità di rendimento atteso. Portafogli con volatilità più bassa sono considerati più efficienti.</p>
+            </div>
+            <div class="box">
+              <h3>📈 Confronto tra ETF e fondi</div>
+              <p>Prima di investire in un ETF, confronta la sua volatilità storica con quella di benchmark e competitor. Un ETF con volatilità molto più alta del mercato può nascondere rischi specifici.</p>
+            </div>
+            <div class="box">
+              <h3>🛡️ Hedging e derivati</div>
+              <p>La volatilità implicita è l'input chiave per il pricing di opzioni e altri derivati. Un aumento della volatilità implicita rende le opzioni più costose, rendendo l'hedging più oneroso.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 10. BEST PRACTICE -->
+        <section id="bestpractice">
+          <h2>10. Best practice per l'uso professionale della volatilità</h2>
+          <ul>
+            <li><strong>Usa sempre volatilità annualizzata per confronti:</strong> Non confrontare mai volatilità giornaliera con mensile o annuale senza prima annualizzare.</li>
+            <li><strong>Affianca la volatilità ad altre metriche di rischio:</strong> Sharpe Ratio (efficienza), Sortino Ratio (downside), Max Drawdown (perdita massima).</li>
+            <li><strong>Considera il clustering:</strong> Per periodi di stress, utilizza modelli EWMA o GARCH per stimare la volatilità condizionale piuttosto che la volatilità storica semplice.</li>
+            <li><strong>Attenzione alla finestra temporale:</strong> Una volatilità calcolata su 1 anno può essere molto diversa da quella su 5 anni. Scegli una finestra coerente con il tuo orizzonte di investimento.</li>
+            <li><strong>Non fidarti della normalità:</strong> I rendimenti finanziari hanno code spesse; integra la volatilità con misure di rischio di coda (Expected Shortfall, Conditional VaR).</li>
+            <li><strong>Monitora il VIX e la volatilità implicita:</strong> Soprattutto se utilizzi opzioni o strategie leverage, la volatilità implicita offre un'indicazione prezzata del sentiment di mercato.</li>
+          </ul>
+          <p class="note"><strong>Contenuto informativo ed educativo:</strong> Le informazioni contenute in questa guida non costituiscono consulenza finanziaria, sollecitazione all'investimento o raccomandazione personalizzata. Prima di qualsiasi decisione di investimento, consultare un consulente finanziario indipendente.</p>
+        </section>
+
+        <p><span id="open_preferences_center_bottom" style="color: var(--accent); text-decoration: underline; cursor: pointer;">📌 Gestisci le preferenze sui cookie</span></p>
+      </div>
+      <footer class="footer">VQuantPro · La volatilità aiuta a leggere la stabilità del percorso, non soltanto il risultato finale.</footer>
+    </article>
+  </main>
+
+  <!-- Cookie Banner Interattivo -->
+  <div id="cookie-banner" class="cookie-banner" style="display:none;">
+      <p>🔐 Utilizziamo cookie tecnici per il funzionamento del sito. Con il tuo consenso, utilizziamo cookie di terze parti per annunci personalizzati. <a href="/privacy/index.html">Privacy Policy</a> | <a href="/cookie/index.html">Cookie Policy</a></p>
+      <div class="cookie-buttons">
+          <button id="cookie-accept" class="cookie-btn accept">Accetta tutti</button>
+          <button id="cookie-reject" class="cookie-btn reject">Solo necessari</button>
+      </div>
+  </div>
+
+  <script>
+  (function() {
+      const banner = document.getElementById('cookie-banner');
+      const acceptBtn = document.getElementById('cookie-accept');
+      const rejectBtn = document.getElementById('cookie-reject');
+      const prefsLink = document.getElementById('open_preferences_center');
+      const prefsLinkBottom = document.getElementById('open_preferences_center_bottom');
+      
+      if (!localStorage.getItem('cookie-consent')) {
+          banner.style.display = 'flex';
+      }
+      
+      function setConsent(value) {
+          localStorage.setItem('cookie-consent', value);
+          banner.style.display = 'none';
+          if (value === 'accepted') {
+              loadExternalScripts();
+          } else {
+              removeExternalScripts();
+          }
+      }
+      
+      if (acceptBtn) acceptBtn.addEventListener('click', () => setConsent('accepted'));
+      if (rejectBtn) rejectBtn.addEventListener('click', () => setConsent('rejected'));
+      
+      const handlePrefs = (e) => { e.preventDefault(); banner.style.display = 'flex'; };
+      if (prefsLink) prefsLink.addEventListener('click', handlePrefs);
+      if (prefsLinkBottom) prefsLinkBottom.addEventListener('click', handlePrefs);
+      
+      if (localStorage.getItem('cookie-consent') === 'accepted') {
+          loadExternalScripts();
+      }
+      
+      function loadExternalScripts() {
+          if (!document.querySelector('script[src*="adsbygoogle"]')) {
+              var adsScript = document.createElement('script');
+              adsScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2835044924304516';
+              adsScript.async = true;
+              adsScript.crossOrigin = 'anonymous';
+              document.head.appendChild(adsScript);
+              
+              var fcScript = document.createElement('script');
+              fcScript.src = 'https://fundingchoicesmessages.google.com/i/ca-pub-2835044924304516?ers=1';
+              fcScript.async = true;
+              document.head.appendChild(fcScript);
+          }
+      }
+      
+      function removeExternalScripts() {
+          var scripts = document.querySelectorAll('script[src*="adsbygoogle"], script[src*="fundingchoicesmessages"]');
+          scripts.forEach(script => script.remove());
+      }
+  })();
+
+  // Calcolatore Volatilità interattivo
+  (function(){
+      const calcBtn = document.getElementById('calcVolatilityBtn');
+      if(calcBtn){
+          calcBtn.addEventListener('click', function(){
+              const inputStr = document.getElementById('returnsList').value;
+              const resultEl = document.getElementById('volatilityResult');
+              const numbers = inputStr.split(',').map(s => parseFloat(s.trim().replace('%', '')));
+              if(numbers.some(isNaN)){
+                  resultEl.innerHTML = "Inserisci valori numerici validi separati da virgola.";
+                  return;
+              }
+              const n = numbers.length;
+              if(n < 2){
+                  resultEl.innerHTML = "Servono almeno 2 osservazioni.";
+                  return;
+              }
+              const mean = numbers.reduce((a,b) => a + b, 0) / n;
+              const variance = numbers.map(x => Math.pow(x - mean, 2)).reduce((a,b) => a + b, 0) / (n - 1);
+              const volatility = Math.sqrt(variance);
+              resultEl.innerHTML = `Volatilità = ${volatility.toFixed(2)}% (deviazione standard campionaria)`;
+              if(volatility < 5) resultEl.innerHTML += " (bassa)";
+              else if(volatility < 15) resultEl.innerHTML += " (media)";
+              else if(volatility < 30) resultEl.innerHTML += " (alta)";
+              else resultEl.innerHTML += " (molto alta)";
+          });
+          document.getElementById('calcVolatilityBtn').click();
+      }
+  })();
+  </script>
+</body>
+</html>
