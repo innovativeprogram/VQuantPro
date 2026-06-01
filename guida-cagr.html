@@ -205,21 +205,6 @@
       font-size:.85em;
       color:var(--accent);
     }
-    .comparison-table{
-      width:100%;
-      border-collapse:collapse;
-      margin:20px 0;
-    }
-    .comparison-table th,.comparison-table td{
-      border:1px solid var(--border);
-      padding:12px;
-      text-align:left;
-    }
-    .comparison-table th{
-      background:rgba(34,197,94,0.1);
-      color:var(--accent);
-      font-weight:600;
-    }
     .interactive-box{
       background:rgba(0,0,0,0.3);
       border-radius:16px;
@@ -234,14 +219,14 @@
       padding:8px 12px;
       border-radius:8px;
       margin:5px;
-      width:120px;
+      width:130px;
       font-family:'JetBrains Mono',monospace;
     }
     .calc-btn{
       background:var(--accent);
       color:var(--code);
       border:none;
-      padding:8px 20px;
+      padding:10px 24px;
       border-radius:40px;
       font-weight:bold;
       cursor:pointer;
@@ -312,7 +297,7 @@
         <p class="lead">Il <strong>Compound Annual Growth Rate (CAGR)</strong> è la metrica più affidabile per valutare la crescita reale di un investimento nel tempo, depurata dalle illusioni della volatilità e dalla distorsione dei rendimenti medi aritmetici. In questa guida definitiva vedremo la formula, esempi pratici su ETF e portafogli, i limiti da non sottovalutare e come integrarlo nell'analisi quantitativa professionale.</p>
       </header>
       <div class="content">
-        <!-- Indice dei contenuti migliorato -->
+        <!-- Indice dei contenuti -->
         <section class="toc">
           <h2>📑 Indice della guida</h2>
           <ul>
@@ -332,7 +317,7 @@
         <!-- 1. DEFINIZIONE -->
         <section id="definizione">
           <h2>1. Che cos'è realmente il CAGR?</h2>
-          <p>Il <strong>Compound Annual Growth Rate (CAGR)</strong> è il tasso di rendimento annuo composto che descrive la crescita di un investimento su un determinato orizzonte temporale. A differenza della semplice media aritmetica, che somma i rendimenti e li divide per il numero degli anni, il CAGR tiene conto del <strong>potere dell'interesse composto</strong> e restituisce un tasso costante che, se applicato ogni anno, porta dal valore iniziale a quello finale osservato.[reference:0]</p>
+          <p>Il <strong>Compound Annual Growth Rate (CAGR)</strong> è il tasso di rendimento annuo composto che descrive la crescita di un investimento su un determinato orizzonte temporale. A differenza della semplice media aritmetica, che somma i rendimenti e li divide per il numero degli anni, il CAGR tiene conto del <strong>potere dell'interesse composto</strong> e restituisce un tasso costante che, se applicato ogni anno, porta dal valore iniziale a quello finale osservato.</p>
           <p>Immagina di avere un portafoglio che in 5 anni ha avuto rendimenti annui molto disomogenei (+30%, -15%, +25%, -5%, +20%). La media aritmetica semplice sarebbe positiva (+11%), ma quale è stata la <strong>crescita geometrica reale</strong>? Il CAGR risponde proprio a questa domanda, livellando la montagna russa dei rendimenti in un tasso annuo equivalente. È per questo che viene considerato la "bussola del lungo periodo" nella finanza quantitativa.</p>
         </section>
 
@@ -340,7 +325,7 @@
         <section id="formula">
           <h2>2. La formula matematica e il suo significato</h2>
           <div class="formula">CAGR = (Valore Finale / Valore Iniziale) ^ (1 / n) - 1</div>
-          <p>Dove <strong>n</strong> rappresenta il numero di anni (o frazioni di anno) del periodo di investimento. La potenza `1/n` trasforma il rapporto moltiplicativo totale in un tasso annualizzato e la sottrazione finale di 1 converte il fattore di crescita in tasso percentuale. La profondità di questa formula risiede nella sua capacità di astrarre dalla sequenza temporale, focalizzandosi esclusivamente su inizio e fine.</p>
+          <p>Dove <strong>n</strong> rappresenta il numero di anni (o frazioni di anno) del periodo di investimento. La potenza `1/n` trasforma il rapporto moltiplicativo totale in un tasso annualizzato e la sottrazione finale di 1 converte il fattore di crescita in tasso percentuale.</p>
           <div class="quote">⚠️ <strong>Nota matematica importante:</strong> La formula utilizza l'esponenziale per estrarre la radice n-esima. In Excel si usa `(VF/VI)^(1/n)-1`, in Python `(final/initial)**(1/n)-1`. Il punto cruciale è che <strong>n</strong> deve essere misurato in anni (es. 2.5 anni per un periodo di 30 mesi).</div>
         </section>
 
@@ -368,56 +353,169 @@
               <li><strong>Fondo A:</strong> Rendimenti annuali: +40%, -20%, +30%, -10%, +25% → <strong>Media aritmetica = 13,0%</strong> → <strong>CAGR = 10,2%</strong>.</li>
               <li><strong>Fondo B:</strong> Rendimenti annuali: +11%, +12%, +9%, +10%, +13% → <strong>Media aritmetica = 11,0%</strong> → <strong>CAGR = 10,9%</strong>.</li>
             </ul>
-            <p>Nonostante il Fondo A abbia una media aritmetica più alta, il suo CAGR è inferiore a causa della maggiore volatilità. Il Fondo B, più stabile, ha un CAGR più elevato: ecco perché il CAGR è più realistico e meno soggetto all'effetto della variabilità.[reference:1]</p>
+            <p>Nonostante il Fondo A abbia una media aritmetica più alta, il suo CAGR è inferiore a causa della maggiore volatilità. Il Fondo B, più stabile, ha un CAGR più elevato: ecco perché il CAGR è più realistico e meno soggetto all'effetto della variabilità.</p>
           </div>
         </section>
 
-        <!-- 4. CALCOLATORE INTERATTIVO (Funzionale in JS) -->
+        <!-- 4. CALCOLATORE INTERATTIVO (CORRETTO) -->
         <section id="calcolatore">
-          <h2>4. 🧮 Calcolatore Interattivo del CAGR</h2>
+          <h2>4. 🧮 Calcolatore interattivo del CAGR</h2>
           <div class="interactive-box">
-            <p><label>Valore Iniziale (€): </label><input type="number" id="startVal" value="10000" style="width:130px"></p>
-            <p><label>Valore Finale (€): </label><input type="number" id="endVal" value="16500" style="width:130px"></p>
-            <p><label>Periodo (anni): </label><input type="number" id="years" value="5" step="0.5" style="width:100px"></p>
+            <p><label>Valore Iniziale (€): </label><input type="number" id="startVal" value="10000" step="100"></p>
+            <p><label>Valore Finale (€): </label><input type="number" id="endVal" value="16500" step="100"></p>
+            <p><label>Periodo (anni): </label><input type="number" id="years" value="5" step="0.5"></p>
             <button class="calc-btn" id="calcBtn">Calcola CAGR</button>
             <p id="cagrResult" style="font-size:1.4rem; font-weight:bold; color:var(--accent); margin-top:10px;">CAGR = --%</p>
-            <div class="note">Utilizza questo tool per verificare rapidamente il tasso di crescita composto delle tue strategie.</div>
+            <div class="note">💡 Inserisci i valori e clicca "Calcola CAGR". Il risultato mostra il tasso annuo composto di crescita.</div>
           </div>
         </section>
 
         <!-- 5. CONFRONTO CON ALTRE METRICHE -->
         <section id="confronti">
           <h2>5. CAGR vs: Rendimento Assoluto, IRR e ROA</h2>
-          <table class="comparison-table">
-            <thead><tr><th>Metrica</th><th>Definizione</th><th>Limitazione principale</th></tr></thead>
-            <tbody>
-              <tr><td><strong>Rendimento Assoluto</strong></td><td>(VF-VI)/VI</td><td>Ignora completamente il fattore temporale (non annualizza).</td></tr>
-              <tr><td><strong>Media Aritmetica</strong></td><td>Somma rendimenti / n</td><td>Sovrastima la crescita quando c'è volatilità (non considera il compounding).</td></tr>
-              <tr><td><strong>IRR (TIR)</strong></td><td>Attualizza flussi di cassa intermedi</td><td>Più complesso, richiede stime dei cash flow temporali.</td></tr>
-              <tr><td><strong>CAGR</strong></td><td>Tasso geometrico annuale</td><td>Non rappresenta il rischio e la volatilità intra-periodo.</td></tr>
-            </tbody>
-          </table>
-          <p>Mentre il CAGR è eccellente per confrontare la crescita di diversi asset, l'<strong>IRR</strong> è più adatto per investimenti con versamenti periodici. In un contesto di semplice acquisto e vendita, il CAGR è insuperabile per rapidità e chiarezza.</p>
+          <div class="box">
+            <ul>
+              <li><strong>Rendimento Assoluto:</strong> (VF-VI)/VI. Ignora il fattore temporale.</li>
+              <li><strong>Media Aritmetica:</strong> Somma rendimenti / n. Sovrastima la crescita in presenza di volatilità.</li>
+              <li><strong>IRR (TIR):</strong> Attualizza flussi di cassa intermedi. Più complesso.</li>
+              <li><strong>CAGR:</strong> Tasso geometrico annuale. Non rappresenta il rischio intra-periodo.</li>
+            </ul>
+          </div>
         </section>
 
         <!-- 6. APPLICAZIONE NELL'ANALISI DI PORTAFOGLIO -->
         <section id="usi">
           <h2>6. Applicazioni nell'analisi di portafoglio</h2>
-          <p>Nel mondo della finanza quantitativa, il CAGR viene utilizzato per <strong>normalizzare la performance di asset diversi</strong>. Ad esempio, un portafoglio di ETF azionari europei con CAGR del 6,5% in un decennio può essere confrontato con un portafoglio obbligazionario con CAGR del 3,2%. Questa comparabilità rende il CAGR lo standard per il reporting dei fondi e l'analisi storica degli indici di mercato. Inoltre, insieme al <strong>Calmar Ratio</strong> e allo <strong>Sharpe Ratio</strong>, forma la triade delle metriche di efficienza degli investimenti.</p>
-          <div class="grid">
-            <div class="box"><h3>🎯 Caso d'uso - ETF settoriali</h3><p>Un investitore valuta un ETF tecnologico americano e un ETF europeo sui dividendi. Il primo ha CAGR storico 12%, il secondo 7,8%. Usando il CAGR, l'investitore può immediatamente comprendere la differenza di crescita composta.</p></div>
-            <div class="box"><h3>📊 Modellazione in Excel</h3><p>La formula `=RATE(n,,-VI,VF)` in Excel calcola esattamente il CAGR, oppure `=POTENZA(VF/VI,1/n)-1`. Questi strumenti sono essenziali nell'analisi finanziaria professionale.</p></div>
-          </div>
+          <p>Nel mondo della finanza quantitativa, il CAGR viene utilizzato per <strong>normalizzare la performance di asset diversi</strong>. Ad esempio, un portafoglio di ETF azionari europei con CAGR del 6,5% in un decennio può essere confrontato con un portafoglio obbligazionario con CAGR del 3,2%. Questa comparabilità rende il CAGR lo standard per il reporting dei fondi e l'analisi storica degli indici di mercato.</p>
         </section>
 
         <!-- 7. LIMITI ED ERRORI -->
         <section id="limiti">
           <h2>7. Limiti, criticità ed errori frequenti</h2>
-          <div class="quote">⚠️ Il CAGR è una <strong>misura "smussata" (smoothed rate)</strong>: non rappresenta la sequenza reale e la volatilità intra-annuale. Due investimenti con lo stesso CAGR possono avere profili di rischio radicalmente diversi.[reference:2][reference:3]</div>
+          <div class="quote">⚠️ Il CAGR è una <strong>misura "smussata" (smoothed rate)</strong>: non rappresenta la sequenza reale e la volatilità intra-annuale. Due investimenti con lo stesso CAGR possono avere profili di rischio radicalmente diversi.</div>
           <ul>
-            <li><strong>Ignora la volatilità e il rischio:</strong> Un CAGR del 10% può nascondere un max drawdown del -40%, una condizione inaccettabile per investitori conservatori.[reference:4]</li>
-            <li><strong>Non gestisce flussi di cassa intermedi:</strong> Se l'investitore aggiunge o preleva capitale durante il periodo, il CAGR distorce la realtà. In tal caso si utilizza l'IRR (TIR).[reference:5]</li>
-            <li><strong>Falsa precisione su periodi brevi:</strong> Su 2 anni o meno, il CAGR può essere fuorviante a causa di shock temporanei o anomalie stagionali.[reference:6]</li>
-            <li><strong>Assume il reinvestimento completo dei profitti:</strong> Nella realtà fiscale, tasse e commissioni erodono il rendimento composto.</li>
+            <li><strong>Ignora la volatilità e il rischio:</strong> Un CAGR del 10% può nascondere un max drawdown del -40%.</li>
+            <li><strong>Non gestisce flussi di cassa intermedi:</strong> Se l'investitore aggiunge o preleva capitale, il CAGR distorce. In tal caso si utilizza l'IRR.</li>
+            <li><strong>Falsa precisione su periodi brevi:</strong> Su 2 anni o meno, il CAGR può essere fuorviante a causa di shock temporanei.</li>
           </ul>
-          <p><strong>Errore comune:</strong> Confondere la <strong>media aritmetica</strong> con il <strong>CAGR</strong>. La differenza è spesso drammatica, specialmente in asset volatili come criptovalute o small cap.</
+        </section>
+
+        <!-- 8. INTEGRAZIONE CON METRICHE DI RISCHIO -->
+        <section id="rischio">
+          <h2>8. Integrazione del CAGR con le metriche di rischio</h2>
+          <p>Per superare i limiti del CAGR, nell'analisi professionale lo si combina con:</p>
+          <ul>
+            <li><strong>Volatilità (σ):</strong> Misura la dispersione dei rendimenti.</li>
+            <li><strong>Max Drawdown (MDD):</strong> Perdita massima dal picco al minimo. Il <strong>Calmar Ratio = CAGR / MDD</strong> valuta il rendimento per unità di sofferenza.</li>
+            <li><strong>Sharpe Ratio:</strong> (CAGR - RiskFree) / Volatilità.</li>
+          </ul>
+        </section>
+
+        <!-- 9. CONCLUSIONI -->
+        <section id="conclusione">
+          <h2>9. Conclusioni e best practice operative</h2>
+          <div class="quote">"Il CAGR è la risposta alla domanda 'quanto è cresciuto davvero il capitale nel tempo?'. Non è però la risposta completa alla domanda 'a quale prezzo, in termini di rischio, è stata ottenuta quella crescita'."</div>
+          <p>Il <strong>CAGR</strong> è uno strumento potente e necessario per ogni investitore o analista quantitativo, ma non può essere utilizzato da solo. Le best practice operative prevedono:</p>
+          <ul>
+            <li>Utilizzare sempre il CAGR su orizzonti temporali omogenei e rappresentativi (minimo 3-5 anni).</li>
+            <li>Affiancare il CAGR a misure di rischio come Sharpe e Max Drawdown.</li>
+            <li>In presenza di versamenti periodici o prelievi, optare per il calcolo dell'IRR (TIR).</li>
+          </ul>
+          <p class="note"><strong>Contenuto informativo ed educativo:</strong> Le informazioni contenute in questa guida non costituiscono consulenza finanziaria, sollecitazione all'investimento o raccomandazione personalizzata.</p>
+        </section>
+
+        <p><span id="open_preferences_center_bottom" style="color: var(--accent); text-decoration: underline; cursor: pointer;">📌 Gestisci le preferenze sui cookie</span></p>
+      </div>
+      <footer class="footer">
+        VQuantPro · Analisi quantitativa, metriche e strumenti per una lettura più rigorosa di rischio e rendimento.
+      </footer>
+    </article>
+  </main>
+
+  <!-- Cookie Banner Interattivo -->
+  <div id="cookie-banner" class="cookie-banner" style="display:none;">
+      <p>🔐 Utilizziamo cookie tecnici per il funzionamento del sito. Con il tuo consenso, utilizziamo cookie di terze parti per annunci personalizzati. <a href="/privacy/index.html">Privacy Policy</a> | <a href="/cookie/index.html">Cookie Policy</a></p>
+      <div class="cookie-buttons">
+          <button id="cookie-accept" class="cookie-btn accept">Accetta tutti</button>
+          <button id="cookie-reject" class="cookie-btn reject">Solo necessari</button>
+      </div>
+  </div>
+
+  <script>
+  (function() {
+      const banner = document.getElementById('cookie-banner');
+      const acceptBtn = document.getElementById('cookie-accept');
+      const rejectBtn = document.getElementById('cookie-reject');
+      const prefsLink = document.getElementById('open_preferences_center');
+      const prefsLinkBottom = document.getElementById('open_preferences_center_bottom');
+      
+      if (!localStorage.getItem('cookie-consent')) {
+          banner.style.display = 'flex';
+      }
+      
+      function setConsent(value) {
+          localStorage.setItem('cookie-consent', value);
+          banner.style.display = 'none';
+          if (value === 'accepted') {
+              loadExternalScripts();
+          } else {
+              removeExternalScripts();
+          }
+      }
+      
+      if (acceptBtn) acceptBtn.addEventListener('click', () => setConsent('accepted'));
+      if (rejectBtn) rejectBtn.addEventListener('click', () => setConsent('rejected'));
+      
+      const handlePrefs = (e) => { e.preventDefault(); banner.style.display = 'flex'; };
+      if (prefsLink) prefsLink.addEventListener('click', handlePrefs);
+      if (prefsLinkBottom) prefsLinkBottom.addEventListener('click', handlePrefs);
+      
+      if (localStorage.getItem('cookie-consent') === 'accepted') {
+          loadExternalScripts();
+      }
+      
+      function loadExternalScripts() {
+          if (!document.querySelector('script[src*="adsbygoogle"]')) {
+              var adsScript = document.createElement('script');
+              adsScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2835044924304516';
+              adsScript.async = true;
+              adsScript.crossOrigin = 'anonymous';
+              document.head.appendChild(adsScript);
+              
+              var fcScript = document.createElement('script');
+              fcScript.src = 'https://fundingchoicesmessages.google.com/i/ca-pub-2835044924304516?ers=1';
+              fcScript.async = true;
+              document.head.appendChild(fcScript);
+          }
+      }
+      
+      function removeExternalScripts() {
+          var scripts = document.querySelectorAll('script[src*="adsbygoogle"], script[src*="fundingchoicesmessages"]');
+          scripts.forEach(script => script.remove());
+      }
+  })();
+  
+  // Calcolatore CAGR interattivo (corretto)
+  (function(){
+      const calcBtn = document.getElementById('calcBtn');
+      if(calcBtn){
+          calcBtn.addEventListener('click', function(){
+              const start = parseFloat(document.getElementById('startVal').value);
+              const end = parseFloat(document.getElementById('endVal').value);
+              const years = parseFloat(document.getElementById('years').value);
+              const resultEl = document.getElementById('cagrResult');
+              if(isNaN(start) || isNaN(end) || isNaN(years) || start <= 0 || years <= 0){
+                  resultEl.innerHTML = "CAGR = Inserisci valori validi (>0)";
+                  return;
+              }
+              const ratio = end / start;
+              const cagr = Math.pow(ratio, 1 / years) - 1;
+              resultEl.innerHTML = `CAGR = ${(cagr * 100).toFixed(2)}% annuo composto`;
+          });
+          // Esegui il calcolo al caricamento della pagina per mostrare un valore di default
+          setTimeout(() => { if(calcBtn) calcBtn.click(); }, 100);
+      }
+  })();
+  </script>
+</body>
+</html>
