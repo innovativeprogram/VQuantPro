@@ -3,39 +3,306 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Max Drawdown: la misura della perdita massima | VQuantPro</title>
+  <title>Max Drawdown: la guida completa alla perdita massima subita | VQuantPro</title>
   
   <link rel="canonical" href="https://vquantpro.it/guida-max-drawdown.html" />
   <link rel="icon" type="image/png" href="/favicon.png">
 
-  <meta name="description" content="Guida professionale al Max Drawdown: definizione, calcolo, interpretazione e ruolo nell'analisi del rischio di portafogli e strategie.">
+  <meta name="description" content="Guida definitiva al Max Drawdown: definizione, formula, calcolo passo-passo, esempi reali su ETF, effetto del recupero (snowball) e come gestire la tolleranza al rischio. Include calcolatore interattivo.">
+  <meta name="keywords" content="Max Drawdown, drawdown massimo, perdita massima, rischio di portafoglio, volatilità, gestione del rischio, recupero investimenti, tolleranza al rischio">
+  <meta name="author" content="Canio Tedesco, VQuantPro">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    :root{--bg:#0b1020;--panel:#131b2f;--panel-2:#17233b;--border:#273553;--text:#d8e1ef;--muted:#99a8bf;--title:#f8fbff;--accent:#f59e0b;--accent-soft:rgba(245,158,11,.12);--code:#0a1324;--shadow:0 18px 50px rgba(0,0,0,.35)}
-    *{box-sizing:border-box} body{margin:0;font-family:'Inter',sans-serif;background:linear-gradient(180deg,#0a0f1c 0%,#0b1020 100%);color:var(--text);line-height:1.75}
-    .wrap{max-width:980px;margin:0 auto;padding:28px 20px 60px}.card{background:linear-gradient(180deg,var(--panel) 0%,var(--panel-2) 100%);border:1px solid var(--border);border-radius:20px;box-shadow:var(--shadow);overflow:hidden}
-    .topbar,.footer{padding:18px 24px;border-bottom:1px solid var(--border)} .footer{border-top:1px solid var(--border);border-bottom:none;color:var(--muted);font-size:.93rem}
-    .topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;background:rgba(255,255,255,.02)} .brand{font-weight:700;color:var(--title)}
-    .back{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;text-decoration:none;background:#1c2942;color:#eaf2ff;border:1px solid #314261}
-    .hero{padding:38px 24px 16px}.eyebrow{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--accent-soft);border:1px solid rgba(245,158,11,.25);color:#ffd898;font-size:13px;font-weight:600}
-    h1{font-size:clamp(2rem,3vw,3rem);line-height:1.08;color:var(--title);margin:18px 0 14px}.lead{font-size:1.08rem;color:#c7d3e5;max-width:72ch}
-    .content{padding:8px 24px 34px} h2{font-size:1.45rem;margin:34px 0 12px;padding-left:14px;border-left:4px solid var(--accent);color:var(--title)} h3{color:var(--title);margin:24px 0 10px}
-    p{margin:0 0 18px} ul{margin:0;padding-left:20px} li{margin:0 0 12px}.box,.formula,.quote{margin:24px 0}.box{background:rgba(8,15,30,.42);border:1px solid var(--border);border-radius:16px;padding:20px}
-    .formula{background:var(--code);border:1px solid #1c3450;border-radius:14px;padding:18px 20px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#ffd68e;font-size:1.03rem;text-align:center}
-    .quote{padding:22px;border-left:4px solid var(--accent);background:var(--accent-soft);border-radius:0 14px 14px 0;color:#fff8ec}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.note{color:var(--muted);font-size:.96rem}
-    @media (max-width:760px){.grid{grid-template-columns:1fr}.hero,.content,.topbar,.footer{padding-left:18px;padding-right:18px}}
+    :root{
+      --bg:#0b1020;
+      --panel:#131b2f;
+      --panel-2:#17233b;
+      --border:#273553;
+      --text:#d8e1ef;
+      --muted:#99a8bf;
+      --title:#f8fbff;
+      --accent:#f59e0b;
+      --accent-soft:rgba(245,158,11,.12);
+      --code:#0a1324;
+      --shadow:0 18px 50px rgba(0,0,0,.35);
+      --accent-dark:#d97706;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:'Inter',sans-serif;
+      background:linear-gradient(180deg,#0a0f1c 0%,#0b1020 100%);
+      color:var(--text);
+      line-height:1.75;
+      font-size:16px;
+    }
+    .wrap{max-width:980px;margin:0 auto;padding:28px 20px 60px}
+    .card{
+      background:linear-gradient(180deg,var(--panel) 0%,var(--panel-2) 100%);
+      border:1px solid var(--border);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      transition:transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card:hover {
+      transform:translateY(-2px);
+      box-shadow:0 20px 40px rgba(0,0,0,0.4);
+    }
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+      align-items:center;
+      padding:18px 28px;
+      border-bottom:1px solid var(--border);
+      background:rgba(255,255,255,.02)
+    }
+    .brand{
+      font-weight:800;
+      letter-spacing:-0.01em;
+      font-size:1.35rem;
+      background:linear-gradient(135deg,#fff 0%,var(--accent) 100%);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+    .back{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:40px;
+      text-decoration:none;
+      background:#1c2942;
+      color:#eaf2ff;
+      border:1px solid #314261;
+      transition:all 0.2s ease;
+    }
+    .back:hover{
+      background:#233153;
+      border-color:var(--accent);
+      color:var(--accent);
+    }
+    .hero{padding:38px 28px 16px}
+    .eyebrow{
+      display:inline-block;
+      padding:6px 12px;
+      border-radius:999px;
+      background:var(--accent-soft);
+      border:1px solid rgba(245,158,11,.25);
+      color:#ffd898;
+      font-size:12px;
+      font-weight:600;
+      letter-spacing:.02em;
+      text-transform:uppercase;
+    }
+    h1{
+      font-size:clamp(2rem,4vw,3.2rem);
+      line-height:1.15;
+      font-weight:800;
+      color:var(--title);
+      margin:18px 0 14px;
+      letter-spacing:-0.02em;
+    }
+    .lead{
+      font-size:1.15rem;
+      color:#c7d3e5;
+      max-width:75ch;
+      font-weight:400;
+      border-left:3px solid var(--accent);
+      padding-left:20px;
+      margin-top:10px;
+    }
+    .content{padding:8px 28px 34px}
+    .toc,.box,.formula,.quote,.highlight-box{margin:28px 0}
+    .toc,.box{
+      background:rgba(8,15,30,.5);
+      border:1px solid var(--border);
+      border-radius:20px;
+      padding:24px;
+      backdrop-filter:blur(4px);
+    }
+    .toc h2,.box h2,section h2{
+      font-size:1.45rem;
+      font-weight:700;
+      margin:0 0 16px 0;
+      padding-left:0;
+      border-left:none;
+      color:var(--title);
+    }
+    h2{
+      font-size:1.65rem;
+      font-weight:700;
+      margin:48px 0 16px;
+      padding-bottom:8px;
+      border-bottom:2px solid rgba(245,158,11,0.3);
+      color:var(--title);
+    }
+    h3{
+      color:var(--title);
+      margin:28px 0 12px;
+      font-size:1.25rem;
+      font-weight:600;
+    }
+    p{
+      margin:0 0 18px;
+      color:var(--text);
+      line-height:1.7;
+    }
+    ul{margin:0;padding-left:20px}
+    li{margin:0 0 8px;color:var(--muted)}
+    .formula{
+      background:var(--code);
+      border:1px solid #1c3450;
+      border-radius:16px;
+      padding:20px 24px;
+      font-family:'JetBrains Mono',monospace;
+      color:#ffd68e;
+      font-size:1.2rem;
+      text-align:center;
+      overflow-x:auto;
+      font-weight:500;
+    }
+    .quote{
+      padding:24px;
+      border-left:4px solid var(--accent);
+      background:var(--accent-soft);
+      border-radius:0 20px 20px 0;
+      color:#fff8ec;
+      font-style:italic;
+      font-size:1.05rem;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:24px
+    }
+    .note{
+      color:var(--muted);
+      font-size:.9rem;
+      padding:12px;
+      background:rgba(0,0,0,0.2);
+      border-radius:12px;
+    }
+    .footer{
+      padding:24px 28px;
+      border-top:1px solid var(--border);
+      color:var(--muted);
+      font-size:.85rem;
+      background:rgba(0,0,0,0.2);
+    }
+    .inline-code{
+      background:var(--code);
+      padding:3px 8px;
+      border-radius:8px;
+      font-family:'JetBrains Mono',monospace;
+      font-size:.85em;
+      color:var(--accent);
+    }
+    .comparison-table{
+      width:100%;
+      border-collapse:collapse;
+      margin:20px 0;
+    }
+    .comparison-table th,.comparison-table td{
+      border:1px solid var(--border);
+      padding:12px;
+      text-align:left;
+    }
+    .comparison-table th{
+      background:rgba(245,158,11,0.1);
+      color:var(--accent);
+      font-weight:600;
+    }
+    .interactive-box{
+      background:rgba(0,0,0,0.3);
+      border-radius:16px;
+      padding:20px;
+      text-align:center;
+      transition:all 0.2s ease;
+    }
+    .interactive-box input{
+      background:var(--code);
+      border:1px solid var(--border);
+      color:var(--title);
+      padding:8px 12px;
+      border-radius:8px;
+      margin:5px;
+      width:110px;
+      font-family:'JetBrains Mono',monospace;
+    }
+    .calc-btn{
+      background:var(--accent);
+      color:var(--code);
+      border:none;
+      padding:10px 24px;
+      border-radius:40px;
+      font-weight:bold;
+      cursor:pointer;
+      transition:0.2s;
+      margin-top:10px;
+    }
+    .calc-btn:hover{
+      background:var(--accent-dark);
+      transform:scale(0.98);
+    }
+    .warning-box{
+      background:rgba(245,158,11,0.2);
+      border-left:4px solid var(--accent);
+      padding:16px 20px;
+      border-radius:12px;
+      margin:20px 0;
+    }
+    @media (max-width:760px){
+      .grid{grid-template-columns:1fr}
+      .hero,.content,.topbar,.footer{padding-left:20px;padding-right:20px}
+      h1{font-size:clamp(1.8rem,5vw,2.4rem)}
+      .lead{font-size:1rem}
+    }
 
-    /* Cookie Banner */
-    .cookie-banner { position: fixed; bottom: 0; left: 0; right: 0; background: #161F30; border-top: 2px solid #f59e0b; padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; z-index: 10000; gap: 15px; font-size: 14px; color: #D1D5DB; box-shadow: 0 -5px 20px rgba(0,0,0,0.5); }
-    .cookie-banner p { margin: 0; flex: 1 1 300px; }
-    .cookie-banner a { color: #f59e0b; text-decoration: underline; }
-    .cookie-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
-    .cookie-btn { padding: 10px 20px; border-radius: 6px; font-weight: 600; cursor: pointer; border: none; font-size: 14px; }
-    .cookie-btn.accept { background: #f59e0b; color: #0B0F19; }
-    .cookie-btn.reject { background: transparent; color: #D1D5DB; border: 1px solid #24334C; }
+    /* Cookie Banner Moderno */
+    .cookie-banner{
+      position:fixed;
+      bottom:20px;
+      left:20px;
+      right:20px;
+      background:#161F30;
+      border:1px solid rgba(245,158,11,0.3);
+      backdrop-filter:blur(10px);
+      border-radius:20px;
+      padding:20px 24px;
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+      z-index:10000;
+      gap:15px;
+      font-size:14px;
+      color:#D1D5DB;
+      box-shadow:0 20px 35px -8px rgba(0,0,0,0.5);
+    }
+    .cookie-banner p{margin:0;flex:1 1 300px}
+    .cookie-banner a{color:#f59e0b;text-decoration:underline}
+    .cookie-buttons{display:flex;gap:12px;flex-wrap:wrap}
+    .cookie-btn{
+      padding:10px 20px;
+      border-radius:40px;
+      font-weight:600;
+      cursor:pointer;
+      border:none;
+      font-size:14px;
+      transition:0.2s;
+    }
+    .cookie-btn.accept{background:#f59e0b;color:#0B0F19}
+    .cookie-btn.accept:hover{background:#d97706;transform:translateY(-1px)}
+    .cookie-btn.reject{background:transparent;color:#D1D5DB;border:1px solid #24334C}
+    .cookie-btn.reject:hover{background:rgba(255,255,255,0.05);border-color:#f59e0b}
+    @media (max-width:600px){.cookie-banner{bottom:10px;left:10px;right:10px;padding:16px}}
   </style>
 </head>
 <body>
@@ -43,131 +310,125 @@
     <article class="card">
       <div class="topbar"><div class="brand">VQuantPro</div><a class="back" href="/">← Torna alla Home</a></div>
       <header class="hero">
-        <span class="eyebrow">Guida gestione del rischio</span>
+        <span class="eyebrow">Guida avanzata alla gestione del rischio</span>
         <h1>Max Drawdown: la perdita massima che un investitore deve essere pronto a sopportare</h1>
-        <p class="lead">Il Max Drawdown è una metrica centrale per leggere il rischio in termini concreti. Mentre molte misure parlano di volatilità o dispersione statistica, il drawdown dice qualcosa di immediato: quanto può scendere un capitale dal suo massimo prima di recuperare.</p>
+        <p class="lead">Il <strong>Max Drawdown (Drawdown Massimo)</strong> è una delle metriche più concrete e immediate per valutare il rischio di un investimento. Mentre la volatilità misura le oscillazioni medie, il drawdown risponde alla domanda fondamentale: <em>"quanto può scendere il mio capitale dal suo massimo prima che inizi a recuperare?"</em> Questa guida completa ti mostrerà come calcolarlo, interpretarlo e utilizzarlo per costruire portafogli più resilienti.</p>
       </header>
       <div class="content">
-        <section>
-          <h2>Definizione</h2>
-          <p>Il Max Drawdown rappresenta la perdita massima registrata da un portafoglio o da uno strumento tra un picco e il punto di minimo successivo, prima che venga eventualmente recuperato il massimo precedente. È quindi una misura della peggior discesa storica subita dal capitale lungo il percorso di investimento.</p>
-          
-          <div class="formula">Max Drawdown = (Minimo successivo al picco - Picco precedente) / Picco precedente</div>
-          
-          <p>Espresso in percentuale, il drawdown permette di tradurre il rischio in una dimensione facilmente comprensibile anche da chi non ragiona in termini puramente statistici. Una perdita massima del 12% e una del 45% non generano la stessa pressione psicologica, né richiedono lo stesso tempo di recupero.</p>
+        <!-- Indice dei contenuti -->
+        <section class="toc">
+          <h2>📑 Indice della guida</h2>
+          <ul>
+            <li><a href="#definizione" style="color:var(--accent); text-decoration:none;">1. Definizione: il linguaggio concreto del rischio</a></li>
+            <li><a href="#formula" style="color:var(--accent); text-decoration:none;">2. La formula e il calcolo passo-passo</a></li>
+            <li><a href="#esempi" style="color:var(--accent); text-decoration:none;">3. Esempi pratici: calcolare il drawdown su ETF e azioni</a></li>
+            <li><a href="#calcolatore" style="color:var(--accent); text-decoration:none;">4. Calcolatore interattivo del Max Drawdown</a></li>
+            <li><a href="#recupero" style="color:var(--accent); text-decoration:none;">5. L'effetto snowball: perché perdite profonde richiedono recuperi molto più che proporzionali</a></li>
+            <li><a href="#confronto" style="color:var(--accent); text-decoration:none;">6. Max Drawdown vs Volatilità: differenze e complementarità</a></li>
+            <li><a href="#metriche" style="color:var(--accent); text-decoration:none;">7. Metriche derivate: Calmar Ratio, Sterling Ratio e Burke Ratio</a></li>
+            <li><a href="#applicazioni" style="color:var(--accent); text-decoration:none;">8. Applicazioni pratiche: selezione ETF, backtesting e tolleranza al rischio</a></li>
+            <li><a href="#limiti" style="color:var(--accent); text-decoration:none;">9. Limiti, criticità ed errori frequenti</a></li>
+            <li><a href="#bestpractice" style="color:var(--accent); text-decoration:none;">10. Best practice per integrare il Max Drawdown nell'analisi</a></li>
+            <li><a href="#" id="open_preferences_center">📌 Gestisci le preferenze sui cookie</a></li>
+          </ul>
         </section>
 
-        <section>
-          <h2>Perché è una metrica così importante</h2>
-          <p>Molti investitori scoprono la propria tolleranza al rischio non quando il mercato sale, ma quando il portafoglio scende. Il Max Drawdown è prezioso proprio perché collega il rischio a un'esperienza reale: la perdita subita nel momento peggiore. Questo lo rende una misura molto più intuitiva della sola volatilità annualizzata.</p>
-          <p>Dal punto di vista operativo, conoscere il drawdown storico aiuta a capire se una strategia è coerente con il proprio profilo. Un portafoglio con ottimo rendimento medio ma cadute profonde potrebbe essere matematicamente interessante, ma psicologicamente ingestibile per molti investitori.</p>
+        <!-- 1. DEFINIZIONE -->
+        <section id="definizione">
+          <h2>1. Definizione: il linguaggio concreto del rischio</h2>
+          <p>Il <strong>Max Drawdown (Drawdown Massimo)</strong> rappresenta la perdita percentuale massima registrata da un portafoglio o da uno strumento finanziario tra un picco (massimo storico) e il successivo punto di minimo, prima che venga eventualmente superato il picco precedente. È quindi la <strong>peggior discesa subita dal capitale</strong> lungo l'intero periodo di osservazione.</p>
+          <p>A differenza della volatilità, che misura la dispersione statistica dei rendimenti, il Max Drawdown parla un linguaggio immediato e concreto: <strong>quanti soldi ho rischiato di perdere nel momento peggiore?</strong> Per un investitore, sapere che il proprio portafoglio ha avuto un drawdown storico del 15% o del 45% fa una differenza enorme in termini di gestione emotiva e capacità di rimanere disciplinati durante le fasi di mercato difficili.</p>
+          <div class="quote">"Il Max Drawdown non è solo una metrica di rischio: è una misura della resilienza emotiva richiesta all'investitore. Conoscere la profondità delle perdite passate aiuta a prepararsi a quelle future."</div>
         </section>
 
-        <section>
-          <h2>Un esempio semplice</h2>
+        <!-- 2. FORMULA E CALCOLO PASSO-PASSO -->
+        <section id="formula">
+          <h2>2. La formula e il calcolo passo-passo</h2>
+          <div class="formula">Max Drawdown = (Valore Minimo Successivo al Picco - Valore di Picco) / Valore di Picco</div>
+          <p>La formula è apparentemente semplice, ma la sua corretta applicazione richiede attenzione alla sequenza temporale. Ecco i passaggi fondamentali:</p>
+          <ul>
+            <li><strong>Step 1:</strong> Identificare il picco massimo raggiunto dal capitale fino a un certo momento (running maximum).</li>
+            <li><strong>Step 2:</strong> Calcolare la distanza percentuale tra il picco corrente e il valore successivo minimo.</li>
+            <li><strong>Step 3:</strong> Ripetere l'operazione per tutto l'istogramma e selezionare la riduzione percentuale più profonda.</li>
+          </ul>
+          <div class="box">
+            <h3>📐 Esempio numerico del calcolo</h3>
+            <p>Supponiamo la seguente sequenza di valori di un portafoglio: 100 → 120 → 110 → 130 → 95 → 115 → 140.</p>
+            <ul>
+              <li>Al primo picco (120), il drawdown successivo è (110-120)/120 = -8,33%.</li>
+              <li>Al secondo picco (130), il drawdown successivo è (95-130)/130 = <strong>-26,92%</strong> (massimo finora).</li>
+              <li>In seguito il capitale risale e raggiunge un nuovo picco a 140.</li>
+            </ul>
+            <p>Il <strong>Max Drawdown</strong> dell'intero periodo è quindi <strong>-26,92%</strong>.</p>
+          </div>
+          <div class="note">💡 Attenzione: il drawdown non si calcola mai rispetto al capitale iniziale, ma sempre rispetto al picco più alto raggiunto prima di ogni discesa. Ignorare questo dettaglio è uno degli errori più comuni nell'analisi amatoriale.</div>
+        </section>
+
+        <!-- 3. ESEMPI PRATICI SU ETF E AZIONI -->
+        <section id="esempi">
+          <h2>3. Esempi pratici: calcolare il drawdown su ETF e azioni</h2>
           <div class="grid">
             <div class="box">
-              <h3>Percorso del capitale</h3>
-              <p>Immagina un portafoglio che sale da 100 a 140, poi scende a 98 e infine recupera. La perdita massima non si misura rispetto al capitale iniziale, ma rispetto al picco precedente di 140.</p>
+              <h3>📊 Esempio 1: ETF S&P500 (2020-2023)</h3>
+              <p>Tra febbraio e marzo 2020, l'S&P500 ha subito un crollo di oltre il 33% a causa della pandemia COVID-19. Quel drawdown è stato il peggiore dal 2008. Un investitore che avesse avuto l'intero portafoglio azionario avrebbe visto il capitale ridursi di un terzo in poche settimane, prima di recuperare nei mesi successivi.</p>
+              <p><strong>Dato rilevante:</strong> un drawdown del 33% richiede un recupero del +50% per tornare al punto di partenza. Questo esempio mostra l'importanza di non sottovalutare la profondità delle perdite.</p>
             </div>
             <div class="box">
-              <h3>Lettura corretta</h3>
-              <p>In questo caso il drawdown massimo è del 30%. Anche se il portafoglio in seguito recupera, quella discesa resta parte integrante del suo profilo di rischio e non può essere ignorata nell'analisi.</p>
+              <h3>📈 Esempio 2: Azione singola (ETF ARKK)</h3>
+              <p>L'ETF ARKK (innovazione tecnologica) ha avuto un drawdown del -72% dal picco del febbraio 2021 al minimo del 2023. Un drawdown così estremo significa che per tornare ai vecchi massimi sarebbe stato necessario un recupero del +257%. Molti investitori hanno abbandonato la posizione ben prima di quel recupero, realizzando perdite ingenti.</p>
             </div>
           </div>
-        </section>
-
-        <section>
-          <h2>Drawdown e tempo di recupero</h2>
-          <p>Una caratteristica spesso sottovalutata è che perdite ampie richiedono recuperi molto più che proporzionali. Dopo un drawdown del 10%, serve circa un +11,1% per tornare al punto di partenza. Dopo un drawdown del 50%, serve invece un +100%. Questo aspetto rende la profondità delle perdite un fattore cruciale nella costruzione di strategie resilienti.</p>
-          <div class="quote">Difendere il capitale nelle fasi negative non è soltanto una scelta prudente: è una condizione necessaria per evitare che il tempo di recupero diventi il vero costo nascosto dell'investimento.</div>
-        </section>
-
-        <section>
-          <h2>Quando usarlo</h2>
-          <div class="box">
-            <ul>
-              <li>Per confrontare strategie con rendimento simile ma diversa capacità di contenere le perdite.</li>
-              <li>Per verificare se il profilo di rischio storico di un portafoglio è sostenibile per l'investitore.</li>
-              <li>Per integrare il giudizio su volatilità, Sharpe Ratio e CAGR con una misura concreta del peggior scenario vissuto.</li>
-              <li>Per analizzare non solo quanto una strategia ha reso, ma come ha attraversato le fasi di stress.</li>
-              <li><a href="#" id="open_preferences_center">Gestisci le preferenze sui cookie</a></li>
-            </ul>
+          <div class="warning-box">
+            <strong>⚠️ Lezione importante:</strong> un drawdown del 50% non si recupera con un +50%, ma con un <strong>+100%</strong>. Più profondo è il drawdown, più il recupero diventa matematicamente impegnativo. Questo effetto viene spesso sottovalutato anche da investitori esperti.
           </div>
         </section>
 
-        <section>
-          <h2>I suoi limiti</h2>
-          <p>Il Max Drawdown è molto potente, ma non racconta tutto. Dipende infatti dal periodo osservato: cambiare la finestra temporale può modificare sensibilmente il risultato. Inoltre descrive il caso peggiore storico, ma non la frequenza con cui perdite rilevanti si sono verificate.</p>
-          <p>Per questo è utile affiancarlo ad altre metriche. La volatilità misura la variabilità complessiva, il CAGR la crescita composta, il Sortino Ratio isola il rischio al ribasso e il Calmar Ratio collega rendimento e drawdown. Il Max Drawdown, quindi, è fondamentale, ma va sempre letto dentro una struttura analitica più ampia.</p>
+        <!-- 4. CALCOLATORE INTERATTIVO DEL MAX DRAWDOWN -->
+        <section id="calcolatore">
+          <h2>4. 🧮 Calcolatore interattivo del Max Drawdown e del recupero necessario</h2>
+          <div class="interactive-box">
+            <p><label>Perdita subita (%) : </label><input type="number" id="lossInput" value="20" step="5"></p>
+            <p><label>Rendimento necessario per recuperare (%) : </label><span id="recoveryOutput" style="font-weight:bold; color:var(--accent);">--</span></p>
+            <button class="calc-btn" id="calcRecoveryBtn">Calcola</button>
+            <div class="note">💡 Inserisci la perdita percentuale subita (es. 20 per -20%) e scopri di quanto deve crescere il capitale per tornare al valore iniziale. Più la perdita è grande, più il recupero richiesto cresce esponenzialmente.</div>
+          </div>
         </section>
 
-        <section>
-          <h2>Come leggerlo in modo professionale</h2>
-          <p>Una valutazione rigorosa non si limita a osservare il numero finale, ma considera anche la durata del drawdown, la velocità di recupero e il contesto di mercato in cui si è verificato. Un drawdown breve durante una crisi sistemica può avere un significato diverso rispetto a una perdita lunga e persistente in un contesto normale.</p>
-          <p class="note">Contenuto informativo ed educativo. Non costituisce consulenza finanziaria o raccomandazione personalizzata.</p>
+        <!-- 5. EFFETTO SNOWBALL DEL RECUPERO -->
+        <section id="recupero">
+          <h2>5. L'effetto snowball: perché perdite profonde richiedono recuperi molto più che proporzionali</h2>
+          <p>Una proprietà fondamentale e spesso fraintesa della matematica finanziaria è che le perdite e i guadagni non sono simmetrici: dopo una perdita, il capitale base su cui calcolare i rendimenti futuri è più piccolo, quindi serve un rendimento percentuale maggiore per tornare al punto di partenza. Questo fenomeno è noto come <strong>effetto snowball del recupero</strong>.</p>
+          <ul>
+            <li>Dopo un drawdown del <strong>-10%</strong>, serve un <strong>+11,1%</strong> per recuperare.</li>
+            <li>Dopo un drawdown del <strong>-20%</strong>, serve un <strong>+25,0%</strong> per recuperare.</li>
+            <li>Dopo un drawdown del <strong>-33%</strong>, serve un <strong>+50,0%</strong> per recuperare.</li>
+            <li>Dopo un drawdown del <strong>-50%</strong>, serve un <strong>+100%</strong> per recuperare.</li>
+            <li>Dopo un drawdown del <strong>-75%</strong>, serve un <strong>+300%</strong> per recuperare.</li>
+          </ul>
+          <div class="quote">"Difendere il capitale nelle fasi negative non è soltanto una scelta prudente: è una condizione necessaria per evitare che il tempo di recupero diventi il vero costo nascosto dell'investimento."</div>
+          <p>Questa asimmetria spiega perché i grandi gestori attribuiscono così tanta importanza al controllo del drawdown. Evitare perdite profonde non è solo una questione di conforto psicologico, ma un elemento chiave per preservare il capitale e la capacità di ottenere rendimenti composti nel lungo periodo.</p>
         </section>
-      </div>
-      <footer class="footer">VQuantPro · Rischio non significa solo oscillazione: significa anche capacità di resistere e recuperare.</footer>
-    </article>
-  </main>
 
-  <!-- Cookie Banner Personalizzato -->
-  <div id="cookie-banner" class="cookie-banner" style="display:none;">
-      <p>Questo sito utilizza cookie tecnici necessari al funzionamento. Con il tuo consenso, potremmo utilizzare cookie di terze parti per annunci personalizzati. <a href="/privacy/index.html">Privacy Policy</a></p>
-      <div class="cookie-buttons">
-          <button id="cookie-accept" class="cookie-btn accept">Accetta tutti</button>
-          <button id="cookie-reject" class="cookie-btn reject">Solo necessari</button>
-      </div>
-  </div>
-
-  <script>
-  (function() {
-      const banner = document.getElementById('cookie-banner');
-      const acceptBtn = document.getElementById('cookie-accept');
-      const rejectBtn = document.getElementById('cookie-reject');
-      const prefsLink = document.getElementById('open_preferences_center');
-      
-      if (!localStorage.getItem('cookie-consent')) {
-          banner.style.display = 'flex';
-      }
-      
-      function setConsent(value) {
-          localStorage.setItem('cookie-consent', value);
-          banner.style.display = 'none';
-          if (value === 'accepted') loadExternalScripts();
-      }
-      
-      acceptBtn.addEventListener('click', function() { setConsent('accepted'); });
-      rejectBtn.addEventListener('click', function() { setConsent('rejected'); });
-      
-      if (prefsLink) {
-          prefsLink.addEventListener('click', function(e) {
-              e.preventDefault();
-              banner.style.display = 'flex';
-          });
-      }
-      
-      if (localStorage.getItem('cookie-consent') === 'accepted') {
-          loadExternalScripts();
-      }
-      
-      function loadExternalScripts() {
-          if (!document.querySelector('script[src*="adsbygoogle"]')) {
-              var adsScript = document.createElement('script');
-              adsScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2835044924304516';
-              adsScript.async = true;
-              adsScript.crossOrigin = 'anonymous';
-              document.head.appendChild(adsScript);
-              
-              var fcScript = document.createElement('script');
-              fcScript.src = 'https://fundingchoicesmessages.google.com/i/ca-pub-2835044924304516?ers=1';
-              fcScript.async = true;
-              document.head.appendChild(fcScript);
-          }
-      }
-  })();
-  </script>
-
-</body>
-</html>
+        <!-- 6. MAX DRAWDOWN VS VOLATILITÀ -->
+        <section id="confronto">
+          <h2>6. Max Drawdown vs Volatilità: differenze e complementarità</h2>
+          <table class="comparison-table">
+            <thead>
+              <tr><th>Metrica</th><th>Definizione</th><th>Cosa misura</th><th>Limitazione</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Volatilità (σ)</strong></td>
+                <td>Deviazione standard dei rendimenti</td>
+                <td>Dispersione media dei rendimenti attorno alla media, sia positivi che negativi</td>
+                <td>Non distingue tra oscillazioni positive e negative; ignora l'asimmetria dei recuperi</td>
+              </tr>
+              <tr>
+                <td><strong>Max Drawdown</strong></td>
+                <td>Perdita massima dal picco al minimo</td>
+                <td>Evento estremo di perdita, la peggior discesa subita</td>
+                <td>Dipende dal periodo osservato; ignora la frequenza delle perdite</td>
+              </tr>
+              <tr>
+                <td><strong>Downside Deviation</strong></td>
+                <td>Deviazione standard dei soli rendimenti negativi</td>
+                <td>
