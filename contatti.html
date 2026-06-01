@@ -7,16 +7,16 @@
 
     <link rel="canonical" href="https://vquantpro.it/contatti.html" />
     <link rel="icon" type="image/png" href="/favicon.png">
+    
+    <meta name="description" content="Contatta VQuantPro per supporto tecnico, partnership o semplicemente per fare una domanda. Ti risponderemo al più presto. Il team è a tua disposizione.">
 
-    <script type="text/javascript" src="https://www.termsfeed.com/public/cookie-consent/4.2.0/cookie-consent.js" charset="UTF-8"></script>
-    <script type="text/javascript" charset="UTF-8">
-    document.addEventListener('DOMContentLoaded', function () {
-    cookieconsent.run({"notice_banner_type":"standalone","consent_type":"express","palette":"light","language":"it","page_load_consent_levels":["strictly-necessary"],"notice_banner_reject_button_hide":false,"preferences_center_close_button_hide":false,"page_refresh_confirmation_buttons":false});
-    });
-    </script>
+    <!-- Google Analytics -->
+    <script src="/ga4.js"></script>
 
-    <noscript>Free cookie consent management tool by <a href="https://www.termsfeed.com/">TermsFeed</a></noscript>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2835044924304516" crossorigin="anonymous"></script>
+    <!-- Font Awesome per icone -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
         :root { 
@@ -27,41 +27,312 @@
             --text-muted: #9CA3AF;
             --border: #24334C;
         }
-        body { 
-            background-color: var(--bg-main); 
-            color: var(--text-main); 
-            font-family: 'Inter', sans-serif; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            height: 100vh; 
-            margin: 0; 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-main); color: var(--text-main); line-height: 1.7; font-size: 18px; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+        /* Header */
+        header { background-color: rgba(11, 15, 25, 0.95); backdrop-filter: blur(15px); border-bottom: 1px solid var(--border); position: fixed; width: 100%; top: 0; z-index: 100; height: 75px; display: flex; align-items: center; }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .logo { font-weight: 700; font-size: 24px; color: #fff; }
+        .logo span { color: var(--accent); }
+        nav a { color: var(--text-muted); text-decoration: none; font-size: 15px; font-weight: 500; transition: color 0.3s; margin-left: 25px; }
+        nav a:hover { color: var(--accent); }
+
+        /* Contenuto principale */
+        .contact-wrapper {
+            max-width: 900px;
+            margin: 120px auto 80px;
+            padding: 0 20px;
         }
-        .container { 
-            text-align: center; 
-            border: 1px solid var(--border); 
-            padding: 40px; 
-            border-radius: 12px; 
-            background: var(--bg-card); 
-            max-width: 400px;
-            width: 90%;
+        h1 { font-size: 42px; color: #fff; margin-bottom: 20px; line-height: 1.2; text-align: center; }
+        .intro-text { color: var(--text-muted); text-align: center; max-width: 700px; margin: 0 auto 40px auto; font-size: 18px; }
+
+        /* Layout due colonne */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
         }
-        h1 { margin-bottom: 20px; font-size: 24px; }
-        p { color: var(--text-muted); margin-bottom: 20px; }
-        a { color: var(--accent); font-size: 20px; font-weight: 700; text-decoration: none; word-break: break-all; }
-        a:hover { text-decoration: underline; }
-        .back-link { display: block; margin-top: 30px; font-size: 14px; color: var(--text-muted); text-decoration: none; }
-        .back-link:hover { color: var(--accent); }
+        .contact-info {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+        }
+        .contact-info h2 {
+            color: var(--accent);
+            font-size: 24px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+        }
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .info-item i {
+            width: 30px;
+            font-size: 20px;
+            color: var(--accent);
+        }
+        .info-item a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.2s;
+        }
+        .info-item a:hover { color: var(--accent); text-decoration: underline; }
+        .social-links {
+            margin-top: 30px;
+            display: flex;
+            gap: 20px;
+        }
+        .social-links a {
+            color: var(--text-muted);
+            font-size: 24px;
+            transition: color 0.2s;
+        }
+        .social-links a:hover { color: var(--accent); }
+
+        /* Modulo di contatto */
+        .contact-form {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+        }
+        .contact-form h2 {
+            color: var(--accent);
+            font-size: 24px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-main);
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--bg-main);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-main);
+            font-size: 16px;
+            transition: border-color 0.2s;
+        }
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+        .submit-btn {
+            background-color: var(--accent);
+            color: #0B0F19;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+            width: 100%;
+        }
+        .submit-btn:hover {
+            background-color: #00B359;
+            transform: translateY(-2px);
+        }
+        .note { color: var(--text-muted); font-size: 14px; margin-top: 15px; text-align: center; }
+
+        /* Box aggiuntivi */
+        .business-hours {
+            margin-top: 40px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+        }
+        .business-hours h3 { color: var(--accent); margin-bottom: 10px; }
+        .business-hours p { margin-bottom: 5px; }
+
+        .disclaimer-aff { margin-top: 40px; font-size: 13px; color: #6b7280; text-align: center; border-top: 1px solid var(--border); padding-top: 20px; }
+
+        #open_preferences_center { color: var(--accent); text-decoration: underline; cursor: pointer; font-size: 0.9em; display: block; text-align: center; margin-top: 30px; }
+
+        @media (max-width: 768px) {
+            .contact-grid { grid-template-columns: 1fr; gap: 30px; }
+            h1 { font-size: 32px; }
+        }
+
+        /* Cookie Banner */
+        .cookie-banner { position: fixed; bottom: 0; left: 0; right: 0; background: #161F30; border-top: 2px solid #00E676; padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; z-index: 10000; gap: 15px; font-size: 14px; color: #D1D5DB; box-shadow: 0 -5px 20px rgba(0,0,0,0.5); }
+        .cookie-banner p { margin: 0; flex: 1 1 300px; }
+        .cookie-banner a { color: #00E676; text-decoration: underline; }
+        .cookie-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
+        .cookie-btn { padding: 10px 20px; border-radius: 6px; font-weight: 600; cursor: pointer; border: none; font-size: 14px; }
+        .cookie-btn.accept { background: #00E676; color: #0B0F19; }
+        .cookie-btn.reject { background: transparent; color: #D1D5DB; border: 1px solid #24334C; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Contatta il Team VQuantPro</h1>
-        <p>Per supporto tecnico, analisi o partnership, siamo a disposizione all'indirizzo email:</p>
-        <a href="mailto:info@vquantpro.it">info@vquantpro.it</a>
-        <a href="index.html" class="back-link">← Torna alla Home</a>
-        
-        <a href="#" id="open_preferences_center" style="font-size: 12px; margin-top: 20px; display: block; color: var(--text-muted);">Gestisci le preferenze sui cookie</a>
+
+<header>
+    <div class="nav-container">
+        <div class="logo">VQuant<span>Pro</span></div>
+        <nav>
+            <a href="/">← Torna alla Home</a>
+        </nav>
     </div>
+</header>
+
+<main class="contact-wrapper">
+    <h1>Contatta il Team VQuantPro</h1>
+    <p class="intro-text">Hai domande, suggerimenti o vuoi proporre una collaborazione? Compila il modulo sottostante o scrivici direttamente. Siamo sempre felici di sentire la voce della community. Rispondiamo in genere entro 24-48 ore lavorative.</p>
+
+    <div class="contact-grid">
+        <!-- Colonna sinistra: info di contatto -->
+        <div class="contact-info">
+            <h2><i class="fas fa-address-card" style="margin-right: 10px;"></i> Contatti diretti</h2>
+            <div class="info-item">
+                <i class="fas fa-envelope"></i>
+                <a href="mailto:info@vquantpro.it">info@vquantpro.it</a>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-user-circle"></i>
+                <span>Canio Tedesco (Fondatore)</span>
+            </div>
+            <div class="info-item">
+                <i class="fab fa-linkedin"></i>
+                <a href="https://www.linkedin.com/in/canio-tedesco-741b342aa" target="_blank" rel="noopener">LinkedIn</a>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Bari, Italia</span>
+            </div>
+            <div class="social-links">
+                <a href="https://www.instagram.com/vquantpro" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@vquantpro" target="_blank" rel="noopener"><i class="fab fa-tiktok"></i></a>
+                <a href="https://www.linkedin.com/in/canio-tedesco-741b342aa" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+
+        <!-- Colonna destra: modulo di contatto (Funziona con Formspree) -->
+        <div class="contact-form">
+            <h2><i class="fas fa-paper-plane" style="margin-right: 10px;"></i> Scrivi un messaggio</h2>
+            <form action="https://formspree.io/f/mkgjkkgd" method="POST">
+                <div class="form-group">
+                    <label for="name">Nome e Cognome</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="_replyto" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Messaggio</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Invia messaggio</button>
+                <p class="note">I tuoi dati saranno utilizzati esclusivamente per rispondere alla tua richiesta. Per maggiori informazioni consulta la <a href="/privacy/index.html" style="color: var(--accent);">Privacy Policy</a>.</p>
+            </form>
+        </div>
+    </div>
+
+    <div class="business-hours">
+        <h3><i class="far fa-clock"></i> Orari di risposta</h3>
+        <p>Lun - Ven: 9:00 - 18:00</p>
+        <p>Rispondiamo generalmente entro 24-48 ore lavorative.</p>
+        <p>Per richieste di partnership, scrivere direttamente all'indirizzo <strong>info@vquantpro.it</strong>.</p>
+    </div>
+
+    <div class="disclaimer-aff">
+        In qualità di Affiliato Amazon, ricevo un guadagno dagli acquisti idonei. I link presenti su questo sito potrebbero essere link di affiliazione.
+    </div>
+
+    <span id="open_preferences_center">Gestisci preferenze cookie</span>
+</main>
+
+<!-- Cookie Banner -->
+<div id="cookie-banner" class="cookie-banner" style="display:none;">
+    <p>Questo sito utilizza cookie tecnici necessari al funzionamento. Con il tuo consenso, potremmo utilizzare cookie di terze parti per annunci personalizzati. <a href="/privacy/index.html">Privacy Policy</a> | <a href="/cookie/index.html">Cookie Policy</a></p>
+    <div class="cookie-buttons">
+        <button id="cookie-accept" class="cookie-btn accept">Accetta tutti</button>
+        <button id="cookie-reject" class="cookie-btn reject">Solo necessari</button>
+    </div>
+</div>
+
+<script>
+// Cookie Banner e GA4 Update
+(function() {
+    const banner = document.getElementById('cookie-banner');
+    const acceptBtn = document.getElementById('cookie-accept');
+    const rejectBtn = document.getElementById('cookie-reject');
+    const prefsLink = document.getElementById('open_preferences_center');
+    
+    if (!localStorage.getItem('cookie-consent')) {
+        banner.style.display = 'flex';
+    }
+    
+    function setConsent(value) {
+        localStorage.setItem('cookie-consent', value);
+        banner.style.display = 'none';
+        if (value === 'accepted') {
+            // Aggiorna GA4 se la funzione esiste (da ga4.js)
+            if (typeof window.updateGA4Consent === 'function') {
+                window.updateGA4Consent();
+            }
+            loadExternalScripts();
+        } else {
+            removeExternalScripts();
+        }
+    }
+    
+    if (acceptBtn) acceptBtn.addEventListener('click', () => setConsent('accepted'));
+    if (rejectBtn) rejectBtn.addEventListener('click', () => setConsent('rejected'));
+    
+    if (prefsLink) {
+        prefsLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            banner.style.display = 'flex';
+        });
+    }
+    
+    if (localStorage.getItem('cookie-consent') === 'accepted') {
+        if (typeof window.updateGA4Consent === 'function') window.updateGA4Consent();
+        loadExternalScripts();
+    }
+    
+    function loadExternalScripts() {
+        if (!document.querySelector('script[src*="adsbygoogle"]')) {
+            var adsScript = document.createElement('script');
+            adsScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2835044924304516';
+            adsScript.async = true;
+            adsScript.crossOrigin = 'anonymous';
+            document.head.appendChild(adsScript);
+            
+            var fcScript = document.createElement('script');
+            fcScript.src = 'https://fundingchoicesmessages.google.com/i/ca-pub-2835044924304516?ers=1';
+            fcScript.async = true;
+            document.head.appendChild(fcScript);
+        }
+    }
+    
+    function removeExternalScripts() {
+        var scripts = document.querySelectorAll('script[src*="adsbygoogle"], script[src*="fundingchoicesmessages"]');
+        scripts.forEach(script => script.remove());
+    }
+})();
+</script>
+
 </body>
 </html>
