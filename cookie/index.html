@@ -59,7 +59,7 @@
 </head>
 <body>
     <h1>Cookie Policy</h1>
-    <p><strong>Ultimo aggiornamento:</strong> 1 giugno 2026</p>
+    <p><strong>Ultimo aggiornamento:</strong> 3 giugno 2026</p>
     
     <h2>1. Cosa sono i cookie</h2>
     <p>I cookie sono piccoli file di testo che i siti web visitati inviano al browser dell’utente, dove vengono memorizzati per essere poi ritrasmessi allo stesso sito alla visita successiva. Servono a far funzionare il sito, a migliorare l’esperienza di navigazione, a raccogliere statistiche anonime e a mostrare pubblicità personalizzate.</p>
@@ -72,12 +72,13 @@
     Utilizziamo Google Analytics per raccogliere informazioni aggregate sul numero di visitatori, sulle pagine visualizzate e sul comportamento di navigazione. Questi cookie ci aiutano a migliorare il Sito. L’indirizzo IP viene anonimizzato. Per questi cookie richiediamo il tuo consenso.</p>
     
     <p><strong>Cookie di profilazione e advertising</strong><br>
-    Attraverso Monetag e Google AdSense, potremmo mostrare annunci personalizzati in base ai tuoi interessi e alla tua navigazione su altri siti. Questi cookie monitorano la navigazione per creare profili. Richiedono il tuo consenso esplicito.</p>
+    Attraverso Monetag, PopAds e Google AdSense, potremmo mostrare annunci personalizzati in base ai tuoi interessi e alla tua navigazione su altri siti. Questi cookie monitorano la navigazione per creare profili. Richiedono il tuo consenso esplicito.</p>
     
     <h2>3. Cookie di terze parti</h2>
     <p>Il Sito integra servizi di terze parti che possono installare cookie propri. Ecco i principali:</p>
     <ul>
         <li><strong>Monetag</strong> (pubblicità): <a href="https://monetag.com/privacy-policy" target="_blank">Privacy Policy di Monetag</a></li>
+        <li><strong>PopAds</strong> (pubblicità): <a href="https://www.popads.net/privacy.html" target="_blank">Informativa sulla privacy di PopAds</a></li>
         <li><strong>Google AdSense</strong> (pubblicità): <a href="https://policies.google.com/technologies/cookies" target="_blank">Informativa cookie Google</a></li>
         <li><strong>Google Analytics</strong> (statistiche): <a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage" target="_blank">Utilizzo dei cookie da Google Analytics</a></li>
         <li><strong>Google Fonts</strong> e <strong>Font Awesome</strong> (caricamento di caratteri e icone): potrebbero raccogliere dati anonimi; maggiori dettagli nelle rispettive privacy policy.</li>
@@ -90,7 +91,7 @@
     <p>Inoltre, puoi impostare il tuo browser per bloccare o eliminare i cookie (compresi quelli tecnici) – ma ciò potrebbe compromettere alcune funzionalità del Sito. Le istruzioni per i browser più comuni sono disponibili nei rispettivi menu “Aiuto” o “Preferenze”.</p>
     
     <h2>5. Durata dei cookie</h2>
-    <p>I cookie tecnici e di analisi hanno una durata massima di 12 mesi. I cookie di profilazione (Monetag, AdSense) hanno durata variabile (tipicamente 30-90 giorni). Al termine, vengono automaticamente cancellati dal browser.</p>
+    <p>I cookie tecnici e di analisi hanno una durata massima di 12 mesi. I cookie di profilazione (Monetag, PopAds, AdSense) hanno durata variabile (tipicamente 30-90 giorni). Al termine, vengono automaticamente cancellati dal browser.</p>
     
     <h2>6. Diritti dell’utente</h2>
     <p>Hai il diritto di revocare il consenso in qualsiasi momento, senza pregiudicare la liceità del trattamento basata sul consenso prima della revoca. Per esercitare i tuoi diritti in materia di dati personali (accesso, rettifica, cancellazione, ecc.), consulta la nostra <a href="/privacy/index.html">Privacy Policy</a> o scrivi a privacy@vquantpro.it.</p>
@@ -174,10 +175,20 @@
                 monetagScript.setAttribute('data-cfasync', 'false');
                 document.head.appendChild(monetagScript);
             }
+            // PopAds
+            if (!document.querySelector('script[src*="intelligenc"]')) {
+                var popadsScript = document.createElement('script');
+                popadsScript.type = 'text/javascript';
+                popadsScript.setAttribute('data-cfasync', 'false');
+                popadsScript.textContent = `/*<![CDATA[/* */
+(function(){var x=window,k="ae21519766e93cedb42759a73794e644",l=[["siteId",670-855+388+5304173],["minBid",0],["popundersPerIP","0"],["delayBetween",0],["default",false],["defaultPerDay",0],["topmostLayer","auto"]],a=["d3d3LmludGVsbGlnZW5jZWFkeC5jb20vUGYvbnF5U1kvcmZvcnQubWluLmpz","ZDJrbHg4N2Jnem5nY2UuY2xvdWRmcm9udC5uZXQva2pzb24ubWluLmpz"],c=-1,b,w,q=function(){clearTimeout(w);c++;if(a[c]&&!(1806389918000<(new Date).getTime()&&1<c)){b=x.document.createElement("script");b.type="text/javascript";b.async=!0;var o=x.document.getElementsByTagName("script")[0];b.src="https://"+atob(a[c]);b.crossOrigin="anonymous";b.onerror=q;b.onload=function(){clearTimeout(w);x[k.slice(0,16)+k.slice(0,16)]||q()};w=setTimeout(q,5E3);o.parentNode.insertBefore(b,o)}};if(!x[k]){try{Object.freeze(x[k]=l)}catch(e){}q()}})();
+/*]]>*/`;
+                document.head.appendChild(popadsScript);
+            }
         }
         
         function removeExternalScripts() {
-            var scripts = document.querySelectorAll('script[src*="adsbygoogle"], script[src*="fundingchoicesmessages"], script[src*="quge5.com"]');
+            var scripts = document.querySelectorAll('script[src*="adsbygoogle"], script[src*="fundingchoicesmessages"], script[src*="quge5.com"], script[src*="intelligenc"]');
             scripts.forEach(script => script.remove());
         }
     })();
