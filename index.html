@@ -151,6 +151,21 @@
         .cookie-btn { padding: 10px 20px; border-radius: 6px; font-weight: 600; cursor: pointer; border: none; font-size: 14px; }
         .cookie-btn.accept { background: #00E676; color: #0B0F19; }
         .cookie-btn.reject { background: transparent; color: #D1D5DB; border: 1px solid #24334C; }
+        
+        /* SmartLink box in fondo */
+        .smartlink-container {
+            text-align: center;
+            margin: 20px auto 10px auto;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+        .smartlink-container a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        .smartlink-container a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -306,11 +321,17 @@
     </div>
 </div>
 
+<!-- SmartLink Monetag (sostituisce il vecchio Monetag) -->
+<div class="smartlink-container">
+    <span>📢 Strumento gratuito – Se vuoi supportare il progetto, visita: </span>
+    <a href="https://omg10.com/4/11094038" target="_blank" rel="nofollow sponsored">Partner consigliato</a>
+</div>
+
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
 
 <script>
-    // Gestione cookie + Monetag (nuovo In-Page Push) + PopAds
+    // Gestione cookie + PopAds (Monetag rimosso, sostituito da SmartLink statico)
     (function() {
         const banner = document.getElementById('cookie-banner');
         const acceptBtn = document.getElementById('cookie-accept');
@@ -354,15 +375,7 @@
                 document.head.appendChild(fcScript);
             }
             
-            // MONETAG - NUOVO IN-PAGE PUSH (zona 11093922)
-            if (!document.querySelector('script[src*="nap5k.com/tag.min.js"]')) {
-                var monetagScript = document.createElement('script');
-                monetagScript.dataset.zone = '11093922';
-                monetagScript.src = 'https://nap5k.com/tag.min.js';
-                document.head.appendChild(monetagScript);
-            }
-            
-            // POPADS (codice fornitoci)
+            // Solo PopAds (Monetag è stato sostituito dal link statico)
             if (!document.querySelector('script[src*="intelligenc"]')) {
                 var popadsScript = document.createElement('script');
                 popadsScript.type = 'text/javascript';
@@ -375,43 +388,10 @@
         }
         
         function removeExternalScripts() {
-            var scripts = document.querySelectorAll('script[src*="adsbygoogle"], script[src*="fundingchoicesmessages"], script[src*="quge5.com"], script[src*="nap5k.com"], script[src*="intelligenc"]');
+            var scripts = document.querySelectorAll('script[src*="adsbygoogle"], script[src*="fundingchoicesmessages"], script[src*="intelligenc"]');
             scripts.forEach(script => script.remove());
         }
     })();
-    
-    // ========== SPOSTA TUTTI GLI ANNUNCI (MONETAG E POPADS) IN FONDO ==========
-    function moveAllAdsToBottom() {
-        var selectors = [
-            '[class*="monetag"]',
-            '[class*="nap5k"]',
-            '[data-zone="11093922"]',
-            'iframe[src*="monetag"]',
-            'ins.adsbygoogle[data-ad-layout]',
-            '[class*="popads"]',
-            '[id*="popads"]',
-            '[class*="intelligenc"]'
-        ];
-        var found = false;
-        for (var i = 0; i < selectors.length; i++) {
-            var elements = document.querySelectorAll(selectors[i]);
-            for (var j = 0; j < elements.length; j++) {
-                var elem = elements[j];
-                if (elem && elem.parentNode && !elem.hasAttribute('data-moved')) {
-                    elem.setAttribute('data-moved', 'true');
-                    document.body.appendChild(elem);
-                    found = true;
-                    console.log('Annuncio spostato in fondo: ' + selectors[i]);
-                }
-            }
-        }
-        if (!found) {
-            setTimeout(moveAllAdsToBottom, 1000);
-        }
-    }
-    
-    setTimeout(moveAllAdsToBottom, 3000);
-    setInterval(moveAllAdsToBottom, 5000);
 </script>
 
 </body>
