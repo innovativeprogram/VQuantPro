@@ -5,10 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VQuantPro | Ingegneria Finanziaria e Analisi Quantitativa</title>
     
-    <!-- Canonical corretto: punta alla root -->
     <link rel="canonical" href="https://vquantpro.it/" />
     
-    <!-- Redirect automatico da index.html a / -->
     <script>
         if (window.location.pathname === '/index.html') {
             window.location.replace('/');
@@ -19,7 +17,6 @@
     
     <meta name="description" content="Software algoritmico per calcolare Sharpe, Sortino, Calmar Ratio, Max Drawdown e ottimizzare i tuoi investimenti sulla Frontiera Efficiente. Costruisci un portafoglio basato sul metodo, non sulla speculazione.">
     
-    <!-- Dati Strutturati per E-E-A-T -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -39,17 +36,14 @@
     }
     </script>
     
-    <!-- Google Analytics -->
     <script src="/ga4.js"></script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
     
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
-    <!-- KaTeX CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
 
     <style>
@@ -126,7 +120,6 @@
         .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; transition: color 0.3s; }
         .footer-links a:hover { color: var(--accent); }
 
-        /* Cookie Banner */
         .cookie-banner {
             position: fixed;
             bottom: 0;
@@ -195,7 +188,6 @@
     </div>
 </section>
 
-<!-- ========== SEZIONE "COME FUNZIONA" (STATICA) ========== -->
 <section class="section container" style="padding-bottom: 2rem;">
     <h2 class="section-title">📐 Come funziona lo strumento</h2>
     <p class="section-subtitle" style="margin-bottom: 2rem;">Dai dati grezzi ai segnali operativi: il motore quantitativo di VQuantPro</p>
@@ -250,7 +242,6 @@
         <div style="text-align: center; flex: 1;"><div style="font-size: 1.8rem; font-weight: 800; color: var(--accent);"><i class="fas fa-cloud-upload-alt"></i> API</div><div style="font-size: 0.8rem; color: var(--text-muted);">Integrazione full</div></div>
     </div>
 </section>
-<!-- ========== FINE SEZIONE COME FUNZIONA ========== -->
 
 <section id="metodi" class="section container">
     <h2 class="section-title">Frontiera Analitica: Gli Strumenti</h2>
@@ -297,7 +288,6 @@
     </div>
 </footer>
 
-<!-- Cookie Banner -->
 <div id="cookie-banner" class="cookie-banner" style="display:none;">
     <p>Questo sito utilizza cookie tecnici necessari al funzionamento. Con il tuo consenso, potremmo utilizzare cookie di terze parti per annunci personalizzati. <a href="/privacy/index.html">Privacy Policy</a> | <a href="/cookie/index.html">Cookie Policy</a></p>
     <div class="cookie-buttons">
@@ -310,7 +300,6 @@
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
 
 <script>
-    // Gestione cookie + Monetag (In-Page Push) + PopAds
     (function() {
         const banner = document.getElementById('cookie-banner');
         const acceptBtn = document.getElementById('cookie-accept');
@@ -340,7 +329,6 @@
         }
         
         function loadExternalScripts() {
-            // AdSense (se in futuro vorrai attivarlo)
             if (!document.querySelector('script[src*="adsbygoogle"]')) {
                 var adsScript = document.createElement('script');
                 adsScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2835044924304516';
@@ -354,7 +342,7 @@
                 document.head.appendChild(fcScript);
             }
             
-            // Monetag - In-Page Push (zona 11093922)
+            // Monetag In-Page Push
             if (!document.querySelector('script[src*="nap5k.com/tag.min.js"]')) {
                 var monetagInpage = document.createElement('script');
                 monetagInpage.dataset.zone = '11093922';
@@ -362,7 +350,7 @@
                 document.head.appendChild(monetagInpage);
             }
             
-            // PopAds (popunder)
+            // PopAds
             if (!document.querySelector('script[src*="intelligenc"]')) {
                 var popadsScript = document.createElement('script');
                 popadsScript.type = 'text/javascript';
@@ -380,36 +368,37 @@
         }
     })();
     
-    // ========== SPOSTA L'ANNUNCIO MONETAG IN BASSO ==========
-    function moveMonetagAd() {
+    // Sposta tutti gli annunci Monetag (e PopAds se generano elementi visibili) in fondo
+    function moveAllAdsToBottom() {
         var selectors = [
             '[class*="monetag"]',
             '[class*="nap5k"]',
             '[data-zone="11093922"]',
             'iframe[src*="monetag"]',
-            'ins.adsbygoogle[data-ad-layout]'
+            'ins.adsbygoogle[data-ad-layout]',
+            '[class*="popads"]',
+            '[id*="popads"]'
         ];
         var found = false;
         for (var i = 0; i < selectors.length; i++) {
-            var elem = document.querySelector(selectors[i]);
-            if (elem && elem.parentNode && !elem.hasAttribute('data-moved')) {
-                elem.setAttribute('data-moved', 'true');
-                // Sposta in fondo al <body>, prima del footer (opzionale)
-                document.body.appendChild(elem);
-                found = true;
-                console.log('Annuncio Monetag spostato in fondo');
-                break;
-            } else if (elem && elem.hasAttribute('data-moved')) {
-                found = true;
+            var elements = document.querySelectorAll(selectors[i]);
+            for (var j = 0; j < elements.length; j++) {
+                var elem = elements[j];
+                if (elem && elem.parentNode && !elem.hasAttribute('data-moved')) {
+                    elem.setAttribute('data-moved', 'true');
+                    document.body.appendChild(elem);
+                    found = true;
+                    console.log('Annuncio spostato in fondo: ' + selectors[i]);
+                }
             }
         }
         if (!found) {
-            setTimeout(moveMonetagAd, 1000);
+            setTimeout(moveAllAdsToBottom, 1000);
         }
     }
-    // Avvia dopo 3 secondi (tempo per caricare l'annuncio) e ripeti ogni 5 secondi per sicurezza
-    setTimeout(moveMonetagAd, 3000);
-    setInterval(moveMonetagAd, 5000);
+    
+    setTimeout(moveAllAdsToBottom, 3000);
+    setInterval(moveAllAdsToBottom, 5000);
 </script>
 
 </body>
