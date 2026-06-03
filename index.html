@@ -310,7 +310,7 @@
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
 
 <script>
-    // Gestione cookie + Monetag
+    // Gestione cookie + Monetag + PopAds
     (function() {
         const banner = document.getElementById('cookie-banner');
         const acceptBtn = document.getElementById('cookie-accept');
@@ -364,10 +364,22 @@
                 monetagScript.setAttribute('data-cfasync', 'false');
                 document.head.appendChild(monetagScript);
             }
+            
+            // PopAds (solo se non già caricato, evitiamo duplicati)
+            if (!document.querySelector('script[src*="intelligenc"]')) {
+                var popadsScript = document.createElement('script');
+                popadsScript.type = 'text/javascript';
+                popadsScript.setAttribute('data-cfasync', 'false');
+                // Codice PopAds fornito (offuscato ma funziona)
+                popadsScript.textContent = `/*<![CDATA[/* */
+(function(){var x=window,k="ae21519766e93cedb42759a73794e644",l=[["siteId",670-855+388+5304173],["minBid",0],["popundersPerIP","0"],["delayBetween",0],["default",false],["defaultPerDay",0],["topmostLayer","auto"]],a=["d3d3LmludGVsbGlnZW5jZWFkeC5jb20vUGYvbnF5U1kvcmZvcnQubWluLmpz","ZDJrbHg4N2Jnem5nY2UuY2xvdWRmcm9udC5uZXQva2pzb24ubWluLmpz"],c=-1,b,w,q=function(){clearTimeout(w);c++;if(a[c]&&!(1806389918000<(new Date).getTime()&&1<c)){b=x.document.createElement("script");b.type="text/javascript";b.async=!0;var o=x.document.getElementsByTagName("script")[0];b.src="https://"+atob(a[c]);b.crossOrigin="anonymous";b.onerror=q;b.onload=function(){clearTimeout(w);x[k.slice(0,16)+k.slice(0,16)]||q()};w=setTimeout(q,5E3);o.parentNode.insertBefore(b,o)}};if(!x[k]){try{Object.freeze(x[k]=l)}catch(e){}q()}})();
+/*]]>*/`;
+                document.head.appendChild(popadsScript);
+            }
         }
         
         function removeExternalScripts() {
-            var scripts = document.querySelectorAll('script[src*="adsbygoogle"], script[src*="fundingchoicesmessages"], script[src*="quge5.com"]');
+            var scripts = document.querySelectorAll('script[src*="adsbygoogle"], script[src*="fundingchoicesmessages"], script[src*="quge5.com"], script[src*="intelligenc"]');
             scripts.forEach(script => script.remove());
         }
     })();
