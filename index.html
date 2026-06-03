@@ -310,7 +310,7 @@
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
 
 <script>
-    // Gestione cookie + Monetag + PopAds
+    // Gestione cookie + Monetag (In-Page Push) + PopAds
     (function() {
         const banner = document.getElementById('cookie-banner');
         const acceptBtn = document.getElementById('cookie-accept');
@@ -323,7 +323,6 @@
             localStorage.setItem('cookie-consent', value);
             banner.style.display = 'none';
             if (value === 'accepted') {
-                // Aggiorna GA4 se disponibile
                 if (typeof window.updateGA4Consent === 'function') window.updateGA4Consent();
                 loadExternalScripts();
             } else {
@@ -341,7 +340,7 @@
         }
         
         function loadExternalScripts() {
-            // AdSense (se in futuro vorrai attivarlo)
+            // AdSense (opzionale, in futuro)
             if (!document.querySelector('script[src*="adsbygoogle"]')) {
                 var adsScript = document.createElement('script');
                 adsScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2835044924304516';
@@ -355,22 +354,19 @@
                 document.head.appendChild(fcScript);
             }
             
-            // Monetag (solo se non già caricato)
-            if (!document.querySelector('script[src*="quge5.com/88/tag.min.js"]')) {
-                var monetagScript = document.createElement('script');
-                monetagScript.src = 'https://quge5.com/88/tag.min.js';
-                monetagScript.setAttribute('data-zone', '245093');
-                monetagScript.async = true;
-                monetagScript.setAttribute('data-cfasync', 'false');
-                document.head.appendChild(monetagScript);
+            // Monetag - In-Page Push (nuovo formato non invasivo)
+            if (!document.querySelector('script[src*="nap5k.com/tag.min.js"]')) {
+                var monetagInpage = document.createElement('script');
+                monetagInpage.dataset.zone = '11093922';
+                monetagInpage.src = 'https://nap5k.com/tag.min.js';
+                document.head.appendChild(monetagInpage);
             }
             
-            // PopAds (solo se non già caricato, evitiamo duplicati)
+            // PopAds (popunder, meno invasivo)
             if (!document.querySelector('script[src*="intelligenc"]')) {
                 var popadsScript = document.createElement('script');
                 popadsScript.type = 'text/javascript';
                 popadsScript.setAttribute('data-cfasync', 'false');
-                // Codice PopAds fornito (offuscato ma funziona)
                 popadsScript.textContent = `/*<![CDATA[/* */
 (function(){var x=window,k="ae21519766e93cedb42759a73794e644",l=[["siteId",670-855+388+5304173],["minBid",0],["popundersPerIP","0"],["delayBetween",0],["default",false],["defaultPerDay",0],["topmostLayer","auto"]],a=["d3d3LmludGVsbGlnZW5jZWFkeC5jb20vUGYvbnF5U1kvcmZvcnQubWluLmpz","ZDJrbHg4N2Jnem5nY2UuY2xvdWRmcm9udC5uZXQva2pzb24ubWluLmpz"],c=-1,b,w,q=function(){clearTimeout(w);c++;if(a[c]&&!(1806389918000<(new Date).getTime()&&1<c)){b=x.document.createElement("script");b.type="text/javascript";b.async=!0;var o=x.document.getElementsByTagName("script")[0];b.src="https://"+atob(a[c]);b.crossOrigin="anonymous";b.onerror=q;b.onload=function(){clearTimeout(w);x[k.slice(0,16)+k.slice(0,16)]||q()};w=setTimeout(q,5E3);o.parentNode.insertBefore(b,o)}};if(!x[k]){try{Object.freeze(x[k]=l)}catch(e){}q()}})();
 /*]]>*/`;
@@ -379,7 +375,7 @@
         }
         
         function removeExternalScripts() {
-            var scripts = document.querySelectorAll('script[src*="adsbygoogle"], script[src*="fundingchoicesmessages"], script[src*="quge5.com"], script[src*="intelligenc"]');
+            var scripts = document.querySelectorAll('script[src*="adsbygoogle"], script[src*="fundingchoicesmessages"], script[src*="quge5.com"], script[src*="nap5k.com"], script[src*="intelligenc"]');
             scripts.forEach(script => script.remove());
         }
     })();
