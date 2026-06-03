@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VQuantPro | Ingegneria Finanziaria e Analisi Quantitativa</title>
     
+    <!-- Canonical corretto: punta alla root -->
     <link rel="canonical" href="https://vquantpro.it/" />
     
+    <!-- Redirect automatico da index.html a / -->
     <script>
         if (window.location.pathname === '/index.html') {
             window.location.replace('/');
@@ -14,8 +16,10 @@
     </script>
     
     <link rel="icon" type="image/png" href="/favicon.png">
+    
     <meta name="description" content="Software algoritmico per calcolare Sharpe, Sortino, Calmar Ratio, Max Drawdown e ottimizzare i tuoi investimenti sulla Frontiera Efficiente. Costruisci un portafoglio basato sul metodo, non sulla speculazione.">
     
+    <!-- Dati Strutturati per E-E-A-T -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -35,12 +39,17 @@
     }
     </script>
     
+    <!-- Google Analytics -->
     <script src="/ga4.js"></script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- KaTeX CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
 
     <style>
@@ -53,8 +62,10 @@
             --text-muted: #9CA3AF;
             --border: #24334C;
         }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
+
         body { font-family: 'Inter', sans-serif; background-color: var(--bg-main); color: var(--text-main); line-height: 1.7; font-size: 18px; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
@@ -62,9 +73,11 @@
         .nav-container { display: flex; justify-content: space-between; align-items: center; height: 75px; }
         .logo { font-weight: 700; font-size: 24px; color: #fff; }
         .logo span { color: var(--accent); }
+        
         nav ul { display: flex; list-style: none; gap: 30px; }
         nav a { color: var(--text-muted); text-decoration: none; font-size: 15px; font-weight: 500; transition: color 0.3s; }
         nav a:hover { color: var(--accent); }
+
         .hamburger { display: none; cursor: pointer; color: var(--accent); font-size: 30px; background: none; border: none; }
         .hamburger:hover { color: #ffffff; }
 
@@ -103,6 +116,7 @@
         .card-link:hover { color: #fff; letter-spacing: 0.5px; }
 
         .content-image { width: 100%; border-radius: 12px; margin-bottom: 40px; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        
         .lesson-section { background-color: #0d131f; padding: 80px; border-radius: 16px; border: 1px solid var(--border); max-width: 900px; margin: 40px auto; }
         .lesson-section h2 { font-family: 'Playfair Display', serif; font-size: 36px; color: var(--accent); margin-bottom: 30px; text-align: center; }
         .lesson-section p { color: var(--text-muted); margin-bottom: 20px; font-size: 17px; line-height: 1.8; }
@@ -112,6 +126,7 @@
         .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; transition: color 0.3s; }
         .footer-links a:hover { color: var(--accent); }
 
+        /* Cookie Banner */
         .cookie-banner {
             position: fixed;
             bottom: 0;
@@ -140,18 +155,162 @@
 </head>
 <body>
 
-<header>...</header> <!-- il resto del contenuto HTML rimane identico, lo tronco per brevità ma va inserito tutto -->
+<header>
+    <div class="container nav-container">
+        <div class="logo">VQuant<span>Pro</span></div>
+        <button class="hamburger" onclick="document.querySelector('nav').classList.toggle('active')" aria-label="Menu">☰</button>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#chi-siamo">Chi Siamo</a></li>
+                <li><a href="#metodi">Frontiera Analitica</a></li>
+                <li><a href="masterclass/index.html">Masterclass</a></li>
+                <li><a href="/blog/index.html">Blog</a></li>
+                <li><a href="libri-consigliati.html">Libri</a></li>
+                <li><a href="contatti.html">Contatti</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
 
-<!-- ... tutto il contenuto della pagina ... -->
+<section id="home" class="hero">
+    <div class="container">
+        <h1>Ingegneria Finanziaria: Misura il Rischio, Domina il Rendimento</h1>
+        <p>Non fidarti dell'istinto. La gestione del capitale non è un gioco d'azzardo; è un esercizio di probabilità. VQuantPro ti fornisce il toolkit algoritmico per analizzare i tuoi asset con il rigore dei grandi gestori.</p>
+        <a href="https://vquantpro.streamlit.app/" class="btn-primary" target="_blank" rel="noopener noreferrer">Accedi alla Dashboard Quantitativa</a>
+    </div>
+</section>
 
-<footer>...</footer>
+<section id="chi-siamo" class="container">
+    <div class="about-grid">
+        <div class="about-text">
+            <h2>Il Metodo: Oltre il Rumore del Mercato</h2>
+            <p>La finanza moderna è inondata di opinioni, rumore e previsioni non richieste. Ho creato VQuantPro perché ritengo che il vantaggio competitivo non risieda nel "prevedere" dove andrà il prezzo domani, ma nel comprendere profondamente la struttura del rischio oggi.</p>
+            <p>Ogni investitore consapevole deve porsi una domanda fondamentale: <em>"Il rendimento che sto ottenendo è proporzionato al rischio che sto correndo?"</em></p>
+            <p>VQuantPro trasforma questa domanda in risposte numeriche. È una piattaforma progettata per chi rifiuta la delega passiva e vuole costruire il proprio "fossato" finanziario attraverso l'analisi quantitativa.</p>
+        </div>
+        <div class="about-image">
+            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=600&q=75&fm=webp" alt="Analisi quantitativa" width="600" height="400">
+        </div>
+    </div>
+</section>
 
-<div id="cookie-banner" class="cookie-banner" style="display:none;">...</div>
+<!-- ========== SEZIONE "COME FUNZIONA" (STATICA) ========== -->
+<section class="section container" style="padding-bottom: 2rem;">
+    <h2 class="section-title">📐 Come funziona lo strumento</h2>
+    <p class="section-subtitle" style="margin-bottom: 2rem;">Dai dati grezzi ai segnali operativi: il motore quantitativo di VQuantPro</p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.8rem; margin: 2rem 0;">
+        <div class="card" style="padding: 1.5rem;">
+            <div style="background: rgba(0,230,118,0.1); width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; border-radius: 1rem; margin-bottom: 1.5rem;">
+                <i class="fas fa-database" style="font-size: 1.8rem; color: var(--accent);"></i>
+            </div>
+            <h3 style="font-size: 1.5rem; margin-bottom: 0.75rem;">1. Data Fusion</h3>
+            <p style="color: var(--text-muted);">Aggregazione e pulizia di dati multi‑fonte: azioni, crypto, forex, macro e sentiment. Pipeline ETL in tempo reale.</p>
+            <span style="display: inline-flex; align-items: center; gap: 6px; background: rgba(0,230,118,0.12); padding: 0.2rem 0.8rem; border-radius: 30px; font-size: 0.75rem; color: var(--accent);"><i class="fas fa-check-circle"></i> 50+ fonti integrate</span>
+        </div>
+        <div class="card" style="padding: 1.5rem;">
+            <div style="background: rgba(0,230,118,0.1); width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; border-radius: 1rem; margin-bottom: 1.5rem;">
+                <i class="fas fa-chart-scatter" style="font-size: 1.8rem; color: var(--accent);"></i>
+            </div>
+            <h3 style="font-size: 1.5rem; margin-bottom: 0.75rem;">2. Quantitative Engine</h3>
+            <p style="color: var(--text-muted);">Modelli statistici, machine learning e backtesting avanzato per identificare pattern non lineari.</p>
+            <span style="display: inline-flex; align-items: center; gap: 6px; background: rgba(0,230,118,0.12); padding: 0.2rem 0.8rem; border-radius: 30px; font-size: 0.75rem; color: var(--accent);"><i class="fas fa-microchip"></i> AI proprietaria</span>
+        </div>
+        <div class="card" style="padding: 1.5rem;">
+            <div style="background: rgba(0,230,118,0.1); width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; border-radius: 1rem; margin-bottom: 1.5rem;">
+                <i class="fas fa-flask" style="font-size: 1.8rem; color: var(--accent);"></i>
+            </div>
+            <h3 style="font-size: 1.5rem; margin-bottom: 0.75rem;">3. Backtesting dinamico</h3>
+            <p style="color: var(--text-muted);">Simulazioni walk‑forward, stress test e metriche di rischio: Sharpe, Sortino, Drawdown, Calmar.</p>
+            <span style="display: inline-flex; align-items: center; gap: 6px; background: rgba(0,230,118,0.12); padding: 0.2rem 0.8rem; border-radius: 30px; font-size: 0.75rem; color: var(--accent);"><i class="fas fa-chart-simple"></i> 15+ metriche</span>
+        </div>
+        <div class="card" style="padding: 1.5rem;">
+            <div style="background: rgba(0,230,118,0.1); width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; border-radius: 1rem; margin-bottom: 1.5rem;">
+                <i class="fas fa-bullhorn" style="font-size: 1.8rem; color: var(--accent);"></i>
+            </div>
+            <h3 style="font-size: 1.5rem; margin-bottom: 0.75rem;">4. Signal Delivery</h3>
+            <p style="color: var(--text-muted);">Segnali actionable in tempo reale, API REST, webhook e integrazione con broker.</p>
+            <span style="display: inline-flex; align-items: center; gap: 6px; background: rgba(0,230,118,0.12); padding: 0.2rem 0.8rem; border-radius: 30px; font-size: 0.75rem; color: var(--accent);"><i class="fas fa-bolt"></i> Latenza < 250ms</span>
+        </div>
+    </div>
+
+    <div style="background: var(--bg-card); border-radius: 1rem; padding: 2rem; margin-top: 1rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem; border: 1px solid var(--border);">
+        <div>
+            <h4 style="font-size: 1.4rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem;"><i class="fas fa-cogs" style="margin-right: 8px; color: var(--accent);"></i> Personalizza ogni fase</h4>
+            <p style="color: var(--text-muted); margin: 0;">Imposta parametri, seleziona asset, definisci la tua tolleranza al rischio. VQuantPro si adatta alla tua strategia.</p>
+        </div>
+        <a href="https://vquantpro.streamlit.app/" class="btn-primary" style="background: var(--accent); color: #0B0F19; padding: 0.8rem 1.8rem; border-radius: 2rem; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;" target="_blank">Esplora la dashboard <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: space-between; margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--border);">
+        <div style="text-align: center; flex: 1;"><div style="font-size: 1.8rem; font-weight: 800; color: var(--accent);">∞</div><div style="font-size: 0.8rem; color: var(--text-muted);">Backtest illimitati</div></div>
+        <div style="text-align: center; flex: 1;"><div style="font-size: 1.8rem; font-weight: 800; color: var(--accent);">99.9%</div><div style="font-size: 0.8rem; color: var(--text-muted);">Uptime garantito</div></div>
+        <div style="text-align: center; flex: 1;"><div style="font-size: 1.8rem; font-weight: 800; color: var(--accent);">+200</div><div style="font-size: 0.8rem; color: var(--text-muted);">Indicatori quant</div></div>
+        <div style="text-align: center; flex: 1;"><div style="font-size: 1.8rem; font-weight: 800; color: var(--accent);"><i class="fas fa-cloud-upload-alt"></i> API</div><div style="font-size: 0.8rem; color: var(--text-muted);">Integrazione full</div></div>
+    </div>
+</section>
+<!-- ========== FINE SEZIONE COME FUNZIONA ========== -->
+
+<section id="metodi" class="section container">
+    <h2 class="section-title">Frontiera Analitica: Gli Strumenti</h2>
+    <p class="section-subtitle">Il successo finanziario è un'equazione. Ecco le metriche che utilizziamo per decodificare il comportamento dei mercati.</p>
+    
+    <img src="https://images.unsplash.com/photo-1543286386-2e659306cd6c?auto=format&fit=crop&w=800&q=75&fm=webp" alt="Data Analysis" class="content-image" width="800" height="450">
+
+    <div class="grid-methods">
+        <div class="card"><h3>CAGR</h3><p>Il Tasso di Crescita Annuo Composto è la bussola del lungo termine. Elimina le distorsioni dei rendimenti annuali per mostrarti il rendimento geometrico costante.</p><div class="formula">\( CAGR = \left( \frac{V_f}{V_i} \right)^{\frac{1}{t}} - 1 \)</div><a href="guida-cagr.html" class="card-link">Comprendi il CAGR →</a></div>
+        <div class="card"><h3>Volatilità</h3><p>Non temere la volatilità, comprendila. Misuriamo la dispersione dei rendimenti per valutare la "temperatura" del tuo rischio sistemico.</p><div class="formula">\( \sigma = \sqrt{\frac{1}{N}\sum(R_i - \bar{R})^2} \)</div><a href="guida-volatilita.html" class="card-link">Analisi della Volatilità →</a></div>
+        <div class="card"><h3>Max Drawdown</h3><p>La metrica della sofferenza. Misuriamo il calo massimo dal picco al minimo per testare la vera resilienza del tuo portafoglio nei momenti di crisi.</p><div class="formula">\( DD = \frac{Trough - Peak}{Peak} \)</div><a href="guida-max-drawdown.html" class="card-link">Analizza il Drawdown →</a></div>
+        <div class="card"><h3>Sharpe Ratio</h3><p>L'efficienza ha un nome. Lo Sharpe Ratio ti dice quanto rendimento stai ottenendo per ogni unità di rischio volatile che decidi di sopportare.</p><div class="formula">\( Sharpe = \frac{R_p - R_f}{\sigma_p} \)</div><a href="guida-sharpe.html" class="card-link">Ottimizza lo Sharpe →</a></div>
+        <div class="card"><h3>Sortino Ratio</h3><p>Solo il rischio che fa male conta. Il Sortino isola la volatilità negativa, permettendoti di valutare la qualità reale della tua strategia.</p><div class="formula">\( Sortino = \frac{R_p - R_f}{\sigma_d} \)</div><a href="guida-sortino.html" class="card-link">Analisi Asimmetrica →</a></div>
+        <div class="card"><h3>Calmar Ratio</h3><p>Il test finale. Mettiamo il rendimento a confronto con il "dolore" massimo (Drawdown). È la metrica definitiva per la robustezza di lungo periodo.</p><div class="formula">\( Calmar = \frac{CAGR}{Max\ DD} \)</div><a href="guida-calmar.html" class="card-link">Calcola il Calmar →</a></div>
+        <div class="card"><h3>Diversificazione</h3><p>Distribuire il capitale tra asset differenti con correlazioni basse è l'unico modo per ridurre il rischio senza sacrificare il rendimento atteso.</p><div class="formula">\( \rho_{ij} = \frac{Cov(R_i, R_j)}{\sigma_i \sigma_j} \)</div><a href="guida-diversificazione.html" class="card-link">Scopri la Diversificazione →</a></div>
+    </div>
+</section>
+
+<section id="masterclass" class="section container">
+    <div class="lesson-section">
+        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=600&q=75&fm=webp" alt="Masterclass" class="content-image" width="600" height="400">
+        <h2>Masterclass VQuantPro: Costruire il proprio Metodo</h2>
+        <p>Il rischio deriva dal non sapere cosa si sta facendo. Questa è la nostra massima operativa.</p>
+        <p>La Masterclass non è un corso teorico, ma un percorso di architettura finanziaria. Attraverso lezioni basate sull'analisi dati, imparerai a costruire un sistema di investimento che non dipenda dal "sentimento" del momento, ma da regole matematiche rigorose.</p>
+        <p><strong>Cosa apprenderai:</strong><br>
+        - La costruzione di un portafoglio resistente ai crolli di mercato.<br>
+        - Come utilizzare le metriche quantitative per ribilanciare gli asset.<br>
+        - L'arte della pazienza: perché il tempo è l'unico vero alleato dell'investitore.</p>
+        <p><em>“Il valore reale non risiede nella capacità di prevedere il mercato, ma nella capacità di misurare la robustezza della propria strategia.”</em></p>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="footer-links">
+            <a href="/privacy/index.html">Privacy Policy</a>
+            <a href="/cookie/index.html">Cookie Policy</a>
+            <a href="/legal/index.html">Note Legali & Disclaimer</a>
+            <a href="risorse.html">Risorse</a>
+            <a href="contatti.html">Contatti</a>
+            <a href="#" id="open_preferences_center">Gestisci preferenze cookie</a>
+        </div>
+        <p>&copy; 2026 VQuantPro. La disciplina è il motore del rendimento.</p>
+    </div>
+</footer>
+
+<!-- Cookie Banner -->
+<div id="cookie-banner" class="cookie-banner" style="display:none;">
+    <p>Questo sito utilizza cookie tecnici necessari al funzionamento. Con il tuo consenso, potremmo utilizzare cookie di terze parti per annunci personalizzati. <a href="/privacy/index.html">Privacy Policy</a> | <a href="/cookie/index.html">Cookie Policy</a></p>
+    <div class="cookie-buttons">
+        <button id="cookie-accept" class="cookie-btn accept">Accetta tutti</button>
+        <button id="cookie-reject" class="cookie-btn reject">Solo necessari</button>
+    </div>
+</div>
 
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
 
 <script>
+    // Gestione cookie + Monetag (In-Page Push) + PopAds
     (function() {
         const banner = document.getElementById('cookie-banner');
         const acceptBtn = document.getElementById('cookie-accept');
@@ -181,13 +340,14 @@
         }
         
         function loadExternalScripts() {
-            // AdSense (opzionale)
+            // AdSense (se in futuro vorrai attivarlo)
             if (!document.querySelector('script[src*="adsbygoogle"]')) {
                 var adsScript = document.createElement('script');
                 adsScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2835044924304516';
                 adsScript.async = true;
                 adsScript.crossOrigin = 'anonymous';
                 document.head.appendChild(adsScript);
+                
                 var fcScript = document.createElement('script');
                 fcScript.src = 'https://fundingchoicesmessages.google.com/i/ca-pub-2835044924304516?ers=1';
                 fcScript.async = true;
